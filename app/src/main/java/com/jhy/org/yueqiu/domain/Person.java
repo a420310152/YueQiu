@@ -1,27 +1,89 @@
 package com.jhy.org.yueqiu.domain;
 
-import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.datatype.BmobRelation;
 
 /**
  * Created by Administrator on 2016/4/11.
  */
-public class Person extends BmobObject{
-    private String name;
-    private String address;
+public class Person extends BmobUser {
+    public static final boolean SEX_MAN = true;
+    public static final boolean SEX_WOMAN = false;
 
-    public String getName() {
-        return name;
+    private Boolean sex;            // 性别
+    private Integer age;            // 年龄
+    private Integer height;         // 身高
+    private Integer weight;         // 体重
+    private String address;         // 地址
+    private String position;        // 擅长位置
+    private BmobFile avatar;        // 头像
+    private BmobRelation friends;   // 好友
+    private BmobGeoPoint location;  // 最近的地理位置
+
+    public String getPosition() { return position; }
+
+    public void setPosition(String position) { this.position = position; }
+
+    public Boolean getSex() {
+        return sex;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setSex(Boolean sex) {
+        this.sex = sex;
     }
 
-    public String getAddress() {
-        return address;
+    public Integer getAge() {
+        return age;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setAge(Integer age) {
+        this.age = age;
     }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public BmobFile getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(BmobFile avatar) {
+        this.avatar = avatar;
+    }
+
+    public BmobRelation getFriends() {
+        return friends;
+    }
+
+    public void setFriends(BmobRelation friends) {
+        this.friends = friends;
+    }
+
+    public String getAddress() { return address; }
+
+    public void setAddress(String address) { this.address = address; }
+
+    public BmobGeoPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(BmobGeoPoint location) {
+        this.location = location;
+    }
+
 }

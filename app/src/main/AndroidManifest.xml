@@ -30,7 +30,7 @@
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -38,6 +38,44 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SearchFriendActivity"
+            android:label="@string/title_activity_search_friend"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".activity.SearchPlaceActivity"
+            android:label="@string/title_activity_search_place"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".activity.ForumActivity" >
+        </activity>
+        <activity android:name=".activity.LoginActivity" >
+        </activity>
+        <activity android:name=".activity.SignUpActivity" >
+        </activity>
+        <activity android:name=".activity.MyProfileActivity" >
+        </activity>
+        <activity android:name=".activity.MyTeamActivity" >
+        </activity>
+        <activity android:name=".activity.MyFlaceActivity" >
+        </activity>
+        <activity android:name=".activity.MyFootprintActivity" >
+        </activity>
+        <activity android:name=".activity.MyFriendActivity" >
+        </activity>
+        <activity android:name=".activity.ChatRoomActivity" >
+        </activity>
+        <activity android:name=".activity.SettingActivity" >
+        </activity>
+        <activity android:name=".activity.SoloChallengeActivity" >
+        </activity>
+        <activity android:name=".activity.TrainChallengeActivity" >
+        </activity>
+        <activity android:name=".activity.TeamChallengeActivity" >
+        </activity>
+        <activity android:name=".activity.ResponseChallengeActivity" >
         </activity>
     </application>
 

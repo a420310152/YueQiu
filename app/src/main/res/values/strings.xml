@@ -2,4 +2,6 @@
     <string name="app_name">YueQiu</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_test_hbaidu_map">TestHBaiduMapActivity</string>
+    <string name="title_activity_search_friend">SearchFriendActivity</string>
+    <string name="title_activity_search_place">SearchPlaceActivity</string>
 </resources>
