@@ -11,7 +11,7 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
 /*
  **********************************************
- * 			所有者 H: (黄振梓)
+ * 			所有者 X: (夏旺)
  **********************************************
  */
 public class ChallengeLayout extends LinearLayout{
@@ -47,11 +47,11 @@ public class ChallengeLayout extends LinearLayout{
         tv_apply = (TextView) findViewById(R.id.tv_apply);
     }
     public void setContent(Challenge challenge){
-//        tv_title.setText(challenge.getTitle());
-//        tv_setName.setText(challenge.getPublisher());
-//        tv_setTime.setText(challenge.getTime());
-//        tv_setPlace.setText(challenge.getPlace());
-//        tv_text.setText(challenge.getText());
+        tv_title.setText(challenge.getType());
+        tv_setName.setText(challenge.getInitiator().getUsername());
+        tv_setTime.setText(challenge.getFromDate().getDate());
+        tv_setPlace.setText(challenge.getPlace().getName());
+        tv_text.setText(challenge.getTitle());
     }
     public void clickApply(View v){
 

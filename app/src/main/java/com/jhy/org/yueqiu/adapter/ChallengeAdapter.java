@@ -32,7 +32,7 @@ public class ChallengeAdapter extends MyBaseAdapter {
         }
         Challenge challenge = new Challenge();
         challenge = (Challenge) list.get(position);
-        challengeLayout.setContent(challenge);
+        challengeLayout.setContent(challenge);//调用ChallengeLayout类里的方法设置内容
         return convertView;
     }
 }
