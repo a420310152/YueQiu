@@ -8,11 +8,11 @@ import android.os.Bundle;
  * 			所有者 X: (夏旺)
  **********************************************
  */
-public class MyFriendActivity extends Activity {
+public class ContactActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_friend);
+        setContentView(R.layout.activity_contact);
     }
 }

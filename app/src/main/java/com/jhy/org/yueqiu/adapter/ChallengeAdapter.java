@@ -26,7 +26,7 @@ public class ChallengeAdapter extends MyBaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         super.getView(position, convertView, parent);
         if (convertView==null){
-            convertView = inflater.inflate(R.layout.layout_item_challenge,null);
+            convertView = inflater.inflate(R.layout.adapter_challenge,null);
             challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
             iv_head = (ImageView) convertView.findViewById(R.id.iv_head);
         }
