@@ -1,6 +1,7 @@
 package com.jhy.org.yueqiu.fragment;
 
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,12 +13,24 @@ import android.widget.Gallery;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import com.bmob.BmobProFile;
+import com.bmob.btp.callback.UploadListener;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
+import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.domain.Place;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +39,10 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
+
 /*
  **********************************************
  * 			所有者 X: (夏旺)
@@ -70,7 +86,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         if (group != null) {
             group.setOnCheckedChangeListener(this);
         }
-        Log.i("result", "buildup=--------------------");
     }
 
     @Override
@@ -105,7 +120,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     //下半部分约占列表建立
     private void builddown() {
-        Bmob.initialize(getContext(), "f250b019e456d9655d4467d4959ee79e");
+        Bmob.initialize(getContext(), Key.bmob.application_id);
+        addBmobDate();
         listView = (ListView) view.findViewById(R.id.lv_war);
         List<Challenge> list = new ArrayList<Challenge>();
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
@@ -129,27 +145,98 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
 
     }
+
+    Challenge challenge;
+    Person p1;
+    Place place;
+    private void addBmobDate() {
+        //向服务器添加数据
+//        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
+//        String time = sdf.format(new java.util.Date());
+        //上传用户选择挑战类型
+        challenge = new Challenge();
+        challenge.setType(Challenge.TYPE_SOLO);
+        //上传用户姓名
+        p1 = new Person();
+        p1.setUsername("用户1");
+        p1.setPassword("123456");
+        p1.save(getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                challenge.setInitiator(p1);
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+        //上传用户选择约战开始时间
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = null;
+        try {
+            date = sdf.parse("2016-04-14 15:30:00");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        BmobDate d1 = new BmobDate(date);
+        challenge.setFromDate(d1);
+        //上传用户选择的篮球场地点
+        place = new Place();
+        place.setName("某某篮球场");
+        place.save(getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                challenge.setPlace(place);
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+
+        //上传用户编辑的标题内容
+        challenge.setTitle("来来来！约起来！大家一起玩!");
+        challenge.save(getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getContext(), "保存成功", Toast.LENGTH_SHORT).show();
+            }
+
+
+            @Override
+            public void onFailure(int i, String s) {
+            Log.i("result", "SaveListener=============" + s);
+            }
+        });
+    }
+    private void addAvader(){
+        //上传用户的头像
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+            //File fileSD = Environment.getExternalStorageDirectory();
+            String filePath = "/storage/emulated/legacy/Download/avatar1.jpg";
+            BmobProFile proFile = new BmobProFile();
+            proFile.upload(filePath, new UploadListener() {
+                @Override
+                public void onSuccess(String s, String s1, BmobFile bmobFile) {
+                    Log.i("result",bmobFile.getUrl());
+                    Toast.makeText(getContext(),"保存图片成功",Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onProgress(int i) {
+
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    Log.i("result","onError==============="+s);
+                    Toast.makeText(getContext(),"保存图片失败",Toast.LENGTH_SHORT).show();
+                }
+            });
+            challenge.setInitiator(p1);
+        }
+    }
 }
 
-//向服务器添加数据
-/*               SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");                 */
-/*String time = sdf.format(new java.util.Date());                                      */
-/*Challenge challenge = new Challenge();                                               */
-/*    challenge.setTitle("3V3 组队赛");                                                   */
-/*    challenge.setPublisher("用户3" );                                                  */
-/*    challenge.setTime(time);                                                         */
-/*    challenge.setPlace("某333篮球场");                                                   */
-/*    challenge.setText("谁敢一战！团队的力量！");                                                */
-/*    challenge.save(getContext(), new SaveListener() {                                */
-/*        @Override                                                                    */
-/*        public void onSuccess() {                                                    */
-/*            Toast.makeText(getContext(), "保存成功", Toast.LENGTH_SHORT).show();         */
-/*        }                                                                            */
-/*
-*/
-
-/*        @Override                                                                    */
-/*        public void onFailure(int i, String s) {                                     */
-/*            Toast.makeText(getContext(), "保存失败" + s, Toast.LENGTH_SHORT).show();     */
-/*        }                                                                            */
-/*    });                                                                              */

@@ -3,15 +3,16 @@ package com.jhy.org.yueqiu.domain;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobRelation;
+
 /*
  **********************************************
  * 			所有者 H: (黄振梓)
  **********************************************
  */
 public class Challenge extends BmobObject {
-    public static final int TYPE_SOLO = -1;      // solo赛
-    public static final int TYPE_TRAIN = -2;    // 陪练赛
-    public static final int TYPE_TEAM = -3;     // 团队赛
+    public static final String TYPE_SOLO = "1V1 SOLO赛";       // solo赛
+    public static final String TYPE_TRAIN = "娱乐陪练";         // 陪练赛
+    public static final String TYPE_TEAM = "3V3 组队对抗赛";    // 团队赛
     public static final int STATE_INIT = 1;     // 发起挑战
     public static final int STATE_PREPARED = 2; // 等待开始
     public static final int STATE_PLAYING = 3;  // 挑战开始
@@ -24,7 +25,7 @@ public class Challenge extends BmobObject {
     private Place place;            // 场地
     private BmobDate fromDate;      // 入场时间
     private BmobDate toDate;        // 散场时间
-    private Integer type;           // 对战类型
+    private String type;           // 对战类型
     private Integer state;          // 挑战状态
     private BmobRelation responders;// 响应者
     private BmobRelation targets;   // 对战者
@@ -77,11 +78,11 @@ public class Challenge extends BmobObject {
         this.toDate = toDate;
     }
 
-    public Integer getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Integer type) {
+    public void setType(String type) {
         this.type = type;
     }
 
