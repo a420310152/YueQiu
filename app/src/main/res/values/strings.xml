@@ -1,7 +1,36 @@
 <resources>
     <string name="app_name">YueQiu</string>
-    <string name="action_settings">Settings</string>
-    <string name="title_activity_test_hbaidu_map">TestHBaiduMapActivity</string>
-    <string name="title_activity_search_friend">SearchFriendActivity</string>
-    <string name="title_activity_search_place">SearchPlaceActivity</string>
+    <string name="action_settings">YueQiu</string>
+
+    <string name="register_login">登录/注册</string>
+    <string name="information">我的资料</string>
+    <string name="collect">我的收藏</string>
+    <string name="team">我的球队</string>
+    <string name="track">我的足迹</string>
+    <string name="system_set">系统设置</string>
+
+    <string name="head">设置头像</string>
+    <string name="email">邮箱</string>
+    <string name="name">用户名</string>
+    <string name="passward">密码</string>
+    <string name="repetpassward">重复密码</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="rememberword">记住密码</string>
+    <string name="reminder">选择第三方登录</string>
+
+    <string name="info_name">爱德华</string>
+    <string name="info_sex">性别：</string>
+    <string name="info_age">年龄：</string>
+    <string name="info_height">身高：</string>
+    <string name="info_weight">体重：</string>
+    <string name="info_skilled">擅长位置：</string>
+
+    <string name="system_set_toast">通知</string>
+    <string name="system_set_account_manager">账号管理</string>
+    <string name="system_general_set">通用设置</string>
+    <string name="system_set_clean">清理缓存</string>
+    <string name="system_set_about_help">关于约球与帮组</string>
+    <string name="system_music_set">音效设置</string>
+    <string name="system_set_clean_position">清除地理位置</string>
 </resources>

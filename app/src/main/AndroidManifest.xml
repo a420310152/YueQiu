@@ -27,11 +27,6 @@
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
 
         <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.SearchFriendActivity" >
         </activity>
@@ -66,6 +61,13 @@
         <activity android:name=".activity.ResponseChallengeActivity" >
         </activity>
         <activity android:name=".test.x.TestActivity">
+        </activity>
+        <activity android:name=".test.c.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

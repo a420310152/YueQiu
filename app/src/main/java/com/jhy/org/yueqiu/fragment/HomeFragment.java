@@ -12,14 +12,12 @@ import android.widget.Gallery;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,7 +63,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         List<Integer> list = new ArrayList<Integer>();
         list.add(R.drawable.icon_home_gallery2);
         list.add(R.drawable.icon_home_gallery1);
-        list.add(R.drawable.icon_home_gallert3);
+        list.add(R.drawable.icon_home_gallery3);
         HomeGalleryAdapter adapter = new HomeGalleryAdapter(getContext(), list);
         gallery.setAdapter(adapter);
         gallery.setOnItemSelectedListener(this);

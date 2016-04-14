@@ -1,10 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.jhy.org.yueqiu.activity.MyProfileActivity">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_title"
+        android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/information"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@+id/tv_info_title"/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_system_right"
+        android:padding="25dp"
+        android:background="@null"
+        android:onClick="myProfileBackClick"
+        android:id="@+id/btn_info_back"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_info_back"
+        android:background="@drawable/icon_launcher"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:onClick="headClick"
+        android:id="@+id/iv_info_head"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/info_name"
+        android:textSize="30sp"
+        android:layout_below="@id/iv_info_head"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_info_name"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info_name"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/info_sex"
+        android:textSize="30sp"
+        android:id="@+id/tv_info_sex"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info_sex"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/info_age"
+        android:textSize="30sp"
+        android:id="@+id/tv_info_age"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info_age"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/info_height"
+        android:textSize="30sp"
+        android:id="@+id/tv_info_height"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info_height"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/info_weight"
+        android:textSize="30sp"
+        android:id="@+id/tv_info_weight"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_info_weight"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="50dp"
+        android:text="@string/info_skilled"
+        android:textSize="30sp"
+        android:id="@+id/tv_info_skilled"/>
 </RelativeLayout>
