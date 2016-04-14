@@ -88,6 +88,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 Intent settingIntent =  new Intent(getActivity(), SettingActivity.class);
                 startActivity(settingIntent);
                 break;
+
         }
 
     }

@@ -17,7 +17,7 @@ import com.jhy.org.yueqiu.fragment.SidebarFragment;
  * Created by Administrator on 2016/4/12.
  */
 public class TestActivity extends FragmentActivity {
-    Button button;
+
     FragmentManager fm_sidebar;
     FragmentTransaction ft_sidebar;
     SidebarFragment sf_fragment;

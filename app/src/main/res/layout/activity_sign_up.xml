@@ -1,10 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.jhy.org.yueqiu.activity.SignUpActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_title"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/register"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@+id/tv_signup_title"/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_system_right"
+        android:padding="25dp"
+        android:background="@null"
+        android:onClick="signupBackClick"
+        android:id="@+id/btn_signup_back"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_signup_back"
+        android:background="@drawable/icon_launcher"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/iv_signup_head"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_signup_head"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/icon_edit"
+        android:gravity="center"
+        android:hint="@string/email"
+        android:id="@+id/et_signup_email"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_signup_email"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/icon_edit"
+        android:gravity="center"
+        android:hint="@string/name"
+        android:id="@+id/et_signup_name"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_signup_name"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/icon_edit"
+        android:gravity="center"
+        android:hint="@string/passward"
+        android:id="@+id/et_signup_password"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_signup_password"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/icon_edit"
+        android:gravity="center"
+        android:hint="@string/repetpassward"
+        android:id="@+id/et_signup_repetpassward"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_signup_repetpassward"
+        android:background="@drawable/icon_cancel"
+        android:layout_marginTop="20dp"
+        android:layout_centerInParent="true"
+        android:onClick="signupClick"
+        android:id="@+id/btn_signup_register"/>
 </RelativeLayout>
