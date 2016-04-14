@@ -9,9 +9,10 @@ import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
-
-/**
- * Created by Administrator on 2016/4/13.
+/*
+ **********************************************
+ * 			所有者 H: (黄振梓)
+ **********************************************
  */
 public class ChallengeLayout extends LinearLayout{
     TextView tv_title;

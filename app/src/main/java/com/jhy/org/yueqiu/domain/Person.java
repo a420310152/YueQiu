@@ -4,9 +4,10 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
-
-/**
- * Created by Administrator on 2016/4/11.
+/*
+ **********************************************
+ * 			所有者 H: (黄振梓)
+ **********************************************
  */
 public class Person extends BmobUser {
     public static final boolean SEX_MAN = true;

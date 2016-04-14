@@ -1,7 +1,8 @@
 package com.jhy.org.yueqiu.adapter;
-
-/**
- * Created by Administrator on 2016/4/13 0013.
+/*
+ **********************************************
+ * 			所有者 H: (黄振梓)
+ **********************************************
  */
 public class PlaceAdapter {
 }

@@ -10,9 +10,10 @@ import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.view.ChallengeLayout;
 
 import java.util.List;
-
-/**
- * Created by Administrator on 2016/4/13 0013.
+/*
+ **********************************************
+ * 			所有者 H: (黄振梓)
+ **********************************************
  */
 public class ChallengeAdapter extends MyBaseAdapter {
     ChallengeLayout challengeLayout;

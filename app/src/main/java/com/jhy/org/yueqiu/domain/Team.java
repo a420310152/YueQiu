@@ -3,9 +3,10 @@ package com.jhy.org.yueqiu.domain;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobRelation;
-
-/**
- * Created by Administrator on 2016/4/13 0013.
+/*
+ **********************************************
+ * 			所有者 H: (黄振梓)
+ **********************************************
  */
 public class Team extends BmobObject {
     private String name;            // 名称

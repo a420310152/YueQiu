@@ -8,9 +8,10 @@ import android.widget.Gallery;
 import android.widget.ImageView;
 
 import java.util.List;
-
-/**
- * Created by Administrator on 2016/4/12.
+/*
+ **********************************************
+ * 			所有者 X: (夏旺)
+ **********************************************
  */
 public class HomeGalleryAdapter extends BaseAdapter{
     List<Integer> list;

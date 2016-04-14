@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import java.util.List;
-
-/**
- * Created by Administrator on 2016/4/13.
+/*
+ **********************************************
+ * 			所有者 H: (黄振梓)
+ **********************************************
  */
 public class MyBaseAdapter extends BaseAdapter{
     public List<?> list;

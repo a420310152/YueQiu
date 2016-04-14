@@ -29,9 +29,10 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.FindListener;
-
-/**
- * Created by Administrator on 2016/4/12.
+/*
+ **********************************************
+ * 			所有者 X: (夏旺)
+ **********************************************
  */
 public class HomeFragment extends Fragment implements OnItemSelectedListener, RadioGroup.OnCheckedChangeListener {
     RadioGroup group;
