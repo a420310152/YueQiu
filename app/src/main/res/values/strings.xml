@@ -11,7 +11,7 @@
 
     <string name="head">设置头像</string>
     <string name="email">邮箱</string>
-    <string name="name">用户名</string>
+    <string name="name">邮箱/用户名</string>
     <string name="passward">密码</string>
     <string name="repetpassward">重复密码</string>
     <string name="login">登录</string>

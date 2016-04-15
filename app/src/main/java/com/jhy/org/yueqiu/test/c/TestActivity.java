@@ -11,7 +11,10 @@ import android.widget.Button;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.fragment.SidebarFragment;
+
+import cn.bmob.v3.Bmob;
 
 /**
  * Created by Administrator on 2016/4/12.
@@ -27,6 +30,7 @@ public class TestActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        Bmob.initialize(this, Key.bmob.application_id);
     }
 
     public void init (){

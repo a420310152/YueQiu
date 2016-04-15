@@ -12,12 +12,12 @@ import java.util.List;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class MyBaseAdapter extends BaseAdapter{
-    public List<?> list;
+public class MyBaseAdapter<T> extends BaseAdapter{
+    public List<T> list;
     public Context context;
     public LayoutInflater inflater;
 
-    public MyBaseAdapter(List<?> list,Context context) {
+    public MyBaseAdapter(List<T> list,Context context) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);

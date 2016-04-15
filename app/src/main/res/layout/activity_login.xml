@@ -16,7 +16,7 @@
             android:textSize="30sp"
             android:textColor="@color/white"
             android:gravity="center"
-            android:id="@+id/tv_info_title"/>
+            android:id="@+id/tv_login_title"/>
 
     </LinearLayout>
     <Button
@@ -26,45 +26,45 @@
         android:padding="25dp"
         android:background="@null"
         android:onClick="loginBackClick"
-        android:id="@+id/btn_info_back"/>
+        android:id="@+id/btn_login_back"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_info_back"
+        android:layout_below="@id/btn_login_back"
         android:background="@drawable/icon_launcher"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:onClick="headClick"
-        android:id="@+id/iv_head"/>
+        android:onClick="loginheadClick"
+        android:id="@+id/iv_login_head"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/head"
-        android:layout_below="@id/iv_head"
+        android:layout_below="@id/iv_login_head"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tv_head"/>
+        android:id="@+id/tv_login_head"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_head"
+        android:layout_below="@id/tv_login_head"
         android:layout_marginTop="20dp"
         android:background="@drawable/icon_edit"
         android:gravity="center"
         android:hint="@string/name"
-        android:id="@+id/et_name"/>
+        android:id="@+id/et_login_name"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_name"
+        android:layout_below="@id/et_login_name"
         android:layout_marginTop="10dp"
         android:background="@drawable/icon_edit"
         android:gravity="center"
         android:hint="@string/passward"
-        android:id="@+id/et_password"/>
+        android:id="@+id/et_login_password"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_password"
+        android:layout_below="@id/et_login_password"
         android:layout_marginTop="10dp"
         android:id="@+id/linear">
         <Button
@@ -92,42 +92,41 @@
         android:layout_below="@id/linear"
         android:layout_marginLeft="10dp"
         android:text="@string/rememberword"
-        android:onClick="rememberwordClick"
-        android:id="@+id/cb_rememberword"/>
+        android:id="@+id/cb_login_rememberword"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/cb_rememberword"
+        android:layout_below="@id/cb_login_rememberword"
         android:layout_marginTop="30dp"
         android:text="@string/reminder"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tv_hint"/>
+        android:id="@+id/tv_login_hint"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_hint"
+        android:layout_below="@+id/tv_login_hint"
         android:background="@drawable/icon_sidebar_person"
         android:layout_centerHorizontal="true"
-        android:onClick="qqClick"
-        android:id="@+id/iv_qq"/>
+        android:onClick="loginOnClick"
+        android:id="@+id/iv_login_qq"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/iv_qq"
+        android:layout_toLeftOf="@id/iv_login_qq"
         android:layout_marginRight="20dp"
-        android:layout_below="@+id/tv_hint"
+        android:layout_below="@+id/tv_login_hint"
         android:background="@drawable/icon_sidebar_person"
-        android:onClick="weixinClick"
-        android:id="@+id/iv_weixin"/>
+        android:onClick="loginOnClick"
+        android:id="@+id/iv_login_weixin"/>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/iv_qq"
+        android:layout_toRightOf="@id/iv_login_qq"
         android:layout_marginLeft="20dp"
-        android:layout_below="@+id/tv_hint"
+        android:layout_below="@+id/tv_login_hint"
         android:background="@drawable/icon_sidebar_person"
-        android:onClick="weiboClick"
-        android:id="@+id/iv_weibo"/>
+        android:onClick="loginOnClick"
+        android:id="@+id/iv_login_weibo"/>
 
 </RelativeLayout>

@@ -14,7 +14,7 @@ import java.util.List;
  * 			所有者 C: (曹昌盛)
  **********************************************
  */
-public class TeamAdapter extends MyBaseAdapter{
+public class TeamAdapter extends MyBaseAdapter<Team>{
     TeamLayout teamLayout;
     Team team;
     public TeamAdapter(List<Team> list, Context context) {
@@ -23,7 +23,7 @@ public class TeamAdapter extends MyBaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        team = (Team) list.get(position);
+        team =  list.get(position);
         teamLayout.setTeam(team);
         return convertView;
     }
