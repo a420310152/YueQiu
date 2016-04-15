@@ -19,7 +19,7 @@ public class ChallengeAdapter extends MyBaseAdapter {
     ChallengeLayout challengeLayout;
     ImageView iv_head;
     public ChallengeAdapter(List<Challenge> list, Context context) {
-        super(list, context);
+        super(context,list);
     }
 
     @Override
@@ -30,8 +30,7 @@ public class ChallengeAdapter extends MyBaseAdapter {
             challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
             iv_head = (ImageView) convertView.findViewById(R.id.iv_head);
         }
-        Challenge challenge = new Challenge();
-        challenge = (Challenge) list.get(position);
+        Challenge challenge = (Challenge) list.get(position);
         challengeLayout.setContent(challenge);//调用ChallengeLayout类里的方法设置内容
         return convertView;
     }

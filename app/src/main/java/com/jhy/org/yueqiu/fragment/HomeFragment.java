@@ -38,9 +38,11 @@ import java.util.List;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 
 /*
@@ -53,6 +55,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     Gallery gallery;
     View view;
     ListView listView;
+    RadioGroup markGroup;
+    View indexView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,23 +79,45 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     private void buildup() {
         group = (RadioGroup) view.findViewById(R.id.rg_title);
+        markGroup = (RadioGroup) view .findViewById(R.id.markGroup);
         gallery = (Gallery) view.findViewById(R.id.gallery);
         List<Integer> list = new ArrayList<Integer>();
-        list.add(R.drawable.icon_home_gallery2);
         list.add(R.drawable.icon_home_gallery1);
+        list.add(R.drawable.icon_home_gallery2);
         list.add(R.drawable.icon_home_gallery3);
         HomeGalleryAdapter adapter = new HomeGalleryAdapter(getContext(), list);
         gallery.setAdapter(adapter);
         gallery.setOnItemSelectedListener(this);
-        if (group != null) {
-            group.setOnCheckedChangeListener(this);
+        if (markGroup != null) {
+            markGroup.setOnCheckedChangeListener(this);
         }
+        group.setOnCheckedChangeListener(click);
     }
+    //标题group的选择监听
+    RadioGroup.OnCheckedChangeListener click = new RadioGroup.OnCheckedChangeListener() {
+        @Override
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId){
+                case R.id.rb_one:
+                //gallery.setVisibility(View.GONE);
+                break;
+                case R.id.rb_two:
 
+                break;
+                case R.id.rb_three:
+
+                break;
+                default:
+                break;
+            }
+        }
+    };
+
+    //Gallery的欢动监听
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if (group != null) {
-            RadioButton rb = (RadioButton) group.getChildAt(position);
+        if (markGroup != null) {
+            RadioButton rb = (RadioButton) markGroup.getChildAt(position);
             rb.setChecked(true);
         }
     }
@@ -101,16 +127,17 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     }
 
+    //markGroup的选择监听
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
-            case R.id.rb_one:
+            case R.id.rb_markone:
                 gallery.setSelection(0);
                 break;
-            case R.id.rb_two:
+            case R.id.rb_marktwo:
                 gallery.setSelection(1);
                 break;
-            case R.id.rb_three:
+            case R.id.rb_markthree:
                 gallery.setSelection(2);
                 break;
             default:
@@ -121,7 +148,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     //下半部分约占列表建立
     private void builddown() {
         Bmob.initialize(getContext(), Key.bmob.application_id);
-        addBmobDate();
         listView = (ListView) view.findViewById(R.id.lv_war);
         List<Challenge> list = new ArrayList<Challenge>();
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
@@ -149,6 +175,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     Challenge challenge;
     Person p1;
     Place place;
+
     private void addBmobDate() {
         //向服务器添加数据
 //        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm");
@@ -156,21 +183,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         //上传用户选择挑战类型
         challenge = new Challenge();
         challenge.setType(Challenge.TYPE_SOLO);
-        //上传用户姓名
+        //获得用户名字并添加到Challenge表中
         p1 = new Person();
-        p1.setUsername("用户1");
-        p1.setPassword("123456");
-        p1.save(getContext(), new SaveListener() {
-            @Override
-            public void onSuccess() {
-                challenge.setInitiator(p1);
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-
-            }
-        });
+        p1.setObjectId("622cdb9543");
+        challenge.setInitiator(p1);
         //上传用户选择约战开始时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         Date date = null;
@@ -181,23 +197,14 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         }
         BmobDate d1 = new BmobDate(date);
         challenge.setFromDate(d1);
-        //上传用户选择的篮球场地点
+
+        BmobUser.getCurrentUser(getContext()).getObjectId();
+        //添加地点
         place = new Place();
-        place.setName("某某篮球场");
-        place.save(getContext(), new SaveListener() {
-            @Override
-            public void onSuccess() {
-                challenge.setPlace(place);
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-
-            }
-        });
-
+        place.setObjectId("25b967cef0");
+        challenge.setPlace(place);
         //上传用户编辑的标题内容
-        challenge.setTitle("来来来！约起来！大家一起玩!");
+        challenge.setTitle("aaaaa来来来！约起来！大家一起玩!");
         challenge.save(getContext(), new SaveListener() {
             @Override
             public void onSuccess() {
@@ -207,10 +214,53 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
             @Override
             public void onFailure(int i, String s) {
-            Log.i("result", "SaveListener=============" + s);
+                Log.i("result", "SaveListener=============" + s);
             }
         });
     }
+
+    //添加Place的数据（地点）
+    String placeId;
+
+    private void addPlace() {
+        //上传用户选择的篮球场地点
+        place = new Place();
+        place.setName("某某篮球场3");
+        place.save(getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                placeId = place.getObjectId();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+    }
+
+    //上传Person的数据（用户名）
+    String personId;
+    private void addPerson() {
+        p1 = new Person();
+        p1.setUsername("用户3");
+        p1.setPassword("123456");
+        p1.setAddress("ccccccc");
+        p1.signUp(getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.i("result", "addPerson保存成功=============");
+                personId = p1.getObjectId();
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+    }
+
+
     private void addAvader(){
         //上传用户的头像
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
@@ -220,8 +270,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             proFile.upload(filePath, new UploadListener() {
                 @Override
                 public void onSuccess(String s, String s1, BmobFile bmobFile) {
-                    Log.i("result",bmobFile.getUrl());
-                    Toast.makeText(getContext(),"保存图片成功",Toast.LENGTH_SHORT).show();
+                    Log.i("result", bmobFile.getUrl());
+                    Toast.makeText(getContext(), "保存图片成功", Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -231,11 +281,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
                 @Override
                 public void onError(int i, String s) {
-                    Log.i("result","onError==============="+s);
-                    Toast.makeText(getContext(),"保存图片失败",Toast.LENGTH_SHORT).show();
+                    Log.i("result", "onError===============" + s);
+                    Toast.makeText(getContext(), "保存图片失败", Toast.LENGTH_SHORT).show();
                 }
             });
-            challenge.setInitiator(p1);
         }
     }
 }

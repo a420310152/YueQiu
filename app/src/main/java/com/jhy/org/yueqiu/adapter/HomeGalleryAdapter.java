@@ -45,7 +45,7 @@ public class HomeGalleryAdapter extends BaseAdapter{
         }
         image = (ImageView) convertView;
         //设置控件的大小参数
-        Gallery.LayoutParams params = new Gallery.LayoutParams(Gallery.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        Gallery.LayoutParams params = new Gallery.LayoutParams(Gallery.LayoutParams.MATCH_PARENT, Gallery.LayoutParams.WRAP_CONTENT);
         image.setLayoutParams(params);
         image.setBackgroundResource(list.get(position));
         return image;
