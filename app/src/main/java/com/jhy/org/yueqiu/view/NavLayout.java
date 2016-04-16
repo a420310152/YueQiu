@@ -21,7 +21,7 @@ public class NavLayout extends RelativeLayout implements View.OnClickListener {
     private TextView tv_contact;
     private TextView tv_search;
     private Context context;
-    private Intent communicateIntent;
+    private Intent contactIntent;
     private Intent searchIntent;
 
     public NavLayout(Context context) {
@@ -32,10 +32,10 @@ public class NavLayout extends RelativeLayout implements View.OnClickListener {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.layout_nav, this);
 
-        tv_contact = (TextView) findViewById(R.id.tv_contact);
-        tv_search = (TextView) findViewById(R.id.tv_search);
+        this.tv_contact = (TextView) findViewById(R.id.tv_contact);
+        this.tv_search = (TextView) findViewById(R.id.tv_search);
         this.context = context;
-        this.communicateIntent = new Intent(context, ContactActivity.class);
+        this.contactIntent = new Intent(context, ContactActivity.class);
         this.searchIntent = new Intent(context, SearchActivity.class);
 
         tv_contact.setOnClickListener(this);
@@ -44,6 +44,15 @@ public class NavLayout extends RelativeLayout implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.tv_contact:
+                context.startActivity(contactIntent);
+                break;
+            case R.id.tv_search:
+                context.startActivity(searchIntent);
+                break;
+            default:
+                break;
+        }
     }
 }

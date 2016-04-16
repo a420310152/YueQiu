@@ -9,7 +9,7 @@ import android.widget.BaseAdapter;
 import java.util.List;
 /*
  **********************************************
- * 			所有者 H: (黄振梓)
+ *          所有者 H: (黄振梓)
  **********************************************
  */
 public class MyBaseAdapter<T> extends BaseAdapter{
@@ -17,7 +17,7 @@ public class MyBaseAdapter<T> extends BaseAdapter{
     public Context context;
     public LayoutInflater inflater;
 
-    public MyBaseAdapter(Context context,List<T> list) {
+    public MyBaseAdapter(Context context, List<T> list) {
         this.list = list;
         this.context = context;
         inflater = LayoutInflater.from(context);
@@ -40,7 +40,6 @@ public class MyBaseAdapter<T> extends BaseAdapter{
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         return null;
     }
 

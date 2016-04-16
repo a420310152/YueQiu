@@ -19,7 +19,7 @@ public class ChallengeAdapter extends MyBaseAdapter {
     ChallengeLayout challengeLayout;
     ImageView iv_head;
     public ChallengeAdapter(List<Challenge> list, Context context) {
-        super(context,list);
+        super(context, list);
     }
 
     @Override

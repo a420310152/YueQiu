@@ -17,8 +17,8 @@ import java.util.List;
 public class TeamAdapter extends MyBaseAdapter<Team>{
     TeamLayout teamLayout;
     Team team;
-    public TeamAdapter(List<Team> list, Context context) {
-            super(list, context);
+    public TeamAdapter(Context context, List<Team> list) {
+            super(context, list);
     }
 
     @Override
