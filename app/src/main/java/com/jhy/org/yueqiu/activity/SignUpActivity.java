@@ -28,12 +28,14 @@ public class SignUpActivity extends Activity {
 
     //获取输入框中的email，用户名，密码，重复密码
     String userEmail,userName,userPassword,userRepetPassword;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
         init();
     }
+
     //初始化控件
     private void init(){
         et_signup_email = (EditText) findViewById(R.id.et_signup_email);
@@ -47,6 +49,7 @@ public class SignUpActivity extends Activity {
     public void signupBackClick(View v){
         finish();
     }
+
     //注册按钮的监听
     public  void signupClick(View v){
         //获取输入框中的email，用户名，密码，重复密码
@@ -65,6 +68,7 @@ public class SignUpActivity extends Activity {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(SignUpActivity.this, "注册成功", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     @Override
                     public void onFailure(int i, String s) {
@@ -75,8 +79,8 @@ public class SignUpActivity extends Activity {
                 Toast.makeText(SignUpActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
             }
         }
-        finish();
     }
+
     //对注册信息的判断
     private void signupToastInfo(){
         if(userEmail.equals("")){

@@ -8,6 +8,7 @@ import com.jhy.org.yueqiu.domain.Place;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.SaveListener;
@@ -18,9 +19,7 @@ public class TestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test);
-        Bmob.initialize(this, Key.bmob.application_id);
-        savePlace();
+        setContentView(R.layout.activity_test_h);
     }
 
     private void savePlace () {
@@ -38,4 +37,5 @@ public class TestActivity extends Activity {
             }
         });
     }
+
 }

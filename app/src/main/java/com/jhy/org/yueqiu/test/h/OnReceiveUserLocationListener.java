@@ -1,6 +1,9 @@
 package com.jhy.org.yueqiu.test.h;
 
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.model.LatLng;
+
+import cn.bmob.v3.datatype.BmobGeoPoint;
 
 /*
  **********************************************
@@ -8,5 +11,5 @@ import com.baidu.mapapi.model.LatLng;
  **********************************************
  */
 public interface OnReceiveUserLocationListener {
-    void onReceiveUserLocation (LatLng userLocation);
+    void onReceiveUserLocation (BDLocation userLocation);
 }

@@ -46,6 +46,7 @@ public class LoginActivity extends Activity{
         setContentView(R.layout.activity_login);
         init();
     }
+
     //初始化控件
     private void init(){
         btn_login_back = (Button) findViewById(R.id.btn_login_back);
@@ -69,23 +70,25 @@ public class LoginActivity extends Activity{
 
         }
     };
+
     //返回箭头的监听
     public void loginBackClick(View v){
         finish();
     }
+
     //登录按钮的监听
     public void loginClick(View v) {
-            String loginUserName = et_login_name.getText().toString();
-            String loginUserPassword = et_login_password.getText().toString();
-            if(loginUserName.equals("")){
-                toast("请填写用户名");
-                return;
-            }
+        String loginUserName = et_login_name.getText().toString();
+        String loginUserPassword = et_login_password.getText().toString();
+        if(loginUserName.equals("")){
+            toast("请填写用户名");
+            return;
+        }
         if(loginUserPassword.equals("")){
             toast("请填写密码");
             return;
         }
-            if(loginUserName!=null && loginUserPassword!=null){
+        if(loginUserName!=null && loginUserPassword!=null){
             BmobUser bu_login_user = new BmobUser();
             bu_login_user.setUsername(loginUserName);
             bu_login_user.setEmail(loginUserName);
@@ -105,6 +108,7 @@ public class LoginActivity extends Activity{
             });
         }
     }
+
     //注册按钮的监听
     public void registerClick(View v){
         Intent intent = new Intent(LoginActivity.this,SignUpActivity.class);
@@ -125,6 +129,7 @@ public class LoginActivity extends Activity{
                 break;
         }
     }
+
     //三方登陆的微信登录
     private void loginByWeixin(String s){
         JSONObject qqobj;
@@ -154,6 +159,7 @@ public class LoginActivity extends Activity{
         }
 
     }
+
     //三方登陆的qq登录
     private void loginByqq(String s){
 

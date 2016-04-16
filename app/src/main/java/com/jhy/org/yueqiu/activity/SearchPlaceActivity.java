@@ -4,10 +4,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
+import com.baidu.location.BDLocation;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
@@ -35,10 +35,9 @@ import cn.bmob.v3.datatype.BmobGeoPoint;
 public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResultListener, OnReceiveUserLocationListener {
     private PoiSearch poiSearch;
     private PoiNearbySearchOption searchOption;
-    private LatLng userLocation = null;
 
     private List<Place> placeList;
-    private PlaceAdapter adapter;
+    private PlaceAdapter placeAdapter;
     private ListView lv_places;
 
     private Handler handler = new Handler() {
@@ -46,7 +45,7 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 //            Log.i("ilog:", "handleMessage, 准备填充ListView");
-            lv_places.setAdapter(adapter);
+            lv_places.setAdapter(placeAdapter);
         }
     };
 
@@ -62,7 +61,7 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
                 .keyword("篮球场")
                 .pageNum(0);
         this.placeList = new ArrayList<Place>();
-        this.adapter = new PlaceAdapter(this, placeList);
+        this.placeAdapter = new PlaceAdapter(this, placeList);
         this.lv_places = (ListView) findViewById(R.id.lv_places);
 
         poiSearch.setOnGetPoiSearchResultListener(this);
@@ -70,10 +69,10 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
     }
 
     @Override
-    public void onReceiveUserLocation(LatLng userLocation) {
-        this.userLocation = userLocation;
-        adapter.setUserLocation(userLocation);
-        searchOption.location(userLocation);
+    public void onReceiveUserLocation(BDLocation userLocation) {
+        LatLng location = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+        placeAdapter.setUserLocation(location);
+        searchOption.location(location);
         poiSearch.searchNearby(searchOption);
     }
 
@@ -83,19 +82,19 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
         if (poiResult == null || poiResult.error != SearchResult.ERRORNO.NO_ERROR) {
             return;
         }
-        for (PoiInfo poi : poiResult.getAllPoi()) {
+        for (PoiInfo info : poiResult.getAllPoi()) {
 //            Log.i("ilog: SearchActivity", "name:" + poi.name + ", address:" + poi.address + ", uid:" + poi.uid);
 //            Log.i("ilog:", "\t\t latitude:" + poi.location.latitude + ", langitude:" + poi.location.longitude);
 
             BmobGeoPoint point = new BmobGeoPoint();
-            point.setLatitude(poi.location.latitude);
-            point.setLongitude(poi.location.longitude);
+            point.setLatitude(info.location.latitude);
+            point.setLongitude(info.location.longitude);
 
             Place place = new Place();
-            place.setName(poi.name);
-            place.setAddress(poi.address);
+            place.setName(info.name);
+            place.setAddress(info.address);
             place.setLocation(point);
-            place.setUid(poi.uid);
+            place.setUid(info.uid);
             placeList.add(place);
         }
         handler.sendEmptyMessage(1);

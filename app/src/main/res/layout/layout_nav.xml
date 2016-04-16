@@ -4,26 +4,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
+        android:background="@color/blue"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_contact"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:text="通讯"/>
-        <TextView
-            android:id="@+id/tv_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:paddingRight="20dp"
-            android:text="发现"/>
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rlay_nav"
+            android:background="@color/seagreen"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="64dp">
+
+            <TextView
+                android:id="@+id/tv_contact"
+                android:text="通讯"
+                android:drawableTop="@drawable/icon_sidebar_info"
+                android:paddingLeft="20dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:drawablePadding="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tv_search"
+                android:text="发现"
+                android:drawableTop="@drawable/icon_sidebar_info"
+                android:layout_alignParentRight="true"
+                android:paddingRight="20dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:drawablePadding="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+        <com.jhy.org.yueqiu.test.h.PopupSpan
+            android:id="@+id/popupSpan"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/rlay_nav"
+            android:layout_width="256dp"
+            android:layout_height="128dp" />
+
         <ImageView
             android:id="@+id/iv_basketball"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:background="@drawable/icon_sidebar_team"
+            android:layout_marginBottom="8dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/icon_launcher"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
     </RelativeLayout>
 </merge>
