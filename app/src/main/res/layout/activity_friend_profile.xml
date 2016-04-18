@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/information"
+            android:text="球友资料"
             android:textSize="30sp"
             android:textColor="@color/white"
             android:gravity="center"
@@ -40,11 +40,15 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="上传头像"
+        android:drawableLeft="@drawable/selector_myprofile_zan"
+        android:text="12"
+        android:drawablePadding="10dp"
+        android:padding="10dp"
         android:textSize="30sp"
         android:layout_marginTop="10dp"
         android:layout_below="@id/iv_info_head"
         android:layout_centerHorizontal="true"
+        android:onClick="setInfoClick"
         android:id="@+id/tv_info_zan"/>
 
     <LinearLayout
@@ -220,13 +224,27 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="15dp"/>
 </RelativeLayout>
-    <Button
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
         android:layout_below="@id/relat_info_skilled"
-        android:text="上传"
-        android:textSize="30dp"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/btn_info_send"/>
+        android:layout_marginTop="20dp">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:text="加为好友"
+            android:textSize="20dp"
+            android:layout_weight="1"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:text="发送消息"
+            android:textSize="20dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 </RelativeLayout>
