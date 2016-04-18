@@ -5,11 +5,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/icon_title"
+        android:layout_height="90dp"
+        android:background="@color/blackui"
         android:orientation="horizontal">
 
-        <TextView
+    <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="@string/team"
@@ -27,14 +27,32 @@
         android:background="@null"
         android:onClick="myTeamBackClick"
         android:id="@+id/btn_team_back"/>
-    <ListView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/btn_team_back"
-        android:divider="@color/dimgray"
-        android:dividerHeight="1dp"
-        android:layout_marginTop="20dp"
-        android:id="@+id/lv_team">
-
-    </ListView>
+        android:text="基本资料"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:background="@color/orange"
+        android:layout_marginTop="30dp"
+        android:gravity="center"
+        android:id="@+id/tv_team_logoPicture"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_team_logoPicture"
+        android:drawableTop="@drawable/icon_sidebar_head"
+        android:text="上传Logo"
+        android:textSize="25dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="15dp"
+        android:id="@+id/tv_team_logo"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_below="@id/tv_team_logo"
+        android:background="@color/white"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
 </RelativeLayout>

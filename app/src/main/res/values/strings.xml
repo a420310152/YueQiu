@@ -19,12 +19,12 @@
     <string name="rememberword">记住密码</string>
     <string name="reminder">选择第三方登录</string>
 
-    <string name="info_name">爱德华</string>
-    <string name="info_sex">性别：</string>
-    <string name="info_age">年龄：</string>
-    <string name="info_height">身高：</string>
-    <string name="info_weight">体重：</string>
-    <string name="info_skilled">擅长位置：</string>
+    <string name="info_name">昵称</string>
+    <string name="info_sex">性别</string>
+    <string name="info_age">年龄</string>
+    <string name="info_height">身高</string>
+    <string name="info_weight">体重</string>
+    <string name="info_skilled">擅长位置</string>
 
     <string name="system_set_toast">通知</string>
     <string name="system_set_account_manager">账号管理</string>

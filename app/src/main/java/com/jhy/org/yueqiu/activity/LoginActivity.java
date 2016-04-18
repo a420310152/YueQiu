@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.OtherLoginListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /*
  **********************************************
@@ -129,11 +130,11 @@ public class LoginActivity extends Activity{
     private void loginByWeixin(String s){
         JSONObject qqobj;
         try {
-            qqobj = new JSONObject();
-            String qqtoken = qqobj.getString("access_token");
-            String qqexpires = String.valueOf(qqobj.getLong("expires_in"));
-            String qqopenid = qqobj.getString("openid");
-            final BmobThirdUserAuth authInfo = new BmobThirdUserAuth(BmobThirdUserAuth.SNS_TYPE_WEIXIN,qqtoken,qqexpires,qqopenid);
+            qqobj = new JSONObject(s);
+            String token = qqobj.getString("access_token");
+            String expires = String.valueOf(qqobj.getLong("expires_in"));
+            String openid = qqobj.getString("openid");
+            final BmobThirdUserAuth authInfo = new BmobThirdUserAuth(BmobThirdUserAuth.SNS_TYPE_WEIXIN,token,expires,openid);
             BmobUser.loginWithAuthData(LoginActivity.this, authInfo, new OtherLoginListener() {
 
                 @Override
@@ -158,6 +159,7 @@ public class LoginActivity extends Activity{
     private void loginByqq(String s){
 
     }
+    //三方登录微博登录
     private void loginByWeibo(String s){
 
     }
