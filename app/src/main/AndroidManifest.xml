@@ -61,6 +61,11 @@
         <activity android:name=".activity.ShowChallengeActivity" >
         </activity>
         <activity android:name=".activity.EditChallengeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.SoloChallengeActivity">
         </activity>
@@ -71,11 +76,6 @@
         <activity android:name=".test.c.TestActivity" >
         </activity>
         <activity android:name=".test.h.TestActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".test.x.TestActivity" >
         </activity>

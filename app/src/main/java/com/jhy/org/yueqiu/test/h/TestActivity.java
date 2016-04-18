@@ -17,17 +17,21 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.SaveListener;
 
 public class TestActivity extends Activity {
-    private PickerLayout play_sex;
+    private DatetimePickerLayout play_sex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_h_popup);
 
-        play_sex = (PickerLayout) findViewById(R.id.play_sex);
-        play_sex.setTitle("请选择性别");
-        String[] values = new String[] {"男", "女"};
-        play_sex.setValues(values);
+        play_sex = (DatetimePickerLayout) findViewById(R.id.play_sex);
+        play_sex.setYearPickerVisible(false);
+        play_sex.setSecondPickerVisible(false);
+
+//        play_sex = (PickerLayout) findViewById(R.id.play_sex);
+//        play_sex.setTitle("请选择性别");
+//        String[] values = new String[] {"男", "女"};
+//        play_sex.setValues(values);
     }
 
     public void testClick (View view) {

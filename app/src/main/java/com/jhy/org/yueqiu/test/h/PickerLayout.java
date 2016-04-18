@@ -9,6 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.view.OnValuePickedListener;
 
 /**
  * Created by Administrator on 2016/4/18 0018.
@@ -16,6 +17,7 @@ import com.jhy.org.yueqiu.R;
 public class PickerLayout extends RelativeLayout implements View.OnClickListener {
     private TextView tv_title;
     private TextView tv_finish;
+    private TextView tv_unit;
     private NumberPicker np_picker;
     private boolean usesArray = true;
     private OnValuePickedListener pickedListener = null;
@@ -27,6 +29,7 @@ public class PickerLayout extends RelativeLayout implements View.OnClickListener
 
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_finish = (TextView) findViewById(R.id.tv_finish);
+        tv_unit = (TextView) findViewById(R.id.tv_unit);
         np_picker = (NumberPicker) findViewById(R.id.np_picker);
 
         tv_finish.setOnClickListener(this);
@@ -34,6 +37,10 @@ public class PickerLayout extends RelativeLayout implements View.OnClickListener
 
     public void setTitle (String title) {
         tv_title.setText(title);
+    }
+
+    public void setUnit (String string) {
+        tv_unit.setText(string);
     }
 
     public void setValues (String[] values) {

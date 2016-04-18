@@ -4,7 +4,9 @@ import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.test.h.DatetimePickerLayout;
 import com.jhy.org.yueqiu.test.h.MyDateUtils;
+import com.jhy.org.yueqiu.view.OnValuePickedListener;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -22,12 +24,13 @@ import cn.bmob.v3.listener.SaveListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class EditChallengeActivity extends Activity {
+public class EditChallengeActivity extends Activity implements OnValuePickedListener {
     private EditText et_fromDate;
     private EditText et_toDate;
     private EditText et_place;
     private EditText et_title;
     private Button btn_publish;
+    private DatetimePickerLayout my_picker;
 
     private Context context = this;
 
@@ -41,8 +44,12 @@ public class EditChallengeActivity extends Activity {
         et_place = (EditText) findViewById(R.id.et_place);
         et_title = (EditText) findViewById(R.id.et_title);
         btn_publish = (Button) findViewById(R.id.btn_publish);
+        my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
 
-        Bmob.initialize(context, Key.bmob.application_id);
+        my_picker.setYearPickerVisible(false);
+        my_picker.setSecondPickerVisible(false);
+        my_picker.setVisibility(View.INVISIBLE);
+        my_picker.setOnValuePickedListener(this);
     }
 
     // 发布一条挑战记录
@@ -71,5 +78,14 @@ public class EditChallengeActivity extends Activity {
                 Log.i("ilog: saveChallenge", "failed, " + s);
             }
         });
+    }
+
+    public void showDatetimePicker (View view) {
+        my_picker.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onValuePicked(String value) {
+
     }
 }
