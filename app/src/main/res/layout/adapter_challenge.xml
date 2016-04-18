@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <com.jhy.org.yueqiu.view.ChallengeLayout layout="@layout/layout_challenge"
-        android:layout_toRightOf="@id/iv_head"
+        android:layout_toRightOf="@+id/iv_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/challengeContent"
