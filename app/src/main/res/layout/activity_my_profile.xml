@@ -68,7 +68,8 @@
             android:layout_height="match_parent"
             android:textSize="30dp"
             android:background="@null"
-            android:layout_marginLeft="40dp"/>
+            android:layout_marginLeft="40dp"
+            android:id="@+id/et_info_name"/>
     </LinearLayout>
 
     <RelativeLayout

@@ -7,6 +7,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
 
 /*
@@ -16,22 +17,24 @@ import com.jhy.org.yueqiu.domain.Team;
  */
 public class TeamLayout extends RelativeLayout{
 
-    ImageView iv_team_logo;
-    TextView tv_team_name;
-    TextView tv_team_number;
-    TextView tv_team_time;
+    ImageView iv_memember_head;
+    TextView tv_memember_name;
+    TextView tv_memember_height;
+    TextView tv_memember_weight;
+    TextView tv_memember_position;
     public TeamLayout(Context context) {
         super(context);
-        LayoutInflater.from(context).inflate(R.layout.layout_team,this);
-        this.iv_team_logo = (ImageView) findViewById(R.id.iv_team_logo);
-        this.tv_team_name = (TextView) findViewById(R.id.tv_team_name);
-        this.tv_team_number = (TextView) findViewById(R.id.tv_team_number);
-        this.tv_team_time = (TextView) findViewById(R.id.tv_team_time);
+        LayoutInflater.from(context).inflate(R.layout.layout_team, this);
+        this.iv_memember_head = (ImageView) findViewById(R.id.iv_menember_head);
+        this.tv_memember_name = (TextView) findViewById(R.id.tv_memember_name);
+        this.tv_memember_height = (TextView) findViewById(R.id.tv_memember_height);
+        this.tv_memember_weight = (TextView) findViewById(R.id.tv_memember_weight);
+        this.tv_memember_position = (TextView) findViewById(R.id.tv_memember_position);
     }
-    public void setTeam(Team team){
-        this.tv_team_name.setText(team.getName());
-        this.tv_team_number.setText(team.getMembers().getObjects().size());
-        this.tv_team_time.setText(team.getCreatedAt());
+    public void setTeam(Person person){
+        this.tv_memember_height.setText(person.getHeight());
+        this.tv_memember_weight.setText(person.getWeight());
+        this.tv_memember_position.setText(person.getPosition());
     }
 
 }

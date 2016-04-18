@@ -8,32 +8,40 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/icon_launcher"
-        android:id="@+id/iv_team_logo"/>
+        android:background="@drawable/icon_sidebar_head"
+        android:id="@+id/iv_menember_head"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="球队昵称"
+        android:text="队员："
         android:textSize="25dp"
-        android:layout_toRightOf="@id/iv_team_logo"
-        android:layout_alignTop="@id/iv_team_logo"
+        android:layout_toRightOf="@id/iv_menember_head"
+        android:layout_alignTop="@id/iv_menember_head"
         android:layout_marginTop="10dp"
-        android:id="@+id/tv_team_name"/>
+        android:id="@+id/tv_memember_name"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="人数:"
+        android:text="身高:"
         android:textSize="20dp"
-        android:layout_toRightOf="@id/iv_team_logo"
-        android:layout_below="@id/tv_team_name"
-        android:id="@+id/tv_team_number"/>
+        android:layout_toRightOf="@id/iv_menember_head"
+        android:layout_below="@id/tv_memember_name"
+        android:id="@+id/tv_memember_height"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="建立时间:"
+        android:text="体重:"
         android:textSize="20dp"
-        android:layout_toRightOf="@id/tv_team_number"
-        android:layout_below="@id/tv_team_name"
-        android:layout_marginLeft="30dp"
-        android:id="@+id/tv_team_time"/>
+        android:layout_toRightOf="@id/tv_memember_height"
+        android:layout_below="@id/tv_memember_name"
+        android:layout_marginLeft="80dp"
+        android:id="@+id/tv_memember_weight"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="擅长位置:"
+        android:textSize="20dp"
+        android:layout_toRightOf="@id/iv_menember_head"
+        android:layout_below="@id/tv_memember_height"
+        android:id="@+id/tv_memember_position"/>
 </RelativeLayout>
