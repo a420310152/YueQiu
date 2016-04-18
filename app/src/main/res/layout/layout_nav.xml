@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <RelativeLayout
-        android:background="@color/blue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -41,6 +40,7 @@
 
         <com.jhy.org.yueqiu.test.h.PopupSpan
             android:id="@+id/popupSpan"
+            android:visibility="gone"
             android:layout_centerHorizontal="true"
             android:layout_above="@id/rlay_nav"
             android:layout_width="256dp"

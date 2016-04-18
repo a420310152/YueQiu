@@ -1,6 +1,8 @@
 package com.jhy.org.yueqiu.test.h;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -14,15 +16,21 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.activity.SoloChallengeActivity;
+import com.jhy.org.yueqiu.activity.TeamChallengeActivity;
+import com.jhy.org.yueqiu.activity.TrainChallengeActivity;
 
 /**
  * Created by Administrator on 2016/4/16 0016.
  */
-public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Runnable {
+public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Runnable, View.OnTouchListener, View.OnFocusChangeListener {
 
     private static class SpanInfo {
         private int bgImage = R.drawable.icon_sidebar_team;
@@ -38,13 +46,15 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
         private float endAngle = 360; //结束角度
 
         private String[] texts = new String[] {"1V1比赛", "组队比赛", "娱乐练习"};
+        private int[] colors = new int[] {linkColor, linkColor, linkColor};
         private int textSize = 20;
-        private int textColor = 0xFFFFFFFF;
+        private static int textColor = 0xFFFFFFFF;
 
-        private int linkColor = 0xAAC9C1AD; //链接颜色
-        private int activeColor = 0xAAA98A3F; //激活颜色
+        private static int linkColor = 0xAAC9C1AD; //链接颜色
+        private static int activeColor = 0xAAA98A3F; //激活颜色
     }
 
+    private Context context;
     private Thread thread;
     private SurfaceHolder holder;
     private Canvas canvas;
@@ -54,6 +64,8 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
     private RectF range;
     private RectF clipRange;
     private SpanInfo info = new SpanInfo();
+    private boolean hasFocus = false;
+    private boolean clickable = true;
 
     public PopupSpan(Context context) {
         this(context, null);
@@ -61,11 +73,15 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
     public PopupSpan(Context context, AttributeSet attrs) {
         super(context, attrs);
 
+        this.context = context;
         holder = getHolder();
         holder.addCallback(this);
+
         setFocusable(true);
         setFocusableInTouchMode(true);
         setKeepScreenOn(true);
+        setOnFocusChangeListener(this);
+        setOnTouchListener(this);
     }
 
     @Override
@@ -78,6 +94,55 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
 
         setZOrderOnTop(true);
         holder.setFormat(PixelFormat.TRANSLUCENT);
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        float x = event.getX() - info.radius;
+        float y = info.radius - event.getY();
+        float radius = (float) Math.sqrt(x * x + y * y);
+        float angle = (float) (Math.atan2(y, x) * 180 / Math.PI);
+        Log.i("ilog", "(" + x + ", " + y + ")");
+        Log.i("ilog", "radius = " + radius);
+        Log.i("ilog", "angle = " + angle);
+//        showToast("(" + x + ", " + y + "), radius = " + radius );
+        if (radius < info.radius && radius > info.radius / 2) {
+            if (clickable == true) {
+                clickable = false;
+                if (angle > 0 && angle < 60) {
+                    setActiveArc(2);
+                    context.startActivity(new Intent(context, TrainChallengeActivity.class));
+                } else if (angle > 60 && angle < 120) {
+                    setActiveArc(1);
+                    context.startActivity(new Intent(context, TeamChallengeActivity.class));
+                } else if (angle > 120 && angle < 180) {
+                    setActiveArc(0);
+                    context.startActivity(new Intent(context, SoloChallengeActivity.class));
+                }
+            }
+        } else {
+            setActiveArc(-1);
+            setVisibility(GONE);
+        }
+//        showToast("(" + event.getX() + ", " + event.getY() + ")");
+        return false;
+    }
+
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        Log.i("ilog:", "hasFocus = " + hasFocus);
+    }
+
+    @Override
+    protected void onVisibilityChanged(View changedView, int visibility) {
+        super.onVisibilityChanged(changedView, visibility);
+        Log.i("ilog:", "visibility = " + visibility);
+        if (visibility == VISIBLE) {
+            setActiveArc(-1);
+            clickable = true;
+        } else if (visibility == INVISIBLE && clickable == false) {
+            setVisibility(GONE);
+        }
     }
 
     @Override
@@ -127,7 +192,7 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
                 float tempAngle = info.startAngle + info.paddingAngle / 2;
                 float sweepAngle = (info.endAngle - info.startAngle) / itemCount - info.paddingAngle;
                 for (int i = 0; i < itemCount; i++) {
-                    drawArc(tempAngle, sweepAngle, info.texts[i], info.activeColor);
+                    drawArc(tempAngle, sweepAngle, info.texts[i], info.colors[i]);
 
                     tempAngle += sweepAngle + info.paddingAngle;
                 }
@@ -167,5 +232,19 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
         float offsetX = (float)(info.radius * sweepAngle / 180 * Math.PI - textWidth) / 2;
         float offsetY = info.radius / 4;
         canvas.drawTextOnPath(text, textPath, offsetX, offsetY, textPaint);
+    }
+
+    private void showToast (String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
+    }
+
+    private void setActiveArc (int index) {
+        for (int i = 0; i < info.texts.length; i++) {
+            info.colors[i] = SpanInfo.linkColor;
+        }
+        if (index < info.texts.length && index >= 0) {
+            info.colors[index] = SpanInfo.activeColor;
+        }
+        new Thread(this).start();
     }
 }

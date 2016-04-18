@@ -27,7 +27,6 @@ public class EditChallengeActivity extends Activity {
     private EditText et_toDate;
     private EditText et_place;
     private EditText et_title;
-    private EditText et_content;
     private Button btn_publish;
 
     private Context context = this;
@@ -41,7 +40,6 @@ public class EditChallengeActivity extends Activity {
         et_toDate = (EditText) findViewById(R.id.et_toDate);
         et_place = (EditText) findViewById(R.id.et_place);
         et_title = (EditText) findViewById(R.id.et_title);
-        et_content = (EditText) findViewById(R.id.et_content);
         btn_publish = (Button) findViewById(R.id.btn_publish);
 
         Bmob.initialize(context, Key.bmob.application_id);
@@ -53,7 +51,6 @@ public class EditChallengeActivity extends Activity {
         String _toDate = et_toDate.getText().toString();
         String _place = et_place.getText().toString();
         String _title = et_title.getText().toString();
-        String _content = et_content.getText().toString();
 
         _fromDate = "2016-04-15 09:39:02";
         _toDate = "2026-04-15 12:45:00";
@@ -63,7 +60,6 @@ public class EditChallengeActivity extends Activity {
         challenge.setFromDate(new BmobDate(MyDateUtils.getDate()));
         challenge.setToDate(new BmobDate(MyDateUtils.getDate(_toDate)));
         challenge.setTitle(_title);
-        challenge.setContent(_content);
         challenge.save(context, new SaveListener() {
             @Override
             public void onSuccess() {
