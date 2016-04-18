@@ -5,7 +5,7 @@ import com.jhy.org.yueqiu.R;
 import android.os.Bundle;
 /*
  **********************************************
- * 			所有者 H: (黄振梓)
+ * 			所有者 X: (夏旺)
  **********************************************
  */
 public class ResponseChallengeActivity extends Activity {

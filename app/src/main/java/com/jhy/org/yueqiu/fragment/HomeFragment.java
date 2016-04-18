@@ -1,5 +1,6 @@
 package com.jhy.org.yueqiu.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
 import com.jhy.org.yueqiu.config.Key;
@@ -161,6 +163,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             public void onSuccess(List<Challenge> list) {
                 ChallengeAdapter adapter = new ChallengeAdapter(list, getContext());
                 listView.setAdapter(adapter);
+                listView.setOnItemClickListener(itemClick);
             }
 
             @Override
@@ -171,6 +174,16 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
 
     }
+    //点击Item项事件 弹出对手信息
+    AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(getContext(), MyProfileActivity.class);
+            Challenge challenge = (Challenge) parent.getItemAtPosition(position);
+            intent.putExtra("challenge",challenge);
+            startActivity(intent);
+        }
+    };
 
     Challenge challenge;
     Person p1;
