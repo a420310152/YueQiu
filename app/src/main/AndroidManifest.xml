@@ -31,11 +31,6 @@
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
 
         <activity android:name=".activity.MainActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.SearchActivity" >
         </activity>
@@ -66,6 +61,17 @@
         <activity android:name=".activity.ShowChallengeActivity" >
         </activity>
         <activity android:name=".activity.EditChallengeActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.SoloChallengeActivity">
+        </activity>
+        <activity android:name=".activity.TeamChallengeActivity">
+        </activity>
+        <activity android:name=".activity.TrainChallengeActivity">
         </activity>
         <activity android:name=".test.c.TestActivity" >
         </activity>
