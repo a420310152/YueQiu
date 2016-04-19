@@ -22,11 +22,11 @@ public class TestActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_h_popup);
+        setContentView(R.layout.activity_test_h);
 
         play_sex = (DatetimePickerLayout) findViewById(R.id.play_sex);
-        play_sex.setYearPickerVisible(false);
-        play_sex.setSecondPickerVisible(false);
+//        play_sex.setYearPickerVisible(false);
+//        play_sex.setSecondPickerVisible(false);
 
 //        play_sex = (PickerLayout) findViewById(R.id.play_sex);
 //        play_sex.setTitle("请选择性别");

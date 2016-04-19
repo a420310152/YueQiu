@@ -45,7 +45,7 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_challenge);
+        setContentView(R.layout.activity_solo_challenge);
 
         et_fromDate = (EditText) findViewById(R.id.et_fromDate);
         et_toDate = (EditText) findViewById(R.id.et_toDate);

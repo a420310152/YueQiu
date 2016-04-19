@@ -32,7 +32,13 @@
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
 
         <activity android:name=".activity.MainActivity"></activity>
-        <activity android:name=".activity.SoloChallengeActivity"></activity>
+        <activity android:name=".activity.SoloChallengeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.TeamChallengeActivity"></activity>
         <activity android:name=".activity.TrainChallengeActivity"></activity>
         <activity android:name=".activity.SearchActivity"></activity>
@@ -55,13 +61,9 @@
         <activity android:name=".activity.ResponseChallengeActivity"></activity>
         <activity android:name=".activity.AlarmActivity"></activity>
         <activity android:name=".test.c.TestActivity"></activity>
-        <activity android:name=".test.h.TestActivity"></activity>
+        <activity android:name=".test.h.TestActivity">
+        </activity>
         <activity android:name=".test.x.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.OpponentActivity"></activity>
         <activity android:name=".activity.OpponentTeamActivity"></activity>
