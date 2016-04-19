@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
     <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".config.MyApplication"
@@ -30,55 +31,41 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
 
-        <activity android:name=".activity.MainActivity" >
-        </activity>
-        <activity android:name=".activity.SearchActivity" >
-        </activity>
-        <activity android:name=".activity.SearchFriendActivity" >
-        </activity>
-        <activity android:name=".activity.SearchPlaceActivity" >
-        </activity>
-        <activity android:name=".activity.ForumActivity" >
-        </activity>
-        <activity android:name=".activity.LoginActivity" >
-        </activity>
-        <activity android:name=".activity.SignUpActivity" >
-        </activity>
-        <activity android:name=".activity.MyProfileActivity" >
-        </activity>
-        <activity android:name=".activity.MyTeamActivity" >
-        </activity>
-        <activity android:name=".activity.MyFlaceActivity" >
-        </activity>
-        <activity android:name=".activity.MyFootprintActivity" >
-        </activity>
-        <activity android:name=".activity.ContactActivity" >
-        </activity>
-        <activity android:name=".activity.ChatRoomActivity" >
-        </activity>
-        <activity android:name=".activity.SettingActivity" >
-        </activity>
-        <activity android:name=".activity.ShowChallengeActivity" >
-        </activity>
-        <activity android:name=".activity.EditChallengeActivity" >
+        <activity android:name=".activity.MainActivity"></activity>
+
+
+        <activity android:name=".activity.SoloChallengeActivity"></activity>
+        <activity android:name=".activity.TeamChallengeActivity"></activity>
+        <activity android:name=".activity.TrainChallengeActivity"></activity>
+        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.SearchFriendActivity"></activity>
+        <activity android:name=".activity.SearchPlaceActivity"></activity>
+        <activity android:name=".activity.ForumActivity"></activity>
+        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.SignUpActivity"></activity>
+        <activity android:name=".activity.MyProfileActivity"></activity>
+        <activity android:name=".activity.MyTeamActivity"></activity>
+        <activity android:name=".activity.MyFlaceActivity"></activity>
+        <activity android:name=".activity.MyFootprintActivity"></activity>
+        <activity android:name=".activity.ContactActivity"></activity>
+        <activity android:name=".activity.ChatRoomActivity"></activity>
+        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.ShowChallengeActivity"></activity>
+        <activity android:name=".activity.EditChallengeActivity"></activity>
+        <activity android:name=".activity.ResponseChallengeActivity"></activity>
+        <activity android:name=".activity.AlarmActivity"></activity>
+        <activity android:name=".test.c.TestActivity"></activity>
+        <activity android:name=".test.h.TestActivity"></activity>
+        <activity android:name=".test.x.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.SoloChallengeActivity">
-        </activity>
-        <activity android:name=".activity.TeamChallengeActivity">
-        </activity>
-        <activity android:name=".activity.TrainChallengeActivity">
-        </activity>
-        <activity android:name=".test.c.TestActivity" >
-        </activity>
-        <activity android:name=".test.h.TestActivity" >
-        </activity>
-        <activity android:name=".test.x.TestActivity" >
-        </activity>
+        <activity android:name=".activity.OpponentActivity"></activity>
+        <activity android:name=".activity.OpponentTeamActivity"></activity>
+
     </application>
 
 </manifest>
