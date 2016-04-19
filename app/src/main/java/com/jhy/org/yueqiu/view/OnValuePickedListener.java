@@ -1,8 +1,10 @@
 package com.jhy.org.yueqiu.view;
 
+import com.jhy.org.yueqiu.test.h.PickerLayout;
+
 /**
  * Created by Administrator on 2016/4/18 0018.
  */
 public interface OnValuePickedListener {
-    void onValuePicked (String value);
+    void onValuePicked (PickerLayout picker, int value);
 }

@@ -12,6 +12,7 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by Administrator on 2016/4/18 0018.
@@ -33,7 +34,9 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
     private NumberPicker np_hour;
     private NumberPicker np_minute;
     private NumberPicker np_second;
-    private OnValuePickedListener pickedListener = null;
+    private OnPickDatetimeListener pickListener = null;
+
+    Calendar calendar;
 
     public DatetimePickerLayout(Context context) { this(context, null); }
 
@@ -41,6 +44,12 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.layout_datetime_picker, this);
 
+        initView();
+        initNumberPicker();
+        tv_finish.setOnClickListener(this);
+    }
+
+    private void initView () {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_finish = (TextView) findViewById(R.id.tv_finish);
 
@@ -57,13 +66,10 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         np_hour = (NumberPicker) findViewById(R.id.np_hour);
         np_minute = (NumberPicker) findViewById(R.id.np_minute);
         np_second = (NumberPicker) findViewById(R.id.np_second);
-
-        setNumberPicker();
-        tv_finish.setOnClickListener(this);
     }
 
-    private void setNumberPicker () {
-        Calendar calendar = Calendar.getInstance();
+    private void initNumberPicker () {
+        calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
@@ -96,8 +102,12 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         np_second.setValue(second);
     }
 
-    public void setOnValuePickedListener (OnValuePickedListener pickedListener) {
-        this.pickedListener = pickedListener;
+    public void setTitle (String title) {
+        tv_title.setText(title);
+    }
+
+    public void setOnPickDatetimeListener (OnPickDatetimeListener pickListener) {
+        this.pickListener = pickListener;
     }
 
     public void setYearPickerVisible (boolean visible) {
@@ -121,10 +131,52 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         rlay_second.setVisibility(visibility);
     }
 
+    public String getValue () {
+        String value = "";
+        boolean isFirst = true;
+        if (rlay_year.getVisibility() == VISIBLE) {
+            value += np_year.getValue();
+            isFirst = false;
+        }
+        if (rlay_month.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : "-") + np_month.getValue();
+            isFirst = false;
+        }
+        if (rlay_day.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : "-") + np_day.getValue();
+            isFirst = false;
+        }
+        if (rlay_hour.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : " ") + np_hour.getValue();
+            isFirst = false;
+        }
+        if (rlay_minute.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : ":") + np_minute.getValue();
+            isFirst = false;
+        }
+        if (rlay_second.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : ":") + np_second.getValue();
+            isFirst = false;
+        }
+        return value;
+    }
+
+    public Date getDatetime () {
+        calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, np_year.getValue());
+        calendar.set(Calendar.MONTH, np_month.getValue());
+        calendar.set(Calendar.DAY_OF_MONTH, np_day.getValue());
+        calendar.set(Calendar.HOUR_OF_DAY, np_hour.getValue());
+        calendar.set(Calendar.MINUTE, np_minute.getValue());
+        calendar.set(Calendar.SECOND, np_second.getValue());
+        return calendar.getTime();
+    }
+
     @Override
     public void onClick(View v) {
-        if (pickedListener != null) {
-            pickedListener.onValuePicked("");
+        if (pickListener != null) {
+            pickListener.onPickDatetime(this, getValue());
+            setVisibility(INVISIBLE);
         }
     }
 }

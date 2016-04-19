@@ -5,6 +5,106 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.jhy.org.yueqiu.activity.SoloChallengeActivity">
+    tools:context="com.jhy.org.yueqiu.activity.TrainChallengeActivity">
+
+    <TextView
+        android:id="@+id/tv_type"
+        android:text="1V1 SOLO赛"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tv_fromDate"
+        android:text="入场时间"
+        android:textSize="18sp"
+        android:textColor="@color/darkorange"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/tv_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_fromDate"
+        android:layout_toRightOf="@id/tv_fromDate"
+        android:layout_alignBaseline="@id/tv_fromDate"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_place"
+        android:text="约战地点"
+        android:textSize="18sp"
+        android:textColor="@color/darkorange"
+        android:layout_marginTop="16dp"
+        android:layout_alignRight="@id/tv_fromDate"
+        android:layout_below="@id/tv_fromDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_place"
+        android:layout_alignRight="@id/et_fromDate"
+        android:layout_alignLeft="@id/et_fromDate"
+        android:layout_alignBaseline="@id/tv_place"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_toDate"
+        android:text="离开时间"
+        android:textSize="18sp"
+        android:textColor="@color/darkorange"
+        android:layout_marginTop="16dp"
+        android:layout_alignRight="@id/tv_fromDate"
+        android:layout_below="@id/tv_place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_toDate"
+        android:layout_alignRight="@id/et_fromDate"
+        android:layout_alignLeft="@id/et_fromDate"
+        android:layout_alignBaseline="@id/tv_toDate"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:text="约球宣言"
+        android:textSize="18sp"
+        android:textColor="@color/darkorange"
+        android:layout_marginTop="16dp"
+        android:layout_alignRight="@id/tv_fromDate"
+        android:layout_below="@id/tv_toDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_alignRight="@id/et_fromDate"
+        android:layout_alignLeft="@id/et_fromDate"
+        android:layout_alignBaseline="@id/tv_title"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
+
+
+    <Button
+        android:id="@+id/btn_publish"
+        android:onClick="publish"
+        android:text="发布"
+        android:layout_marginTop="32dp"
+        android:layout_below="@id/tv_title"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.jhy.org.yueqiu.test.h.DatetimePickerLayout
+        android:id="@+id/my_picker"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

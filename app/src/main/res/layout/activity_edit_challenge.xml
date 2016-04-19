@@ -20,6 +20,7 @@
         android:id="@+id/tv_fromDate"
         android:text="入场时间"
         android:textSize="18sp"
+        android:textColor="@color/darkorange"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="32dp"
         android:layout_below="@id/tv_type"
@@ -27,7 +28,6 @@
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/et_fromDate"
-        android:onClick="showDatetimePicker"
         android:layout_toRightOf="@id/tv_fromDate"
         android:layout_alignBaseline="@id/tv_fromDate"
         android:layout_alignParentRight="true"
@@ -40,6 +40,7 @@
         android:id="@+id/tv_place"
         android:text="约战地点"
         android:textSize="18sp"
+        android:textColor="@color/darkorange"
         android:layout_marginTop="16dp"
         android:layout_alignRight="@id/tv_fromDate"
         android:layout_below="@id/tv_fromDate"
@@ -57,6 +58,7 @@
         android:id="@+id/tv_toDate"
         android:text="离开时间"
         android:textSize="18sp"
+        android:textColor="@color/darkorange"
         android:layout_marginTop="16dp"
         android:layout_alignRight="@id/tv_fromDate"
         android:layout_below="@id/tv_place"
@@ -64,7 +66,6 @@
         android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/et_toDate"
-        android:onClick="showDatetimePicker"
         android:layout_alignRight="@id/et_fromDate"
         android:layout_alignLeft="@id/et_fromDate"
         android:layout_alignBaseline="@id/tv_toDate"
@@ -75,6 +76,7 @@
         android:id="@+id/tv_title"
         android:text="约球宣言"
         android:textSize="18sp"
+        android:textColor="@color/darkorange"
         android:layout_marginTop="16dp"
         android:layout_alignRight="@id/tv_fromDate"
         android:layout_below="@id/tv_toDate"
@@ -101,6 +103,7 @@
 
     <com.jhy.org.yueqiu.test.h.DatetimePickerLayout
         android:id="@+id/my_picker"
+        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

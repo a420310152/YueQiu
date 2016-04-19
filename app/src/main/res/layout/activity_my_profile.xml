@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="上传头像"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:layout_marginTop="10dp"
         android:layout_below="@id/iv_info_head"
         android:layout_centerHorizontal="true"
@@ -55,14 +55,14 @@
         android:background="@drawable/icon_myprofile_bground"
         android:layout_below="@id/tv_info_zan"
         android:id="@+id/linear_info_name">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/info_name"
-        android:textSize="35sp"
-        android:id="@+id/tv_info_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/info_name"
+            android:textSize="25sp"
+            android:id="@+id/tv_info_name"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -76,151 +76,151 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_info_name"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/linear_info_sex">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/info_sex"
-        android:textSize="35sp"
-        android:id="@+id/tv_info_sex"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/info_sex"
+            android:textSize="25sp"
+            android:id="@+id/tv_info_sex"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
-            android:text="男"
-            android:textSize="34dp"
+            android:textSize="25sp"
             android:layout_marginLeft="50dp"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/tv_info_sex"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_selector_sex"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/linear_info_sex"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_age">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/info_age"
-        android:textSize="35sp"
-        android:id="@+id/tv_info_age"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/info_age"
+            android:textSize="25sp"
+            android:id="@+id/tv_info_age"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
-            android:text="21"
-            android:textSize="34dp"
+            android:textSize="25sp"
             android:layout_marginLeft="50dp"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/tv_info_age"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_selector_age"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/relat_info_age"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="25dp"
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_height">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/info_height"
-        android:textSize="35sp"
-        android:id="@+id/tv_info_height"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/info_height"
+            android:textSize="25sp"
+            android:id="@+id/tv_info_height"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
-            android:text="175cm"
-            android:textSize="34dp"
+            android:textSize="25sp"
             android:layout_marginLeft="50dp"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/tv_info_height"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_selector_height"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/relat_info_height"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_weight">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/info_weight"
-        android:textSize="35sp"
-        android:id="@+id/tv_info_weight"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/info_weight"
+            android:textSize="25sp"
+            android:id="@+id/tv_info_weight"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
-            android:text="60kg"
-            android:textSize="34dp"
+            android:textSize="25sp"
             android:layout_marginLeft="50dp"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/tv_info_weight"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_selector_weight"/>
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/relat_info_weight"
-        android:layout_marginTop="-5dp"
+        android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_skilled">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="40dp"
-        android:text="@string/info_skilled"
-        android:textSize="35sp"
-        android:id="@+id/tv_info_skilled"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:text="@string/info_skilled"
+            android:textSize="25sp"
+            android:id="@+id/tv_info_skilled"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
-            android:text="PG"
-            android:textSize="34dp"
+            android:textSize="25sp"
             android:layout_marginLeft="50dp"
             android:layout_centerHorizontal="true"
             android:layout_toRightOf="@id/tv_info_skilled"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"/>
-</RelativeLayout>
+            android:layout_marginRight="15dp"
+            android:id="@+id/tv_selector_skilled"/>
+    </RelativeLayout>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -229,5 +229,13 @@
         android:textSize="30dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
+        android:onClick="setInfoClick"
         android:id="@+id/btn_info_send"/>
+    <com.jhy.org.yueqiu.test.h.PickerLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:background="@color/white"
+        android:id="@+id/info_picker"/>
 </RelativeLayout>
