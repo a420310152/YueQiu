@@ -6,10 +6,12 @@ import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.test.h.DatetimePickerLayout;
 import com.jhy.org.yueqiu.test.h.MyDateUtils;
+import com.jhy.org.yueqiu.test.h.OnPickDatetimeListener;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +26,10 @@ import cn.bmob.v3.listener.SaveListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class EditChallengeActivity extends Activity implements OnValuePickedListener {
+public class EditChallengeActivity extends Activity implements OnPickDatetimeListener, View.OnFocusChangeListener {
+    private Context context = this;
+
+    private EditText currentView;
     private EditText et_fromDate;
     private EditText et_toDate;
     private EditText et_place;
@@ -32,7 +37,6 @@ public class EditChallengeActivity extends Activity implements OnValuePickedList
     private Button btn_publish;
     private DatetimePickerLayout my_picker;
 
-    private Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +53,18 @@ public class EditChallengeActivity extends Activity implements OnValuePickedList
         my_picker.setYearPickerVisible(false);
         my_picker.setSecondPickerVisible(false);
         my_picker.setVisibility(View.INVISIBLE);
-        my_picker.setOnValuePickedListener(this);
+        my_picker.setOnPickDatetimeListener(this);
+
+        et_fromDate.setInputType(InputType.TYPE_NULL);
+        et_fromDate.setOnFocusChangeListener(this);
+
+        et_toDate.setInputType(InputType.TYPE_NULL);
+        et_toDate.setOnFocusChangeListener(this);
+
+        et_place.setInputType(InputType.TYPE_NULL);
+        et_place.setOnFocusChangeListener(this);
+
+        et_title.setOnFocusChangeListener(this);
     }
 
     // 发布一条挑战记录
@@ -80,12 +95,37 @@ public class EditChallengeActivity extends Activity implements OnValuePickedList
         });
     }
 
-    public void showDatetimePicker (View view) {
-        my_picker.setVisibility(View.VISIBLE);
+    @Override
+    public void onFocusChange(View v, boolean hasFocus) {
+        boolean visible = false;
+        currentView = null;
+
+        switch (v.getId()) {
+            case R.id.et_fromDate:
+                visible = true;
+                currentView = et_fromDate;
+                break;
+            case R.id.et_toDate:
+                visible = true;
+                currentView = et_toDate;
+                break;
+            case R.id.et_title:
+                visible = false;
+                break;
+            case R.id.et_place:
+                visible = false;
+                break;
+            default:
+                visible = false;
+                break;
+        }
+        my_picker.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
-    public void onValuePicked(String value) {
-
+    public void onPickDatetime(DatetimePickerLayout picker, String value) {
+        if (currentView != null) {
+            currentView.setText(value);
+        }
     }
 }

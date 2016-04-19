@@ -33,7 +33,7 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
     private NumberPicker np_hour;
     private NumberPicker np_minute;
     private NumberPicker np_second;
-    private OnValuePickedListener pickedListener = null;
+    private OnPickDatetimeListener pickListener = null;
 
     public DatetimePickerLayout(Context context) { this(context, null); }
 
@@ -41,6 +41,12 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.layout_datetime_picker, this);
 
+        initView();
+        initNumberPicker();
+        tv_finish.setOnClickListener(this);
+    }
+
+    private void initView () {
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_finish = (TextView) findViewById(R.id.tv_finish);
 
@@ -57,12 +63,9 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         np_hour = (NumberPicker) findViewById(R.id.np_hour);
         np_minute = (NumberPicker) findViewById(R.id.np_minute);
         np_second = (NumberPicker) findViewById(R.id.np_second);
-
-        setNumberPicker();
-        tv_finish.setOnClickListener(this);
     }
 
-    private void setNumberPicker () {
+    private void initNumberPicker () {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -96,8 +99,8 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         np_second.setValue(second);
     }
 
-    public void setOnValuePickedListener (OnValuePickedListener pickedListener) {
-        this.pickedListener = pickedListener;
+    public void setOnPickDatetimeListener (OnPickDatetimeListener pickListener) {
+        this.pickListener = pickListener;
     }
 
     public void setYearPickerVisible (boolean visible) {
@@ -121,10 +124,41 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         rlay_second.setVisibility(visibility);
     }
 
+    public String getValue () {
+        String value = "";
+        boolean isFirst = true;
+        if (rlay_year.getVisibility() == VISIBLE) {
+            value += np_year.getValue();
+            isFirst = false;
+        }
+        if (rlay_month.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : "-") + np_month.getValue();
+            isFirst = false;
+        }
+        if (rlay_day.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : "-") + np_day.getValue();
+            isFirst = false;
+        }
+        if (rlay_hour.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : " ") + np_hour.getValue();
+            isFirst = false;
+        }
+        if (rlay_minute.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : ":") + np_minute.getValue();
+            isFirst = false;
+        }
+        if (rlay_second.getVisibility() == VISIBLE) {
+            value += (isFirst ? "" : ":") + np_second.getValue();
+            isFirst = false;
+        }
+        return value;
+    }
+
     @Override
     public void onClick(View v) {
-        if (pickedListener != null) {
-            pickedListener.onValuePicked("");
+        if (pickListener != null) {
+            pickListener.onPickDatetime(this, getValue());
+            setVisibility(INVISIBLE);
         }
     }
 }

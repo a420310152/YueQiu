@@ -39,20 +39,27 @@ public class PickerLayout extends RelativeLayout implements View.OnClickListener
         tv_title.setText(title);
     }
 
-    public void setUnit (String string) {
-        tv_unit.setText(string);
-    }
-
-    public void setValues (String[] values) {
+    public void setValues (String[] values, String unit) {
         usesArray = true;
-        np_picker.setDisplayedValues(values);
+        np_picker.setDisplayedValues(null);
         np_picker.setMaxValue(values.length - 1);
+        np_picker.setMinValue(0);
+        np_picker.setDisplayedValues(values);
+        tv_unit.setText(unit);
+    }
+    public void setValues(String[] values) {
+        setValues(values, "");
     }
 
-    public void setValues (int min, int max) {
+    public void setValues (int min, int max, String unit) {
         usesArray = false;
-        np_picker.setMinValue(min);
+        np_picker.setDisplayedValues(null);
         np_picker.setMaxValue(max);
+        np_picker.setMinValue(min);
+        tv_unit.setText(unit);
+    }
+    public void setValues(int min, int max) {
+        setValues(min, max, "");
     }
 
     public String getValue () {
@@ -70,7 +77,8 @@ public class PickerLayout extends RelativeLayout implements View.OnClickListener
     @Override
     public void onClick(View v) {
         if (pickedListener != null) {
-            pickedListener.onValuePicked(getValue());
+            pickedListener.onValuePicked(this, np_picker.getValue());
+            setVisibility(INVISIBLE);
         }
     }
 }

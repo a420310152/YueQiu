@@ -85,5 +85,6 @@
         android:background="@drawable/icon_sidebar_cancle"
         android:onClick="cancelClick"
         android:layout_margin="20dp"
+        android:visibility="invisible"
         android:id="@+id/btn_cancel"/>
 </RelativeLayout>
