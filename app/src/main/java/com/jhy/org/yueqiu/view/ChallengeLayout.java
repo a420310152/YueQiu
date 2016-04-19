@@ -1,6 +1,7 @@
 package com.jhy.org.yueqiu.view;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.util.AttributeSet;
@@ -11,14 +12,19 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.activity.ResponseChallengeActivity;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
+import com.jhy.org.yueqiu.domain.Post;
 
 import java.util.logging.LogRecord;
 
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.GetListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /*
  **********************************************
@@ -35,6 +41,7 @@ public class ChallengeLayout extends LinearLayout{
     TextView tv_apply;
     String namePerson; //发起人的姓名
     String namePlace; //发起人选择的地点
+    Challenge challenge;
     public ChallengeLayout(Context context) {
         super(context);
         build(context);
@@ -58,7 +65,17 @@ public class ChallengeLayout extends LinearLayout{
         tv_setPlace = (TextView) findViewById(R.id.tv_setPlace);
         tv_title = (TextView) findViewById(R.id.tv_text);
         tv_apply = (TextView) findViewById(R.id.tv_apply);
+        tv_apply.setOnClickListener(click);
     }
+    OnClickListener click = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            Intent intent = new Intent(getContext(),ResponseChallengeActivity.class);
+            intent.putExtra("challenge",challenge);
+            context.startActivity(intent);
+        }
+    };
     //利用handler作为中转 在主线程中对控件进行设置
     Handler handler = new Handler() {
         @Override
@@ -78,6 +95,7 @@ public class ChallengeLayout extends LinearLayout{
     };
     public void setContent(Challenge challenge){
     //查询Person表的数据 获得发起人的名字
+        this.challenge = challenge;
         BmobQuery<Person> bmobQuery = new BmobQuery<Person>();
         bmobQuery.getObject(context, challenge.getInitiator().getObjectId(), new GetListener<Person>() {
             @Override
@@ -107,11 +125,12 @@ public class ChallengeLayout extends LinearLayout{
         });
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
         tv_type.setText(challenge.getType());
-        tv_setTime.setText(challenge.getFromDate().getDate());
+        //截取只显示日期的字符
+        String data = challenge.getFromDate().getDate();
+        data = data.substring(5,16);
+        tv_setTime.setText(data);
         tv_title.setText(challenge.getTitle());
     }
 
-    public void clickApply(View v){
 
-    }
 }
