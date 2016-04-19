@@ -43,120 +43,148 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_succeed"
         android:layout_centerHorizontal="true"
-        android:text="报名成功!"
+        android:text="确认报名"
         android:textColor="@color/orange"
-        android:textSize="25dp" />
+        android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/tv_one"
+    <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_succeed"
-        android:layout_marginLeft="30dp"
-        android:text="您已经成功报名参加了由"
-        android:textColor="@color/darkgray"
-        android:textSize="15dp" />
+        android:layout_centerHorizontal="true">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_one"
-        android:layout_toRightOf="@id/tv_one"
-        android:text="123"
-        android:textColor="@color/orange"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:text="您是否报名参加由"
+            android:textColor="@color/darkgray"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/tv_two"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_name"
-        android:layout_toRightOf="@id/tv_name"
-        android:text="发起的"
-        android:textColor="@color/darkgray"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_one"
+            android:layout_toRightOf="@id/tv_one"
+            android:text="123"
+            android:textColor="@color/orange"
+            android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_two"
-        android:layout_toRightOf="@id/tv_two"
-        android:text="发起类型"
-        android:textColor="@color/lightseagreen"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_name"
+            android:layout_toRightOf="@id/tv_name"
+            android:text="发起的"
+            android:textColor="@color/darkgray"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/tv_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_two"
-        android:layout_marginLeft="30dp"
-        android:text="时间是"
-        android:textColor="@color/darkgray"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_two"
+            android:layout_toRightOf="@id/tv_two"
+            android:text="发起类型"
+            android:textColor="@color/lightseagreen"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_three"
-        android:layout_toRightOf="@id/tv_three"
-        android:text="00:00"
-        android:textColor="@color/lightseagreen"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_two"
+            android:layout_marginLeft="30dp"
+            android:text="时间是"
+            android:textColor="@color/darkgray"
+            android:textSize="20dp" />
 
-    <TextView
-        android:id="@+id/tv_four"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_time"
-        android:layout_toRightOf="@id/tv_time"
-        android:text="，地点在"
-        android:textColor="@color/darkgray"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_three"
+            android:layout_toRightOf="@id/tv_three"
+            android:text="00:00"
+            android:textColor="@color/lightseagreen"
+            android:textSize="20dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_four"
-        android:layout_toRightOf="@id/tv_four"
-        android:text="某某地点"
-        android:textColor="@color/lightseagreen"
-        android:textSize="15dp" />
+        <TextView
+            android:id="@+id/tv_four"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_time"
+            android:layout_toRightOf="@id/tv_time"
+            android:text="，地点在"
+            android:textColor="@color/darkgray"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_four"
+            android:layout_toRightOf="@id/tv_four"
+            android:text="某某地点"
+            android:textColor="@color/lightseagreen"
+            android:textSize="20dp" />
+    </RelativeLayout>
+
 
     <TextView
         android:id="@+id/tv_five"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_four"
+        android:layout_below="@id/relative"
         android:layout_centerHorizontal="true"
-        android:text="请您准时赴约哦！"
+        android:text="点击确认报名，请您准时赴约哦！"
         android:textColor="@color/darkgray"
-        android:textSize="15dp" />
+        android:textSize="20dp" />
 
-    <RadioButton
-        android:id="@+id/rb_helper"
+    <CheckBox
+        android:id="@+id/cb_helper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_five"
         android:layout_centerHorizontal="true"
-        android:text="提前半个小时提醒我"
+        android:text="设置闹钟提醒我"
         android:textColor="@color/orange"
-        android:textSize="10dp" />
+        android:textSize="15dp"
+        android:layout_marginTop="10dp"/>
 
     <TextView
         android:id="@+id/tv_OK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rb_helper"
-        android:layout_centerHorizontal="true"
+        android:layout_alignLeft="@id/tv_five"
+        android:layout_below="@+id/cb_helper"
         android:background="@color/orange"
         android:paddingBottom="5dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:paddingTop="5dp"
-        android:text="确定返回"
+        android:text="确定报名"
         android:textColor="@color/white"
-        android:textSize="20dp" />
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/tv_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/tv_five"
+        android:layout_below="@+id/cb_helper"
+        android:background="@color/orange"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="5dp"
+        android:text="取消报名"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        android:layout_marginTop="20dp"/>
 </RelativeLayout>

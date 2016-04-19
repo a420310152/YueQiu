@@ -14,18 +14,23 @@ import android.widget.Gallery;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
+import com.jhy.org.yueqiu.activity.OpponentActivity;
+import com.jhy.org.yueqiu.activity.OpponentTeamActivity;
+import com.jhy.org.yueqiu.activity.ResponseChallengeActivity;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
+import com.jhy.org.yueqiu.view.ChallengeLayout;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -58,7 +63,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     View view;
     ListView listView;
     RadioGroup markGroup;
-    View indexView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,7 +85,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     private void buildup() {
         group = (RadioGroup) view.findViewById(R.id.rg_title);
-        markGroup = (RadioGroup) view .findViewById(R.id.markGroup);
+        markGroup = (RadioGroup) view.findViewById(R.id.markGroup);
         gallery = (Gallery) view.findViewById(R.id.gallery);
         List<Integer> list = new ArrayList<Integer>();
         list.add(R.drawable.icon_home_gallery1);
@@ -95,22 +99,23 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         }
         group.setOnCheckedChangeListener(click);
     }
+
     //标题group的选择监听
     RadioGroup.OnCheckedChangeListener click = new RadioGroup.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(RadioGroup group, int checkedId) {
-            switch (checkedId){
+            switch (checkedId) {
                 case R.id.rb_one:
-                //gallery.setVisibility(View.GONE);
-                break;
+                    //gallery.setVisibility(View.GONE);
+                    break;
                 case R.id.rb_two:
 
-                break;
+                    break;
                 case R.id.rb_three:
 
-                break;
+                    break;
                 default:
-                break;
+                    break;
             }
         }
     };
@@ -174,16 +179,29 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
 
     }
+
     //点击Item项事件 弹出对手信息
     AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(getContext(), MyProfileActivity.class);
             Challenge challenge = (Challenge) parent.getItemAtPosition(position);
-            intent.putExtra("challenge",challenge);
-            startActivity(intent);
+            String type = challenge.getType();
+            Intent intent;
+
+            if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
+                intent = new Intent(getContext(), OpponentActivity.class);
+                intent.putExtra("challenge", challenge);
+                Log.i("rea", "challenge===========" + challenge.getInitiator());
+                startActivity(intent);
+            } else if (type.equals(Challenge.TYPE_TEAM)) {
+                intent = new Intent(getContext(), OpponentTeamActivity.class);
+                intent.putExtra("challenge", challenge);
+                startActivity(intent);
+            }
+
         }
     };
+
 
     Challenge challenge;
     Person p1;
@@ -254,6 +272,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     //上传Person的数据（用户名）
     String personId;
+
     private void addPerson() {
         p1 = new Person();
         p1.setUsername("用户3");
@@ -274,9 +293,9 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     }
 
 
-    private void addAvader(){
+    private void addAvader() {
         //上传用户的头像
-        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)){
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
             //File fileSD = Environment.getExternalStorageDirectory();
             String filePath = "/storage/emulated/legacy/Download/avatar1.jpg";
             BmobProFile proFile = new BmobProFile();
