@@ -55,6 +55,7 @@
         android:background="@drawable/icon_myprofile_bground"
         android:layout_below="@id/tv_info_zan"
         android:id="@+id/linear_info_name">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,6 +64,7 @@
             android:text="@string/info_name"
             android:textSize="25sp"
             android:id="@+id/tv_info_name"/>
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -80,6 +82,7 @@
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/linear_info_sex">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,6 +113,7 @@
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_age">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -140,6 +144,7 @@
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_height">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -170,6 +175,7 @@
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_weight">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -200,6 +206,7 @@
         android:background="@drawable/icon_myprofile_bground"
         android:onClick="setInfoClick"
         android:id="@+id/relat_info_skilled">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -220,7 +227,9 @@
             android:layout_centerInParent="true"
             android:layout_marginRight="15dp"
             android:id="@+id/tv_selector_skilled"/>
+
     </RelativeLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

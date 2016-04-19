@@ -41,9 +41,10 @@ public class PickerLayout extends RelativeLayout implements View.OnClickListener
 
     public void setValues (String[] values, String unit) {
         usesArray = true;
-        np_picker.setDisplayedValues(values);
+        np_picker.setDisplayedValues(null);
         np_picker.setMaxValue(values.length - 1);
         np_picker.setMinValue(0);
+        np_picker.setDisplayedValues(values);
         tv_unit.setText(unit);
     }
     public void setValues (String[] values) {
@@ -67,6 +68,13 @@ public class PickerLayout extends RelativeLayout implements View.OnClickListener
             return values[np_picker.getValue()];
         }
         return "" + np_picker.getValue();
+    }
+
+    public void setPositon (int position) {
+        np_picker.setValue(position);
+    }
+    public int getPosition () {
+        return np_picker.getValue();
     }
 
     public void setOnValuePickedListener (OnValuePickedListener pickedListener) {
