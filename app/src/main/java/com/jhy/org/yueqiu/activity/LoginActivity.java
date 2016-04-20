@@ -104,7 +104,7 @@ public class LoginActivity extends Activity{
                 @Override
                 public void onSuccess() {
                     toast("登录成功");
-                    Intent intent = new Intent(LoginActivity.this, TestActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                 }
 

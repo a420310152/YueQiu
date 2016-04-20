@@ -83,10 +83,37 @@
             android:gravity="center"
             android:layout_margin="10dp"/>
     </RadioGroup>
+    <ScrollView
+    android:id="@+id/sv_nbawar"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/rg_title"
+        android:visibility="invisible"
+        android:layout_above="@+id/tv_war">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_home_nbawar"
+            />
+    </ScrollView>
+    <ScrollView
+    android:id="@+id/sv_nbapk"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_below="@id/rg_title"
+        android:visibility="invisible"
+        android:layout_above="@+id/tv_war">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/icon_home_nbapk"
+            android:scaleType="centerInside"
+            />
+    </ScrollView>
     <Gallery
         android:id="@+id/gallery"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_below="@id/rg_title"
         ></Gallery>
         <RadioGroup
@@ -95,11 +122,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:layout_alignBottom="@id/gallery"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="5dp">
             <RadioButton
                 android:id="@+id/rb_markone"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="6dp"
                 android:background="@drawable/selector_gallery"
                 android:button="@null"
                 android:checked="true"
@@ -107,14 +135,14 @@
             <RadioButton
                 android:id="@+id/rb_marktwo"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="6dp"
                 android:background="@drawable/selector_gallery"
                 android:button="@null"
                 android:layout_marginRight="5dp"/>
             <RadioButton
                 android:id="@+id/rb_markthree"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="6dp"
                 android:background="@drawable/selector_gallery"
                 android:button="@null"/>
         </RadioGroup>
@@ -130,8 +158,14 @@
         android:id="@+id/lv_war"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="64dp"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/tv_war"></ListView>
+    <com.jhy.org.yueqiu.view.NavLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/navLayout"
+        />
 </RelativeLayout>

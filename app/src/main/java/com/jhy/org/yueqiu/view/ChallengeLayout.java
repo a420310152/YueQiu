@@ -39,8 +39,6 @@ public class ChallengeLayout extends LinearLayout{
     TextView tv_title;
     Context context;
     TextView tv_apply;
-    String namePerson; //发起人的姓名
-    String namePlace; //发起人选择的地点
     Challenge challenge;
     public ChallengeLayout(Context context) {
         super(context);
@@ -76,23 +74,7 @@ public class ChallengeLayout extends LinearLayout{
             context.startActivity(intent);
         }
     };
-    //利用handler作为中转 在主线程中对控件进行设置
-    Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what){
-                case 10:
-                    tv_setName.setText(namePerson);
-                    break;
-                case 11:
-                    tv_setPlace.setText(namePlace);
-                break;
-                default:
-                    break;
-            }
-        }
-    };
+
     public void setContent(Challenge challenge){
     //查询Person表的数据 获得发起人的名字
         this.challenge = challenge;
@@ -100,8 +82,7 @@ public class ChallengeLayout extends LinearLayout{
         bmobQuery.getObject(context, challenge.getInitiator().getObjectId(), new GetListener<Person>() {
             @Override
             public void onSuccess(Person person) {
-                namePerson = person.getUsername();
-                handler.sendEmptyMessage(10);
+                tv_setName.setText(person.getUsername());
             }
 
             @Override
@@ -114,8 +95,7 @@ public class ChallengeLayout extends LinearLayout{
         bmobQuery1.getObject(context, challenge.getPlace().getObjectId(), new GetListener<Place>() {
             @Override
             public void onSuccess(Place place) {
-                namePlace = place.getName();
-                handler.sendEmptyMessage(11);
+                tv_setPlace.setText(place.getName());
             }
 
             @Override

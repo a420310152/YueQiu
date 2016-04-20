@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jhy.org.yueqiu" >
+    package="com.jhy.org.yueqiu">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.GET_TASKS" />
@@ -26,12 +26,18 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
 
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.SoloChallengeActivity"></activity>
         <activity android:name=".activity.TeamChallengeActivity"></activity>
         <activity android:name=".activity.TrainChallengeActivity"></activity>
@@ -57,11 +63,7 @@
         <activity android:name=".test.c.TestActivity"></activity>
         <activity android:name=".test.h.TestActivity"></activity>
         <activity android:name=".test.x.TestActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.OpponentActivity"></activity>
         <activity android:name=".activity.OpponentTeamActivity"></activity>

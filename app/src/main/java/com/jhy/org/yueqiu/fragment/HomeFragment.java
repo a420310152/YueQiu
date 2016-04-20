@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +13,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +44,7 @@ import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -63,6 +68,9 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     View view;
     ListView listView;
     RadioGroup markGroup;
+    ScrollView sv_nbawar;
+    ScrollView sv_nbapk;
+    TextView tv_war;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,6 +95,9 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         group = (RadioGroup) view.findViewById(R.id.rg_title);
         markGroup = (RadioGroup) view.findViewById(R.id.markGroup);
         gallery = (Gallery) view.findViewById(R.id.gallery);
+        sv_nbawar = (ScrollView) view.findViewById(R.id.sv_nbawar);
+        sv_nbapk = (ScrollView) view.findViewById(R.id.sv_nbapk);
+
         List<Integer> list = new ArrayList<Integer>();
         list.add(R.drawable.icon_home_gallery1);
         list.add(R.drawable.icon_home_gallery2);
@@ -97,8 +108,9 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         if (markGroup != null) {
             markGroup.setOnCheckedChangeListener(this);
         }
-        group.setOnCheckedChangeListener(click);
+        //group.setOnCheckedChangeListener(click);
     }
+
 
     //标题group的选择监听
     RadioGroup.OnCheckedChangeListener click = new RadioGroup.OnCheckedChangeListener() {
@@ -106,13 +118,19 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         public void onCheckedChanged(RadioGroup group, int checkedId) {
             switch (checkedId) {
                 case R.id.rb_one:
-                    //gallery.setVisibility(View.GONE);
+                    sv_nbawar.setVisibility(View.VISIBLE);
+                    gallery.setVisibility(View.INVISIBLE);
+                    sv_nbapk.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.rb_two:
-
+                    gallery.setVisibility(View.VISIBLE);
+                    sv_nbawar.setVisibility(View.INVISIBLE);
+                    sv_nbapk.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.rb_three:
-
+                    sv_nbapk.setVisibility(View.VISIBLE);
+                    gallery.setVisibility(View.INVISIBLE);
+                    sv_nbawar.setVisibility(View.INVISIBLE);
                     break;
                 default:
                     break;
@@ -154,18 +172,23 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     //下半部分约占列表建立
     private void builddown() {
+        tv_war = (TextView) view.findViewById(R.id.tv_war);
+        tv_war.setOnClickListener(clickwar);
         Bmob.initialize(getContext(), Key.bmob.application_id);
         listView = (ListView) view.findViewById(R.id.lv_war);
         List<Challenge> list = new ArrayList<Challenge>();
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
-        Date d = new Date();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//当天日期
-        BmobDate date = new BmobDate(new Date(d.getTime() - 2 * 24 * 60 * 60 * 1000));//两天前的日期
-        query.addWhereGreaterThan("createdAt", date);
+//        Date d = new Date();
+//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//当天日期
+//        BmobDate date = new BmobDate(new Date(d.getTime() - 2 * 24 * 60 * 60 * 1000));//两天前的日期
+//        query.addWhereGreaterThan("createdAt", date);
 
+        query.order("-score,createdAt");//设置按照时间大小降序排列
+        query.setLimit(3);
         query.findObjects(getContext(), new FindListener<Challenge>() {
             @Override
             public void onSuccess(List<Challenge> list) {
+                Collections.reverse(list);
                 ChallengeAdapter adapter = new ChallengeAdapter(list, getContext());
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(itemClick);
@@ -178,7 +201,15 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         });
 
 
+
     }
+    //点击约战列表 弹出详细约战长列表
+    View.OnClickListener clickwar = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+        }
+    };
 
     //点击Item项事件 弹出对手信息
     AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
