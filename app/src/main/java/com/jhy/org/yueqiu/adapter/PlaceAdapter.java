@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.view.PlaceLayout;
@@ -16,10 +17,10 @@ import java.util.List;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class PlaceAdapter extends MyBaseAdapter<Place> {
+public class PlaceAdapter extends MyBaseAdapter<PoiInfo> {
     private LatLng userLocation = null;
 
-    public PlaceAdapter(Context context, List<Place> list) {
+    public PlaceAdapter(Context context, List<PoiInfo> list) {
         super(context, list);
     }
 

@@ -43,7 +43,8 @@
         <activity android:name=".activity.TrainChallengeActivity"></activity>
         <activity android:name=".activity.SearchActivity"></activity>
         <activity android:name=".activity.SearchFriendActivity"></activity>
-        <activity android:name=".activity.SearchPlaceActivity"></activity>
+        <activity android:name=".activity.SearchPlaceActivity">
+        </activity>
         <activity android:name=".activity.ForumActivity"></activity>
         <activity android:name=".activity.LoginActivity">
 

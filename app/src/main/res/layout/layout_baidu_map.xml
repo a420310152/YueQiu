@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:focusable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.baidu.mapapi.map.MapView
+        android:id="@+id/mapView"
+        android:clickable="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="320dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:text="标题"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:background="#AADAA72C"
+        android:gravity="center_horizontal"
+        android:padding="4dp"
+        android:layout_alignTop="@id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:background="@color/gray"
+        android:layout_above="@id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
+</RelativeLayout>

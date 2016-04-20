@@ -12,15 +12,7 @@ import java.util.Date;
 public final class MyDateUtils {
     public static final String DEFAULT_DATE_PATTERN = "yyyy-MM-dd hh:mm:ss";
 
-    public static Date getDate () {
-        return new Date();
-    }
-
-    public static Date getDate (String text) {
-        return getDate(text, DEFAULT_DATE_PATTERN);
-    }
-
-    public static Date getDate (String text, String pattern) {
+    public static Date toDate (String text, String pattern) {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         Date date = null;
         try {
@@ -29,5 +21,22 @@ public final class MyDateUtils {
             e.printStackTrace();
         }
         return date;
+    }
+    public static Date toDate (String text) {
+        return toDate(text, DEFAULT_DATE_PATTERN);
+    }
+    public static Date toDate () {
+        return new Date();
+    }
+
+    public static String toString (Date date, String pattern) {
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(date);
+    }
+    public static String toString (Date date) {
+        return toString(date, DEFAULT_DATE_PATTERN);
+    }
+    public String toString () {
+        return toString(new Date());
     }
 }

@@ -1,8 +1,11 @@
 package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
+
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.test.h.DatetimePickerLayout;
 import com.jhy.org.yueqiu.test.h.OnPickDatetimeListener;
@@ -15,7 +18,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import org.xml.sax.helpers.LocatorImpl;
+
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.SaveListener;
 
@@ -24,22 +32,25 @@ import cn.bmob.v3.listener.SaveListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class SoloChallengeActivity extends Activity implements OnPickDatetimeListener, View.OnFocusChangeListener  {
+public class SoloChallengeActivity extends Activity implements OnPickDatetimeListener, View.OnClickListener {
     private static final int REQUEST_CODE_FOR_PLACE = 520;
 
     private Context context = this;
 
-    private EditText currentView;
-    private EditText et_fromDate;
-    private EditText et_toDate;
-    private EditText et_place;
+    private TextView currentView;
+    private TextView tv_fromDate;
+    private TextView tv_toDate;
+    private TextView tv_place;
     private EditText et_title;
     private Button btn_publish;
     private DatetimePickerLayout my_picker;
 
     private Challenge challenge;
-    private Place place;
+    private Person currentUser = null;
+    private PoiInfo place = null;
+
     private Intent searchPlaceIntent;
+    private Intent loginIntent;
 
 
     @Override
@@ -47,68 +58,83 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solo_challenge);
 
-        et_fromDate = (EditText) findViewById(R.id.et_fromDate);
-        et_toDate = (EditText) findViewById(R.id.et_toDate);
-        et_place = (EditText) findViewById(R.id.et_place);
-        et_title = (EditText) findViewById(R.id.et_title);
-        btn_publish = (Button) findViewById(R.id.btn_publish);
-        my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
-        challenge = new Challenge();
         searchPlaceIntent = new Intent(context, SearchPlaceActivity.class);
+        loginIntent = new Intent(context, LoginActivity.class);
 
+        currentUser = BmobUser.getCurrentUser(context, Person.class);
+        if (currentUser == null) {
+            startActivity(loginIntent);
+            finish();
+        }
+        challenge = new Challenge();
+        challenge.setInitiator(currentUser);
+
+        tv_fromDate = (TextView) findViewById(R.id.tv_fromDate);
+        tv_fromDate.setInputType(InputType.TYPE_NULL);
+        findViewById(R.id.container_fromDate).setOnClickListener(this);
+
+        tv_toDate = (TextView) findViewById(R.id.tv_toDate);
+        tv_toDate.setInputType(InputType.TYPE_NULL);
+        findViewById(R.id.container_toDate).setOnClickListener(this);
+
+        tv_place = (TextView) findViewById(R.id.tv_place);
+        tv_place.setInputType(InputType.TYPE_NULL);
+        tv_place.setOnClickListener(this);
+        findViewById(R.id.container_place).setOnClickListener(this);
+
+        et_title = (EditText) findViewById(R.id.et_title);
+        findViewById(R.id.container_title).setOnClickListener(this);
+
+        btn_publish = (Button) findViewById(R.id.btn_publish);
+
+        my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
         my_picker.setYearPickerVisible(false);
         my_picker.setSecondPickerVisible(false);
         my_picker.setVisibility(View.INVISIBLE);
         my_picker.setOnPickDatetimeListener(this);
-
-        et_fromDate.setInputType(InputType.TYPE_NULL);
-        et_fromDate.setOnFocusChangeListener(this);
-
-        et_toDate.setInputType(InputType.TYPE_NULL);
-        et_toDate.setOnFocusChangeListener(this);
-
-        et_place.setInputType(InputType.TYPE_NULL);
-        et_place.setOnFocusChangeListener(this);
-
-        et_title.setOnFocusChangeListener(this);
     }
 
     // 发布一条挑战记录
     public void publish (View view) {
-        String _place = et_place.getText().toString();
         String _title = et_title.getText().toString();
+        if (_title.equals("") || tv_place.getText().equals("")
+                || tv_fromDate.getText().equals("") || tv_toDate.getText().equals("")) {
+            showToast("提交错误, 请重新填写");
+            return;
+        }
         challenge.setTitle(_title);
         challenge.save(context, new SaveListener() {
             @Override
             public void onSuccess() {
-                Log.i("ilog: saveChallenge", "success");
+                showToast("添加成功");
+                finish();
             }
 
             @Override
             public void onFailure(int i, String s) {
-                Log.i("ilog: saveChallenge", "failed, " + s);
+                showToast("添加失败");
             }
         });
     }
 
     @Override
-    public void onFocusChange(View v, boolean hasFocus) {
+    public void onClick(View v) {
         boolean visible = false;
         currentView = null;
 
         switch (v.getId()) {
-            case R.id.et_fromDate:
+            case R.id.container_fromDate:
                 visible = true;
-                currentView = et_fromDate;
+                currentView = tv_fromDate;
                 break;
-            case R.id.et_toDate:
+            case R.id.container_toDate:
                 visible = true;
-                currentView = et_toDate;
+                currentView = tv_toDate;
                 break;
-            case R.id.et_title:
+            case R.id.container_title:
                 visible = false;
                 break;
-            case R.id.et_place:
+            case R.id.container_place:
                 visible = false;
                 searchPlaceIntent.putExtra("needsPlace", true);
                 startActivityForResult(searchPlaceIntent, REQUEST_CODE_FOR_PLACE);
@@ -125,7 +151,13 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_PLACE) {
-                place = (Place) data.getSerializableExtra("place");
+                place = (PoiInfo) data.getParcelableExtra("place");
+                if (place != null) {
+                    tv_place.setText(place.name);
+                    challenge.setPlaceName(place.name);
+                    challenge.setPlaceAddress(place.address);
+                    challenge.setPlaceUid(place.uid);
+                }
             }
         }
     }
@@ -135,11 +167,15 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
         if (currentView != null) {
             currentView.setText(value);
 
-            if (currentView == et_fromDate) {
+            if (currentView == tv_fromDate) {
                 challenge.setFromDate(new BmobDate(picker.getDatetime()));
-            } else if (currentView == et_toDate) {
+            } else if (currentView == tv_toDate) {
                 challenge.setToDate(new BmobDate(picker.getDatetime()));
             }
         }
+    }
+
+    private void showToast (String text) {
+        Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
     }
 }

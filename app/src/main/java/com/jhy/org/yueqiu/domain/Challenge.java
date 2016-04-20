@@ -23,6 +23,9 @@ public class Challenge extends BmobObject {
     private String content;         // 内容
     private Person initiator;       // 发起人
     private Place place;            // 场地
+    private String placeName;       // 场地名字
+    private String placeAddress;    // 场地地址
+    private String placeUid;        // 场地标识
     private BmobDate fromDate;      // 入场时间
     private BmobDate toDate;        // 散场时间
     private String type;           // 对战类型
@@ -33,7 +36,6 @@ public class Challenge extends BmobObject {
     public String getTitle() {
         return title;
     }
-
     public void setTitle(String title) {
         this.title = title;
     }
@@ -41,7 +43,6 @@ public class Challenge extends BmobObject {
     public String getContent() {
         return content;
     }
-
     public void setContent(String content) {
         this.content = content;
     }
@@ -49,7 +50,6 @@ public class Challenge extends BmobObject {
     public Person getInitiator() {
         return initiator;
     }
-
     public void setInitiator(Person initiator) {
         this.initiator = initiator;
     }
@@ -57,15 +57,22 @@ public class Challenge extends BmobObject {
     public Place getPlace() {
         return place;
     }
-
     public void setPlace(Place place) {
         this.place = place;
     }
 
+    public String getPlaceName() { return placeName; }
+    public void setPlaceName(String placeName) { this.placeName = placeName; }
+
+    public String getPlaceAddress() { return placeAddress; }
+    public void setPlaceAddress(String placeAddress) { this.placeAddress = placeAddress; }
+
+    public String setPlaceUid() { return placeUid; }
+    public void setPlaceUid(String placeUid) { this.placeUid = placeUid; }
+
     public BmobDate getFromDate() {
         return fromDate;
     }
-
     public void setFromDate(BmobDate fromDate) {
         this.fromDate = fromDate;
     }
@@ -73,7 +80,6 @@ public class Challenge extends BmobObject {
     public BmobDate getToDate() {
         return toDate;
     }
-
     public void setToDate(BmobDate toDate) {
         this.toDate = toDate;
     }
@@ -81,7 +87,6 @@ public class Challenge extends BmobObject {
     public String getType() {
         return type;
     }
-
     public void setType(String type) {
         this.type = type;
     }
@@ -89,7 +94,6 @@ public class Challenge extends BmobObject {
     public Integer getState() {
         return state;
     }
-
     public void setState(Integer state) {
         this.state = state;
     }
@@ -97,7 +101,6 @@ public class Challenge extends BmobObject {
     public BmobRelation getResponders() {
         return responders;
     }
-
     public void setResponders(BmobRelation responders) {
         this.responders = responders;
     }
@@ -105,7 +108,6 @@ public class Challenge extends BmobObject {
     public BmobRelation getTargets() {
         return targets;
     }
-
     public void setTargets(BmobRelation targets) {
         this.targets = targets;
     }
