@@ -54,4 +54,5 @@ public class Team extends BmobObject {
     public void setMotto(String motto) {
         this.motto = motto;
     }
+
 }
