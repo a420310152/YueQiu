@@ -1,8 +1,10 @@
 package com.jhy.org.yueqiu.fragment;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +19,10 @@ import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.MyTeamActivity;
 import com.jhy.org.yueqiu.activity.SettingActivity;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.Person;
+
+import cn.bmob.v3.BmobUser;
+
 /*
  **********************************************
  *          所有者 C: (曹昌盛)
@@ -30,14 +36,19 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     private Button btn_team;
     private Button btn_track;
     private Button btn_disabled;
-    private Button btn_register;
+    private Button btn_cancel;
+    private BmobUser login_bmobUser;
     private View view;
-
+    private Context context;
+    public void setContext(Context context){
+        this.context = context;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         view= inflater.inflate(R.layout.fragment_sidebar, container, false);
         init();
+        judge();
         return  view;
     }
     //初始化控件
@@ -48,7 +59,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_team = (Button) view.findViewById(R.id.btn_team);
         btn_track = (Button) view.findViewById(R.id.btn_track);
         btn_disabled = (Button) view.findViewById(R.id.btn_disabled);
-        btn_register = (Button) view.findViewById(R.id.btn_register);
+        btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
 
         tv_register_login.setOnClickListener(this);
         btn_info.setOnClickListener(this);
@@ -56,17 +67,37 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_team.setOnClickListener(this);
         btn_track.setOnClickListener(this);
         btn_disabled.setOnClickListener(this);
-        if(btn_register!=null) {
-            btn_register.setOnClickListener(this);
-        }
+            btn_cancel.setOnClickListener(this);
     }
+        public void judge() {
+            if (context != null) {
+                login_bmobUser = BmobUser.getCurrentUser(context);
+                if (login_bmobUser != null && btn_cancel!=null) {
+                        btn_cancel.setVisibility(View.VISIBLE);
+                        String username = (String) BmobUser.getObjectByKey(context, "username");
+                        tv_register_login.setText(username);
+                        tv_register_login.setVisibility(View.VISIBLE);
+                    }
+                } else {
+                        tv_register_login.setVisibility(View.INVISIBLE);
+                        tv_register_login.setText("登录/注册");
+                        btn_cancel.setVisibility(View.INVISIBLE);
 
+                }
+            }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_register_login:
-                Intent loginIntent =  new Intent(getActivity(),LoginActivity.class);
-                startActivity(loginIntent);
+                login_bmobUser = BmobUser.getCurrentUser(context);
+                if(login_bmobUser != null){
+                    Intent myprofileIntent =  new Intent(getActivity(),MyProfileActivity.class);
+                    startActivity(myprofileIntent);
+                }else{
+                    Intent loginIntent =  new Intent(getActivity(),LoginActivity.class);
+                    startActivity(loginIntent);
+                }
+
                 break;
             case R.id.btn_info:
                 Intent infoIntent =  new Intent(getActivity(),MyProfileActivity.class);
@@ -88,8 +119,6 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 Intent settingIntent =  new Intent(getActivity(), SettingActivity.class);
                 startActivity(settingIntent);
                 break;
-
         }
-
     }
 }

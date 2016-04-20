@@ -15,6 +15,7 @@ import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.fragment.SidebarFragment;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
 
 /**
  * Created by Administrator on 2016/4/12.
@@ -33,14 +34,16 @@ public class TestActivity extends FragmentActivity {
         Bmob.initialize(this, Key.bmob.application_id);
     }
 
+
     public void init (){
         fm_sidebar = getSupportFragmentManager();
         ft_sidebar = fm_sidebar.beginTransaction();
         sf_fragment = new SidebarFragment();
+        sf_fragment.setContext(this);
+        sf_fragment.judge();
         ft_sidebar.add(R.id.linear, sf_fragment);
         ft_sidebar.commit();
     }
-
 
 
 

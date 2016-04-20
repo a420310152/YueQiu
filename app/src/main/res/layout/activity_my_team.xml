@@ -39,11 +39,12 @@
         android:gravity="center"
         android:id="@+id/tv_team_logoPicture"/>
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_team_logoPicture"
         android:drawableTop="@drawable/icon_sidebar_head"
-        android:text="上传Logo"
+        android:layout_centerInParent="true"
+        android:text="球队Logo"
         android:textSize="15dp"
         android:gravity="center"
         android:layout_marginTop="15dp"
@@ -74,6 +75,11 @@
         android:text="小分队"
         android:textSize="20sp"
         android:id="@+id/et_team_name"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="创建时间"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"

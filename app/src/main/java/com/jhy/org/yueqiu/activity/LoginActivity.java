@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.fragment.SidebarFragment;
 import com.jhy.org.yueqiu.test.c.TestActivity;
 
 import org.json.JSONException;
@@ -40,18 +41,11 @@ public class LoginActivity extends Activity{
     ImageView iv_login_weixin;
     ImageView iv_login_weibo;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-        BmobUser login_bmobUser = BmobUser.getCurrentUser(LoginActivity.this);
-        if(login_bmobUser != null){
-            // 允许用户使用应用
-        }else{
-            //缓存用户对象为空时， 可打开用户注册界面…
-        }
     }
 
     //初始化控件
@@ -180,4 +174,5 @@ public class LoginActivity extends Activity{
     private void toast(String msg){
         Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
+
 }
