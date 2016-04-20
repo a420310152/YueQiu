@@ -79,7 +79,7 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
 
         np_year.setMaxValue(year);
         np_year.setMinValue(year - 100);
-        np_year.setValue(year - 20);
+        np_year.setValue(year);
 
         np_month.setMaxValue(12);
         np_month.setMinValue(1);
@@ -129,6 +129,54 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         rlay_hour.setVisibility(visibility);
         rlay_minute.setVisibility(visibility);
         rlay_second.setVisibility(visibility);
+    }
+
+    public void setYear (int value) {
+        set(Calendar.YEAR, value);
+    }
+    public void setMonth (int value) {
+        set(Calendar.MONTH, value);
+    }
+    public void setDay (int value) {
+        set(Calendar.DAY_OF_MONTH, value);
+    }
+    public void setHour (int value) {
+        set(Calendar.HOUR_OF_DAY, value);
+    }
+    public void setMinute (int value) {
+        set(Calendar.MINUTE, value);
+    }
+    public void setSecond (int value) {
+        set(Calendar.SECOND, value);
+    }
+
+    public void set (int field, int value) {
+        NumberPicker picker = null;
+        switch (field) {
+            case Calendar.YEAR:
+                picker = np_year;
+                break;
+            case Calendar.MONTH:
+                picker = np_month;
+                break;
+            case Calendar.DAY_OF_MONTH:
+                picker = np_day;
+                break;
+            case Calendar.HOUR_OF_DAY:
+                picker = np_hour;
+                break;
+            case Calendar.MINUTE:
+                picker = np_minute;
+                break;
+            case Calendar.SECOND:
+                picker = np_second;
+                break;
+            default:
+                return;
+        }
+        if (value <= picker.getMaxValue() && value >= picker.getMinValue()) {
+            picker.setValue(value);
+        }
     }
 
     public String getValue () {

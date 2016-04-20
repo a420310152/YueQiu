@@ -18,9 +18,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.jhy.org.yueqiu.view.NavLayout
-        android:id="@+id/view_nav"
-        android:layout_alignParentBottom="true"
+    <com.jhy.org.yueqiu.test.h.BaiduMapLayout
+        android:id="@+id/baiduMap"
         android:layout_width="match_parent"
-        android:layout_height="192dp"/>
+        android:layout_height="match_parent" />
 </RelativeLayout>

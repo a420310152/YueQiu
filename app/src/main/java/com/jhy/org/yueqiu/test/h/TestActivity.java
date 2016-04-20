@@ -17,16 +17,17 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.SaveListener;
 
 public class TestActivity extends Activity {
-    private DatetimePickerLayout play_sex;
+    private BaiduMapLayout baiduMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_test_h_popup);
+        setContentView(R.layout.activity_test_h);
 
-        play_sex = (DatetimePickerLayout) findViewById(R.id.play_sex);
-        play_sex.setYearPickerVisible(false);
-        play_sex.setSecondPickerVisible(false);
+        baiduMap = (BaiduMapLayout) findViewById(R.id.baiduMap);
+
+//        play_sex.setYearPickerVisible(false);
+//        play_sex.setSecondPickerVisible(false);
 
 //        play_sex = (PickerLayout) findViewById(R.id.play_sex);
 //        play_sex.setTitle("请选择性别");
@@ -35,7 +36,7 @@ public class TestActivity extends Activity {
     }
 
     public void testClick (View view) {
-        Log.i("ilog;", "testClick");
+        baiduMap.setVisibility(View.VISIBLE);
     }
 
 }

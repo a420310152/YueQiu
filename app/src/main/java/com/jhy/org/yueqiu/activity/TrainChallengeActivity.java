@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.listener.SaveListener;
@@ -28,6 +29,11 @@ public class TrainChallengeActivity extends Activity implements OnPickDatetimeLi
     private static final int REQUEST_CODE_FOR_PLACE = 520;
 
     private Context context = this;
+
+    private LinearLayout container_fromDate;
+    private LinearLayout container_toDate;
+    private LinearLayout container_place;
+    private LinearLayout container_title;
 
     private EditText currentView;
     private EditText et_fromDate;
@@ -46,6 +52,11 @@ public class TrainChallengeActivity extends Activity implements OnPickDatetimeLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_train_challenge);
+
+        container_fromDate = (LinearLayout) findViewById(R.id.container_fromDate);
+        container_toDate = (LinearLayout) findViewById(R.id.container_toDate);
+        container_place = (LinearLayout) findViewById(R.id.container_place);
+        container_title = (LinearLayout) findViewById(R.id.container_title);
 
         et_fromDate = (EditText) findViewById(R.id.et_fromDate);
         et_toDate = (EditText) findViewById(R.id.et_toDate);

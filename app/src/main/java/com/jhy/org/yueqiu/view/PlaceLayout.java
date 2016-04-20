@@ -8,6 +8,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Place;
@@ -45,18 +46,16 @@ public class PlaceLayout extends RelativeLayout {
         this.tv_usedCount = (TextView) findViewById(R.id.tv_usedCount);
     }
 
-    public void setPlace (Place where, LatLng userLocation) {
+    public void setPlace (PoiInfo info, LatLng userLocation) {
 //        Picasso.with(context).load(where.getImage().getUrl()).into(iv_image);
-        tv_name.setText(where.getName());
-        tv_address.setText(where.getAddress());
+        tv_name.setText(info.name);
+        tv_address.setText(info.address);
 //        tv_distance.setText("");
 //        tv_usedCount.setText(where.getUsedCount());
 
         String distance = "*";
-        BmobGeoPoint point = where.getLocation();
-        if (userLocation != null && point != null) {
-            LatLng targetLocation = new LatLng(point.getLatitude(), point.getLongitude());
-            distance = "" + (int)DistanceUtil.getDistance(userLocation, targetLocation);
+        if (userLocation != null && info.location != null) {
+            distance = "" + (int)DistanceUtil.getDistance(userLocation, info.location);
         }
         tv_distance.setText("距离: " + distance + "m");
     }
