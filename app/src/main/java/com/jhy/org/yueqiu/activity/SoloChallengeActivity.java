@@ -12,12 +12,14 @@ import com.jhy.org.yueqiu.test.h.OnPickDatetimeListener;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
     private TextView tv_place;
     private EditText et_title;
     private Button btn_publish;
+    private ImageButton ibtn_finish;
     private DatetimePickerLayout my_picker;
 
     private Challenge challenge;
@@ -68,6 +71,7 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
         }
         challenge = new Challenge();
         challenge.setInitiator(currentUser);
+        challenge.setType(Challenge.TYPE_SOLO);
 
         tv_fromDate = (TextView) findViewById(R.id.tv_fromDate);
         tv_fromDate.setInputType(InputType.TYPE_NULL);
@@ -86,6 +90,10 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
         findViewById(R.id.container_title).setOnClickListener(this);
 
         btn_publish = (Button) findViewById(R.id.btn_publish);
+        btn_publish.setOnClickListener(this);
+
+        ibtn_finish = (ImageButton) findViewById(R.id.ibtn_finish);
+        ibtn_finish.setOnClickListener(this);
 
         my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
         my_picker.setYearPickerVisible(false);
@@ -95,7 +103,7 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
     }
 
     // 发布一条挑战记录
-    public void publish (View view) {
+    private void publish () {
         String _title = et_title.getText().toString();
         if (_title.equals("") || tv_place.getText().equals("")
                 || tv_fromDate.getText().equals("") || tv_toDate.getText().equals("")) {
@@ -132,12 +140,16 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
                 currentView = tv_toDate;
                 break;
             case R.id.container_title:
-                visible = false;
                 break;
             case R.id.container_place:
-                visible = false;
                 searchPlaceIntent.putExtra("needsPlace", true);
                 startActivityForResult(searchPlaceIntent, REQUEST_CODE_FOR_PLACE);
+                break;
+            case R.id.btn_publish:
+                publish();
+                break;
+            case R.id.ibtn_finish:
+                finish();
                 break;
             default:
                 visible = false;

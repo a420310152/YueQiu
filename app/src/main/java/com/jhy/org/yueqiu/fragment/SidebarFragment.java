@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,13 +12,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
-import com.jhy.org.yueqiu.activity.MyFlaceActivity;
+import com.jhy.org.yueqiu.activity.MyPlaceActivity;
 import com.jhy.org.yueqiu.activity.MyFootprintActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.MyTeamActivity;
 import com.jhy.org.yueqiu.activity.SettingActivity;
 import com.jhy.org.yueqiu.R;
-import com.jhy.org.yueqiu.domain.Person;
 
 import cn.bmob.v3.BmobUser;
 
@@ -104,7 +102,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 startActivity(infoIntent);
                 break;
             case R.id.btn_collect:
-                Intent collectIntent =  new Intent(getActivity(),MyFlaceActivity.class);
+                Intent collectIntent =  new Intent(getActivity(),MyPlaceActivity.class);
                 startActivity(collectIntent);
                 break;
             case R.id.btn_team:

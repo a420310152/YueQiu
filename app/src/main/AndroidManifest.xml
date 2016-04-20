@@ -61,7 +61,7 @@
         </activity>
         <activity android:name=".activity.MyTeamActivity">
         </activity>
-        <activity android:name=".activity.MyFlaceActivity">
+        <activity android:name=".activity.MyPlaceActivity">
         </activity>
         <activity android:name=".activity.MyFootprintActivity">
         </activity>

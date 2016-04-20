@@ -4,7 +4,7 @@
     android:id="@+id/container"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
-    tools:context="com.jhy.org.yueqiu.activity.MyFlaceActivity">
+    tools:context="com.jhy.org.yueqiu.activity.MyPlaceActivity">
 
    <!-- <LinearLayout
         android:id="@+id/linear"

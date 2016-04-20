@@ -67,6 +67,10 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
     private boolean hasFocus = false;
     private boolean clickable = true;
 
+    private Intent soloIntent;
+    private Intent teamIntent;
+    private Intent trainIntent;
+
     public PopupSpan(Context context) {
         this(context, null);
     }
@@ -76,6 +80,10 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
         this.context = context;
         holder = getHolder();
         holder.addCallback(this);
+
+        soloIntent = new Intent(context, SoloChallengeActivity.class);
+        teamIntent = new Intent(context, TeamChallengeActivity.class);
+        trainIntent = new Intent(context, TrainChallengeActivity.class);
 
         setFocusable(true);
         setFocusableInTouchMode(true);
@@ -111,13 +119,13 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
                 clickable = false;
                 if (angle > 0 && angle < 60) {
                     setActiveArc(2);
-                    context.startActivity(new Intent(context, TrainChallengeActivity.class));
+                    context.startActivity(trainIntent);
                 } else if (angle > 60 && angle < 120) {
                     setActiveArc(1);
-                    context.startActivity(new Intent(context, TeamChallengeActivity.class));
+                    context.startActivity(teamIntent);
                 } else if (angle > 120 && angle < 180) {
                     setActiveArc(0);
-                    context.startActivity(new Intent(context, SoloChallengeActivity.class));
+                    context.startActivity(soloIntent);
                 }
             }
         } else {

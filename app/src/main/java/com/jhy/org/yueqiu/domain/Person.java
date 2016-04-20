@@ -24,6 +24,8 @@ public class Person extends BmobUser {
     private BmobFile avatar;        // 头像
     private BmobRelation friends;   // 好友
     private BmobGeoPoint location;  // 最近的地理位置
+    private BmobRelation collection;// 收藏的地点
+    private BmobRelation footprints;// 足迹
 
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }
@@ -70,4 +72,9 @@ public class Person extends BmobUser {
         this.location = location;
     }
 
+    public BmobRelation getFootprints() { return footprints; }
+    public void setFootprints(BmobRelation footprints) { this.footprints = footprints; }
+
+    public BmobRelation getCollection() { return collection; }
+    public void setCollection(BmobRelation collection) { this.collection = collection; }
 }

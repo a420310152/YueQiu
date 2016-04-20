@@ -18,7 +18,7 @@
             android:layout_height="wrap_content" />
         <TextView
             android:id="@+id/tv_type"
-            android:text="1V1 SOLO赛"
+            android:text="娱乐练习"
             android:textSize="20dp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -30,6 +30,8 @@
 
     <LinearLayout
         android:id="@+id/container_fromDate"
+        android:focusable="true"
+        android:clickable="true"
         android:background="@drawable/icon_edit"
         android:gravity="center_vertical"
         android:padding="8dp"
@@ -47,15 +49,17 @@
             android:paddingRight="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_fromDate"
+        <TextView
+            android:id="@+id/tv_fromDate"
             android:background="@null"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/container_place"
+        android:focusable="true"
+        android:clickable="true"
         android:background="@drawable/icon_edit"
         android:gravity="center_vertical"
         android:padding="8dp"
@@ -73,15 +77,17 @@
             android:paddingRight="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_place"
+        <TextView
+            android:id="@+id/tv_place"
             android:background="@null"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/container_toDate"
+        android:focusable="true"
+        android:clickable="true"
         android:background="@drawable/icon_edit"
         android:gravity="center_vertical"
         android:padding="8dp"
@@ -99,16 +105,18 @@
             android:paddingRight="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-        <EditText
-            android:id="@+id/et_toDate"
+        <TextView
+            android:id="@+id/tv_toDate"
             android:background="@null"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="wrap_content" />
     </LinearLayout>
 
 
     <LinearLayout
         android:id="@+id/container_title"
+        android:focusable="true"
+        android:clickable="true"
         android:background="@drawable/icon_edit"
         android:gravity="center_vertical"
         android:padding="8dp"
@@ -130,12 +138,11 @@
             android:id="@+id/et_title"
             android:background="@null"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="wrap_content" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_publish"
-        android:onClick="publish"
         android:text="发布"
         android:layout_marginTop="32dp"
         android:layout_below="@id/container_title"
