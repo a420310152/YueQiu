@@ -4,6 +4,8 @@ import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 /*
  **********************************************
@@ -11,7 +13,9 @@ import android.view.View;
  **********************************************
  */
 public class MyTeamActivity extends Activity {
-
+    private TextView tv_team_logo;
+    private EditText et_team_name;
+    private EditText et_team_slogan;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

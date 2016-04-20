@@ -54,14 +54,17 @@
         <activity android:name=".activity.EditChallengeActivity"></activity>
         <activity android:name=".activity.ResponseChallengeActivity"></activity>
         <activity android:name=".activity.AlarmActivity"></activity>
-        <activity android:name=".test.c.TestActivity"></activity>
-        <activity android:name=".test.h.TestActivity"></activity>
-        <activity android:name=".test.x.TestActivity">
+        <activity android:name=".test.c.TestActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".test.h.TestActivity"></activity>
+        <activity android:name=".test.x.TestActivity">
+
         </activity>
         <activity android:name=".activity.OpponentActivity"></activity>
         <activity android:name=".activity.OpponentTeamActivity"></activity>

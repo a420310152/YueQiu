@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_login_back"
-        android:background="@drawable/icon_launcher"
+        android:background="@drawable/icon_sidebar_head"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:onClick="loginheadClick"

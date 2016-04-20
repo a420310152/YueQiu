@@ -27,6 +27,14 @@
         android:background="@null"
         android:onClick="myProfileBackClick"
         android:id="@+id/btn_info_back"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableRight="@drawable/icon_myfile_info"
+        android:layout_alignParentRight="true"
+        android:padding="25dp"
+        android:id="@+id/btn_info_edit"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -49,7 +57,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:orientation="horizontal"
         android:layout_marginTop="10dp"
         android:background="@drawable/icon_myprofile_bground"
@@ -58,7 +66,7 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="40dp"
             android:text="@string/info_name"
@@ -68,7 +76,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:textSize="30dp"
+            android:textSize="25sp"
             android:background="@null"
             android:layout_marginLeft="40dp"
             android:id="@+id/et_info_name"/>
@@ -76,7 +84,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/linear_info_name"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
@@ -107,7 +115,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/linear_info_sex"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
@@ -138,7 +146,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/relat_info_age"
         android:layout_marginTop="25dp"
         android:background="@drawable/icon_myprofile_bground"
@@ -169,7 +177,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/relat_info_height"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
@@ -200,7 +208,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
         android:layout_below="@id/relat_info_weight"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
@@ -239,6 +247,7 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:onClick="setInfoClick"
+        android:visibility="invisible"
         android:id="@+id/btn_info_send"/>
     <com.jhy.org.yueqiu.test.h.PickerLayout
         android:layout_width="wrap_content"
