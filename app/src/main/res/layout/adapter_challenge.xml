@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/challengeContent"
+        android:layout_toLeftOf="@+id/tv_apply"
         />
     <ImageView
         android:id="@+id/iv_head"
@@ -17,5 +18,20 @@
         android:scaleType="centerCrop"
         android:layout_alignTop="@id/challengeContent"
         android:layout_alignBottom="@id/challengeContent"
+        />
+    <TextView
+        android:id="@+id/tv_apply"
+        android:layout_width="56sp"
+        android:layout_height="wrap_content"
+        android:text="约战报名"
+        android:textColor="@color/white"
+        android:background="@color/orange"
+        android:paddingTop="5sp"
+        android:paddingBottom="5sp"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp"
+        android:layout_alignParentRight="true"
+        android:onClick="clickApply"
+        android:gravity="center"
         />
 </RelativeLayout>

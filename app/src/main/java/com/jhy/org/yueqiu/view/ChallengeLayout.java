@@ -38,7 +38,6 @@ public class ChallengeLayout extends LinearLayout{
     TextView tv_setPlace;
     TextView tv_title;
     Context context;
-    TextView tv_apply;
     Challenge challenge;
     public ChallengeLayout(Context context) {
         super(context);
@@ -62,18 +61,8 @@ public class ChallengeLayout extends LinearLayout{
         tv_setTime = (TextView) findViewById(R.id.tv_setTime);
         tv_setPlace = (TextView) findViewById(R.id.tv_setPlace);
         tv_title = (TextView) findViewById(R.id.tv_text);
-        tv_apply = (TextView) findViewById(R.id.tv_apply);
-        tv_apply.setOnClickListener(click);
     }
-    OnClickListener click = new OnClickListener() {
-        @Override
-        public void onClick(View v) {
 
-            Intent intent = new Intent(getContext(),ResponseChallengeActivity.class);
-            intent.putExtra("challenge",challenge);
-            context.startActivity(intent);
-        }
-    };
 
     public void setContent(Challenge challenge){
     //查询Person表的数据 获得发起人的名字
@@ -82,7 +71,7 @@ public class ChallengeLayout extends LinearLayout{
         bmobQuery.getObject(context, challenge.getInitiator().getObjectId(), new GetListener<Person>() {
             @Override
             public void onSuccess(Person person) {
-                tv_setName.setText(person.getUsername());
+
             }
 
             @Override
@@ -90,22 +79,13 @@ public class ChallengeLayout extends LinearLayout{
 
             }
         });
-        //查询Place表的数据 获得发起人选择的地点名字
-        BmobQuery<Place> bmobQuery1 = new BmobQuery<Place>();
-        bmobQuery1.getObject(context, challenge.getPlace().getObjectId(), new GetListener<Place>() {
-            @Override
-            public void onSuccess(Place place) {
-                tv_setPlace.setText(place.getName());
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-
-            }
-        });
+        // 获得发起人选择的地点名字
+        tv_setPlace.setText(challenge.getPlaceName());
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
         tv_type.setText(challenge.getType());
         //截取只显示日期的字符
+        Log.i("data","challenge==============="+challenge);
+        Log.i("data","challenge.getFromDate()==============="+challenge.getFromDate());
         String data = challenge.getFromDate().getDate();
         data = data.substring(5,16);
         tv_setTime.setText(data);

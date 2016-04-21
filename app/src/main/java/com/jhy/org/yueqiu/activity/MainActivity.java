@@ -28,7 +28,7 @@ import cn.bmob.v3.listener.SaveListener;
  **********************************************
  */
 public class MainActivity extends FragmentActivity {
-
+    SidebarFragment sidebarFragment;
     ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,8 @@ public class MainActivity extends FragmentActivity {
     private void build() {
     viewPager = (ViewPager) findViewById(R.id.vPager);
         List<Fragment> list = new ArrayList<Fragment>();
-        list.add(new SidebarFragment());
+        sidebarFragment = new SidebarFragment();
+        list.add(sidebarFragment);
         list.add(new HomeFragment());
         VpagerFragmentAdapter adapter = new VpagerFragmentAdapter(getSupportFragmentManager(),list);
         viewPager.setAdapter(adapter);

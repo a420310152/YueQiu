@@ -183,12 +183,12 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 //        BmobDate date = new BmobDate(new Date(d.getTime() - 2 * 24 * 60 * 60 * 1000));//两天前的日期
 //        query.addWhereGreaterThan("createdAt", date);
 
-        query.order("-score,createdAt");//设置按照时间大小降序排列
         query.setLimit(3);
+        query.order("-createdAt");//设置按照时间大小降序排列
+        query.include("initiator");
         query.findObjects(getContext(), new FindListener<Challenge>() {
             @Override
             public void onSuccess(List<Challenge> list) {
-                Collections.reverse(list);
                 ChallengeAdapter adapter = new ChallengeAdapter(list, getContext());
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(itemClick);

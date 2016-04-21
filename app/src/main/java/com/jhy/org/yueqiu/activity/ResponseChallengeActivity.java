@@ -43,7 +43,7 @@ public class ResponseChallengeActivity extends Activity {
     TextView tv_OK;
     TextView tv_cancle;
     CheckBox cb_helper;
-    Context context;
+    Context context = this;
     int hourOfDay;
     int minute;
     Calendar calendar;
@@ -75,15 +75,11 @@ public class ResponseChallengeActivity extends Activity {
     View.OnClickListener clickOk = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            String objectId = (String) BmobUser.getObjectByKey(context, "objectId");//得到当前用户的ID
             Person person =  BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
-            Post post = new Post();//新建一个帖子
-            post.setObjectId(objectId);//将当前用户关联到这个帖子
             BmobRelation responders = new BmobRelation();
             responders.add(person);//将用户对象添加到多对多关联
-            challenge.setResponders(new BmobRelation());
-            post.setLikes(responders);//多对多指向'post' 的'likes'字段
-            post.update(context, new UpdateListener() {
+            challenge.setResponders(responders);
+            challenge.update(context, new UpdateListener() {
                 @Override
                 public void onSuccess() {
                     Toast.makeText(ResponseChallengeActivity.this,"报名成功！请您准时赴约哦！",Toast.LENGTH_SHORT).show();
@@ -92,7 +88,7 @@ public class ResponseChallengeActivity extends Activity {
 
                 @Override
                 public void onFailure(int i, String s) {
-
+                    Log.i("re","onFailure========"+i+","+s);
                 }
             });
         }
@@ -122,7 +118,6 @@ public class ResponseChallengeActivity extends Activity {
         calendar = Calendar.getInstance();
         hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
         minute = calendar.get(Calendar.MINUTE);
-        context = ResponseChallengeActivity.this;
         TimePickerDialog dialog = new TimePickerDialog(context, listener, hourOfDay, minute, true);
         dialog.show();
     }
@@ -143,9 +138,10 @@ public class ResponseChallengeActivity extends Activity {
     }
     //设置该页面的信息
     private void setContent(){
+        Log.i("re","challenge.getInitiator().getUsername()===="+challenge.getInitiator().getUsername());
         tv_name.setText(challenge.getInitiator().getUsername());
         tv_type.setText(challenge.getType());
         tv_time.setText(challenge.getFromDate().getDate()+"");
-        tv_place.setText(challenge.getPlace().getName()+"");
+        tv_place.setText(challenge.getPlaceName());
     }
 }
