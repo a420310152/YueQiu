@@ -7,7 +7,10 @@ import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.view.NavLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.NumberPicker;
@@ -24,7 +27,7 @@ public class TestActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_h);
 
-        baiduMap = (BaiduMapLayout) findViewById(R.id.baiduMap);
+//        baiduMap = (BaiduMapLayout) findViewById(R.id.baiduMap);
 
 //        play_sex.setYearPickerVisible(false);
 //        play_sex.setSecondPickerVisible(false);
@@ -36,7 +39,8 @@ public class TestActivity extends Activity {
     }
 
     public void testClick (View view) {
-        baiduMap.setVisibility(View.VISIBLE);
+//        baiduMap.setVisibility(View.VISIBLE);
+        startActivity(new Intent(this, ConversationActivity.class));
     }
 
 }

@@ -36,11 +36,6 @@
             android:value="sfci50a7c2dhi" />
 
         <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity android:name=".activity.SoloChallengeActivity">
         </activity>
@@ -85,6 +80,21 @@
         <activity android:name=".test.c.TestActivity">
         </activity>
         <activity android:name=".test.h.TestActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".test.h.ConversationActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.jhy.org.yueqiu"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
         </activity>
         <activity android:name=".test.x.TestActivity">
         </activity>
