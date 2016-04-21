@@ -31,6 +31,9 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="85da7KAHCtEO0N19lK01DoptinafLtuu" />
+        <meta-data
+            android:name="RONG_CLOUD_APP_KEY"
+            android:value="sfci50a7c2dhi" />
 
         <activity android:name=".activity.MainActivity">
             <intent-filter>

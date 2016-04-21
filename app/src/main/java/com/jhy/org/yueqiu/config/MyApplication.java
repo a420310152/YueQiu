@@ -1,5 +1,6 @@
 package com.jhy.org.yueqiu.config;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
 import android.util.Log;
@@ -19,6 +20,7 @@ import java.util.List;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
+import io.rong.imkit.RongIM;
 
 /*
  **********************************************
@@ -40,6 +42,15 @@ public class MyApplication extends Application implements BDLocationListener {
 
         initLocation();
         locationClient.start();
+
+        /**
+         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
+         * io.rong.push 为融云 push 进程名称，不可修改。
+         */
+        String curProcessName = getCurProcessName(getApplicationContext());
+        if (curProcessName.equals(getApplicationInfo().packageName) || curProcessName.equals("io.rong.push")) {
+            RongIM.init(this);
+        }
     }
 
     public static void registerReceiveUserLocation (OnReceiveUserLocationListener listener) {
@@ -67,7 +78,7 @@ public class MyApplication extends Application implements BDLocationListener {
         locationClient = new LocationClient(this);
         locationClient.registerLocationListener(this);
         locationClient.setLocOption(option);
-//        Log.i("ilog", "准备定位");
+        //Log.i("ilog", "准备定位");
     }
 
     @Override
@@ -78,5 +89,21 @@ public class MyApplication extends Application implements BDLocationListener {
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);
         }
+    }
+
+    // 获得当前进程的名字
+    public static String getCurProcessName (Context context) {
+        int pid = android.os.Process.myPid();
+        ActivityManager activityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager
+                .getRunningAppProcesses()) {
+
+            if (appProcess.pid == pid) {
+                return appProcess.processName;
+            }
+        }
+        return null;
     }
 }

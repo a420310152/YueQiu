@@ -15,6 +15,11 @@ public class Key {
 		public static final String secret_key = "646d14a47483c92b";
 		public static final String master_key = "6b1a2860d9dc55d541c1cbb9e28a4f98";
 	}
+
+	public static final class rong {
+		public static final String app_key = "sfci50a7c2dhi";
+		public static final String app_secret = "yG3yFTy2UG";
+	}
 }
 
 // 通过以下命令行来获得证书
