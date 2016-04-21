@@ -14,9 +14,8 @@ import android.widget.TextView;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
 import com.jhy.org.yueqiu.activity.MainActivity;
-import com.jhy.org.yueqiu.activity.MyFlaceActivity;
-import com.jhy.org.yueqiu.activity.MyFootprintActivity;
 import com.jhy.org.yueqiu.activity.MyPlaceActivity;
+import com.jhy.org.yueqiu.activity.MyFootprintActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.MyTeamActivity;
 import com.jhy.org.yueqiu.activity.SettingActivity;

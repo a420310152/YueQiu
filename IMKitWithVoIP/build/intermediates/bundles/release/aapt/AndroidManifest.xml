@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.jhy.org.yueqiu"
+    package="io.rong.imkit"
     android:versionCode="2016041822"
     android:versionName="2.5.0 Stable" >
 
@@ -107,16 +107,16 @@
         </receiver>
 
         <activity
-            android:name="com.jhy.org.yueqiu.tools.SelectPictureActivity"
+            android:name="io.rong.imkit.tools.SelectPictureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.jhy.org.yueqiu.tools.PreviewPictureActivity"
+            android:name="io.rong.imkit.tools.PreviewPictureActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.jhy.org.yueqiu.tools.RongWebviewActivity"
+            android:name="io.rong.imkit.tools.RongWebviewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.jhy.org.yueqiu.widget.provider.TakingPicturesActivity"
+            android:name="io.rong.imkit.widget.provider.TakingPicturesActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
 
