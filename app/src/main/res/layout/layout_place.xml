@@ -2,7 +2,7 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/iv_image"
         android:background="@drawable/icon_launcher"
@@ -41,6 +41,14 @@
         android:layout_toRightOf="@id/tv_distance"
         android:layout_below="@id/tv_address"
         android:paddingLeft="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageButton
+        android:id="@+id/ibtn_likes"
+        android:background="@drawable/icon_heart_like_0"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="16dp"
+        android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 </RelativeLayout>
