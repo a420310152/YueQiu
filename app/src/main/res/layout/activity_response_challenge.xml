@@ -127,41 +127,46 @@
             android:id="@+id/tv_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/tv_four"
-            android:layout_toRightOf="@id/tv_four"
+            android:layout_below="@id/tv_four"
             android:text="某某地点"
+            android:layout_centerHorizontal="true"
+            android:singleLine="false"
             android:textColor="@color/lightseagreen"
+            android:textSize="20dp" />
+        <TextView
+            android:id="@+id/tv_five"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_place"
+            android:layout_centerHorizontal="true"
+            android:text="点击确认报名，请您准时赴约哦！"
+            android:textColor="@color/darkgray"
             android:textSize="20dp" />
     </RelativeLayout>
 
 
-    <TextView
-        android:id="@+id/tv_five"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/relative"
-        android:layout_centerHorizontal="true"
-        android:text="点击确认报名，请您准时赴约哦！"
-        android:textColor="@color/darkgray"
-        android:textSize="20dp" />
+
 
     <CheckBox
         android:id="@+id/cb_helper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_five"
+        android:layout_below="@id/relative"
         android:layout_centerHorizontal="true"
         android:text="设置闹钟提醒我"
         android:textColor="@color/orange"
         android:textSize="15dp"
         android:layout_marginTop="10dp"/>
 
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/cb_helper"
+    android:layout_centerHorizontal="true">
     <TextView
         android:id="@+id/tv_OK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/tv_five"
-        android:layout_below="@+id/cb_helper"
         android:background="@color/orange"
         android:paddingBottom="5dp"
         android:paddingLeft="15dp"
@@ -170,14 +175,13 @@
         android:text="确定报名"
         android:textColor="@color/white"
         android:textSize="25dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        />
 
     <TextView
         android:id="@+id/tv_cancle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@id/tv_five"
-        android:layout_below="@+id/cb_helper"
         android:background="@color/orange"
         android:paddingBottom="5dp"
         android:paddingLeft="15dp"
@@ -186,5 +190,9 @@
         android:text="取消报名"
         android:textColor="@color/white"
         android:textSize="25dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/tv_OK"
+        android:layout_marginLeft="50dp"/>
+</RelativeLayout>
+
 </RelativeLayout>

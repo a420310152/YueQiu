@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -12,12 +13,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
-import com.jhy.org.yueqiu.activity.MyPlaceActivity;
+import com.jhy.org.yueqiu.activity.MainActivity;
+import com.jhy.org.yueqiu.activity.MyFlaceActivity;
 import com.jhy.org.yueqiu.activity.MyFootprintActivity;
+import com.jhy.org.yueqiu.activity.MyPlaceActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.MyTeamActivity;
 import com.jhy.org.yueqiu.activity.SettingActivity;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.Person;
 
 import cn.bmob.v3.BmobUser;
 
@@ -65,37 +69,34 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_team.setOnClickListener(this);
         btn_track.setOnClickListener(this);
         btn_disabled.setOnClickListener(this);
-            btn_cancel.setOnClickListener(this);
+        btn_cancel.setOnClickListener(this);
+        if(context != null){
+            login_bmobUser = BmobUser.getCurrentUser(context);
+        }
     }
-        public void judge() {
-            if (context != null) {
-                login_bmobUser = BmobUser.getCurrentUser(context);
-                if (login_bmobUser != null && btn_cancel!=null) {
-                        btn_cancel.setVisibility(View.VISIBLE);
-                        String username = (String) BmobUser.getObjectByKey(context, "username");
-                        tv_register_login.setText(username);
-                        tv_register_login.setVisibility(View.VISIBLE);
-                    }
-                } else {
-                        tv_register_login.setVisibility(View.INVISIBLE);
-                        tv_register_login.setText("登录/注册");
-                        btn_cancel.setVisibility(View.INVISIBLE);
+    public void judge() {
+        if (login_bmobUser != null && btn_cancel != null) {
+            String username = (String) BmobUser.getObjectByKey(context, "username");
+            tv_register_login.setText(username);
+            btn_cancel.setVisibility(View.VISIBLE);
+        } else if(btn_cancel != null){
+            tv_register_login.setVisibility(View.VISIBLE);
+            tv_register_login.setText("登录/注册");
+            btn_cancel.setVisibility(View.INVISIBLE);
 
-                }
-            }
+        }
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_register_login:
-                login_bmobUser = BmobUser.getCurrentUser(context);
-                if(login_bmobUser != null){
-                    Intent myprofileIntent =  new Intent(getActivity(),MyProfileActivity.class);
+                if (login_bmobUser != null) {
+                    Intent myprofileIntent = new Intent(getActivity(), MyProfileActivity.class);
                     startActivity(myprofileIntent);
-                }else{
-                    Intent loginIntent =  new Intent(getActivity(),LoginActivity.class);
+                } else {
+                    Intent loginIntent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(loginIntent);
                 }
-
                 break;
             case R.id.btn_info:
                 Intent infoIntent =  new Intent(getActivity(),MyProfileActivity.class);
@@ -116,6 +117,11 @@ public class SidebarFragment extends Fragment implements OnClickListener {
             case R.id.btn_disabled:
                 Intent settingIntent =  new Intent(getActivity(), SettingActivity.class);
                 startActivity(settingIntent);
+                break;
+            case R.id.btn_cancel:
+                BmobUser.logOut(context);   //清除缓存用户对象
+                tv_register_login.setText("登录/注册");
+                startActivity(new Intent(context, MainActivity.class));
                 break;
         }
     }
