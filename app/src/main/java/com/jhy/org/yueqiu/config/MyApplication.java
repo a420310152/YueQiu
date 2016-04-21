@@ -86,13 +86,12 @@ public class MyApplication extends Application implements BDLocationListener {
         locationClient = new LocationClient(this);
         locationClient.registerLocationListener(this);
         locationClient.setLocOption(option);
-        //Log.i("ilog", "准备定位");
     }
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         userLocation = bdLocation;
-        Log.i("ilog:", "定位成功---(" + bdLocation.getLatitude() + ", " + bdLocation.getLongitude() + ")");
+        Log.i("ilog", "定位成功---(" + bdLocation.getLatitude() + ", " + bdLocation.getLongitude() + ")");
         locationClient.stop();
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);

@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <ImageView
-        android:onClick="finish"
+    <ImageButton
+        android:id="@+id/ibtn_back"
         android:background="@drawable/icon_system_right"
         android:layout_margin="8dp"
         android:layout_width="wrap_content"

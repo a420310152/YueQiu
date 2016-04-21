@@ -9,6 +9,7 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,9 +36,11 @@ import cn.bmob.v3.listener.FindListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class SearchFriendActivity extends Activity implements AdapterView.OnItemClickListener, OnReceiveUserLocationListener {
+public class SearchFriendActivity extends Activity implements AdapterView.OnItemClickListener, OnReceiveUserLocationListener, View.OnClickListener {
     private Context context = this;
     private Intent myProfileIntent;
+
+    private ImageButton ibtn_back;
 
     private ListView lv_friends;
     private List<Person> friendList = null;
@@ -60,6 +63,9 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
         this.lv_friends = (ListView) findViewById(R.id.lv_friends);
         lv_friends.setOnItemClickListener(this);
+
+        ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
+        ibtn_back.setOnClickListener(this);
 
         this.myProfileIntent = new Intent(context, MyProfileActivity.class);
 
@@ -88,7 +94,7 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
                 @Override
                 public void onError(int i, String s) {
-                    Log.i("ilog:", "SearchActivity: 查找失败!");
+                    Log.i("ilog", "SearchActivity: 查找失败!");
                     showToast("不好意思, 查找失败!");
                 }
             });
@@ -96,5 +102,12 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
     private void showToast (CharSequence text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.ibtn_back) {
+            finish();
+        }
     }
 }
