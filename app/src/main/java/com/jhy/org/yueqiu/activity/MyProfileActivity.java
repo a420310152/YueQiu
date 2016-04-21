@@ -145,7 +145,6 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
                 pickerLayout.setValues(position);
                 break;
             case R.id.btn_info_send:
-                Log.i("result", "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`");
                 pickerLayout.setVisibility(View.INVISIBLE);
                 String my_profile_name = et_info_name.getText().toString();
                 if(my_profile_name!=null && my_profile!=null) {

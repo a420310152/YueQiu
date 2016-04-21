@@ -28,9 +28,9 @@
 
     <string name="system_set_toast">通知</string>
     <string name="system_set_account_manager">账号管理</string>
-    <string name="system_general_set">通用设置</string>
+    <string name="system_general_set">消息纪录</string>
     <string name="system_set_clean">清理缓存</string>
-    <string name="system_set_about_help">关于约球与帮组</string>
-    <string name="system_music_set">音效设置</string>
-    <string name="system_set_clean_position">清除地理位置</string>
+    <string name="system_set_about_help">音效设置</string>
+    <string name="system_music_set">清除地理位置</string>
+    <string name="system_set_clean_position">关于约球</string>
 </resources>
