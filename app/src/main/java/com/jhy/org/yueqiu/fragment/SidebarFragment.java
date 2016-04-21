@@ -46,7 +46,6 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         view= inflater.inflate(R.layout.fragment_sidebar, container, false);
         init();
         judge();

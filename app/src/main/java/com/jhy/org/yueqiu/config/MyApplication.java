@@ -28,6 +28,8 @@ import io.rong.imkit.RongIM;
  **********************************************
  */
 public class MyApplication extends Application implements BDLocationListener {
+    public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
+    private static MyApplication application;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
     private static List<OnReceiveUserLocationListener> locationListeners = null;
@@ -51,6 +53,8 @@ public class MyApplication extends Application implements BDLocationListener {
         if (curProcessName.equals(getApplicationInfo().packageName) || curProcessName.equals("io.rong.push")) {
             RongIM.init(this);
         }
+
+        application = this;
     }
 
     public static void registerReceiveUserLocation (OnReceiveUserLocationListener listener) {
@@ -59,6 +63,10 @@ public class MyApplication extends Application implements BDLocationListener {
         } else {
             listener.onReceiveUserLocation(userLocation);
         }
+    }
+
+    public static MyApplication getInstance () {
+        return application;
     }
 
     private void initLocation () {
@@ -94,11 +102,10 @@ public class MyApplication extends Application implements BDLocationListener {
     // 获得当前进程的名字
     public static String getCurProcessName (Context context) {
         int pid = android.os.Process.myPid();
-        ActivityManager activityManager = (ActivityManager) context
-                .getSystemService(Context.ACTIVITY_SERVICE);
 
-        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager
-                .getRunningAppProcesses()) {
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
 
             if (appProcess.pid == pid) {
                 return appProcess.processName;
