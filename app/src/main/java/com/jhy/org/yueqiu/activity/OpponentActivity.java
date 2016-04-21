@@ -85,6 +85,8 @@ public class OpponentActivity extends Activity {
 
         }
     };
-
+    public void myProfileBackClick(View v){
+        finish();
+    }
 
 }

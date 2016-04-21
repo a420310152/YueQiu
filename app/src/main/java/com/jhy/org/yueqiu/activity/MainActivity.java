@@ -43,6 +43,8 @@ public class MainActivity extends FragmentActivity {
     viewPager = (ViewPager) findViewById(R.id.vPager);
         List<Fragment> list = new ArrayList<Fragment>();
         sidebarFragment = new SidebarFragment();
+        sidebarFragment.setContext(this);
+        sidebarFragment.judge();
         list.add(sidebarFragment);
         list.add(new HomeFragment());
         VpagerFragmentAdapter adapter = new VpagerFragmentAdapter(getSupportFragmentManager(),list);

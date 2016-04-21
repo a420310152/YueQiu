@@ -3,6 +3,8 @@ package com.jhy.org.yueqiu.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +26,7 @@ import android.widget.Toast;
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadListener;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.activity.ChallengeDetailsActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
 import com.jhy.org.yueqiu.activity.OpponentTeamActivity;
@@ -47,6 +50,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
@@ -71,6 +76,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     ScrollView sv_nbawar;
     ScrollView sv_nbapk;
     TextView tv_war;
+    private int index = 0;
+    public static List<Integer> list;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -98,18 +105,21 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         sv_nbawar = (ScrollView) view.findViewById(R.id.sv_nbawar);
         sv_nbapk = (ScrollView) view.findViewById(R.id.sv_nbapk);
 
-        List<Integer> list = new ArrayList<Integer>();
+        list = new ArrayList<Integer>();
         list.add(R.drawable.icon_home_gallery1);
         list.add(R.drawable.icon_home_gallery2);
         list.add(R.drawable.icon_home_gallery3);
         HomeGalleryAdapter adapter = new HomeGalleryAdapter(getContext(), list);
         gallery.setAdapter(adapter);
+        Timer timer = new Timer();
+        timer.schedule(task, 7000, 7000);
         gallery.setOnItemSelectedListener(this);
         if (markGroup != null) {
             markGroup.setOnCheckedChangeListener(this);
         }
         //group.setOnCheckedChangeListener(click);
     }
+
 
 
     //标题group的选择监听
@@ -152,6 +162,36 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
     }
 
+    /**
+     * 定时器，实现自动播放Gallery
+     */
+    private TimerTask task = new TimerTask() {
+        @Override
+        public void run() {
+            Message message = new Message();
+            message.what = 2;
+            index = gallery.getSelectedItemPosition();
+            if (index==2){
+                index = -1;
+            }
+            index++;
+            handler.sendMessage(message);
+        }
+    };
+
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 2:
+                    gallery.setSelection(index);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
     //markGroup的选择监听
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -176,13 +216,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         tv_war.setOnClickListener(clickwar);
         Bmob.initialize(getContext(), Key.bmob.application_id);
         listView = (ListView) view.findViewById(R.id.lv_war);
-        List<Challenge> list = new ArrayList<Challenge>();
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
-//        Date d = new Date();
-//        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");//当天日期
-//        BmobDate date = new BmobDate(new Date(d.getTime() - 2 * 24 * 60 * 60 * 1000));//两天前的日期
-//        query.addWhereGreaterThan("createdAt", date);
-
         query.setLimit(3);
         query.order("-createdAt");//设置按照时间大小降序排列
         query.include("initiator");
@@ -207,7 +241,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     View.OnClickListener clickwar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-
+            Intent intent = new Intent(getContext(),ChallengeDetailsActivity.class);
+            startActivity(intent);
         }
     };
 

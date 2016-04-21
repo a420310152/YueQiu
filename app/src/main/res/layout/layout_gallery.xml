@@ -115,6 +115,8 @@
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:layout_below="@id/rg_title"
+        android:spacing="30dp"
+        android:unselectedAlpha="1"
         ></Gallery>
         <RadioGroup
             android:id="@+id/markGroup"
