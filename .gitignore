@@ -5,15 +5,9 @@
 .DS_Store
 /build
 /captures
-<<<<<<< HEAD
-/IMKitWithVoIP/
-*.aar
-=======
 /IMKitWithVoIP
 /.idea
 /app
 /gradle
 !/app/src/main/java
 !/app/src/main/res
-
->>>>>>> 98a279b0c81c3c84c5d8469dad2457422866edf7
