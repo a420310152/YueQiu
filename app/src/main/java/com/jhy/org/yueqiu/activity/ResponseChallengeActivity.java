@@ -76,19 +76,22 @@ public class ResponseChallengeActivity extends Activity {
         @Override
         public void onClick(View v) {
             Person person =  BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
+
+
             BmobRelation responders = new BmobRelation();
             responders.add(person);//将用户对象添加到多对多关联
             challenge.setResponders(responders);
             challenge.update(context, new UpdateListener() {
                 @Override
                 public void onSuccess() {
-                    Toast.makeText(ResponseChallengeActivity.this,"报名成功！请您准时赴约哦！",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ResponseChallengeActivity.this, "报名成功！请您准时赴约哦！", Toast.LENGTH_SHORT).show();
                     Log.i("life", "===========多对多关联添加成功");
+                    finish();
                 }
 
                 @Override
                 public void onFailure(int i, String s) {
-                    Log.i("re","onFailure========"+i+","+s);
+                    Log.i("re", "onFailure========" + i + "," + s);
                 }
             });
         }

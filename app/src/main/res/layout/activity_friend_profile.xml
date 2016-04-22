@@ -35,7 +35,6 @@
         android:background="@drawable/icon_sidebar_head"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:onClick="setInfoClick"
         android:id="@+id/iv_info_head"/>
     <TextView
         android:id="@+id/tv_info_zan"
@@ -46,7 +45,6 @@
         android:layout_marginTop="5dp"
         android:drawableLeft="@drawable/selector_myprofile_zan"
         android:drawablePadding="10dp"
-        android:onClick="setInfoClick"
         android:padding="5dp"
         android:text="12"
         android:textSize="25sp" />
@@ -86,7 +84,6 @@
         android:layout_below="@id/linear_info_name"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
-        android:onClick="setInfoClick"
         android:id="@+id/linear_info_sex">
 
         <TextView
@@ -117,7 +114,6 @@
         android:layout_below="@id/linear_info_sex"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
-        android:onClick="setInfoClick"
         android:id="@+id/relat_info_age">
 
         <TextView
@@ -148,7 +144,6 @@
         android:layout_below="@id/relat_info_age"
         android:layout_marginTop="25dp"
         android:background="@drawable/icon_myprofile_bground"
-        android:onClick="setInfoClick"
         android:id="@+id/relat_info_height">
 
         <TextView
@@ -179,7 +174,6 @@
         android:layout_below="@id/relat_info_height"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
-        android:onClick="setInfoClick"
         android:id="@+id/relat_info_weight">
 
         <TextView
@@ -210,7 +204,6 @@
         android:layout_below="@id/relat_info_weight"
         android:layout_marginTop="-10dp"
         android:background="@drawable/icon_myprofile_bground"
-        android:onClick="setInfoClick"
         android:id="@+id/relat_info_skilled">
 
         <TextView

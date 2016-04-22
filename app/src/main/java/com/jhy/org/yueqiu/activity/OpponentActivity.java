@@ -52,11 +52,12 @@ public class OpponentActivity extends Activity {
                         //设置对手信息
                         //iv_info_head.setImageBitmap(bitmap);  //设置对手信息 头像
                         tv_name.setText(person.getUsername());
-                        tv_sex.setText(person.getSex() + "");
-                        tv_age.setText(person.getAge());
-                        tv_height.setText(person.getHeight());
-                        tv_weight.setText(person.getWeight());
-                        tv_skilled.setText(person.getPosition());
+                        tv_sex.setText(person.getSex() ? "男" : "女");
+                        Log.i("person", "person.getAge()=======" + person.getAge());
+                        tv_age.setText(person.getAge() + " 岁");
+                        tv_height.setText(person.getHeight()+" cm");
+                        tv_weight.setText(person.getWeight()+" kg");
+                        tv_skilled.setText( person.getPosition());
                     }
 
                     @Override
