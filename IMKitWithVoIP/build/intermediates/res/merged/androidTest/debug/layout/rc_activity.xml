@@ -11,4 +11,4 @@
         android:id="@id/rc_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-</FrameLayout><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_activity.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_activity.xml -->
+</FrameLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_activity.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_activity.xml -->

@@ -3,7 +3,6 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -14,10 +13,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
-import com.jhy.org.yueqiu.config.MyApplication;
 import com.jhy.org.yueqiu.fragment.SidebarFragment;
 import com.jhy.org.yueqiu.test.c.TestActivity;
-import com.squareup.okhttp.OkHttpClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,8 +23,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.OtherLoginListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.RongIMClient;
 
 /*
  **********************************************
@@ -114,7 +109,6 @@ public class LoginActivity extends Activity{
             });
         }
     }
-
 
     //注册按钮的监听
     public void registerClick(View v){

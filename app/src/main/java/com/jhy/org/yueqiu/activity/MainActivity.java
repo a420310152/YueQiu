@@ -7,9 +7,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 
 import com.jhy.org.yueqiu.R;
@@ -31,7 +29,7 @@ import cn.bmob.v3.listener.SaveListener;
  */
 public class MainActivity extends FragmentActivity {
     SidebarFragment sidebarFragment;
-    DrawerLayout drawerLayout;
+    ViewPager viewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,50 +40,44 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void build() {
-        drawerLayout = (DrawerLayout) findViewById(R.id.container);
-        //添加Fragment
+    viewPager = (ViewPager) findViewById(R.id.vPager);
+        List<Fragment> list = new ArrayList<Fragment>();
         sidebarFragment = new SidebarFragment();
         sidebarFragment.setContext(this);
         sidebarFragment.judge();
-        HomeFragment homeFragment = new HomeFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.linear,homeFragment);
-        ft.commit();
-        FragmentTransaction ftSide = getSupportFragmentManager().beginTransaction();
-        ftSide.add(R.id.linearMenu,sidebarFragment);
-        ftSide.commit();
-        drawerLayout.setDrawerListener(drawerListener);
+        list.add(sidebarFragment);
+        list.add(new HomeFragment());
+        VpagerFragmentAdapter adapter = new VpagerFragmentAdapter(getSupportFragmentManager(),list);
+        viewPager.setAdapter(adapter);
+        viewPager.setCurrentItem(2);
+        viewPager.setOnPageChangeListener(clickVpager);
+    }
+    public void loginMenu(View v){
+        Log.i("loginMenu","loginMenu===="+viewPager.getCurrentItem());
+        if (viewPager.getCurrentItem()==1){
+            viewPager.setCurrentItem(0);
+        }else if (viewPager.getCurrentItem()==0){
+            viewPager.setCurrentItem(1);
+        }
     }
 
-    //抽屉菜单监听
-    DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
+    //后期：可以对滑动监听进行设置***(暂时没用)
+    ViewPager.OnPageChangeListener clickVpager = new ViewPager.OnPageChangeListener() {
         @Override
-        public void onDrawerSlide(View drawerView, float slideOffset) {
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
         }
 
         @Override
-        public void onDrawerOpened(View drawerView) {
+        public void onPageSelected(int position) {
 
         }
 
         @Override
-        public void onDrawerClosed(View drawerView) {
-
-        }
-
-        @Override
-        public void onDrawerStateChanged(int newState) {
+        public void onPageScrollStateChanged(int state) {
 
         }
     };
-
-//左上角菜单按钮监听
-    public void loginMenu(View v) {
-        drawerLayout.openDrawer(Gravity.LEFT);
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED,
-                Gravity.LEFT);
-    }
 
 
 }
