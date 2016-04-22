@@ -60,6 +60,8 @@
         </activity>
         <activity android:name=".activity.SignUpActivity">
         </activity>
+        <activity android:name=".activity.MyApplyActivity">
+        </activity>
         <activity android:name=".activity.MyProfileActivity">
         </activity>
         <activity android:name=".activity.MyTeamActivity">

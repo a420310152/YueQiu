@@ -4,11 +4,13 @@ import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.test.h.PickerLayout;
+import com.jhy.org.yueqiu.utils.ImageLoader;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +20,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
+
+import java.io.File;
+
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
@@ -42,6 +48,7 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
     private Person my_profile;
     private Context context = this;
     private BmobUser my_profile_bmobUser;
+    private ImageLoader imageLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,7 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
         btn_info_edit.setOnClickListener(click);
         pickerLayout.setTitle("TITLE");
         my_profile = BmobUser.getCurrentUser(context, Person.class);
+        imageLoader = new ImageLoader(MyProfileActivity.this,iv_info_head);
         saveMyProfile();
     }
     //对编辑按钮进行监听，点击时显示上传按钮
@@ -116,12 +124,18 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
     public void myProfileBackClick(View v){
         finish();
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (imageLoader != null) {
+            imageLoader.setResult(requestCode, data);
+        }
+    }
+
     public void setInfoClick(View v){
         currentView = v;
         switch (v.getId()){
-            case R.id.iv_info_head:
-
-                break;
             case R.id.linear_info_sex:
                 pickerLayout.setVisibility(View.VISIBLE);
                 String[] values = new String[]{"男", "女"};
@@ -147,8 +161,11 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
             case R.id.btn_info_send:
                 pickerLayout.setVisibility(View.INVISIBLE);
                 String my_profile_name = et_info_name.getText().toString();
+                String path = Environment.getExternalStorageDirectory()+"avatar.jpg";
+                BmobFile file=new BmobFile(new File(path));
                 if(my_profile_name!=null && my_profile!=null) {
                     my_profile.setUsername(my_profile_name);
+                    my_profile.setAvatar(file);
                     my_profile.update(MyProfileActivity.this, new UpdateListener() {
                         @Override
                         public void onSuccess() {

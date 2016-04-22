@@ -25,9 +25,9 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:layout_marginLeft="0dp"
-        android:text="我的资料"
+        android:text="我的报名"
         android:textColor="@color/orange"
-        android:id="@+id/btn_info"/>
+        android:id="@+id/btn_apply"/>
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:background="@null"
-        android:layout_below="@id/btn_info"
+        android:layout_below="@id/btn_apply"
         android:textColor="@color/orange"
         android:id="@+id/btn_collect"/>
     <Button
