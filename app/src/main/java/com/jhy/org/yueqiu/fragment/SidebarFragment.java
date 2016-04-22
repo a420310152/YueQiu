@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
 import com.jhy.org.yueqiu.activity.MainActivity;
+import com.jhy.org.yueqiu.activity.MyApplyActivity;
 import com.jhy.org.yueqiu.activity.MyPlaceActivity;
 import com.jhy.org.yueqiu.activity.MyFootprintActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
@@ -32,7 +33,7 @@ import cn.bmob.v3.BmobUser;
 public class SidebarFragment extends Fragment implements OnClickListener {
 
     private TextView tv_register_login;
-    private Button btn_info;
+    private Button btn_apply;
     private Button btn_collect;
     private Button btn_team;
     private Button btn_track;
@@ -54,7 +55,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     //初始化控件
     private void init(){
         tv_register_login = (TextView)view.findViewById(R.id.tv_register_login);
-        btn_info = (Button) view.findViewById(R.id.btn_info);
+        btn_apply = (Button) view.findViewById(R.id.btn_apply);
         btn_collect = (Button) view.findViewById(R.id.btn_collect);
         btn_team = (Button) view.findViewById(R.id.btn_team);
         btn_track = (Button) view.findViewById(R.id.btn_track);
@@ -62,7 +63,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
 
         tv_register_login.setOnClickListener(this);
-        btn_info.setOnClickListener(this);
+        btn_apply.setOnClickListener(this);
         btn_collect.setOnClickListener(this);
         btn_team.setOnClickListener(this);
         btn_track.setOnClickListener(this);
@@ -96,8 +97,8 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                     startActivity(loginIntent);
                 }
                 break;
-            case R.id.btn_info:
-                Intent infoIntent =  new Intent(getActivity(),MyProfileActivity.class);
+            case R.id.btn_apply:
+                Intent infoIntent =  new Intent(getActivity(),MyApplyActivity.class);
                 startActivity(infoIntent);
                 break;
             case R.id.btn_collect:

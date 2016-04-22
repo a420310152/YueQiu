@@ -20,8 +20,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:onClick="finish"
+        <ImageButton
+            android:id="@+id/ibtn_back"
             android:background="@drawable/icon_system_right"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
@@ -30,7 +30,6 @@
         <Button
             android:id="@+id/btn_ok"
             android:text="确定"
-            android:visibility="invisible"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_width="wrap_content"
@@ -45,8 +44,8 @@
 
     <com.jhy.org.yueqiu.test.h.BaiduMapLayout
         android:id="@+id/baiduMap"
-        android:visibility="invisible"
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </RelativeLayout>

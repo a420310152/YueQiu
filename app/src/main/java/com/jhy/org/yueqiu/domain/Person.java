@@ -1,5 +1,7 @@
 package com.jhy.org.yueqiu.domain;
 
+import java.util.List;
+
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
@@ -24,7 +26,7 @@ public class Person extends BmobUser {
     private BmobFile avatar;        // 头像
     private BmobRelation friends;   // 好友
     private BmobGeoPoint location;  // 最近的地理位置
-    private BmobRelation collection;// 收藏的地点
+    private List<String> collection;// 收藏的地点
     private BmobRelation footprints;// 足迹
 
     public String getPosition() { return position; }
@@ -75,6 +77,6 @@ public class Person extends BmobUser {
     public BmobRelation getFootprints() { return footprints; }
     public void setFootprints(BmobRelation footprints) { this.footprints = footprints; }
 
-    public BmobRelation getCollection() { return collection; }
-    public void setCollection(BmobRelation collection) { this.collection = collection; }
+    public List<String> getCollection() { return collection; }
+    public void setCollection(List<String> collection) { this.collection = collection; }
 }

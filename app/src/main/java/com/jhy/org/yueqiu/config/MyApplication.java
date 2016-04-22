@@ -12,14 +12,13 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserCollectionListener;
 import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobGeoPoint;
 import io.rong.imkit.RongIM;
 
 /*
@@ -32,7 +31,10 @@ public class MyApplication extends Application implements BDLocationListener {
     private static MyApplication application;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
+
+    private static Person currentUser = null;
     private static List<OnReceiveUserLocationListener> locationListeners = null;
+    private static List<OnReceiveUserCollectionListener> collectionListeners = null;
 
     @Override
     public void onCreate() {
@@ -58,10 +60,12 @@ public class MyApplication extends Application implements BDLocationListener {
     }
 
     public static void registerReceiveUserLocation (OnReceiveUserLocationListener listener) {
-        if (userLocation == null) {
-            locationListeners.add(listener);
-        } else {
-            listener.onReceiveUserLocation(userLocation);
+        if (listener != null) {
+            if (userLocation == null) {
+                locationListeners.add(listener);
+            } else {
+                listener.onReceiveUserLocation(userLocation);
+            }
         }
     }
 
@@ -96,6 +100,10 @@ public class MyApplication extends Application implements BDLocationListener {
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);
         }
+    }
+
+    public static BDLocation getUserLocation () {
+        return userLocation;
     }
 
     // 获得当前进程的名字
