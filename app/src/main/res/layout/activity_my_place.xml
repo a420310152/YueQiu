@@ -11,11 +11,10 @@
         android:background="@color/blackui"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btn_back"
-            android:drawableLeft="@drawable/icon_system_right"
-            android:background="@null"
-            android:padding="25dp"
+        <ImageButton
+            android:id="@+id/ibtn_back"
+            android:background="@drawable/icon_system_right"
+            android:layout_margin="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
@@ -51,7 +50,6 @@
 
     <com.jhy.org.yueqiu.test.h.BaiduMapLayout
         android:id="@+id/baiduMap"
-        android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

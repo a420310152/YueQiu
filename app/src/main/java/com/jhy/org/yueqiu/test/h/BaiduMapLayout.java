@@ -43,13 +43,14 @@ public class BaiduMapLayout extends RelativeLayout implements View.OnClickListen
         this.context = context;
         mapView = (MapView) findViewById(R.id.mapView);
         tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_title.setText("");
+        tv_title.setOnClickListener(this);
 
         baiduMap = mapView.getMap();
         icon_a = BitmapDescriptorFactory.fromResource(R.drawable.icon_mark_a);
         icon_b = BitmapDescriptorFactory.fromResource(R.drawable.icon_mark_b);
 
-        tv_title.setText("");
-        setOnClickListener(this);
+        setVisibility(INVISIBLE);
     }
 
     public void setTitle (String title) {
@@ -68,7 +69,7 @@ public class BaiduMapLayout extends RelativeLayout implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        if (v == this) {
+        if (v.getId() == R.id.tv_title) {
             setVisibility(INVISIBLE);
         }
     }

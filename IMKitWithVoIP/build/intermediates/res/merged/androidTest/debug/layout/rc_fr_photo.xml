@@ -22,4 +22,4 @@
         android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:visibility="gone"/>
-</FrameLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_fr_photo.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_fr_photo.xml -->
+</FrameLayout><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_fr_photo.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_fr_photo.xml -->

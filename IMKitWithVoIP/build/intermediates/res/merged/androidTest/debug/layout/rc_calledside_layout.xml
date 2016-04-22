@@ -164,4 +164,4 @@
         android:background="#88000000"
         android:clickable="true"
         android:visibility="gone"/>
-</RelativeLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_calledside_layout.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_calledside_layout.xml -->
+</RelativeLayout><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_calledside_layout.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_calledside_layout.xml -->
