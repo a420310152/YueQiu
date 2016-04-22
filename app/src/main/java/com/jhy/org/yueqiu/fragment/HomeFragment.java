@@ -223,6 +223,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         query.findObjects(getContext(), new FindListener<Challenge>() {
             @Override
             public void onSuccess(List<Challenge> list) {
+            Log.i("result","===========list"+list.size());
                 ChallengeAdapter adapter = new ChallengeAdapter(list, getContext());
                 listView.setAdapter(adapter);
                 listView.setOnItemClickListener(itemClick);
@@ -230,7 +231,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
             @Override
             public void onError(int i, String s) {
-
+                Log.i("result","===========onError"+s);
             }
         });
 

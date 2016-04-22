@@ -1,5 +1,10 @@
 package com.jhy.org.yueqiu.adapter;
-
+/*
+ **********************************************
+ * 			所有者 X: (夏旺)
+ * 		此类暂时遗弃
+ **********************************************
+ */
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;

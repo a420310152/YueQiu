@@ -6,13 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.ResponseChallengeActivity;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.view.ChallengeLayout;
 
 import java.util.List;
+
+import cn.bmob.v3.BmobUser;
+
 /*
  **********************************************
  * 			所有者 H: (黄振梓)
@@ -45,10 +50,16 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
     View.OnClickListener click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            challenge = list.get(v.getId() - 1000);
-            Intent intent = new Intent(context,ResponseChallengeActivity.class);
-            intent.putExtra("challenge",challenge);
-            context.startActivity(intent);
+            Person person =  BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
+            if(person!=null){
+                challenge = list.get(v.getId() - 1000);
+                Intent intent = new Intent(context,ResponseChallengeActivity.class);
+                intent.putExtra("challenge",challenge);
+                context.startActivity(intent);
+            }else {
+                Toast.makeText(context,"请登录账号",Toast.LENGTH_SHORT).show();
+            }
+
         }
     };
 }
