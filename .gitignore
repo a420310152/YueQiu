@@ -5,3 +5,10 @@
 .DS_Store
 /build
 /captures
+/IMKitWithVoIP
+/.idea
+/app
+/gradle
+!/app/src/main/java
+!/app/src/main/res
+
