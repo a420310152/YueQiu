@@ -1,12 +1,10 @@
 .gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
 .DS_Store
+/local.properties
+/.idea
 /build
 /captures
 /IMKitWithVoIP
-/.idea
 /app
 /gradle
 !/app/src/main/java
