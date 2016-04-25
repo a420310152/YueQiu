@@ -5,6 +5,7 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Team;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -28,11 +29,13 @@ public class MyTeamActivity extends Activity {
     private Button btn_team_addmemember;
     private Team myTeamInfo;
     private Context context = this;
+    private BmobUser myTeam_bmobUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_team);
         init();
+        saveTeamInfo();
     }
     //初始化控件
     private void init(){
@@ -42,6 +45,16 @@ public class MyTeamActivity extends Activity {
         et_team_slogan = (EditText) findViewById(R.id.et_team_slogan);
         btn_team_addmemember = (Button) findViewById(R.id.btn_team_addmemember);
         myTeamInfo = BmobUser.getCurrentUser(context,Team.class);
+    }
+    //判断登录状态
+    private void saveTeamInfo(){
+        myTeam_bmobUser = BmobUser.getCurrentUser(this);
+        if(myTeam_bmobUser!=null){
+
+        }else{
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        }
     }
 
     public void teaminfoClick(View v){

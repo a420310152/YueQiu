@@ -24,16 +24,19 @@ public class MyApplyActivity extends Activity{
     private ListView lv_apply_info;
     private BmobUser my_apply_bmobuser;
     private Context context = this;
+    private Challenge challenge;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_apply);
         lv_apply_info = (ListView) findViewById(R.id.lv_apply_info);
-        list = new ArrayList<Challenge>();
-        applyAdapter = new ApplyAdapter(MyApplyActivity.this,list);
-        Log.i("result","!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!");
-        lv_apply_info.setAdapter(applyAdapter);
         judgeLogin();
+        list = new ArrayList<Challenge>();
+        challenge = new Challenge();
+        list.add(challenge);
+        applyAdapter = new ApplyAdapter(MyApplyActivity.this,list);
+        Log.i("result", "!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!");
+        lv_apply_info.setAdapter(applyAdapter);
     }
     //判断登录状态
     private void judgeLogin(){
@@ -49,10 +52,11 @@ public class MyApplyActivity extends Activity{
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+            Intent intentApplyInfo = new Intent(MyApplyActivity.this,OpponentActivity.class);
+            intentApplyInfo.putExtra("challenge",challenge);
+            startActivity(intentApplyInfo);
         }
     };
-
 
     //返回按钮的监听
     public void myApplyBackClick(View v){

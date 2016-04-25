@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
 import com.jhy.org.yueqiu.activity.MainActivity;
+import com.jhy.org.yueqiu.activity.MyAllTeamActivity;
 import com.jhy.org.yueqiu.activity.MyApplyActivity;
 import com.jhy.org.yueqiu.activity.MyPlaceActivity;
 import com.jhy.org.yueqiu.activity.MyFootprintActivity;
@@ -106,7 +107,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 startActivity(collectIntent);
                 break;
             case R.id.btn_team:
-                Intent teamIntent =  new Intent(getActivity(), MyTeamActivity.class);
+                Intent teamIntent =  new Intent(getActivity(), MyAllTeamActivity.class);
                 startActivity(teamIntent);
                 break;
             case R.id.btn_track:
