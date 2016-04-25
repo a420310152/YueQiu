@@ -2,4 +2,8 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@drawable/rc_ic_no_hover" android:state_selected="true"/>
     <item android:drawable="@drawable/rc_ic_no"/>
+<<<<<<< HEAD
+</selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ic_no_selector.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ic_no_selector.xml -->
+=======
 </selector><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ic_no_selector.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ic_no_selector.xml -->
+>>>>>>> origin/master

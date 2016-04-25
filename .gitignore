@@ -7,3 +7,5 @@ AndroidManifest.xml
 /captures/
 /IMKitWithVoIP/
 /gradle/
+/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/
+/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable-xhdpi/

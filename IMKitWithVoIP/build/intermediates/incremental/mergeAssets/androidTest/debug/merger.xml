@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+<merger version="3"><dataSet config="debug"><source path="E:\androidwork\YueQiu\IMKitWithVoIP\build\intermediates\bundles\debug\assets"><file name="voip_ring_call.mp3" path="E:\androidwork\YueQiu\IMKitWithVoIP\build\intermediates\bundles\debug\assets\voip_ring_call.mp3"/><file name="voip_ring_called.mp3" path="E:\androidwork\YueQiu\IMKitWithVoIP\build\intermediates\bundles\debug\assets\voip_ring_called.mp3"/></source></dataSet><dataSet config="main"><source path="E:\androidwork\YueQiu\IMKitWithVoIP\src\androidTest\assets"/></dataSet></merger>
+=======
 <merger version="3"><dataSet config="debug"><source path="E:\androidProject\YueQiu\IMKitWithVoIP\build\intermediates\bundles\debug\assets"><file name="voip_ring_call.mp3" path="E:\androidProject\YueQiu\IMKitWithVoIP\build\intermediates\bundles\debug\assets\voip_ring_call.mp3"/><file name="voip_ring_called.mp3" path="E:\androidProject\YueQiu\IMKitWithVoIP\build\intermediates\bundles\debug\assets\voip_ring_called.mp3"/></source></dataSet><dataSet config="main"><source path="E:\androidProject\YueQiu\IMKitWithVoIP\src\androidTest\assets"/></dataSet></merger>
+>>>>>>> origin/master

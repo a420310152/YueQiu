@@ -38,4 +38,8 @@
         android:layout_height="match_parent"
         android:background="@android:color/darker_gray" />
 
+<<<<<<< HEAD
+</LinearLayout><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menu.xml -->
+=======
 </LinearLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menu.xml -->
+>>>>>>> origin/master

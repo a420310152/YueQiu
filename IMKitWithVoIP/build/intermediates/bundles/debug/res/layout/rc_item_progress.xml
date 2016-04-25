@@ -8,4 +8,8 @@
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="center" />
+<<<<<<< HEAD
+</FrameLayout><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_progress.xml -->
+=======
 </FrameLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_progress.xml -->
+>>>>>>> origin/master

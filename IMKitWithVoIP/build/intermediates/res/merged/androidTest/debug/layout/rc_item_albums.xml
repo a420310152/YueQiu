@@ -18,4 +18,8 @@
         android:layout_height="fill_parent"
         android:checked="false" />
 
+<<<<<<< HEAD
+</FrameLayout><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_albums.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_albums.xml -->
+=======
 </FrameLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_albums.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_albums.xml -->
+>>>>>>> origin/master

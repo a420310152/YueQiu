@@ -12,7 +12,7 @@ import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.test.h.backups.RongUtils;
-import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserCollectionListener;
+import com.jhy.org.yueqiu.utils.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,36 +27,22 @@ import io.rong.imkit.RongIM;
  */
 public class App extends Application implements BDLocationListener {
     public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
-    private static App application;
+    private static App application = null;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
 
     private static Person currentUser = null;
     private static List<OnReceiveUserLocationListener> locationListeners = null;
-    private static List<OnReceiveUserCollectionListener> collectionListeners = null;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        application = this;
+
         SDKInitializer.initialize(this);
         Bmob.initialize(this, Key.bmob.application_id);
-
-        locationListeners = new ArrayList<OnReceiveUserLocationListener>();
-
+        Preferences.initialize(this);
         initLocation();
-        locationClient.start();
-
-        /**
-         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
-         * io.rong.push 为融云 push 进程名称，不可修改。
-         */
-        String curProcessName = getCurProcessName(getApplicationContext());
-        if (curProcessName.equals(getApplicationInfo().packageName) || curProcessName.equals("io.rong.push")) {
-            RongIM.init(this);
-            RongUtils.connect();
-        }
-
-        application = this;
     }
 
     public static void registerReceiveUserLocation (OnReceiveUserLocationListener listener) {
@@ -69,11 +55,45 @@ public class App extends Application implements BDLocationListener {
         }
     }
 
+    public static BDLocation getUserLocation () {
+        return userLocation;
+    }
+
     public static App getInstance () {
         return application;
     }
 
+    // 获得当前进程的名字
+    public static String getCurProcessName (Context context) {
+        int pid = android.os.Process.myPid();
+
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+
+        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
+
+            if (appProcess.pid == pid) {
+                return appProcess.processName;
+            }
+        }
+        return null;
+    }
+
+    private void initRong () {
+        /**
+         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
+         * io.rong.push 为融云 push 进程名称，不可修改。
+         */
+        String curProcessName = getCurProcessName(getApplicationContext());
+        String packageName = getApplicationInfo().packageName;
+        if (packageName.equals(curProcessName) || "io.rong.push".equals(curProcessName)) {
+            RongIM.init(this);
+        }
+        RongUtils.connect();
+    }
+
     private void initLocation () {
+        locationListeners = new ArrayList<OnReceiveUserLocationListener>();
+
         LocationClientOption option = new LocationClientOption();
         option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);//可选，默认高精度，设置定位模式，高精度，低功耗，仅设备
         option.setCoorType("bd09ll");//可选，默认gcj02，设置返回的定位结果坐标系
@@ -90,6 +110,7 @@ public class App extends Application implements BDLocationListener {
         locationClient = new LocationClient(this);
         locationClient.registerLocationListener(this);
         locationClient.setLocOption(option);
+        locationClient.start();
     }
 
     @Override
@@ -100,24 +121,5 @@ public class App extends Application implements BDLocationListener {
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);
         }
-    }
-
-    public static BDLocation getUserLocation () {
-        return userLocation;
-    }
-
-    // 获得当前进程的名字
-    public static String getCurProcessName (Context context) {
-        int pid = android.os.Process.myPid();
-
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-
-        for (ActivityManager.RunningAppProcessInfo appProcess : activityManager.getRunningAppProcesses()) {
-
-            if (appProcess.pid == pid) {
-                return appProcess.processName;
-            }
-        }
-        return null;
     }
 }

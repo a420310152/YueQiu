@@ -23,4 +23,8 @@
         android:layout_marginLeft="40dp"
         android:id="@+id/name"/>
 </RelativeLayout>
+<<<<<<< HEAD
+<!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_search.xml -->
+=======
 <!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_search.xml -->
+>>>>>>> origin/master
