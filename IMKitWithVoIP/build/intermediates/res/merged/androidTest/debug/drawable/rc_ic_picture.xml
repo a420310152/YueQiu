@@ -7,4 +7,4 @@
     <item android:drawable="@drawable/rc_ic_picture_selected" android:state_focused="true" android:state_pressed="false" android:state_selected="false"/>
     <!-- Pressed -->
     <item android:drawable="@drawable/rc_ic_picture_selected" android:state_pressed="true"/>
-</selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ic_picture.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ic_picture.xml -->
+</selector><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ic_picture.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ic_picture.xml -->

@@ -5,4 +5,4 @@
     <item android:drawable="@drawable/rc_checkbox_normal" android:state_checked="false"></item>
     <item android:drawable="@drawable/rc_checkbox_normal"></item>
 
-</selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_photo_checkbox.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_photo_checkbox.xml -->
+</selector><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_photo_checkbox.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_photo_checkbox.xml -->
