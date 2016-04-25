@@ -18,7 +18,7 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
 import com.jhy.org.yueqiu.config.MyApplication;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
 
 import java.util.List;
 

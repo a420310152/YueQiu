@@ -249,7 +249,7 @@
         android:onClick="setInfoClick"
         android:visibility="invisible"
         android:id="@+id/btn_info_send"/>
-    <com.jhy.org.yueqiu.view.PickerLayout
+    <com.jhy.org.yueqiu.test.h.PickerLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
