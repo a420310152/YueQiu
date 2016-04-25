@@ -1,11 +1,9 @@
 .gradle
 .DS_Store
+AndroidManifest.xml
 /local.properties
 /.idea/
 /build/
 /captures/
 /IMKitWithVoIP/
-/app/
 /gradle/
-!/app/src/main/java/
-!/app/src/main/res/
