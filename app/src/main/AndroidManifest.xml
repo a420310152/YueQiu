@@ -66,6 +66,8 @@
         </activity>
         <activity android:name=".activity.MyTeamActivity">
         </activity>
+        <activity android:name=".activity.MyAllTeamActivity">
+        </activity>
         <activity android:name=".activity.MyPlaceActivity">
         </activity>
         <activity android:name=".activity.MyFootprintActivity">
@@ -75,6 +77,10 @@
         <activity android:name=".activity.ChatRoomActivity">
         </activity>
         <activity android:name=".activity.SettingActivity">
+        </activity>
+        <activity android:name=".activity.SetttingToastActivity">
+        </activity>
+        <activity android:name=".activity.SettingMessageActivity">
         </activity>
         <activity android:name=".activity.ShowChallengeActivity">
         </activity>

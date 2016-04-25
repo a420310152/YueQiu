@@ -101,7 +101,7 @@
             android:id="@+id/tv_info_sex"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
             android:textSize="25sp"
             android:layout_marginLeft="50dp"
@@ -132,7 +132,7 @@
             android:id="@+id/tv_info_age"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
             android:textSize="25sp"
             android:layout_marginLeft="50dp"
@@ -163,7 +163,7 @@
             android:id="@+id/tv_info_height"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
             android:textSize="25sp"
             android:layout_marginLeft="50dp"
@@ -194,7 +194,7 @@
             android:id="@+id/tv_info_weight"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
             android:textSize="25sp"
             android:layout_marginLeft="50dp"
@@ -225,7 +225,7 @@
             android:id="@+id/tv_info_skilled"/>
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="30dp"
+            android:layout_height="40dp"
             android:drawableRight="@drawable/icon_myprofile_selector"
             android:textSize="25sp"
             android:layout_marginLeft="50dp"
