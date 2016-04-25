@@ -20,4 +20,4 @@
         android:layout_width="match_parent"
         android:layout_height="0.0005dip"
         android:background="@android:color/darker_gray" />
-</LinearLayout><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menu_item.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_public_service_input_menu_item.xml -->
+</LinearLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menu_item.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_public_service_input_menu_item.xml -->
