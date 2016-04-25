@@ -11,7 +11,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.utils.RongUtils;
+import com.jhy.org.yueqiu.test.h.backups.RongUtils;
 import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserCollectionListener;
 
 import java.util.ArrayList;
