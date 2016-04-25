@@ -1,10 +1,8 @@
-package com.jhy.org.yueqiu.test.h.backups;
+package com.jhy.org.yueqiu.utils;
 
 import android.util.Log;
 
-import com.jhy.org.yueqiu.config.MyApplication;
-import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.utils.Preferences;
+import com.jhy.org.yueqiu.config.App;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.RongIMClient;
@@ -16,10 +14,10 @@ public final class RongUtils {
     private static boolean isConnected = false;
 
     public static void connect () {
-        MyApplication app = MyApplication.getInstance();
+        App app = App.getInstance();
         String token = Preferences.get("token");
         if (app != null && !isConnected && !token.equals("")) {
-            String curPorcessName = MyApplication.getCurProcessName(app);
+            String curPorcessName = App.getCurProcessName(app);
             String packageName = app.getApplicationInfo().packageName;
             if (packageName.equals(curPorcessName)) {
                 RongIM.connect(token, connectCallback);

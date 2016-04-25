@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.ContactActivity;
 import com.jhy.org.yueqiu.activity.SearchActivity;
-import com.jhy.org.yueqiu.test.h.PopupSpan;
 
 /*
  **********************************************

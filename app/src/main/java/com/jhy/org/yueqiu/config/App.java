@@ -11,8 +11,7 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
-import com.jhy.org.yueqiu.test.h.backups.RongUtils;
+import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserCollectionListener;
 
 import java.util.ArrayList;
@@ -26,9 +25,9 @@ import io.rong.imkit.RongIM;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class MyApplication extends Application implements BDLocationListener {
+public class App extends Application implements BDLocationListener {
     public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
-    private static MyApplication application;
+    private static App application;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
 
@@ -70,7 +69,7 @@ public class MyApplication extends Application implements BDLocationListener {
         }
     }
 
-    public static MyApplication getInstance () {
+    public static App getInstance () {
         return application;
     }
 

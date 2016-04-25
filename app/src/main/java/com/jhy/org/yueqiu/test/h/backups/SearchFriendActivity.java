@@ -21,9 +21,9 @@ import com.baidu.mapapi.radar.RadarUploadInfo;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
-import com.jhy.org.yueqiu.config.MyApplication;
+import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
         this.searchOption = new RadarNearbySearchOption()
                 .pageNum(0)
                 .radius(10000);
-        MyApplication.registerReceiveUserLocation(this);
+        App.registerReceiveUserLocation(this);
         searchManager.addNearbyInfoListener(this);//周边雷达设置监听
         // searchManager.startUploadAuto(this, 5000); //设置自动上传的callback和时间间隔
         // searchManager.setUserID(userID); //周边雷达设置用户身份标识，id为空默认是设备标识

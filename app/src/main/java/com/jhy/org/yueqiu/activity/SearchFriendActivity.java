@@ -16,9 +16,9 @@ import android.widget.Toast;
 import com.baidu.location.BDLocation;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
-import com.jhy.org.yueqiu.config.MyApplication;
+import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 
 import java.util.List;
 
@@ -64,7 +64,7 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
         this.myProfileIntent = new Intent(context, MyProfileActivity.class);
 
-        MyApplication.registerReceiveUserLocation(this);
+        App.registerReceiveUserLocation(this);
     }
 
     @Override

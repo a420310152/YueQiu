@@ -12,11 +12,11 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.PlaceAdapter;
-import com.jhy.org.yueqiu.config.MyApplication;
+import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.BaiduMapLayout;
-import com.jhy.org.yueqiu.test.h.MyPlace;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.view.BaiduMapLayout;
+import com.jhy.org.yueqiu.domain.MyPlace;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -70,7 +70,7 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
         setContentView(R.layout.activity_my_place);
 
         currentUser = BmobUser.getCurrentUser(context, Person.class);
-        MyApplication.registerReceiveUserLocation(this);
+        App.registerReceiveUserLocation(this);
 
         ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
         ibtn_back.setOnClickListener(this);
