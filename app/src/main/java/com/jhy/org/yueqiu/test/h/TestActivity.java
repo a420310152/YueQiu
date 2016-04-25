@@ -2,7 +2,6 @@ package com.jhy.org.yueqiu.test.h;
 
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
-import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
