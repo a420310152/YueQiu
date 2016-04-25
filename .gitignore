@@ -6,4 +6,9 @@ AndroidManifest.xml
 /build/
 /captures/
 /IMKitWithVoIP/
+<<<<<<< HEAD
 /app/
+=======
+/gradle/
+
+>>>>>>> origin/master
