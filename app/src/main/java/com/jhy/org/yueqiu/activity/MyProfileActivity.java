@@ -3,9 +3,9 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.PickerLayout;
 import com.jhy.org.yueqiu.utils.ImageLoader;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
+import com.jhy.org.yueqiu.view.PickerLayout;
 
 import android.content.Context;
 import android.content.Intent;

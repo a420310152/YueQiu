@@ -37,7 +37,6 @@ public class AllTeamLayout extends RelativeLayout{
         super(context, attrs, defStyleAttr);
         init(context);
     }
-    //初始化控件
     public void init(Context context){
         this.context = context;
         LayoutInflater.from(context).inflate(R.layout.layout_allteam, this);
@@ -47,14 +46,12 @@ public class AllTeamLayout extends RelativeLayout{
         tv_selector_allteam_time = (TextView) findViewById(R.id.tv_selector_allteam_time);
         tv_allteam_slogan = (TextView) findViewById(R.id.tv_allteam_slogan);
     }
-    //查询加入球队的信息并显示
     public void setAllTeamInfo(Team team){
         this.team = team;
         BmobQuery<Team> teamQuery = new BmobQuery<Team>();
         teamQuery.getObject(context, team.getCreator().getObjectId(), new GetListener<Team>() {
             @Override
             public void onSuccess(Team team) {
-                iv_allteam_head.set;
                 tv_selector_allteam_name.setText(team.getName());
                 tv_team_buildname.setText(team.getCreator()+"");
                 tv_allteam_slogan.setText(team.getMotto());

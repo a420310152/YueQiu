@@ -25,11 +25,11 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.PlaceAdapter;
-import com.jhy.org.yueqiu.config.MyApplication;
+import com.jhy.org.yueqiu.config.App;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.BaiduMapLayout;
-import com.jhy.org.yueqiu.test.h.MyPlace;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.domain.MyPlace;
+import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +101,7 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
         btn_ok.setOnClickListener(this);
         btn_ok.setVisibility(getIntent() != null && getIntent().hasExtra("needsPlace") ? View.VISIBLE : View.INVISIBLE);
 
-        MyApplication.registerReceiveUserLocation(this);
+        App.registerReceiveUserLocation(this);
 
         queryCollection();
     }
