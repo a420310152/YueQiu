@@ -5,11 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.utils.DistanceUtil;
-import com.jhy.org.yueqiu.R;
-import com.jhy.org.yueqiu.domain.Place;
-import com.jhy.org.yueqiu.test.h.MyPlace;
+import com.jhy.org.yueqiu.domain.MyPlace;
 import com.jhy.org.yueqiu.view.PlaceLayout;
 
 import java.util.List;

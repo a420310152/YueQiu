@@ -11,21 +11,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
-import com.baidu.mapapi.utils.DistanceUtil;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.LoginActivity;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.domain.Place;
-import com.jhy.org.yueqiu.test.h.MyPlace;
-import com.squareup.picasso.Picasso;
+import com.jhy.org.yueqiu.domain.MyPlace;
 
 import java.util.Arrays;
-import java.util.List;
 
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.UpdateListener;
 
 /*

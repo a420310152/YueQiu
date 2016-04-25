@@ -2,13 +2,10 @@ package com.jhy.org.yueqiu.activity;
 
         import android.app.Activity;
         import com.jhy.org.yueqiu.R;
-        import com.jhy.org.yueqiu.config.Key;
         import com.jhy.org.yueqiu.domain.Challenge;
         import com.jhy.org.yueqiu.domain.Place;
-        import com.jhy.org.yueqiu.test.h.DatetimePickerLayout;
-        import com.jhy.org.yueqiu.test.h.MyDateUtils;
-        import com.jhy.org.yueqiu.test.h.OnPickDatetimeListener;
-        import com.jhy.org.yueqiu.view.OnValuePickedListener;
+        import com.jhy.org.yueqiu.view.DatetimePickerLayout;
+        import com.jhy.org.yueqiu.view.OnPickDatetimeListener;
 
         import android.content.Context;
         import android.content.Intent;
@@ -19,7 +16,6 @@ package com.jhy.org.yueqiu.activity;
         import android.widget.Button;
         import android.widget.EditText;
 
-        import cn.bmob.v3.Bmob;
         import cn.bmob.v3.datatype.BmobDate;
         import cn.bmob.v3.listener.SaveListener;
 

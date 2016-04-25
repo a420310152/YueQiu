@@ -10,10 +10,8 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
-import com.baidu.mapapi.model.LatLng;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserCollectionListener;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
 
 import java.util.ArrayList;
 import java.util.List;

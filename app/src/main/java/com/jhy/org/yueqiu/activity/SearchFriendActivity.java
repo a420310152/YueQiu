@@ -14,17 +14,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
-import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.radar.RadarNearbyInfo;
-import com.baidu.mapapi.radar.RadarNearbyResult;
-import com.baidu.mapapi.radar.RadarSearchError;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
 import com.jhy.org.yueqiu.config.MyApplication;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;

@@ -2,22 +2,11 @@ package com.jhy.org.yueqiu.test.h;
 
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
-import com.jhy.org.yueqiu.config.Key;
-import com.jhy.org.yueqiu.domain.Challenge;
-import com.jhy.org.yueqiu.domain.Place;
-import com.jhy.org.yueqiu.view.NavLayout;
+import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.NumberPicker;
-import android.widget.TextView;
-
-import cn.bmob.v3.Bmob;
-import cn.bmob.v3.listener.SaveListener;
 
 public class TestActivity extends Activity {
     private BaiduMapLayout baiduMap;

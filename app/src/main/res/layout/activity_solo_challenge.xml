@@ -150,7 +150,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
-    <com.jhy.org.yueqiu.test.h.DatetimePickerLayout
+    <com.jhy.org.yueqiu.view.DatetimePickerLayout
         android:id="@+id/my_picker"
         android:visibility="invisible"
         android:layout_alignParentBottom="true"

@@ -4,10 +4,8 @@ import android.app.Activity;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.model.LatLng;
-import com.baidu.mapapi.search.core.PoiInfo;
 import com.baidu.mapapi.search.core.SearchResult;
 import com.baidu.mapapi.search.poi.OnGetPoiSearchResultListener;
-import com.baidu.mapapi.search.poi.PoiBoundSearchOption;
 import com.baidu.mapapi.search.poi.PoiDetailResult;
 import com.baidu.mapapi.search.poi.PoiDetailSearchOption;
 import com.baidu.mapapi.search.poi.PoiResult;
@@ -16,9 +14,9 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.PlaceAdapter;
 import com.jhy.org.yueqiu.config.MyApplication;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.BaiduMapLayout;
-import com.jhy.org.yueqiu.test.h.MyPlace;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.view.BaiduMapLayout;
+import com.jhy.org.yueqiu.domain.MyPlace;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -26,7 +24,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 

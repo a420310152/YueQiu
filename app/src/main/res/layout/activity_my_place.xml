@@ -48,7 +48,7 @@
         android:layout_height="wrap_content">
     </ListView>
 
-    <com.jhy.org.yueqiu.test.h.BaiduMapLayout
+    <com.jhy.org.yueqiu.view.BaiduMapLayout
         android:id="@+id/baiduMap"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"

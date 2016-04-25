@@ -23,7 +23,7 @@ import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
 import com.jhy.org.yueqiu.config.MyApplication;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 
 import java.util.ArrayList;
 import java.util.List;

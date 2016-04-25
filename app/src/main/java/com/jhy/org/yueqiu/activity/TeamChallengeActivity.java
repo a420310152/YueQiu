@@ -6,23 +6,19 @@ import com.baidu.mapapi.search.core.PoiInfo;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.domain.Place;
-import com.jhy.org.yueqiu.test.h.DatetimePickerLayout;
-import com.jhy.org.yueqiu.test.h.OnPickDatetimeListener;
+import com.jhy.org.yueqiu.view.DatetimePickerLayout;
+import com.jhy.org.yueqiu.view.OnPickDatetimeListener;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import org.xml.sax.helpers.LocatorImpl;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;

@@ -3,7 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.PickerLayout;
+import com.jhy.org.yueqiu.view.PickerLayout;
 import com.jhy.org.yueqiu.utils.ImageLoader;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 
@@ -11,8 +11,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
-import android.renderscript.Sampler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,7 +23,6 @@ import java.io.File;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
-import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /*
