@@ -23,6 +23,7 @@ public class Person extends BmobUser {
     private String address;         // 地址
     private String position;        // 擅长位置
     private String signature;       // 签名
+    private String avatarUrl;       // 头像的地址
     private BmobFile avatar;        // 头像
     private BmobRelation friends;   // 好友
     private BmobGeoPoint location;  // 最近的地理位置
@@ -49,6 +50,9 @@ public class Person extends BmobUser {
 
     public String getSignature() { return signature; }
     public void setSignature(String signature) { this.signature = signature; }
+
+    public String getAvatarUrl() { return avatarUrl; }
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
 
     public BmobFile getAvatar() {
         return avatar;

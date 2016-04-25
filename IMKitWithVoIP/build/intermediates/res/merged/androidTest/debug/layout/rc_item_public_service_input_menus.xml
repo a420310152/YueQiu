@@ -13,8 +13,4 @@
         android:orientation="vertical" >
     </LinearLayout>
 
-<<<<<<< HEAD
-</LinearLayout> <!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menus.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_public_service_input_menus.xml -->
-=======
-</LinearLayout> <!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menus.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_public_service_input_menus.xml -->
->>>>>>> origin/master
+</LinearLayout> <!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_item_public_service_input_menus.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_item_public_service_input_menus.xml -->

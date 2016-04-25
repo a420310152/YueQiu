@@ -3,6 +3,9 @@ package com.jhy.org.yueqiu.config;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
 
 import com.baidu.location.BDLocation;
@@ -10,14 +13,18 @@ import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
+import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.test.h.backups.RongUtils;
 import com.jhy.org.yueqiu.utils.Preferences;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
+import io.rong.common.FileUtils;
 import io.rong.imkit.RongIM;
 
 /*
@@ -27,21 +34,25 @@ import io.rong.imkit.RongIM;
  */
 public class App extends Application implements BDLocationListener {
     public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
-    private static App application = null;
+    public static final String FIRST_LAUNCH = "APP.FIRST_LAUNCH";
+    private static App app = null;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
 
     private static Person currentUser = null;
     private static List<OnReceiveUserLocationListener> locationListeners = null;
 
+    private static Logx logx = new Logx(App.class);
+
     @Override
     public void onCreate() {
         super.onCreate();
-        application = this;
+        app = this;
 
         SDKInitializer.initialize(this);
         Bmob.initialize(this, Key.bmob.application_id);
         Preferences.initialize(this);
+        initConfig();
         initLocation();
     }
 
@@ -60,7 +71,7 @@ public class App extends Application implements BDLocationListener {
     }
 
     public static App getInstance () {
-        return application;
+        return app;
     }
 
     // 获得当前进程的名字
@@ -120,6 +131,19 @@ public class App extends Application implements BDLocationListener {
         locationClient.stop();
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);
+        }
+    }
+
+    private static void initConfig () {
+        if (Preferences.get(FIRST_LAUNCH, true)) {
+            Bitmap avatar = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
+            Bitmap logo = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
+            File avatarFile = FileUtils.convertBitmap2File(avatar, "/sdcard/yueqiu/user", "avatar.jpg");
+            File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.jpg");
+
+            Preferences.set("user.portraitUri", Uri.fromFile(avatarFile).toString());
+            Preferences.set(FIRST_LAUNCH, false);
+            logx.e("file uri: " + Uri.fromFile(avatarFile).toString());
         }
     }
 }

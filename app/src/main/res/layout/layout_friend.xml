@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:descendantFocusability="blocksDescendants"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <ImageView
@@ -34,19 +35,25 @@
         android:text="擅长位置: XXX"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:gravity="center"
+        android:orientation="vertical"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
         <TextView
+            android:text="熟练度"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="熟练度"/>
-        <RatingBar
+            android:layout_height="wrap_content"/>
+        <TextView
             android:id="@+id/rat_proficiency"
-            android:layout_width="wrap_content"
+            android:text="001"
+            android:textColor="@color/darkred"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:layout_width="32dp"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 </RelativeLayout>

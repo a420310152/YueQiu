@@ -6,8 +6,4 @@
         <item android:drawable="@drawable/rc_ed_pub_service_search_hover" android:state_selected= "true"/>
         <item android:drawable="@drawable/rc_ed_pub_service_search_normal" />
 
-<<<<<<< HEAD
-</selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ed_public_service_search_selector.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ed_public_service_search_selector.xml -->
-=======
-</selector><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ed_public_service_search_selector.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ed_public_service_search_selector.xml -->
->>>>>>> origin/master
+</selector><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_ed_public_service_search_selector.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_ed_public_service_search_selector.xml -->

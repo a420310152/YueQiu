@@ -11,6 +11,8 @@ import android.widget.TextView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 
+import io.rong.imkit.utils.StringUtils;
+
 /*
  **********************************************
  * 			所有者 H: (黄振梓)
@@ -21,7 +23,7 @@ public class FriendLayout extends RelativeLayout {
     TextView tv_username;
     TextView tv_signature;
     TextView tv_position;
-    RatingBar rat_proficiency;
+    TextView tv_proficiency;
 
     public FriendLayout(Context context) {
         this(context, null);
@@ -35,14 +37,27 @@ public class FriendLayout extends RelativeLayout {
         this.tv_username = (TextView) findViewById(R.id.tv_username);
         this.tv_signature = (TextView) findViewById(R.id.tv_signature);
         this.tv_position = (TextView) findViewById(R.id.tv_position);
-        this.rat_proficiency = (RatingBar) findViewById(R.id.rat_proficiency);
+        this.tv_proficiency = (TextView) findViewById(R.id.rat_proficiency);
     }
 
     public FriendLayout setPerson (Person person) {
         if (person != null) {
-            tv_username.setText(person.getUsername());
-            tv_signature.setText(person.getSignature());
-            tv_position.setText(person.getPosition());
+            String username = person.getUsername();
+            String signature = person.getSignature();
+            String position = person.getPosition();
+
+            if (signature == null || signature.isEmpty()) {
+                signature = "该用户还没有签名";
+            }
+
+            if (position == null) {
+                position = "";
+            }
+            position = "擅长位置: " + position;
+
+            tv_username.setText(username);
+            tv_signature.setText(signature);
+            tv_position.setText(position);
         }
         return this;
     }
