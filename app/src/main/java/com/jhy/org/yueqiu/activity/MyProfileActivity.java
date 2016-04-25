@@ -99,19 +99,19 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
             if(userage==null){
                 tv_selector_age.setText("");
             }else{
-                tv_selector_age.setText(""+userage);
+                tv_selector_age.setText(userage+" 岁");
             }
             Integer userheight = (Integer) BmobUser.getObjectByKey(context, "height");
             if(userheight==null){
                 tv_selector_height.setText("");
             }else{
-                tv_selector_height.setText(""+userheight);
+                tv_selector_height.setText(userheight+" cm");
             }
             Integer userweight = (Integer) BmobUser.getObjectByKey(context, "weight");
             if(userweight==null){
                 tv_selector_weight.setText("");
             }else{
-                tv_selector_weight.setText(""+userweight);
+                tv_selector_weight.setText(userweight+" kg");
             }
             String userposition = (String) BmobUser.getObjectByKey(context, "position");
             tv_selector_skilled.setText(userposition);
@@ -194,15 +194,15 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
                 break;
             case R.id.relat_info_age:
                 my_profile.setAge(value);
-                tv_selector_age.setText("" + value);
+                tv_selector_age.setText(value+" 岁");
                 break;
             case R.id.relat_info_height:
                 my_profile.setHeight(value);
-                tv_selector_height.setText("" + value);
+                tv_selector_height.setText(value+" cm");
                 break;
             case R.id.relat_info_weight:
                 my_profile.setWeight(value);
-                tv_selector_weight.setText("" + value);
+                tv_selector_weight.setText(value+ " kg");
                 break;
             case R.id.relat_info_skilled:
                 my_profile.setPosition(picker.getValue());
