@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jhy.org.yueqiu.domain.Team;
+import com.jhy.org.yueqiu.view.AllTeamLayout;
 
 import java.util.List;
 
@@ -13,12 +14,17 @@ import java.util.List;
  */
 public class AllTeamAdapter extends MyBaseAdapter<Team>{
 
+    private AllTeamLayout allTeamLayout;
+    private Team team;
     public AllTeamAdapter(Context context, List<Team> list) {
         super(context, list);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return super.getView(position, convertView, parent);
+        super.getView(position, convertView, parent);
+        team = list.get(position);
+        allTeamLayout.setAllTeamInfo(team);
+        return convertView;
     }
 }

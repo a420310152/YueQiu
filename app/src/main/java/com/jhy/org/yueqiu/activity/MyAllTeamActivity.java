@@ -9,14 +9,22 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.view.View.OnClickListener;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.adapter.AllTeamAdapter;
+import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.view.AllTeamLayout;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/4/23.
  */
 public class MyAllTeamActivity extends Activity{
-    AllTeamLayout allTeamLayout;
-    ListView lv_allteam_info;
+    private AllTeamLayout allTeamLayout;
+    private AllTeamAdapter allTeamAdapter;
+    private ListView lv_allteam_info;
+    private Team team;
+    private List<Team> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,10 @@ public class MyAllTeamActivity extends Activity{
     private void init(){
         allTeamLayout = (AllTeamLayout) findViewById(R.id.allteam_mode);
         lv_allteam_info = (ListView) findViewById(R.id.lv_allteam_info);
+        list = new ArrayList<Team>();
+        list.add(team);
+        allTeamAdapter = new AllTeamAdapter(this,list);
+        lv_allteam_info.setAdapter(allTeamAdapter);
         allTeamLayout.setOnClickListener(onClick);
         lv_allteam_info.setOnItemClickListener(click);
     }
