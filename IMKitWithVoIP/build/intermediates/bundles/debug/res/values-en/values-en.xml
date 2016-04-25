@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/values-en/rc_string.xml -->
+=======
+    <!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/values-en/rc_string.xml -->
+>>>>>>> origin/master
     <eat-comment/>
     <string name="rc_called_accept">The other accepted the call request</string>
     <string name="rc_called_is_calling">Calling number is talking</string>

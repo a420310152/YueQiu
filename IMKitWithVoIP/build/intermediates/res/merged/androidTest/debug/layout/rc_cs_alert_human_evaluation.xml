@@ -88,4 +88,8 @@
             android:textColor="#0099ff"
             android:textSize="17sp" />
     </LinearLayout>
+<<<<<<< HEAD
 </LinearLayout><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_cs_alert_human_evaluation.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_cs_alert_human_evaluation.xml -->
+=======
+</LinearLayout><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_cs_alert_human_evaluation.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/layout/rc_cs_alert_human_evaluation.xml -->
+>>>>>>> origin/master

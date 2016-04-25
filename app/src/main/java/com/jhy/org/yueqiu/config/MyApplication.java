@@ -11,6 +11,8 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.test.h.OnReceiveUserLocationListener;
+import com.jhy.org.yueqiu.test.h.backups.RongUtils;
 import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserCollectionListener;
 
 import java.util.ArrayList;
@@ -52,6 +54,7 @@ public class MyApplication extends Application implements BDLocationListener {
         String curProcessName = getCurProcessName(getApplicationContext());
         if (curProcessName.equals(getApplicationInfo().packageName) || curProcessName.equals("io.rong.push")) {
             RongIM.init(this);
+            RongUtils.connect();
         }
 
         application = this;

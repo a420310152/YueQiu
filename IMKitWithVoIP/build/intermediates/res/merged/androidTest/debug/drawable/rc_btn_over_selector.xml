@@ -9,4 +9,8 @@
     <!-- Pressed -->
     <item android:drawable="@drawable/rc_call_over_down" android:state_pressed="true"/>
 
+<<<<<<< HEAD
 </selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_btn_over_selector.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_btn_over_selector.xml -->
+=======
+</selector><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_btn_over_selector.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_btn_over_selector.xml -->
+>>>>>>> origin/master

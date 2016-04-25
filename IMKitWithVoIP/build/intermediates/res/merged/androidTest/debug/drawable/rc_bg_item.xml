@@ -3,4 +3,8 @@
     <item android:state_focused="true" android:drawable="@color/rc_normal_bg"/>
     <item android:state_pressed="true" android:state_enabled="false" android:drawable="@color/rc_normal_bg" />
     <item android:drawable="@android:color/white"/>
+<<<<<<< HEAD
 </selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_bg_item.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_bg_item.xml -->
+=======
+</selector><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_bg_item.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_bg_item.xml -->
+>>>>>>> origin/master

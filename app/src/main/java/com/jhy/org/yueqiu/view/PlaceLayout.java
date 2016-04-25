@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.LoginActivity;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.domain.MyPlace;
+import com.jhy.org.yueqiu.test.h.MyPlace;
 
 import java.util.Arrays;
 

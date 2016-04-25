@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="@color/blackui"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/team"
+            android:textSize="30sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:id="@+id/tv_allteam_title"/>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/icon_system_right"
+        android:padding="25dp"
+        android:background="@null"
+        android:onClick="allteaminfoClick"
+        android:id="@+id/btn_allteam_back"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/orange"
+        android:layout_below="@id/btn_allteam_back"
+        android:text="我创建的球队"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@+id/tv_my_buildteam"/>
+   <com.jhy.org.yueqiu.view.AllTeamLayout layout="@layout/layout_allteam"
+       android:layout_width="wrap_content"
+       android:layout_height="120dp"
+       android:layout_marginTop="10dp"
+       android:layout_below="@id/tv_my_buildteam"
+       android:id="@+id/allteam_mode"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/allteam_mode"
+        android:text="我加入的球队"
+        android:textSize="30dp"
+        android:textColor="@color/white"
+        android:background="@color/dimgray"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:id="@+id/tv_jointeam_info"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_jointeam_info"
+        android:id="@+id/lv_allteam_info"/>
+</RelativeLayout>
