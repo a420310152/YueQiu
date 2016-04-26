@@ -47,17 +47,22 @@
         android:layout_marginTop="30dp"
         android:gravity="center"
         android:id="@+id/tv_team_logoPicture"/>
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_team_logoPicture"
-        android:drawableTop="@drawable/icon_sidebar_head"
+        android:background="@drawable/icon_sidebar_head"
         android:layout_centerInParent="true"
-        android:text="球队Logo"
-        android:textSize="15dp"
-        android:gravity="center"
         android:onClick="teaminfoClick"
         android:layout_marginTop="15dp"
+        android:id="@+id/iv_team_logo"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="球队Logo"
+        android:textSize="15sp"
+        android:layout_below="@id/iv_team_logo"
+        android:layout_centerInParent="true"
         android:id="@+id/tv_team_logo"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -82,7 +87,6 @@
         android:layout_below="@id/tv_team_logo"
         android:layout_toRightOf="@id/tv_team_name"
         android:background="@null"
-        android:text="小分队"
         android:textSize="20sp"
         android:id="@+id/et_team_name"/>
         <TextView
@@ -105,7 +109,6 @@
         android:layout_below="@id/linear_team_name"
         android:layout_toRightOf="@id/tv_team_slogan"
         android:background="@null"
-        android:text="加油！"
         android:textSize="20sp"
         android:layout_marginLeft="10dp"
         android:id="@+id/et_team_slogan"/>

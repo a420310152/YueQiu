@@ -1,6 +1,7 @@
 package com.jhy.org.yueqiu.view;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -10,7 +11,10 @@ import android.widget.TextView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Team;
 
+import java.io.File;
+
 import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.GetListener;
 
 /**
@@ -52,6 +56,8 @@ public class AllTeamLayout extends RelativeLayout{
         teamQuery.getObject(context, team.getCreator().getObjectId(), new GetListener<Team>() {
             @Override
             public void onSuccess(Team team) {
+                String path = Environment.getExternalStorageDirectory()+"logo.jpg";
+                BmobFile file=new BmobFile(new File(path));
 
                 tv_selector_allteam_name.setText(team.getName());
                 tv_team_buildname.setText(team.getCreator()+"");

@@ -37,6 +37,14 @@
         android:textColor="@color/white"
         android:gravity="center"
         android:id="@+id/tv_my_buildteam"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_add_team"
+        android:layout_below="@id/tv_my_buildteam"
+        android:layout_margin="25dp"
+        android:visibility="invisible"
+        android:id="@+id/btn_add_team"/>
    <com.jhy.org.yueqiu.view.AllTeamLayout layout="@layout/layout_allteam"
        android:layout_width="wrap_content"
        android:layout_height="120dp"

@@ -44,7 +44,7 @@
 
         </RelativeLayout>
 
-        <com.jhy.org.yueqiu.test.h.PopupSpan
+        <com.jhy.org.yueqiu.view.PopupSpan
             android:id="@+id/popupSpan"
             android:visibility="gone"
             android:layout_centerHorizontal="true"
