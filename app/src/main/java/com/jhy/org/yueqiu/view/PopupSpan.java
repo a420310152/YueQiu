@@ -144,7 +144,7 @@ public class PopupSpan extends SurfaceView implements SurfaceHolder.Callback, Ru
     @Override
     protected void onVisibilityChanged(View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
-        Log.i("ilog:", "visibility = " + visibility);
+//        Log.i("ilog:", "visibility = " + visibility);
         if (visibility == VISIBLE) {
             setActiveArc(-1);
             clickable = true;

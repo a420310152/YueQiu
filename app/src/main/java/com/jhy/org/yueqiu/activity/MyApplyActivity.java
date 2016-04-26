@@ -12,11 +12,15 @@ import android.widget.ListView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.ApplyAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.Person;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.listener.FindListener;
 
 public class MyApplyActivity extends Activity{
     private ApplyAdapter applyAdapter;
@@ -31,12 +35,11 @@ public class MyApplyActivity extends Activity{
         setContentView(R.layout.activity_my_apply);
         lv_apply_info = (ListView) findViewById(R.id.lv_apply_info);
         judgeLogin();
+
         list = new ArrayList<Challenge>();
-        challenge = new Challenge();
+        list.add(challenge);
         list.add(challenge);
         applyAdapter = new ApplyAdapter(MyApplyActivity.this,list);
-        Log.i("result", "!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!");
-        lv_apply_info.setAdapter(applyAdapter);
     }
     //判断登录状态
     private void judgeLogin(){
