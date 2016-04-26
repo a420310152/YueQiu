@@ -48,8 +48,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ListView
-        android:id="@+id/lv_conversationList"
+    <RelativeLayout
+        android:id="@+id/fragment_conversationlist"
         android:visibility="invisible"
         android:layout_below="@id/container_header"
         android:layout_width="match_parent"

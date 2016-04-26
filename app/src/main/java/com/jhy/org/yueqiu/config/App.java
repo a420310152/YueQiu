@@ -16,7 +16,7 @@ import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.Logx;
-import com.jhy.org.yueqiu.test.h.backups.RongUtils;
+import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.Preferences;
 
 import java.io.File;
@@ -33,8 +33,24 @@ import io.rong.imkit.RongIM;
  **********************************************
  */
 public class App extends Application implements BDLocationListener {
+
+    public static final class user {
+        public static final String id = "user.id";
+        public static final String name = "user.name";
+        public static final String portrait_uri = "user.portrait_uri";
+        public static final String token = "user.token";
+    }
+
+    public static final class version {
+        public static final int major = 0;
+        public static final int minor = 1;
+        public static final int release = 0;
+        public static final int num = 3;
+        public static final int first_launch = 1;
+    }
+
     public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
-    public static final String FIRST_LAUNCH = "APP.FIRST_LAUNCH";
+    public static final String FIRST_LAUNCH = "APP.FIRST_LAUNCH." + version.first_launch;
     private static App app = null;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
@@ -49,11 +65,12 @@ public class App extends Application implements BDLocationListener {
         super.onCreate();
         app = this;
 
+        Preferences.initialize(this);
         SDKInitializer.initialize(this);
         Bmob.initialize(this, Key.bmob.application_id);
-        Preferences.initialize(this);
-        initConfig();
+        RongUtils.initialize(this);
         initLocation();
+        initConfig();
     }
 
     public static void registerReceiveUserLocation (OnReceiveUserLocationListener listener) {
@@ -66,10 +83,7 @@ public class App extends Application implements BDLocationListener {
         }
     }
 
-    public static BDLocation getUserLocation () {
-        return userLocation;
-    }
-
+    public static BDLocation getUserLocation () { return userLocation; }
     public static App getInstance () {
         return app;
     }
@@ -87,19 +101,6 @@ public class App extends Application implements BDLocationListener {
             }
         }
         return null;
-    }
-
-    private void initRong () {
-        /**
-         * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
-         * io.rong.push 为融云 push 进程名称，不可修改。
-         */
-        String curProcessName = getCurProcessName(getApplicationContext());
-        String packageName = getApplicationInfo().packageName;
-        if (packageName.equals(curProcessName) || "io.rong.push".equals(curProcessName)) {
-            RongIM.init(this);
-        }
-        RongUtils.connect();
     }
 
     private void initLocation () {
@@ -124,6 +125,19 @@ public class App extends Application implements BDLocationListener {
         locationClient.start();
     }
 
+    private static void initConfig () {
+        if (Preferences.get(FIRST_LAUNCH, true)) {
+            Bitmap avatar = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
+            Bitmap logo = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
+            File avatarFile = FileUtils.convertBitmap2File(avatar, "/sdcard/yueqiu/user", "avatar.jpg");
+            File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.jpg");
+
+            Preferences.set(user.portrait_uri, Uri.fromFile(avatarFile).toString());
+            Preferences.set(FIRST_LAUNCH, false);
+            logx.e("file uri: " + Uri.fromFile(avatarFile).toString());
+        }
+    }
+
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         userLocation = bdLocation;
@@ -134,16 +148,4 @@ public class App extends Application implements BDLocationListener {
         }
     }
 
-    private static void initConfig () {
-        if (Preferences.get(FIRST_LAUNCH, true)) {
-            Bitmap avatar = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
-            Bitmap logo = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
-            File avatarFile = FileUtils.convertBitmap2File(avatar, "/sdcard/yueqiu/user", "avatar.jpg");
-            File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.jpg");
-
-            Preferences.set("user.portraitUri", Uri.fromFile(avatarFile).toString());
-            Preferences.set(FIRST_LAUNCH, false);
-            logx.e("file uri: " + Uri.fromFile(avatarFile).toString());
-        }
-    }
 }

@@ -10,7 +10,7 @@ public final class Logx {
     private String className = "";
 
     public Logx (Class<?> cls) {
-        className = " ==[ " + cls.getSimpleName() + " ]== ";
+        className = "  ==[ " + cls.getSimpleName() + " ]==  ";
     }
 
     public void e (String text) {
