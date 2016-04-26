@@ -69,4 +69,7 @@ public class ChallengeDetailsActivity extends Activity{
 
         }
     };
+    public void loginMenu(View v){
+        finish();
+    }
 }
