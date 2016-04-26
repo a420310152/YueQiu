@@ -52,6 +52,7 @@ public class AllTeamLayout extends RelativeLayout{
         teamQuery.getObject(context, team.getCreator().getObjectId(), new GetListener<Team>() {
             @Override
             public void onSuccess(Team team) {
+
                 tv_selector_allteam_name.setText(team.getName());
                 tv_team_buildname.setText(team.getCreator()+"");
                 tv_allteam_slogan.setText(team.getMotto());
