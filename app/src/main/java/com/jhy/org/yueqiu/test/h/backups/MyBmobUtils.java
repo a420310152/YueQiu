@@ -1,7 +1,6 @@
-package com.jhy.org.yueqiu.test.h;
+package com.jhy.org.yueqiu.test.h.backups;
 
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.test.h.backups.OnReceiveUserInfoListener;
 
 import java.util.List;
 

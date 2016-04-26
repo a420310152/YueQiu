@@ -3,8 +3,4 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true" android:drawable="@drawable/rc_radio_button_on" />
     <item android:drawable="@drawable/rc_radio_button_off" />
-<<<<<<< HEAD
-</selector><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_switch_btn.xml --><!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_switch_btn.xml -->
-=======
-</selector><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_switch_btn.xml --><!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_switch_btn.xml -->
->>>>>>> origin/master
+</selector><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/drawable/rc_switch_btn.xml --><!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/build/intermediates/bundles/debug/res/drawable/rc_switch_btn.xml -->

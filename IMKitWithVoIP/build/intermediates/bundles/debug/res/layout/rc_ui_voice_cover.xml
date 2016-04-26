@@ -35,8 +35,4 @@
             android:textColor="@android:color/white"
             android:textSize="14sp" />
 </LinearLayout>
-<<<<<<< HEAD
-<!-- From: file:/E:/androidwork/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_ui_voice_cover.xml -->
-=======
-<!-- From: file:/E:/androidProject/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_ui_voice_cover.xml -->
->>>>>>> origin/master
+<!-- From: file:/F:/7hens/Studios/YueQiu/IMKitWithVoIP/src/main/res/layout/rc_ui_voice_cover.xml -->
