@@ -18,12 +18,16 @@ import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.Preferences;
+import com.jhy.org.yueqiu.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.listener.UpdateListener;
 import io.rong.common.FileUtils;
 import io.rong.imkit.RongIM;
 
@@ -145,6 +149,26 @@ public class App extends Application implements BDLocationListener {
         locationClient.stop();
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);
+        }
+        uploadUserLocation(bdLocation.getLatitude(), bdLocation.getLongitude());
+    }
+
+    private void uploadUserLocation (double latitude, double longitude) {
+        String userId = (String) BmobUser.getObjectByKey(app, "objectId");
+        if (!Utils.isEmpty(userId)) {
+            Person person = new Person();
+            person.setLocation(new BmobGeoPoint(longitude, latitude));
+            person.update(app, userId, new UpdateListener() {
+                @Override
+                public void onSuccess() {
+                    logx.e("上传用户位置信息 成功!");
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    logx.e("上传用户位置信息 失败: " + s);
+                }
+            });
         }
     }
 

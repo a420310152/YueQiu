@@ -10,6 +10,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -74,8 +75,9 @@ public class ImageLoader implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == iv_selectImage) {
-            Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
-            galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+//            Intent galleryIntent = new Intent(Intent.ACTION_GET_CONTENT);
+//            galleryIntent.addCategory(Intent.CATEGORY_OPENABLE);
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK);
             galleryIntent.setType("image/*");
             activity.startActivityForResult(galleryIntent, CODE_IMAGE_REQUEST);
         } else if (v == v_takePhone) {

@@ -56,6 +56,7 @@ public class AllTeamLayout extends RelativeLayout{
         teamQuery.getObject(context, team.getCreator().getObjectId(), new GetListener<Team>() {
             @Override
             public void onSuccess(Team team) {
+
                 String path = Environment.getExternalStorageDirectory()+"logo.jpg";
                 BmobFile file=new BmobFile(new File(path));
 

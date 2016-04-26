@@ -4,6 +4,7 @@ import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.ImageLoader;
+import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 import com.jhy.org.yueqiu.view.PickerLayout;
 
@@ -24,6 +25,7 @@ import java.io.File;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UpdateListener;
+import cn.bmob.v3.listener.UploadFileListener;
 
 /*
  **********************************************
@@ -69,6 +71,8 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
         my_profile = BmobUser.getCurrentUser(context, Person.class);
         imageLoader = new ImageLoader(MyProfileActivity.this,iv_info_head);
         saveMyProfile();
+
+        //uploadFile(new File("/sdcard/yueqiu/user/avatar.jpg"));
     }
     //对编辑按钮进行监听，点击时显示上传按钮
     OnClickListener click = new OnClickListener(){
@@ -138,28 +142,34 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
                 String[] values = new String[]{"男", "女"};
                 pickerLayout.setValues(values);
                 break;
+
             case R.id.relat_info_age:
                 pickerLayout.setVisibility(View.VISIBLE);
                 pickerLayout.setValues(8, 40,"岁");
                 break;
+
             case R.id.relat_info_height:
                 pickerLayout.setVisibility(View.VISIBLE);
                 pickerLayout.setValues(160, 190,"cm");
                 break;
+
             case R.id.relat_info_weight:
                 pickerLayout.setVisibility(View.VISIBLE);
                 pickerLayout.setValues(50, 80,"kg");
                 break;
+
             case R.id.relat_info_skilled:
                 pickerLayout.setVisibility(View.VISIBLE);
                 String[] position = new String[]{"PG", "C","SG","PF","SF"};
                 pickerLayout.setValues(position);
                 break;
+
             case R.id.btn_info_send:
                 pickerLayout.setVisibility(View.INVISIBLE);
                 String my_profile_name = et_info_name.getText().toString();
                 String path = Environment.getExternalStorageDirectory()+"avatar.jpg";
                 BmobFile file=new BmobFile(new File(path));
+
                 if(my_profile_name!=null && my_profile!=null) {
                     my_profile.setUsername(my_profile_name);
                     my_profile.setAvatar(file);
@@ -207,5 +217,23 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
                 break;
         }
 
+    }
+
+    static Logx logx = new Logx(MyProfileActivity.class);
+    BmobFile bmobFile;
+    private void uploadFile (File file) {
+        bmobFile = new BmobFile(file);
+        bmobFile.uploadblock(context, new UploadFileListener() {
+            @Override
+            public void onSuccess() {
+                logx.e("上传文件 成功: url = " + bmobFile.getFileUrl(context));
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                logx.e("上传文件 失败: url = " + bmobFile.getFileUrl(context));
+                logx.e("\t\t\t" + s);
+            }
+        });
     }
 }
