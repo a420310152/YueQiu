@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tv_team"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="对手球队"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/tv_teamname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_team"
+        android:text="队名:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_teamname_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_teamname"
+        android:layout_toRightOf="@id/tv_teamname"
+        android:text="11"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_motto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_teamname"
+        android:text="球队宣言:" />
+
+    <TextView
+        android:id="@+id/tv_motto_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_motto"
+        android:layout_toRightOf="@id/tv_motto"
+        android:text=" " />
+
+    <TextView
+        android:id="@+id/tv_creator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_motto"
+        android:text="队长:" />
+
+    <TextView
+        android:id="@+id/tv_creator_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_creator"
+        android:layout_toRightOf="@id/tv_creator"
+        android:text=" " />
+
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_creator"
+        android:layout_marginLeft="100dp"
+        android:layout_toRightOf="@id/tv_creator"
+        android:text="位置:" />
+
+    <TextView
+        android:id="@+id/tv_position_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/tv_position"
+        android:layout_toRightOf="@id/tv_position"
+        android:text=" " />
+
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_creator"></ListView>
+</RelativeLayout>

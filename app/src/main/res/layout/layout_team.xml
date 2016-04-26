@@ -1,47 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/iv_menember_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/icon_sidebar_head"
-        android:id="@+id/iv_menember_head"/>
+        android:background="@drawable/icon_sidebar_head" />
+
     <TextView
+        android:id="@+id/tv_memember_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="队员："
-        android:textSize="25dp"
-        android:layout_toRightOf="@id/iv_menember_head"
         android:layout_alignTop="@id/iv_menember_head"
         android:layout_marginTop="10dp"
-        android:id="@+id/tv_memember_name"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="身高:"
-        android:textSize="20dp"
         android:layout_toRightOf="@id/iv_menember_head"
-        android:layout_below="@id/tv_memember_name"
-        android:id="@+id/tv_memember_height"/>
+        android:text="队员："
+        android:textSize="25dp" />
+
     <TextView
+        android:id="@+id/tv_memember_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="体重:"
-        android:textSize="20dp"
+        android:layout_alignTop="@id/tv_memember_name"
+        android:layout_toRightOf="@id/tv_memember_name"
+        android:text="11"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_memember_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_memember_name"
+        android:layout_toRightOf="@id/iv_menember_head"
+        android:text="身高:"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_memember_height_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_memember_height"
         android:layout_toRightOf="@id/tv_memember_height"
+        android:text="11"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/tv_memember_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_memember_name"
         android:layout_marginLeft="80dp"
-        android:id="@+id/tv_memember_weight"/>
+        android:layout_toRightOf="@id/tv_memember_height"
+        android:text="体重:"
+        android:textSize="20sp" />
+
     <TextView
+        android:id="@+id/tv_memember_weight_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="擅长位置:"
-        android:textSize="20dp"
-        android:layout_toRightOf="@id/iv_menember_head"
+        android:layout_alignTop="@id/tv_memember_weight"
+        android:layout_toRightOf="@id/tv_memember_weight"
+        android:text="11"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_memember_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_memember_height"
-        android:id="@+id/tv_memember_position"/>
+        android:layout_toRightOf="@id/iv_menember_head"
+        android:text="擅长位置:"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_memember_position_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_memember_position"
+        android:layout_toRightOf="@id/tv_memember_position"
+        android:text="11"
+        android:textSize="20sp" />
 </RelativeLayout>

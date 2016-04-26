@@ -1,6 +1,7 @@
 package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
+
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
@@ -23,10 +24,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.util.Calendar;
+import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /*
@@ -49,6 +54,7 @@ public class ResponseChallengeActivity extends Activity {
     Calendar calendar;
     AlarmManager manager;
     PendingIntent operation;
+    Person person;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +65,8 @@ public class ResponseChallengeActivity extends Activity {
         challenge = (Challenge) intent.getSerializableExtra("challenge");
         setContent();
     }
-    private void build(){
+
+    private void build() {
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_type = (TextView) findViewById(R.id.tv_type);
         tv_time = (TextView) findViewById(R.id.tv_time);
@@ -71,29 +78,50 @@ public class ResponseChallengeActivity extends Activity {
         tv_OK.setOnClickListener(clickOk);
         tv_cancle.setOnClickListener(clickCancle);
     }
+
     //设置点击确认报名监听
     View.OnClickListener clickOk = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Person person =  BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
-
-
-            BmobRelation responders = new BmobRelation();
-            responders.add(person);//将用户对象添加到多对多关联
-            challenge.setResponders(responders);
-            challenge.update(context, new UpdateListener() {
+            person = BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
+            BmobQuery<Person> bmobQuery = new BmobQuery<Person>();
+            bmobQuery.addWhereRelatedTo("responders", new BmobPointer(challenge));
+            bmobQuery.findObjects(context, new FindListener<Person>() {
                 @Override
-                public void onSuccess() {
-                    Toast.makeText(ResponseChallengeActivity.this, "报名成功！请您准时赴约哦！", Toast.LENGTH_SHORT).show();
-                    Log.i("life", "===========多对多关联添加成功");
-                    finish();
+                public void onSuccess(List<Person> list) {
+                    int i = 0;
+                    for (Person p : list) {
+                        if (p.getObjectId().equals(person.getObjectId())) {
+                            Toast.makeText(context, "您已经报名，不要重复报名哦！", Toast.LENGTH_SHORT).show();
+                            i = 1;
+                        }
+                    }
+                    if (i != 1) {
+                        BmobRelation responders = new BmobRelation();
+                        responders.add(person);//将用户对象添加到多对多关联
+                        challenge.setResponders(responders);
+                        challenge.update(context, new UpdateListener() {
+                            @Override
+                            public void onSuccess() {
+                                Toast.makeText(ResponseChallengeActivity.this, "报名成功！请您准时赴约哦！", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+                            }
+                        });
+                    }
+
+
                 }
 
                 @Override
-                public void onFailure(int i, String s) {
-                    Log.i("re", "onFailure========" + i + "," + s);
+                public void onError(int i, String s) {
+
                 }
             });
+
         }
     };
     //设置取消报名监听
@@ -108,13 +136,14 @@ public class ResponseChallengeActivity extends Activity {
     CompoundButton.OnCheckedChangeListener click = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            if (isChecked){
+            if (isChecked) {
                 myDialog();
-            }else if (isChecked==false&&manager!=null){
+            } else if (isChecked == false && manager != null) {
                 manager.cancel(operation);
             }
         }
     };
+
     //弹出的闹钟
     private void myDialog() {
         manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -124,6 +153,7 @@ public class ResponseChallengeActivity extends Activity {
         TimePickerDialog dialog = new TimePickerDialog(context, listener, hourOfDay, minute, true);
         dialog.show();
     }
+
     TimePickerDialog.OnTimeSetListener listener = new TimePickerDialog.OnTimeSetListener() {
 
         @Override
@@ -135,16 +165,18 @@ public class ResponseChallengeActivity extends Activity {
             manager.set(AlarmManager.RTC, calendar.getTimeInMillis(), operation);
         }
     };
+
     //左上角 返回键
-    public void loginMenu(View v){
+    public void loginMenu(View v) {
         finish();
     }
+
     //设置该页面的信息
-    private void setContent(){
-        Log.i("re","challenge.getInitiator().getUsername()===="+challenge.getInitiator().getUsername());
+    private void setContent() {
+        Log.i("re", "challenge.getInitiator().getUsername()====" + challenge.getInitiator().getUsername());
         tv_name.setText(challenge.getInitiator().getUsername());
         tv_type.setText(challenge.getType());
-        tv_time.setText(challenge.getFromDate().getDate()+"");
+        tv_time.setText(challenge.getFromDate().getDate() + "");
         tv_place.setText(challenge.getPlaceName());
     }
 }

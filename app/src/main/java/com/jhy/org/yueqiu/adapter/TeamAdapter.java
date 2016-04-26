@@ -1,9 +1,11 @@
 package com.jhy.org.yueqiu.adapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.view.TeamLayout;
@@ -16,17 +18,18 @@ import java.util.List;
  **********************************************
  */
 public class TeamAdapter extends MyBaseAdapter<Person>{
-    TeamLayout teamLayout;
-    Person person;
     public TeamAdapter(Context context, List<Person> list) {
             super(context, list);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        person =  list.get(position);
-        teamLayout.setTeam(person);
-        return convertView;
+        TeamLayout view = (TeamLayout)convertView;
+        if (view == null) {
+            view  = new TeamLayout(context);
+        }
+        view.setTeam(list.get(position));
+        return view;
     }
 
 }

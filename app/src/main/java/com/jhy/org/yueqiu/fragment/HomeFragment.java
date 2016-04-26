@@ -37,6 +37,7 @@ import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
+import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.view.ChallengeLayout;
 
 import java.io.File;
@@ -58,9 +59,11 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 /*
  **********************************************
@@ -272,6 +275,49 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     Challenge challenge;
     Person p1;
     Place place;
+
+    //向服务器添加球队
+    private void addTeam(){
+        Team team = new Team();
+        team.setObjectId("214797aba3");
+        /*team.setName("日天队");
+        Person p1 = new Person();
+        p1.setObjectId("6b3b2f0bb9");//test1
+        team.setCreator(p1);
+        team.setMotto("打完球日神仙");
+        team.save(getContext(), new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.i("team","team建立成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });*/
+
+
+        Person p2 = new Person();
+        p2.setObjectId("aeae59b2c4");//test2
+        Person p3 = new Person();
+        p3.setObjectId("96daf1a81f");//testc
+        BmobRelation bmobRelation = new BmobRelation();//建立多对多关联表
+        bmobRelation.add(p2);//向表中添加对象
+        bmobRelation.add(p3);
+        team.setMembers(bmobRelation);//将关联表与Team关联
+        team.update(getContext(), new UpdateListener() {
+            @Override
+            public void onSuccess() {
+                Log.i("team","team成员关联成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+
+            }
+        });
+    }
 
     private void addBmobDate() {
         //向服务器添加数据

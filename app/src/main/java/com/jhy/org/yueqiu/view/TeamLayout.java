@@ -18,23 +18,24 @@ import com.jhy.org.yueqiu.domain.Team;
 public class TeamLayout extends RelativeLayout{
 
     ImageView iv_memember_head;
-    TextView tv_memember_name;
-    TextView tv_memember_height;
-    TextView tv_memember_weight;
-    TextView tv_memember_position;
+    TextView tv_memember_name_text;
+    TextView tv_memember_height_text;
+    TextView tv_memember_weight_text;
+    TextView tv_memember_position_text;
     public TeamLayout(Context context) {
         super(context);
         LayoutInflater.from(context).inflate(R.layout.layout_team, this);
         this.iv_memember_head = (ImageView) findViewById(R.id.iv_menember_head);
-        this.tv_memember_name = (TextView) findViewById(R.id.tv_memember_name);
-        this.tv_memember_height = (TextView) findViewById(R.id.tv_memember_height);
-        this.tv_memember_weight = (TextView) findViewById(R.id.tv_memember_weight);
-        this.tv_memember_position = (TextView) findViewById(R.id.tv_memember_position);
+        this.tv_memember_name_text = (TextView) findViewById(R.id.tv_memember_name_text);
+        this.tv_memember_height_text = (TextView) findViewById(R.id.tv_memember_height_text);
+        this.tv_memember_weight_text = (TextView) findViewById(R.id.tv_memember_weight_text);
+        this.tv_memember_position_text = (TextView) findViewById(R.id.tv_memember_position_text);
     }
     public void setTeam(Person person){
-        this.tv_memember_height.setText(person.getHeight());
-        this.tv_memember_weight.setText(person.getWeight());
-        this.tv_memember_position.setText(person.getPosition());
+        this.tv_memember_name_text.setText(person.getUsername());
+        this.tv_memember_height_text.setText(person.getHeight()+"cm");
+        this.tv_memember_weight_text.setText(person.getWeight()+"kg");
+        this.tv_memember_position_text.setText(person.getPosition());
     }
 
 }

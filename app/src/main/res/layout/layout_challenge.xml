@@ -22,7 +22,7 @@
         android:id="@+id/tv_setName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="用户1"
+        android:text=" "
         android:layout_alignTop="@id/tv_publisher"
         android:layout_toRightOf="@id/tv_publisher"/>
     <TextView
@@ -36,7 +36,7 @@
         android:id="@+id/tv_setTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="04-19 00:00"
+        android:text=" "
         android:layout_alignTop="@id/tv_time"
         android:layout_toRightOf="@id/tv_time"/>
     <TextView
@@ -51,7 +51,7 @@
         android:id="@+id/tv_setPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="某某篮球场"
+        android:text=" "
         android:layout_alignTop="@id/tv_time"
         android:layout_toRightOf="@id/tv_place"
         />
@@ -59,7 +59,7 @@
         android:id="@+id/tv_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="用户说话内容"
+        android:text=" "
         android:layout_below="@id/tv_time"
         />
 

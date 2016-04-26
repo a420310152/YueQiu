@@ -74,7 +74,7 @@ public class ChallengeLayout extends LinearLayout{
         bmobQuery.getObject(context, challenge.getInitiator().getObjectId(), new GetListener<Person>() {
             @Override
             public void onSuccess(Person person) {
-
+                tv_setName.setText(person.getUsername());
             }
 
             @Override
