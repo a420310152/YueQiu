@@ -14,6 +14,7 @@ public final class HttpUtils {
     private static OkHttpClient httpClient = new OkHttpClient();
     private static final String BASE_URL = "http://webim.demo.rong.io/";
     public static final MediaType TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
+    private static Logx logx = new Logx(HttpUtils.class);
 
     public static void get (String url, Callback callback) {
         Request request = new Request.Builder().url(url).build();
@@ -35,11 +36,18 @@ public final class HttpUtils {
         String json = "{";
         for (Entry<String, String> pair : params.entrySet()) {
             json += (isFirst ? "\"" : ",\"") + pair.getKey() + "\":\"" + pair.getValue() + "\"";
+            isFirst = false;
         }
         json += "}";
+        logx.e("post: " + json);
 
-        RequestBody requestBody = RequestBody.create(TYPE_JSON, json);
+        post(url, json, callback);
+    }
+    public static void post (String url, String params, Callback callback) {
+        RequestBody requestBody = RequestBody.create(TYPE_JSON, params);
         Request request = new Request.Builder().url(url).post(requestBody).build();
         httpClient.newCall(request).enqueue(callback);
+    }
+    public static void post (String url, String params) {
     }
 }

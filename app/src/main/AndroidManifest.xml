@@ -73,8 +73,24 @@
         <activity android:name=".activity.MyFootprintActivity">
         </activity>
         <activity android:name=".activity.ContactActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.jhy.org.yueqiu"
+                    android:pathPrefix="/conversationlist"
+                    android:scheme="rong" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.ChatRoomActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="com.jhy.org.yueqiu"
+                    android:pathPrefix="/conversation/"
+                    android:scheme="rong" />
+            </intent-filter>
         </activity>
         <activity android:name=".activity.SettingActivity">
         </activity>
@@ -95,14 +111,6 @@
         <activity android:name=".test.h.TestActivity">
         </activity>
         <activity android:name=".test.h.ConversationActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data
-                    android:host="com.jhy.org.yueqiu"
-                    android:pathPrefix="/conversation/"
-                    android:scheme="rong" />
-            </intent-filter>
         </activity>
         <activity android:name=".test.x.TestActivity">
         </activity>
