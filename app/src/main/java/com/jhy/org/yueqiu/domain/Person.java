@@ -15,6 +15,9 @@ public class Person extends BmobUser {
     public static final boolean SEX_MAN = true;
     public static final boolean SEX_WOMAN = false;
 
+    public static final String URL_DEFAULT_AVATAR = "http://file.bmob.cn/M03/46/8A/oYYBAFcfUsCAIBiiAAA2_kOOk8E327.jpg";
+    public static final String URL_DEFAULT_LOGO = "http://file.bmob.cn/M03/46/8A/oYYBAFcfUsCAIBiiAAA2_kOOk8E327.jpg";
+
     private Boolean sex;            // 性别
     private Integer age;            // 年龄
     private Integer height;         // 身高

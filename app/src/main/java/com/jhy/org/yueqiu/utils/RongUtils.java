@@ -1,5 +1,7 @@
 package com.jhy.org.yueqiu.utils;
 
+import android.net.Uri;
+
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
 import com.squareup.okhttp.Callback;
@@ -31,21 +33,15 @@ public final class RongUtils {
          * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
          * io.rong.push 为融云 push 进程名称，不可修改。
          */
-        String curProcessName = app.getCurProcessName(app.getApplicationContext());
+        String curProcessName = App.getCurProcessName(app.getApplicationContext());
         String packageName = app.getApplicationInfo().packageName;
         if (packageName.equals(curProcessName) || "io.rong.push".equals(curProcessName)) {
             RongIM.init(app);
             connect();
-            RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
-                @Override
-                public UserInfo getUserInfo(String userId) {
-
-                    return null;
-                }
-            }, true);
         }
     }
 
+    // 连接RongIM, 这是一个必须的动作
     public static void connect () {
         App app = App.getInstance();
         String token = Preferences.get(App.user.token);
@@ -66,6 +62,21 @@ public final class RongUtils {
                     @Override
                     public void onSuccess(String s) {
                         isConnected = true;
+
+                        RongIM rong = RongIM.getInstance();
+                        if (rong != null) {
+                            String userId = Preferences.get(App.user.id);
+                            String name = Preferences.get(App.user.name);
+                            String portaitUri = Preferences.get(App.user.portrait_uri);
+
+                            UserInfo info = new UserInfo(userId, name, Uri.parse(portaitUri));
+
+                            rong.setCurrentUserInfo(info);
+                            rong.setMessageAttachedUserInfo(true);
+                        } else {
+                            logx.e("无法绑定用户信息 rong == null");
+                        }
+
                         logx.e("connect 成功:");
                         logx.e("\t\t\tuserId = " + s);
                         logx.e("\t\t\tusername = " + Preferences.get(App.user.name));
@@ -81,6 +92,7 @@ public final class RongUtils {
         }
     }
 
+    // 请求token
     public static void requestToken (String userId, String name, String portraitUri) {
         Map<String, String> params = new HashMap<>();
         params.put("userId", userId);
@@ -101,14 +113,12 @@ public final class RongUtils {
                 String data = response.body().string();
                 try {
                     JSONObject obj = new JSONObject(data);
-                    if (obj != null) {
-                        String token = obj.getString("token");
-                        if (token != null) {
-                            Preferences.set(App.user.token, token);
-                            connect();
-                        } else {
-                            logx.e("请求TOKEN 成功, 但并没有获得TOKEN: " + data);
-                        }
+                    String token = obj.getString("token");
+                    if (token != null) {
+                        Preferences.set(App.user.token, token);
+                        connect();
+                    } else {
+                        logx.e("请求TOKEN 成功, 但并没有获得TOKEN: " + data);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -142,10 +152,14 @@ public final class RongUtils {
             });
         }
     }
+
     public static void requestToken () {
         checkToken();
     }
 
+    // 检查现存的token是否可用
+    //      若可用则返回true
+    //      若过时则返回false, 并会请求新的token
     public static boolean checkToken () {
         String userId = Preferences.get(App.user.id);
         String name = Preferences.get(App.user.name);
@@ -165,5 +179,17 @@ public final class RongUtils {
             }
         }
         return true;
+    }
+
+    public static void refreshUserInfo (String userId, String name, String portraitUri) {
+        Preferences.set(App.user.id, userId);
+        Preferences.set(App.user.name, name);
+        Preferences.set(App.user.portrait_uri, portraitUri);
+        checkToken();
+
+        RongIM rong = RongIM.getInstance();
+        if (rong != null) {
+            rong.refreshUserInfoCache(new UserInfo(userId, name, Uri.parse(portraitUri)));
+        }
     }
 }

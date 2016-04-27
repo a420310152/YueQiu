@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.adapter.GalleryAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Post;
@@ -13,6 +14,8 @@ import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -55,6 +58,11 @@ public class ResponseChallengeActivity extends Activity {
     AlarmManager manager;
     PendingIntent operation;
     Person person;
+    private RecyclerView mRecyclerView;//响应者RecyclerView
+    private GalleryAdapter mAdapter;
+
+    public ResponseChallengeActivity() {
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +72,7 @@ public class ResponseChallengeActivity extends Activity {
         Intent intent = getIntent();
         challenge = (Challenge) intent.getSerializableExtra("challenge");
         setContent();
+        buildResponse();
     }
 
     private void build() {
@@ -77,6 +86,7 @@ public class ResponseChallengeActivity extends Activity {
         cb_helper.setOnCheckedChangeListener(click);
         tv_OK.setOnClickListener(clickOk);
         tv_cancle.setOnClickListener(clickCancle);
+
     }
 
     //设置点击确认报名监听
@@ -96,7 +106,7 @@ public class ResponseChallengeActivity extends Activity {
                             i = 1;
                         }
                     }
-                    if (i != 1) {
+                    if (i != 1&&person.getObjectId()!=challenge.getInitiator().getObjectId()) {
                         BmobRelation responders = new BmobRelation();
                         responders.add(person);//将用户对象添加到多对多关联
                         challenge.setResponders(responders);
@@ -178,5 +188,32 @@ public class ResponseChallengeActivity extends Activity {
         tv_type.setText(challenge.getType());
         tv_time.setText(challenge.getFromDate().getDate() + "");
         tv_place.setText(challenge.getPlaceName());
+    }
+    //建立响应者显示列表
+    private void buildResponse(){
+        //得到控件
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        //设置布局管理器
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        //查询Bmob里  响应者
+        BmobQuery<Person> bmobQuery = new BmobQuery<>();
+        bmobQuery.addWhereRelatedTo("responders",new BmobPointer(challenge));
+        bmobQuery.findObjects(this, new FindListener<Person>() {
+            @Override
+            public void onSuccess(List<Person> list) {
+                Log.i("responders","responders"+list.size());
+                //设置适配器
+                mAdapter = new GalleryAdapter(ResponseChallengeActivity.this, list);
+                mRecyclerView.setAdapter(mAdapter);
+            }
+
+            @Override
+            public void onError(int i, String s) {
+
+            }
+        });
     }
 }

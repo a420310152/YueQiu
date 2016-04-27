@@ -15,6 +15,7 @@ import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.fragment.SidebarFragment;
 import com.jhy.org.yueqiu.test.c.TestActivity;
+import com.jhy.org.yueqiu.utils.RongUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -100,6 +101,7 @@ public class LoginActivity extends Activity{
                     toast("登录成功");
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
+                    RongUtils.connect();
                 }
 
                 @Override

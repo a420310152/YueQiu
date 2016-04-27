@@ -27,8 +27,15 @@ public class ChallengeDetailsActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_challenge);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         build();
     }
+
     private void build(){
         lv_war = (ListView) findViewById(R.id.lv_war);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
@@ -69,4 +76,7 @@ public class ChallengeDetailsActivity extends Activity{
 
         }
     };
+    public void loginMenu(View v){
+        finish();
+    }
 }

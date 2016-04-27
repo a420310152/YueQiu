@@ -86,19 +86,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_gallery, null);
         buildup();
-
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         builddown();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
+        return view;
     }
 
     private void buildup() {
@@ -122,7 +111,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         }
         //group.setOnCheckedChangeListener(click);
     }
-
 
 
     //标题group的选择监听
@@ -174,7 +162,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             Message message = new Message();
             message.what = 2;
             index = gallery.getSelectedItemPosition();
-            if (index==2){
+            if (index == 2) {
                 index = -1;
             }
             index++;
@@ -195,6 +183,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             }
         }
     };
+
     //markGroup的选择监听
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -238,13 +227,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         });
 
 
-
     }
+
     //点击约战列表 弹出详细约战长列表
     View.OnClickListener clickwar = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(getContext(),ChallengeDetailsActivity.class);
+            Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
             startActivity(intent);
         }
     };
@@ -277,7 +266,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     Place place;
 
     //向服务器添加球队
-    private void addTeam(){
+    private void addTeam() {
         Team team = new Team();
         team.setObjectId("214797aba3");
         /*team.setName("日天队");
@@ -309,7 +298,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         team.update(getContext(), new UpdateListener() {
             @Override
             public void onSuccess() {
-                Log.i("team","team成员关联成功");
+                Log.i("team", "team成员关联成功");
             }
 
             @Override
