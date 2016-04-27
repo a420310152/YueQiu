@@ -4,22 +4,43 @@
     android:layout_height="match_parent"
     android:background="@color/blackui">
 
-    <TextView
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:drawableTop="@drawable/icon_sidebar_head"
-        android:padding="15dp"
-        android:gravity="center_horizontal"
-        android:textColor="@color/orange"
-        android:layout_centerHorizontal="true"
-        android:text="登录/注册"
-        android:drawablePadding="5dp"
-        android:id="@+id/tv_register_login" />
+    <!--<TextView-->
+        <!--android:layout_width="200dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:drawableTop="@drawable/icon_sidebar_head"-->
+        <!--android:padding="15dp"-->
+        <!--android:gravity="center_horizontal"-->
+        <!--android:textColor="@color/orange"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:text="登录/注册"-->
+        <!--android:drawablePadding="5dp"-->
+        <!--android:id="@+id/tv_register_login" />-->
+    <RelativeLayout
+        android:id="@+id/container_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_avatar"
+            android:background="@drawable/icon_sidebar_head"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_register_login"
+            android:layout_below="@id/img_avatar"
+            android:text="登录/注册"
+            android:textColor="@color/orange"
+            android:paddingTop="8dp"
+            android:paddingBottom="12dp"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_register_login"
+        android:layout_below="@id/container_header"
         android:background="@null"
         android:drawableLeft="@drawable/icon_sidebar_info"
         android:paddingLeft="30dp"

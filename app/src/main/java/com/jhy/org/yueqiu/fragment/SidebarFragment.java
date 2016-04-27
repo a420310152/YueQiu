@@ -1,5 +1,6 @@
 package com.jhy.org.yueqiu.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +11,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.activity.LoginActivity;
@@ -23,6 +26,8 @@ import com.jhy.org.yueqiu.activity.MyTeamActivity;
 import com.jhy.org.yueqiu.activity.SettingActivity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.RoundTransform;
+import com.squareup.picasso.Picasso;
 
 import cn.bmob.v3.BmobUser;
 
@@ -43,9 +48,15 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     private BmobUser login_bmobUser;
     private View view;
     private Context context;
+
+    private RelativeLayout container_header;
+    private ImageView img_avatar;
+
+
     public void setContext(Context context){
         this.context = context;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_sidebar, container, false);
@@ -70,8 +81,23 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_track.setOnClickListener(this);
         btn_disabled.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
-        if(context != null){
-            login_bmobUser = BmobUser.getCurrentUser(context);
+
+        //以下是H修改的部分
+//        if(context != null){
+//            login_bmobUser = BmobUser.getCurrentUser(context);
+//        }
+        container_header = (RelativeLayout) view.findViewById(R.id.container_header);
+        container_header.setOnClickListener(this);
+        img_avatar = (ImageView) view.findViewById(R.id.img_avatar);
+
+        Activity activity = getActivity();
+        login_bmobUser = BmobUser.getCurrentUser(activity);
+        Person currentUser = BmobUser.getCurrentUser(activity, Person.class);
+        if (currentUser != null) {
+            Picasso.with(activity)
+                    .load(currentUser.getAvatarUrl())
+                    .transform(new RoundTransform())
+                    .into(img_avatar);
         }
     }
     public void judge() {
@@ -90,6 +116,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_register_login:
+            case R.id.container_header:
                 if (login_bmobUser != null) {
                     Intent myprofileIntent = new Intent(getActivity(), MyProfileActivity.class);
                     startActivity(myprofileIntent);

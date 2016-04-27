@@ -180,4 +180,16 @@ public final class RongUtils {
         }
         return true;
     }
+
+    public static void refreshUserInfo (String userId, String name, String portraitUri) {
+        Preferences.set(App.user.id, userId);
+        Preferences.set(App.user.name, name);
+        Preferences.set(App.user.portrait_uri, portraitUri);
+        checkToken();
+
+        RongIM rong = RongIM.getInstance();
+        if (rong != null) {
+            rong.refreshUserInfoCache(new UserInfo(userId, name, Uri.parse(portraitUri)));
+        }
+    }
 }

@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.RoundTransform;
+import com.jhy.org.yueqiu.utils.Utils;
+import com.squareup.picasso.Picasso;
 
 import io.rong.imkit.utils.StringUtils;
 
@@ -19,11 +22,12 @@ import io.rong.imkit.utils.StringUtils;
  **********************************************
  */
 public class FriendLayout extends RelativeLayout {
-    ImageView iv_avatar;
-    TextView tv_username;
-    TextView tv_signature;
-    TextView tv_position;
-    TextView tv_proficiency;
+    private Context context;
+    private ImageView iv_avatar;
+    private TextView tv_username;
+    private TextView tv_signature;
+    private TextView tv_position;
+    private TextView tv_proficiency;
 
     public FriendLayout(Context context) {
         this(context, null);
@@ -45,6 +49,7 @@ public class FriendLayout extends RelativeLayout {
             String username = person.getUsername();
             String signature = person.getSignature();
             String position = person.getPosition();
+            String avatar = person.getAvatarUrl();
 
             if (signature == null || signature.isEmpty()) {
                 signature = "该用户还没有签名";
@@ -55,6 +60,12 @@ public class FriendLayout extends RelativeLayout {
             }
             position = "擅长位置: " + position;
 
+            if (!Utils.isEmpty(avatar)) {
+                Picasso.with(context)
+                        .load(avatar)
+                        .transform(new RoundTransform())
+                        .into(iv_avatar);
+            }
             tv_username.setText(username);
             tv_signature.setText(signature);
             tv_position.setText(position);

@@ -5,8 +5,11 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.ImageLoader;
 import com.jhy.org.yueqiu.utils.Logx;
+import com.jhy.org.yueqiu.utils.RongUtils;
+import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 import com.jhy.org.yueqiu.view.PickerLayout;
+import com.squareup.picasso.Picasso;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,6 +29,8 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
+import io.rong.imkit.RongIM;
+import io.rong.imlib.model.UserInfo;
 
 /*
  **********************************************
@@ -116,6 +121,14 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
             }
             String userposition = (String) BmobUser.getObjectByKey(context, "position");
             tv_selector_skilled.setText(userposition);
+
+            //以下是H修改的部分
+            //显示用户头像
+            String avatar = my_profile.getAvatarUrl();
+            Picasso.with(context)
+                    .load(avatar)
+                    .transform(new RoundTransform())
+                    .into(iv_info_head);
         } else {
             startActivity(new Intent(context, LoginActivity.class));
             finish();
@@ -130,7 +143,10 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (imageLoader != null) {
-            imageLoader.setResult(requestCode, data);
+
+            //下面是H修改的部分
+//            imageLoader.setResult(requestCode, data);
+            uploadFile(imageLoader.setResult(requestCode, data));
         }
     }
 
@@ -219,14 +235,41 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
 
     }
 
-    static Logx logx = new Logx(MyProfileActivity.class);
-    BmobFile bmobFile;
+    //下面是H修改的部分
+    static private Logx logx = new Logx(MyProfileActivity.class);
+    private BmobFile bmobFile;
+    private String avatarUrl = "";
+
     private void uploadFile (File file) {
+        if (file == null) {
+            return;
+        }
+
         bmobFile = new BmobFile(file);
         bmobFile.uploadblock(context, new UploadFileListener() {
             @Override
             public void onSuccess() {
                 logx.e("上传文件 成功: url = " + bmobFile.getFileUrl(context));
+
+                avatarUrl = bmobFile.getFileUrl(context);
+                Person person = new Person();
+                person.setAvatarUrl(avatarUrl);
+                person.update(context, my_profile.getObjectId(), new UpdateListener() {
+                    @Override
+                    public void onSuccess() {
+                        logx.e("更新用户头像 成功!");
+                        String userId = my_profile.getObjectId();
+                        String username = my_profile.getUsername();
+                        RongUtils.refreshUserInfo(userId, username, avatarUrl);
+                    }
+
+                    @Override
+                    public void onFailure(int i, String s) {
+                        logx.e("更新用户头像 失败!");
+                        //更新失败, 应该删除网络上已上传的头像
+                        //这里暂时不操作
+                    }
+                });
             }
 
             @Override

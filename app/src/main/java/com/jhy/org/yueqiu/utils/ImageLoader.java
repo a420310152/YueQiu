@@ -33,10 +33,11 @@ import java.net.URL;
  * Created by Administrator on 2016/4/21 0021.
  */
 public class ImageLoader implements View.OnClickListener {
-    private static final int CODE_IMAGE_REQUEST = 0x16;
-    private static final int CODE_CAMERA_REQUEST = 0x17;
-    private static final int CODE_RESIZE_REQUEST = 0x18;
+    public static final int CODE_IMAGE_REQUEST = 0x16;
+    public static final int CODE_CAMERA_REQUEST = 0x17;
+    public static final int CODE_RESIZE_REQUEST = 0x18;
 
+    public static final String STORAGE_DIR = "/sdcard/yueqiu/user";
     public static final String IMAGE_AVATAR = "avatar.jpg";
     public static final String IMAGE_LOGO = "logo.jpg";
 
@@ -65,7 +66,7 @@ public class ImageLoader implements View.OnClickListener {
         if (activity.getClass() == MyTeamActivity.class) {
             fileName = IMAGE_LOGO;
         }
-        file = new File(Environment.getExternalStorageDirectory(), fileName);
+        file = new File(STORAGE_DIR, fileName);
         uri = Uri.fromFile(file);
     }
     public ImageLoader(Activity activity, ImageView iv_selectImage) {
@@ -92,7 +93,7 @@ public class ImageLoader implements View.OnClickListener {
         }
     }
 
-    public void setResult (int requestCode, Intent data) {
+    public File setResult (int requestCode, Intent data) {
 
         switch (requestCode) {
 
@@ -111,9 +112,12 @@ public class ImageLoader implements View.OnClickListener {
             case CODE_RESIZE_REQUEST:
                 if (data != null) {
                     showResizeImage(data);
+                    return file;
                 }
                 break;
         }
+
+        return null;
     }
 
     private boolean isSdcardExisting() {
