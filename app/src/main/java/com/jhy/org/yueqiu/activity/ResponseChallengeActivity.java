@@ -201,7 +201,6 @@ public class ResponseChallengeActivity extends Activity {
         //查询Bmob里  响应者
         BmobQuery<Person> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereRelatedTo("responders",new BmobPointer(challenge));
-        Log.i("challenge", "challenge1111=====" + challenge);
         bmobQuery.findObjects(this, new FindListener<Person>() {
             @Override
             public void onSuccess(List<Person> list) {
