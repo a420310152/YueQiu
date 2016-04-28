@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.jhy.org.yueqiu.R;
@@ -24,23 +25,40 @@ import cn.bmob.v3.listener.FindListener;
 
 public class MyApplyActivity extends Activity{
     private ApplyAdapter applyAdapter;
-    private List<Challenge> list;
     private ListView lv_apply_info;
     private BmobUser my_apply_bmobuser;
     private Context context = this;
     private Challenge challenge;
+    private Person person;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_apply);
         lv_apply_info = (ListView) findViewById(R.id.lv_apply_info);
+        person = BmobUser.getCurrentUser(MyApplyActivity.this, Person.class);
         judgeLogin();
-
-        list = new ArrayList<Challenge>();
-        list.add(challenge);
-        list.add(challenge);
-        applyAdapter = new ApplyAdapter(MyApplyActivity.this,list);
+        applyChallenge();
     }
+    //查询我报名的挑战
+    private void applyChallenge(){
+        BmobQuery<Challenge> query = new BmobQuery<>();
+        query.addWhereEqualTo("responders", new BmobPointer(person));
+        query.findObjects(this, new FindListener<Challenge>() {
+
+            @Override
+            public void onSuccess(List<Challenge> list) {
+                applyAdapter = new ApplyAdapter(MyApplyActivity.this, list);
+                lv_apply_info.setAdapter(applyAdapter);
+                Log.e("onSuccess", "填充需要我的报名的list" + list);
+            }
+
+            @Override
+            public void onError(int code, String msg) {
+
+            }
+        });
+    }
+
     //判断登录状态
     private void judgeLogin(){
         my_apply_bmobuser = BmobUser.getCurrentUser(context);
@@ -51,7 +69,7 @@ public class MyApplyActivity extends Activity{
             finish();
         }
     }
-    AdapterView.OnItemClickListener click = new AdapterView.OnItemClickListener(){
+    OnItemClickListener click = new OnItemClickListener(){
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

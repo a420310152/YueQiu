@@ -32,6 +32,15 @@ public class Person extends BmobUser {
     private BmobGeoPoint location;  // 最近的地理位置
     private List<String> collection;// 收藏的地点
     private BmobRelation footprints;// 足迹
+    private BmobRelation addTeam;//加入的球队；
+
+    public BmobRelation getAddTeam() {
+        return addTeam;
+    }
+
+    public void setAddTeam(BmobRelation addTeam) {
+        this.addTeam = addTeam;
+    }
 
     public String getPosition() { return position; }
     public void setPosition(String position) { this.position = position; }

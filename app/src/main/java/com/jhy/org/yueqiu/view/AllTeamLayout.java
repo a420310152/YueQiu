@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
+import com.jhy.org.yueqiu.utils.RoundTransform;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.util.List;
@@ -66,13 +68,15 @@ public class AllTeamLayout extends RelativeLayout{
             @Override
             public void onSuccess(List<Team> list) {
                 for (Team addTeam : list) {
-                    Log.i("result","!!!!!!!!!!!!!!~!~~~~~~~~~~~");
-                    String path = Environment.getExternalStorageDirectory() + "logo.jpg";
-                    BmobFile file = new BmobFile(new File(path));
                     tv_selector_allteam_name.setText(addTeam.getName());
-                    tv_team_buildname.setText(addTeam.getCreator()+"");
+                    tv_team_buildname.setText(addTeam.getCreator().getUsername());
                     tv_selector_allteam_time.setText(addTeam.getCreatedAt());
                     tv_allteam_slogan.setText(addTeam.getMotto());
+                    String logo = addTeam.getLogoUrl();
+                    Picasso.with(context)
+                            .load(logo)
+                            .transform(new RoundTransform())
+                            .into(iv_allteam_head);
                 }
             }
 
@@ -95,6 +99,11 @@ public class AllTeamLayout extends RelativeLayout{
                         tv_team_buildname.setText(person.getUsername());
                         tv_selector_allteam_time.setText(team1.getCreatedAt());
                         tv_allteam_slogan.setText(team1.getMotto());
+                        String logo = team1.getLogoUrl();
+                        Picasso.with(context)
+                                .load(logo)
+                                .transform(new RoundTransform())
+                                .into(iv_allteam_head);
                     }
                 }
 

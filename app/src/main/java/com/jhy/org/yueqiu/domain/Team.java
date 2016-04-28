@@ -10,6 +10,7 @@ import cn.bmob.v3.datatype.BmobRelation;
  */
 public class Team extends BmobObject {
     private String name;            // 名称
+    private String logoUrl;         // Logo
     private BmobFile logo;          // Logo标志
     private Person creator;         // 创建者
     private BmobRelation members;   // 队员
@@ -21,6 +22,14 @@ public class Team extends BmobObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLogoUrl() {
+        return logoUrl;
+    }
+
+    public void setLogoUrl(String logoUrl) {
+        this.logoUrl = logoUrl;
     }
 
     public BmobFile getLogo() {

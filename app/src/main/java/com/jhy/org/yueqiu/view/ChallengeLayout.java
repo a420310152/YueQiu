@@ -34,7 +34,7 @@ import cn.bmob.v3.listener.UpdateListener;
  * 			所有者 X: (夏旺)
  **********************************************
  */
-public class ChallengeLayout extends LinearLayout{
+public class ChallengeLayout extends LinearLayout {
     TextView tv_type;
     TextView tv_setName;
     TextView tv_setTime;
@@ -42,6 +42,7 @@ public class ChallengeLayout extends LinearLayout{
     TextView tv_title;
     Context context;
     Challenge challenge;
+
     public ChallengeLayout(Context context) {
         super(context);
         build(context);
@@ -56,9 +57,10 @@ public class ChallengeLayout extends LinearLayout{
         super(context, attrs, defStyleAttr);
         build(context);
     }
-    private void build(Context context){
+
+    private void build(Context context) {
         this.context = context;
-        LayoutInflater.from(context).inflate(R.layout.layout_challenge,this);
+        LayoutInflater.from(context).inflate(R.layout.layout_challenge, this);
         tv_type = (TextView) findViewById(R.id.tv_title);
         tv_setName = (TextView) findViewById(R.id.tv_setName);
         tv_setTime = (TextView) findViewById(R.id.tv_setTime);
@@ -67,8 +69,8 @@ public class ChallengeLayout extends LinearLayout{
     }
 
 
-    public void setContent(Challenge challenge){
-    //查询Person表的数据 获得发起人的名字
+    public void setContent(Challenge challenge) {
+        //查询Person表的数据 获得发起人的名字
         this.challenge = challenge;
         BmobQuery<Person> bmobQuery = new BmobQuery<Person>();
         bmobQuery.getObject(context, challenge.getInitiator().getObjectId(), new GetListener<Person>() {
@@ -87,13 +89,11 @@ public class ChallengeLayout extends LinearLayout{
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
         tv_type.setText(challenge.getType());
         //截取只显示日期的字符
-        Log.i("data","challenge==============="+challenge);
-        Log.i("data","challenge.getFromDate()==============="+challenge.getFromDate());
+        Log.i("data", "challenge===============" + challenge);
+        Log.i("data", "challenge.getFromDate()===============" + challenge.getFromDate());
         String data = challenge.getFromDate().getDate();
-        data = data.substring(5,16);
+        data = data.substring(5, 16);
         tv_setTime.setText(data);
         tv_title.setText(challenge.getTitle());
     }
-
-
-}
+    }

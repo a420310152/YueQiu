@@ -54,7 +54,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_below="@id/allteam_mode"
+        android:layout_below="@id/btn_add_team"
         android:text="我加入的球队"
         android:textSize="30dp"
         android:textColor="@color/white"
