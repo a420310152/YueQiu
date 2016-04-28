@@ -14,13 +14,17 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.OnReceiveWeatherInfoListener;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.domain.Weather;
+import com.jhy.org.yueqiu.utils.HeWeatherUtils;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.Preferences;
 import com.jhy.org.yueqiu.utils.Utils;
 
 import java.io.File;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,18 +47,15 @@ public class App extends Application implements BDLocationListener {
         public static final String name = "user.name";
         public static final String portrait_uri = "user.portrait_uri";
         public static final String token = "user.token";
+        public static final String city_code = "user.city_code";
     }
 
     public static final class version {
-        public static final int major = 0;
-        public static final int minor = 1;
-        public static final int release = 0;
-        public static final int num = 3;
         public static final int first_launch = 1;
     }
 
     public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
-    public static final String FIRST_LAUNCH = "APP.FIRST_LAUNCH." + version.first_launch;
+    public static final String FIRST_LAUNCH = "app.first_launch_" + version.first_launch;
     private static App app = null;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
@@ -88,9 +89,7 @@ public class App extends Application implements BDLocationListener {
     }
 
     public static BDLocation getUserLocation () { return userLocation; }
-    public static App getInstance () {
-        return app;
-    }
+    public static App getInstance () { return app; }
 
     // 获得当前进程的名字
     public static String getCurProcessName (Context context) {
@@ -137,6 +136,7 @@ public class App extends Application implements BDLocationListener {
             File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.jpg");
 
             Preferences.set(user.portrait_uri, Uri.fromFile(avatarFile).toString());
+            Preferences.set(user.city_code, Weather.CITY_CODE_DEFAULT);
             Preferences.set(FIRST_LAUNCH, false);
             logx.e("file uri: " + Uri.fromFile(avatarFile).toString());
         }
@@ -145,12 +145,16 @@ public class App extends Application implements BDLocationListener {
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
         userLocation = bdLocation;
-        Log.i("ilog", "定位成功---(" + bdLocation.getLatitude() + ", " + bdLocation.getLongitude() + ")");
+        logx.e("百度定位 成功: (" + bdLocation.getLatitude() + ", " + bdLocation.getLongitude() + ")");
         locationClient.stop();
         for (OnReceiveUserLocationListener listener : locationListeners) {
             listener.onReceiveUserLocation(userLocation);
         }
         uploadUserLocation(bdLocation.getLatitude(), bdLocation.getLongitude());
+
+        String cityCode = Weather.convertCityToCode(bdLocation.getCity());
+        logx.e("保存cityCode: " + cityCode);
+        Preferences.set(user.city_code, cityCode);
     }
 
     private void uploadUserLocation (double latitude, double longitude) {
@@ -171,5 +175,4 @@ public class App extends Application implements BDLocationListener {
             });
         }
     }
-
 }

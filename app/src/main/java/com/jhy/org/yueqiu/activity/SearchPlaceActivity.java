@@ -111,6 +111,8 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
         this.userLocation = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
         searchOption.location(this.userLocation);
         poiSearch.searchNearby(searchOption);
+
+        baiduMap.setLocation(userLocation);
     }
 
     @Override

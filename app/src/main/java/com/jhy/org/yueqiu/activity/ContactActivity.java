@@ -164,9 +164,12 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         if (checkedId == R.id.rad_contact) {
             lv_contacts.setVisibility(View.VISIBLE);
             fragment_conversationlist.setVisibility(View.INVISIBLE);
+            toggle.setBackgroundResource(R.drawable.icon_toggle_left);
+
         } else if (checkedId == R.id.rad_conversationList) {
             lv_contacts.setVisibility(View.INVISIBLE);
             fragment_conversationlist.setVisibility(View.VISIBLE);
+            toggle.setBackgroundResource(R.drawable.icon_toggle_right);
         }
     }
 }

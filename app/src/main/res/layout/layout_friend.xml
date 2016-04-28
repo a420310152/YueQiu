@@ -6,38 +6,45 @@
     android:layout_height="wrap_content">
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/icon_launcher"/>
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/icon_launcher"/>
     <TextView
         android:id="@+id/tv_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="张三"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/darkslategrey"
+        android:paddingTop="4dp"
         android:layout_toRightOf="@id/iv_avatar"
         android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:text="张三"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/tv_signature"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="谁说长得帅就不能打篮球了?"
+        android:textSize="16dp"
+        android:textColor="@color/darkolivegreen"
         android:layout_alignLeft="@id/tv_username"
         android:layout_below="@id/tv_username"
-        android:text="谁说长得帅就不能打篮球了?"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/tv_position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="擅长位置: XXX"
+        android:textColor="@color/darkkhaki"
+        android:paddingTop="4dp"
         android:layout_alignLeft="@id/tv_username"
         android:layout_below="@id/tv_signature"
-        android:text="擅长位置: XXX"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 
     <LinearLayout
         android:padding="8dp"
         android:gravity="center"
         android:orientation="vertical"
+        android:visibility="invisible"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"

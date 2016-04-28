@@ -148,5 +148,6 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
     @Override
     public void onReceiveUserLocation(BDLocation userLocation) {
         this.userLocation = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+        baiduMap.setLocation(userLocation);
     }
 }

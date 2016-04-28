@@ -33,11 +33,16 @@ import com.jhy.org.yueqiu.activity.OpponentTeamActivity;
 import com.jhy.org.yueqiu.activity.ResponseChallengeActivity;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
+import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.OnReceiveWeatherInfoListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.domain.Team;
+import com.jhy.org.yueqiu.domain.Weather;
+import com.jhy.org.yueqiu.utils.Logx;
+import com.jhy.org.yueqiu.utils.Preferences;
 import com.jhy.org.yueqiu.view.ChallengeLayout;
 
 import java.io.File;
@@ -79,6 +84,11 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     ScrollView sv_nbawar;
     ScrollView sv_nbapk;
     TextView tv_war;
+
+    //以下是H修改的部分
+    ImageView iv_weather;
+    TextView tv_temp;
+
     private int index = 0;
     public static List<Integer> list;
 
@@ -87,6 +97,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         view = inflater.inflate(R.layout.layout_gallery, null);
         buildup();
         builddown();
+
+        //以下是H修改的部分
+        initWeather();
+
         return view;
     }
 
@@ -110,6 +124,26 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             markGroup.setOnCheckedChangeListener(this);
         }
         //group.setOnCheckedChangeListener(click);
+    }
+
+    //以下是H修改的部分
+    //显示天气
+    private static Logx logx = new Logx(HomeFragment.class);
+    private Weather weather = null;
+    private static final int MSG_RECIEVE_WEATHER = 0x32;
+    private void initWeather () {
+        iv_weather = (ImageView) view.findViewById(R.id.iv_weather);
+        tv_temp = (TextView) view.findViewById(R.id.tv_temp);
+
+        String cityCode = Preferences.get(App.user.city_code);
+        Weather.request(cityCode, new OnReceiveWeatherInfoListener() {
+            @Override
+            public void onReceiveWeatherInfo(Weather weather) {
+                HomeFragment.this.weather = weather;
+                handler.sendEmptyMessage(MSG_RECIEVE_WEATHER);
+                logx.e("接受天气 成功: city = " + weather.city);
+            }
+        });
     }
 
 
@@ -175,6 +209,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case MSG_RECIEVE_WEATHER:
+                    iv_weather.setBackgroundResource(Weather.convertWeatherToResId(weather.weather.get(0)));
+                    tv_temp.setText(weather.temp.get(0));
+                    break;
                 case 2:
                     gallery.setSelection(index);
                     break;
