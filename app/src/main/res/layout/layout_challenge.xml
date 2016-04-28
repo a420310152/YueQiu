@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:orientation="vertical" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:id="@+id/layout_challenge">
 
     <TextView
         android:id="@+id/tv_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="标题约战类型"
-        android:textColor="@color/darkmagenta"
+        android:textColor="@color/darkred"
         />
     <TextView
         android:id="@+id/tv_publisher"
@@ -37,6 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" "
+        android:textColor="@color/orange"
         android:layout_alignTop="@id/tv_time"
         android:layout_toRightOf="@id/tv_time"/>
     <TextView
@@ -51,13 +52,14 @@
         android:id="@+id/tv_setPlace"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" "
+        android:text=" 1啊实打实大师"
+        android:textColor="@color/orange"
         android:layout_alignTop="@id/tv_time"
         android:layout_toRightOf="@id/tv_place"
         />
     <TextView
         android:id="@+id/tv_text"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=" "
         android:layout_below="@id/tv_time"

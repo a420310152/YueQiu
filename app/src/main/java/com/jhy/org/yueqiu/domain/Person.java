@@ -6,6 +6,7 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
+
 /*
  **********************************************
  * 			所有者 H: (黄振梓)
@@ -29,37 +30,88 @@ public class Person extends BmobUser {
     private String avatarUrl;       // 头像的地址
     private BmobFile avatar;        // 头像
     private BmobRelation friends;   // 好友
+    private BmobRelation newFriends;//待添加的好友
     private BmobGeoPoint location;  // 最近的地理位置
     private List<String> collection;// 收藏的地点
     private BmobRelation footprints;// 足迹
 
-    public String getPosition() { return position; }
-    public void setPosition(String position) { this.position = position; }
 
-    public Boolean getSex() { return sex; }
-    public void setSex(Boolean sex) { this.sex = sex; }
+    public String getPosition() {
+        return position;
+    }
 
-    public Integer getAge() { return age; }
-    public void setAge(Integer age) { this.age = age; }
+    public void setPosition(String position) {
+        this.position = position;
+    }
 
-    public Integer getHeight() { return height; }
-    public void setHeight(Integer height) { this.height = height; }
+    public Boolean getSex() {
+        return sex;
+    }
 
-    public Integer getWeight() { return weight; }
-    public void setWeight(Integer weight) { this.weight = weight; }
+    public void setSex(Boolean sex) {
+        this.sex = sex;
+    }
 
-    public Integer getProficiency() { return proficiency; }
-    public void setProficiency(Integer proficiency) { this.proficiency = proficiency; }
+    public BmobRelation getNewFriends() {
+        return newFriends;
+    }
 
-    public String getSignature() { return signature; }
-    public void setSignature(String signature) { this.signature = signature; }
+    public void setNewFriends(BmobRelation newFriends) {
+        this.newFriends = newFriends;
+    }
 
-    public String getAvatarUrl() { return avatarUrl; }
-    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    public Integer getHeight() {
+        return height;
+    }
+
+    public void setHeight(Integer height) {
+        this.height = height;
+    }
+
+    public Integer getWeight() {
+        return weight;
+    }
+
+    public void setWeight(Integer weight) {
+        this.weight = weight;
+    }
+
+    public Integer getProficiency() {
+        return proficiency;
+    }
+
+    public void setProficiency(Integer proficiency) {
+        this.proficiency = proficiency;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
     public BmobFile getAvatar() {
         return avatar;
     }
+
     public void setAvatar(BmobFile avatar) {
         this.avatar = avatar;
     }
@@ -67,23 +119,41 @@ public class Person extends BmobUser {
     public BmobRelation getFriends() {
         return friends;
     }
+
     public void setFriends(BmobRelation friends) {
         this.friends = friends;
     }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public BmobGeoPoint getLocation() {
         return location;
     }
+
     public void setLocation(BmobGeoPoint location) {
         this.location = location;
     }
 
-    public BmobRelation getFootprints() { return footprints; }
-    public void setFootprints(BmobRelation footprints) { this.footprints = footprints; }
+    public BmobRelation getFootprints() {
+        return footprints;
+    }
 
-    public List<String> getCollection() { return collection; }
-    public void setCollection(List<String> collection) { this.collection = collection; }
+    public void setFootprints(BmobRelation footprints) {
+        this.footprints = footprints;
+    }
+
+    public List<String> getCollection() {
+        return collection;
+    }
+
+    public void setCollection(List<String> collection) {
+        this.collection = collection;
+    }
 }

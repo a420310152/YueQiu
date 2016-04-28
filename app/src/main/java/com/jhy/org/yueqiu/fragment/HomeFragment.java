@@ -29,6 +29,7 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.ChallengeDetailsActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
+import com.jhy.org.yueqiu.activity.OpponentSoloActivity;
 import com.jhy.org.yueqiu.activity.OpponentTeamActivity;
 import com.jhy.org.yueqiu.activity.ResponseChallengeActivity;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
@@ -123,7 +124,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         if (markGroup != null) {
             markGroup.setOnCheckedChangeListener(this);
         }
-        //group.setOnCheckedChangeListener(click);
+        group.setOnCheckedChangeListener(click);
     }
 
     //以下是H修改的部分
@@ -156,14 +157,17 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
                     sv_nbawar.setVisibility(View.VISIBLE);
                     gallery.setVisibility(View.INVISIBLE);
                     sv_nbapk.setVisibility(View.INVISIBLE);
+                    markGroup.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.rb_two:
                     gallery.setVisibility(View.VISIBLE);
+                    markGroup.setVisibility(View.VISIBLE);
                     sv_nbawar.setVisibility(View.INVISIBLE);
                     sv_nbapk.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.rb_three:
                     sv_nbapk.setVisibility(View.VISIBLE);
+                    markGroup.setVisibility(View.INVISIBLE);
                     gallery.setVisibility(View.INVISIBLE);
                     sv_nbawar.setVisibility(View.INVISIBLE);
                     break;
@@ -280,12 +284,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             Challenge challenge = (Challenge) parent.getItemAtPosition(position);
             String type = challenge.getType();
             Intent intent;
 
             if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
-                intent = new Intent(getContext(), OpponentActivity.class);
+                intent = new Intent(getContext(), OpponentSoloActivity.class);
                 intent.putExtra("challenge", challenge);
                 Log.i("rea", "challenge===========" + challenge.getInitiator());
                 startActivity(intent);
@@ -306,10 +311,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     //向服务器添加球队
     private void addTeam() {
         Team team = new Team();
-        team.setObjectId("214797aba3");
+        team.setObjectId("2bb81a5efa");
         /*team.setName("日天队");
         Person p1 = new Person();
-        p1.setObjectId("6b3b2f0bb9");//test1
+        p1.setObjectId("32dd546266");//testx1
         team.setCreator(p1);
         team.setMotto("打完球日神仙");
         team.save(getContext(), new SaveListener() {
@@ -322,13 +327,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             public void onFailure(int i, String s) {
 
             }
-        });*/
-
+        });
+*/
 
         Person p2 = new Person();
-        p2.setObjectId("aeae59b2c4");//test2
+        p2.setObjectId("b11d8a2f22");//testx2
         Person p3 = new Person();
-        p3.setObjectId("96daf1a81f");//testc
+        p3.setObjectId("5dd6e187ca");//testx3
         BmobRelation bmobRelation = new BmobRelation();//建立多对多关联表
         bmobRelation.add(p2);//向表中添加对象
         bmobRelation.add(p3);
