@@ -32,6 +32,7 @@ import cn.bmob.v3.listener.FindListener;
  **********************************************
  */
 public class SearchFriendActivity extends Activity implements AdapterView.OnItemClickListener, OnReceiveUserLocationListener, View.OnClickListener {
+    private static final int MSG_FILL_FRIENDS = 0x32;
     private Context context = this;
     private Intent myProfileIntent;
 
@@ -84,7 +85,7 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
                 public void onSuccess(List<Person> list) {
                     friendList = list;
                     friendAdapter = new FriendAdapter(context, list);
-                    handler.sendEmptyMessage(1);
+                    handler.sendEmptyMessage(MSG_FILL_FRIENDS);
                 }
 
                 @Override

@@ -47,10 +47,10 @@
         android:id="@+id/btn_add_team"/>
    <com.jhy.org.yueqiu.view.AllTeamLayout layout="@layout/layout_allteam"
        android:layout_width="wrap_content"
-       android:layout_height="120dp"
-       android:layout_marginTop="10dp"
+       android:layout_height="130dp"
        android:layout_below="@id/tv_my_buildteam"
        android:id="@+id/allteam_mode"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"

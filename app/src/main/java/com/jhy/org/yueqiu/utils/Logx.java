@@ -10,18 +10,15 @@ public final class Logx {
     private String className = "";
 
     public Logx (Class<?> cls) {
-        className = "  ==[ " + cls.getSimpleName() + " ]==  ";
+        className = "  [ " + cls.getSimpleName() + " ]  ";
     }
 
     public void e (String text) {
         Log.e(HEADER, className + text);
     }
-
     public void w (String text) {
         Log.w(HEADER, className + text);
     }
+    public void i (String text) { Log.i(HEADER, className + text); }
 
-    public void i (String text) {
-        Log.i(HEADER, className + text);
-    }
 }

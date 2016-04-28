@@ -15,7 +15,7 @@
         <RadioGroup
             android:id="@+id/toggle"
             android:orientation="horizontal"
-            android:background="@drawable/icon_toggle_0"
+            android:background="@drawable/icon_toggle_left"
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:layout_width="128dp"

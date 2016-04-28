@@ -37,6 +37,7 @@ public class FriendLayout extends RelativeLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.layout_friend, this);
 
+        this.context = context;
         this.iv_avatar = (ImageView) findViewById(R.id.iv_avatar);
         this.tv_username = (TextView) findViewById(R.id.tv_username);
         this.tv_signature = (TextView) findViewById(R.id.tv_signature);
