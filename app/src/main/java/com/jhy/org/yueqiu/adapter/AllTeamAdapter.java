@@ -24,7 +24,7 @@ public class AllTeamAdapter extends MyBaseAdapter<Team>{
     public View getView(int position, View convertView, ViewGroup parent) {
         super.getView(position, convertView, parent);
         team = list.get(position);
-        convertView = allTeamLayout;
+        AllTeamLayout view = (AllTeamLayout) convertView;
         if(allTeamLayout!=null) {
             allTeamLayout.setAllTeamInfo(team);
         }
