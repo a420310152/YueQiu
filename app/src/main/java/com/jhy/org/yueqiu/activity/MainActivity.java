@@ -41,12 +41,18 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        sidebarFragment.judge();
+    }
+
     private void build() {
         drawerLayout = (DrawerLayout) findViewById(R.id.container);
         //添加Fragment
         sidebarFragment = new SidebarFragment();
         sidebarFragment.setContext(this);
-        sidebarFragment.judge();
+//        sidebarFragment.judge();
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.linear,homeFragment);
