@@ -22,18 +22,19 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/icon_system_right"
+        android:layout_marginTop="3dp"
+        android:drawableLeft="@drawable/icon_arrow_left"
         android:padding="25dp"
         android:background="@null"
         android:onClick="myProfileBackClick"
         android:id="@+id/btn_info_back"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_below="@id/btn_info_back"
         android:background="@drawable/icon_sidebar_head"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
         android:id="@+id/iv_info_head"/>
     <TextView
@@ -244,7 +245,9 @@
             android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:text="加为好友"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:background="@color/orange"
+            android:onClick="addFriend"/>
 
         <Button
             android:layout_width="match_parent"
@@ -253,6 +256,7 @@
             android:layout_marginRight="20dp"
             android:layout_weight="1"
             android:text="发送消息"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            android:background="@color/orange"/>
     </LinearLayout>
 </RelativeLayout>

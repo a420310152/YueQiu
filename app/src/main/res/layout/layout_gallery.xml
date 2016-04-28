@@ -55,7 +55,9 @@
             android:text="NBA战报"
             android:textSize="20dp"
             android:textColor="@drawable/selector_nba_war_text"
-            android:layout_margin="10dp"
+            android:drawableBottom="@drawable/selector_border_warning"
+            android:layout_marginTop="10dp"
+            android:drawablePadding="4dp"
             android:button="@null"
             android:gravity="center"/>
         <RadioButton
@@ -68,8 +70,9 @@
             android:button="@null"
             android:textColor="@drawable/selector_nba_war_text"
             android:gravity="center"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
             android:checked="true"
+            android:drawableBottom="@drawable/selector_border_warning"
             />
         <RadioButton
             android:id="@+id/rb_three"
@@ -80,20 +83,26 @@
             android:textSize="20dp"
             android:button="@null"
             android:textColor="@drawable/selector_nba_war_text"
+            android:drawableBottom="@drawable/selector_border_warning"
+            android:drawablePadding="4dp"
             android:gravity="center"
-            android:layout_margin="10dp"/>
+            android:layout_marginTop="10dp"/>
     </RadioGroup>
     <ScrollView
     android:id="@+id/sv_nbawar"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:layout_below="@id/rg_title"
         android:visibility="invisible"
-        android:layout_above="@+id/tv_war">
+        android:layout_above="@+id/tv_war"
+        android:overScrollMode="never"
+        android:fillViewport="true">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:src="@drawable/icon_home_nbawar"
+            android:scaleType="fitStart"
+            android:layout_marginTop="1dp"
             />
     </ScrollView>
     <ScrollView
@@ -102,12 +111,13 @@
         android:layout_height="250dp"
         android:layout_below="@id/rg_title"
         android:visibility="invisible"
-        android:layout_above="@+id/tv_war">
+        android:layout_above="@+id/tv_war"
+        android:overScrollMode="never">
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@drawable/icon_home_nbapk"
-            android:scaleType="centerInside"
+            android:scaleType="fitStart"
             />
     </ScrollView>
     <Gallery
@@ -117,6 +127,7 @@
         android:layout_below="@id/rg_title"
         android:spacing="30dp"
         android:unselectedAlpha="1"
+        android:layout_marginTop="-5dp"
         ></Gallery>
         <RadioGroup
             android:id="@+id/markGroup"
@@ -150,17 +161,41 @@
         </RadioGroup>
     <TextView
         android:id="@+id/tv_war"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:text="约站列表"
         android:textSize="20dp"
+        android:textColor="@color/orange"
+        android:drawableBottom="@drawable/icon_border_warning"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/gallery"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="&lt;&lt;more"
+            android:layout_alignBottom="@id/tv_war"
+            android:layout_toRightOf="@id/tv_war"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+        android:layout_below="@id/tv_war"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_hr" />
+            <ImageView
+            android:layout_below="@id/tv_war"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_home_background"
+                android:scaleType="centerInside"
+                android:layout_marginBottom="64dp"/>
     <ListView
         android:id="@+id/lv_war"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
+        android:divider="@null"
         android:layout_alignLeft="@+id/imageView"
         android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/tv_war"></ListView>
