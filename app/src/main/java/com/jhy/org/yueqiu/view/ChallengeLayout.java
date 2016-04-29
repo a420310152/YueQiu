@@ -85,7 +85,14 @@ public class ChallengeLayout extends LinearLayout {
             }
         });
         // 获得发起人选择的地点名字
-        tv_setPlace.setText(challenge.getPlaceName());
+
+        String placeString = challenge.getPlaceName();
+        Log.i("placeString", "placeString=====" + placeString);
+        if (placeString.length()!=0&&placeString.length() > 9) {
+            tv_setPlace.setText(challenge.getPlaceName().substring(0, 9) + "...");
+        } else if (placeString.length()!=0){
+            tv_setPlace.setText(challenge.getPlaceName());
+        }
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
         tv_type.setText(challenge.getType());
         //截取只显示日期的字符

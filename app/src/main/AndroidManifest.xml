@@ -35,7 +35,8 @@
             android:name="RONG_CLOUD_APP_KEY"
             android:value="sfci50a7c2dhi" />
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -82,7 +83,8 @@
                     android:scheme="rong" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.ChatRoomActivity">
+        <activity android:name=".activity.ChatRoomActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -119,6 +121,8 @@
         <activity android:name=".activity.OpponentTeamActivity">
         </activity>
         <activity android:name=".activity.ChallengeDetailsActivity">
+        </activity>
+        <activity android:name=".activity.OpponentSoloActivity">
         </activity>
 
     </application>

@@ -90,33 +90,35 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         container_header.setOnClickListener(this);
         img_avatar = (ImageView) view.findViewById(R.id.img_avatar);
 
-        Activity activity = getActivity();
-        login_bmobUser = BmobUser.getCurrentUser(activity);
-        Person currentUser = BmobUser.getCurrentUser(activity, Person.class);
-        if (currentUser != null) {
-            Picasso.with(activity)
+    }
+    public void judge() {
+        Person currentUser = BmobUser.getCurrentUser(context, Person.class);
+
+        if (currentUser != null && btn_cancel != null) {
+            String username = currentUser.getUsername();
+            tv_register_login.setText(username);
+            btn_cancel.setVisibility(View.VISIBLE);
+
+            Picasso.with(context)
                     .load(currentUser.getAvatarUrl())
                     .transform(new RoundTransform())
                     .into(img_avatar);
-        }
-    }
-    public void judge() {
-        if (login_bmobUser != null && btn_cancel != null) {
-            String username = (String) BmobUser.getObjectByKey(context, "username");
-            tv_register_login.setText(username);
-            btn_cancel.setVisibility(View.VISIBLE);
         } else if(btn_cancel != null){
             tv_register_login.setVisibility(View.VISIBLE);
             tv_register_login.setText("登录/注册");
             btn_cancel.setVisibility(View.INVISIBLE);
 
+            img_avatar.setImageResource(R.drawable.icon_sidebar_head);
+
         }
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_register_login:
             case R.id.container_header:
+                login_bmobUser = BmobUser.getCurrentUser(context);
                 if (login_bmobUser != null) {
                     Intent myprofileIntent = new Intent(getActivity(), MyProfileActivity.class);
                     startActivity(myprofileIntent);
@@ -148,7 +150,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
             case R.id.btn_cancel:
                 BmobUser.logOut(context);   //清除缓存用户对象
                 tv_register_login.setText("登录/注册");
-                startActivity(new Intent(context, MainActivity.class));
+                startActivity(new Intent(context, LoginActivity.class));
                 break;
         }
     }

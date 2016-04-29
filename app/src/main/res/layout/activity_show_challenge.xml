@@ -17,7 +17,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="26px"
         android:onClick="loginMenu"
-        android:src="@drawable/icon_home_loginmenu" />
+        android:src="@drawable/icon_arrow_left" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,5 +32,6 @@
         android:id="@+id/lv_war"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:divider="@null"
         android:layout_below="@id/iv_title" />
 </RelativeLayout>

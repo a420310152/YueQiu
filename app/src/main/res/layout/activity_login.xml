@@ -34,19 +34,18 @@
         android:background="@drawable/icon_sidebar_head"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:onClick="loginheadClick"
         android:id="@+id/iv_login_head"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/head"
-        android:layout_below="@id/iv_login_head"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/tv_login_head"/>
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/head"-->
+        <!--android:layout_below="@id/iv_login_head"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:id="@+id/tv_login_head"/>-->
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_login_head"
+        android:layout_below="@id/iv_login_head"
         android:layout_marginTop="20dp"
         android:background="@drawable/icon_edit"
         android:gravity="center"

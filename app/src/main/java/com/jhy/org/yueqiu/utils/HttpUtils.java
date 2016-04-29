@@ -27,6 +27,7 @@ public final class HttpUtils {
             url += (isFirst ? "?" : "&") + pair.getKey() + "=" + pair.getValue();
             isFirst = false;
         }
+        logx.e("发送GET请求: " + url);
         get(url, callback);
     }
 

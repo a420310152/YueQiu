@@ -29,15 +29,21 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.ChallengeDetailsActivity;
 import com.jhy.org.yueqiu.activity.MyProfileActivity;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
+import com.jhy.org.yueqiu.activity.OpponentSoloActivity;
 import com.jhy.org.yueqiu.activity.OpponentTeamActivity;
 import com.jhy.org.yueqiu.activity.ResponseChallengeActivity;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
+import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.OnReceiveWeatherInfoListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.domain.Team;
+import com.jhy.org.yueqiu.domain.Weather;
+import com.jhy.org.yueqiu.utils.Logx;
+import com.jhy.org.yueqiu.utils.Preferences;
 import com.jhy.org.yueqiu.view.ChallengeLayout;
 
 import java.io.File;
@@ -79,6 +85,11 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     ScrollView sv_nbawar;
     ScrollView sv_nbapk;
     TextView tv_war;
+
+    //以下是H修改的部分
+    ImageView iv_weather;
+    TextView tv_temp;
+
     private int index = 0;
     public static List<Integer> list;
 
@@ -87,6 +98,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         view = inflater.inflate(R.layout.layout_gallery, null);
         buildup();
         builddown();
+
+        //以下是H修改的部分
+        initWeather();
+
         return view;
     }
 
@@ -109,7 +124,27 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         if (markGroup != null) {
             markGroup.setOnCheckedChangeListener(this);
         }
-        //group.setOnCheckedChangeListener(click);
+        group.setOnCheckedChangeListener(click);
+    }
+
+    //以下是H修改的部分
+    //显示天气
+    private static Logx logx = new Logx(HomeFragment.class);
+    private Weather weather = null;
+    private static final int MSG_RECIEVE_WEATHER = 0x32;
+    private void initWeather () {
+        iv_weather = (ImageView) view.findViewById(R.id.iv_weather);
+        tv_temp = (TextView) view.findViewById(R.id.tv_temp);
+
+        String cityCode = Preferences.get(App.user.city_code);
+        Weather.request(cityCode, new OnReceiveWeatherInfoListener() {
+            @Override
+            public void onReceiveWeatherInfo(Weather weather) {
+                HomeFragment.this.weather = weather;
+                handler.sendEmptyMessage(MSG_RECIEVE_WEATHER);
+                logx.e("接受天气 成功: city = " + weather.city);
+            }
+        });
     }
 
 
@@ -122,14 +157,17 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
                     sv_nbawar.setVisibility(View.VISIBLE);
                     gallery.setVisibility(View.INVISIBLE);
                     sv_nbapk.setVisibility(View.INVISIBLE);
+                    markGroup.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.rb_two:
                     gallery.setVisibility(View.VISIBLE);
+                    markGroup.setVisibility(View.VISIBLE);
                     sv_nbawar.setVisibility(View.INVISIBLE);
                     sv_nbapk.setVisibility(View.INVISIBLE);
                     break;
                 case R.id.rb_three:
                     sv_nbapk.setVisibility(View.VISIBLE);
+                    markGroup.setVisibility(View.INVISIBLE);
                     gallery.setVisibility(View.INVISIBLE);
                     sv_nbawar.setVisibility(View.INVISIBLE);
                     break;
@@ -175,6 +213,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what) {
+                case MSG_RECIEVE_WEATHER:
+                    iv_weather.setBackgroundResource(Weather.convertWeatherToResId(weather.weather.get(0)));
+                    tv_temp.setText(weather.temp.get(0));
+                    break;
                 case 2:
                     gallery.setSelection(index);
                     break;
@@ -242,12 +284,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
             Challenge challenge = (Challenge) parent.getItemAtPosition(position);
             String type = challenge.getType();
             Intent intent;
 
             if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
-                intent = new Intent(getContext(), OpponentActivity.class);
+                intent = new Intent(getContext(), OpponentSoloActivity.class);
                 intent.putExtra("challenge", challenge);
                 Log.i("rea", "challenge===========" + challenge.getInitiator());
                 startActivity(intent);
@@ -268,10 +311,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     //向服务器添加球队
     private void addTeam() {
         Team team = new Team();
-        team.setObjectId("214797aba3");
+        team.setObjectId("2bb81a5efa");
         /*team.setName("日天队");
         Person p1 = new Person();
-        p1.setObjectId("6b3b2f0bb9");//test1
+        p1.setObjectId("32dd546266");//testx1
         team.setCreator(p1);
         team.setMotto("打完球日神仙");
         team.save(getContext(), new SaveListener() {
@@ -284,13 +327,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             public void onFailure(int i, String s) {
 
             }
-        });*/
-
+        });
+*/
 
         Person p2 = new Person();
-        p2.setObjectId("aeae59b2c4");//test2
+        p2.setObjectId("b11d8a2f22");//testx2
         Person p3 = new Person();
-        p3.setObjectId("96daf1a81f");//testc
+        p3.setObjectId("5dd6e187ca");//testx3
         BmobRelation bmobRelation = new BmobRelation();//建立多对多关联表
         bmobRelation.add(p2);//向表中添加对象
         bmobRelation.add(p3);
