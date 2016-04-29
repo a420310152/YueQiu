@@ -168,7 +168,7 @@ public class MyTeamActivity extends Activity {
                 }
                 break;
             case R.id.btn_team_addmemember:
-                addMemberIntent = new Intent(context,ChatRoomActivity.class);
+                addMemberIntent = new Intent(context,ContactActivity.class);
                 addMemberIntent.putExtra("message",true);
                 startActivityForResult(addMemberIntent,REQUEST_CODE_FOR_MESSAGE);
 

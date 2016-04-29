@@ -78,10 +78,15 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
 
         resolveIntent(getIntent());
         //addFriends();
-        enterFragment();
     }
 
     private void resolveIntent (Intent intent) {
+        boolean needsResult = intent.getBooleanExtra("message", false);
+        if (needsResult) {
+
+        } else {
+            enterFragment();
+        }
     }
 
     private void enterFragment () {

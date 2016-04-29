@@ -29,6 +29,7 @@ public class ActionBarLayout extends RelativeLayout implements View.OnClickListe
 
     public ActionBarLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
+        LayoutInflater.from(context).inflate(R.layout.layout_action_bar, this);
         activity = (Activity) context;
 
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.actionbar);
@@ -37,8 +38,6 @@ public class ActionBarLayout extends RelativeLayout implements View.OnClickListe
     }
 
     private void initView (Context context, TypedArray typedArray) {
-        LayoutInflater.from(context).inflate(R.layout.layout_action_bar, this);
-
         ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
         ibtn_back.setOnClickListener(this);
 
