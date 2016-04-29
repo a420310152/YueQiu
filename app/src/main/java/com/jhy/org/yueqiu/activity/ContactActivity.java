@@ -76,10 +76,12 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         toggle = (RadioGroup) findViewById(R.id.toggle);
         toggle.setOnCheckedChangeListener(this);
 
-        RongUtils.connect();
-
+        resolveIntent(getIntent());
         //addFriends();
         enterFragment();
+    }
+
+    private void resolveIntent (Intent intent) {
     }
 
     private void enterFragment () {

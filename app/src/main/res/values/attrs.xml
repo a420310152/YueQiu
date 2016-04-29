@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="actionbar">
+        <attr name="logo_src" format="integer" />
+        <attr name="logo_visible" format="boolean" />
+
+        <attr name="title_text" format="string"/>
+        <attr name="title_textSize" format="dimension" />
+
+        <attr name="options_src" format="integer" />
+        <attr name="options_visible" format="boolean" />
+    </declare-styleable>
+</resources>
