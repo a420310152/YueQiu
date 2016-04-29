@@ -29,8 +29,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
-import io.rong.imkit.RongIM;
-import io.rong.imlib.model.UserInfo;
 
 /*
  **********************************************

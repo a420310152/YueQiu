@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -13,8 +12,6 @@ import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.squareup.picasso.Picasso;
-
-import io.rong.imkit.utils.StringUtils;
 
 /*
  **********************************************

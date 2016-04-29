@@ -17,7 +17,6 @@ import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.domain.Post;
-import com.jhy.org.yueqiu.utils.Utils;
 
 import java.util.List;
 import java.util.logging.LogRecord;
@@ -87,11 +86,11 @@ public class ChallengeLayout extends LinearLayout {
         });
         // 获得发起人选择的地点名字
 
-        String placeString = challenge.getPlaceName()+"";
+        String placeString = challenge.getPlaceName();
         Log.i("placeString", "placeString=====" + placeString);
-        if (Utils.isEmpty(placeString)&&placeString.length() > 9) {
+        if (placeString.length()!=0&&placeString.length() > 9) {
             tv_setPlace.setText(challenge.getPlaceName().substring(0, 9) + "...");
-        } else if (Utils.isEmpty(placeString)){
+        } else if (placeString.length()!=0){
             tv_setPlace.setText(challenge.getPlaceName());
         }
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
