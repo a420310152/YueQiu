@@ -17,6 +17,7 @@ import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
 import com.jhy.org.yueqiu.domain.Post;
+import com.jhy.org.yueqiu.utils.Utils;
 
 import java.util.List;
 import java.util.logging.LogRecord;
@@ -88,9 +89,9 @@ public class ChallengeLayout extends LinearLayout {
 
         String placeString = challenge.getPlaceName();
         Log.i("placeString", "placeString=====" + placeString);
-        if (placeString!=null&&placeString.length() > 9) {
+        if (Utils.isEmpty(placeString)&&placeString.length() > 9) {
             tv_setPlace.setText(challenge.getPlaceName().substring(0, 9) + "...");
-        } else if (placeString!=null){
+        } else if (Utils.isEmpty(placeString)){
             tv_setPlace.setText(challenge.getPlaceName());
         }
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
