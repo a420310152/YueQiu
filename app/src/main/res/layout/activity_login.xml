@@ -1,40 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
+        chx:title_text="登录"
+        chx:title_textSize="15sp"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@color/blackui"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/register_login"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:id="@+id/tv_login_title"/>
-
-    </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/icon_system_right"
-        android:padding="25dp"
-        android:background="@null"
-        android:onClick="loginBackClick"
-        android:id="@+id/btn_login_back"/>
+        android:id="@+id/actionbar_login_title"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:layout_below="@id/actionbar_login_title"
+        android:background="@drawable/icon_login_background"
+        android:id="@+id/line_login_head">
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login_back"
         android:background="@drawable/icon_sidebar_head"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:id="@+id/iv_login_head"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/icon_login_bottom"
+
+        android:layout_below="@id/line_login_head"
+        android:textColor="@color/dimgray"/>
     <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
@@ -43,89 +39,106 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:id="@+id/tv_login_head"/>-->
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_login_head"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/icon_edit"
+        android:layout_below="@id/line_login_head"
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:drawableLeft="@drawable/icon_login_custom"
+        android:paddingLeft="20dp"
+        android:background="@drawable/icon_login_edit"
         android:gravity="center"
         android:hint="@string/name"
+        android:paddingRight="35dp"
         android:id="@+id/et_login_name"/>
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_login_name"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/icon_edit"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/icon_login_edit"
+        android:drawableLeft="@drawable/icon_login_password"
+        android:paddingLeft="20dp"
         android:gravity="center"
-        android:hint="@string/passward"
+        android:hint= "密  码"
+        android:paddingRight="35dp"
         android:inputType="textPassword"
         android:id="@+id/et_login_password"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/et_login_password"
-        android:layout_marginTop="10dp"
-        android:id="@+id/linear">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_below="@id/et_login_password"
+            android:text="登 录"
+            android:textSize="20sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:background="@drawable/icon_login"
             android:layout_marginLeft="10dp"
             android:onClick="loginClick"
             android:id="@+id/btn_login"/>
-        <Button
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/btn_login"
-            android:layout_weight="1"
+            android:layout_below="@id/btn_login"
+            android:layout_marginTop="10dp"
+            android:layout_alignRight="@id/btn_login"
+            android:padding="10dp"
+            android:text="注册账号？"
+            android:textSize="15sp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:background="@drawable/icon_register"
             android:onClick="registerClick"
-            android:id="@+id/btn_register"/>
-    </LinearLayout>
+            android:clickable="true"
+            android:id="@+id/tv_register_text"/>
+
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/linear"
+        android:layout_below="@id/btn_login"
         android:layout_marginLeft="10dp"
+        android:layout_alignLeft="@id/btn_login"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
         android:text="@string/rememberword"
         android:id="@+id/cb_login_rememberword"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cb_login_rememberword"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="@string/reminder"
         android:layout_centerHorizontal="true"
         android:id="@+id/tv_login_hint"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_below="@+id/tv_login_hint"
-        android:background="@drawable/icon_sidebar_person"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/icon_login_weibo"
         android:layout_centerHorizontal="true"
         android:onClick="loginOnClick"
         android:id="@+id/iv_login_qq"/>
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:layout_toLeftOf="@id/iv_login_qq"
         android:layout_marginRight="20dp"
         android:layout_below="@+id/tv_login_hint"
-        android:background="@drawable/icon_sidebar_person"
+        android:background="@drawable/icon_login_qq"
         android:onClick="loginOnClick"
         android:id="@+id/iv_login_weixin"/>
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/iv_login_qq"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/tv_login_hint"
-        android:background="@drawable/icon_sidebar_person"
+        android:background="@drawable/icon_login_weixin"
         android:onClick="loginOnClick"
         android:id="@+id/iv_login_weibo"/>
 

@@ -10,6 +10,7 @@ import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
@@ -31,12 +32,11 @@ import cn.bmob.v3.listener.UpdateListener;
  **********************************************
  */
 public class LoginActivity extends Activity{
-    Button btn_login_back;
     ImageView iv_login_head;
     EditText et_login_name;
     EditText et_login_password;
     Button btn_login;
-    Button btn_register;
+    TextView tv_register_text;
     CheckBox cb_login_rememberword;
     ImageView iv_login_qq;
     ImageView iv_login_weixin;
@@ -51,12 +51,11 @@ public class LoginActivity extends Activity{
 
     //初始化控件
     private void init(){
-        btn_login_back = (Button) findViewById(R.id.btn_login_back);
         iv_login_head = (ImageView) findViewById(R.id.iv_login_head);
         et_login_name = (EditText) findViewById(R.id.et_login_name);
         et_login_password = (EditText) findViewById(R.id.et_login_password);
         btn_login = (Button) findViewById(R.id.btn_login);
-        btn_register = (Button) findViewById(R.id.btn_register);
+        tv_register_text = (TextView) findViewById(R.id.tv_register_text);
         cb_login_rememberword = (CheckBox) findViewById(R.id.cb_login_rememberword);
         iv_login_qq = (ImageView) findViewById(R.id.iv_login_qq);
         iv_login_weibo = (ImageView) findViewById(R.id.iv_login_weibo);
