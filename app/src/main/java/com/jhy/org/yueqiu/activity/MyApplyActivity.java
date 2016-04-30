@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.ApplyAdapter;
+import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 
@@ -24,7 +25,7 @@ import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
 
 public class MyApplyActivity extends Activity{
-    private ApplyAdapter applyAdapter;
+    private ChallengeAdapter challengeAdapter;
     private ListView lv_apply_info;
     private BmobUser my_apply_bmobuser;
     private Context context = this;
@@ -42,19 +43,20 @@ public class MyApplyActivity extends Activity{
     //查询我报名的挑战
     private void applyChallenge(){
         BmobQuery<Challenge> query = new BmobQuery<>();
-        query.addWhereEqualTo("responders", new BmobPointer(person));
+        //query.addWhereContainedIn("responders",person.getO);
         query.findObjects(this, new FindListener<Challenge>() {
 
             @Override
             public void onSuccess(List<Challenge> list) {
-                applyAdapter = new ApplyAdapter(MyApplyActivity.this, list);
-                lv_apply_info.setAdapter(applyAdapter);
-                Log.e("onSuccess", "填充需要我的报名的list" + list);
+                challengeAdapter = new ChallengeAdapter( list,MyApplyActivity.this);
+                challengeAdapter.setTv_apply_GONE();
+                lv_apply_info.setAdapter(challengeAdapter);
+                Log.i("1onSuccess", "填充需要我的报名的list" + list);
             }
 
             @Override
             public void onError(int code, String msg) {
-
+                Log.i("1onSuccess", "查询失败list" + msg);
             }
         });
     }

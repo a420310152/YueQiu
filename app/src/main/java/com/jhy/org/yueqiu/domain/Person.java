@@ -35,6 +35,7 @@ public class Person extends BmobUser {
     private List<String> collection;// 收藏的地点
     private BmobRelation footprints;// 足迹
     private BmobRelation addTeam;//加入的球队；
+    private Challenge challenge;//加入的挑战
 
     public BmobRelation getAddTeam() {
         return addTeam;

@@ -2,6 +2,7 @@ package com.jhy.org.yueqiu.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.Image;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +31,7 @@ public class ApplyAdapter extends MyBaseAdapter<Challenge>{
     private TextView tv_type;
     ChallengeLayout challengeLayout;
     private ImageView iv_head;
-    private TextView tv_apply;
+    private ImageView tv_apply;
     private Challenge challenge;
     private Person person;
 
@@ -46,14 +47,13 @@ public class ApplyAdapter extends MyBaseAdapter<Challenge>{
             convertView = inflater.inflate(R.layout.adapter_challenge, null);
             challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
             iv_head = (ImageView) convertView.findViewById(R.id.iv_head);
-            tv_apply = (TextView) convertView.findViewById(R.id.tv_apply);
-            tv_apply.setText("取消报名");
+            tv_apply = (ImageView) convertView.findViewById(R.id.tv_apply);
             iv_head.setTag(position);
         }
         iv_head.setOnClickListener(headClick);
         challenge = list.get(position);
         challengeLayout.setContent(challenge);
-        tv_apply.setOnClickListener(new OnClickListener() {
+        /*tv_apply.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
@@ -83,7 +83,7 @@ public class ApplyAdapter extends MyBaseAdapter<Challenge>{
                     }
                 });
             }
-        });
+        });*/
         //开始设置每一个挑战的发起人头像  此时需要每次都向服务器获取
         if (challenge.getInitiator().getAvatarUrl() != null) {
             Picasso.with(context)

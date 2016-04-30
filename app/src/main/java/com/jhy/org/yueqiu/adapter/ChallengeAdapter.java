@@ -72,6 +72,9 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
         }
         return convertView;
     }
+    public void setTv_apply_GONE(){
+        tv_apply.setVisibility(View.GONE);
+    }
 
     //点击头像弹出个人资料
     View.OnClickListener headClick = new View.OnClickListener() {
@@ -101,4 +104,18 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
             }
         }
     };
+    //点击查看报名按钮
+    public void checkApply(View v){
+        //跳转至报名页面
+        person = BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
+        if (person != null) {
+            challenge = list.get(v.getId() - 1000);
+            Intent intent = new Intent(context, ResponseChallengeActivity.class);
+            intent.putExtra("challenge", challenge);
+            intent.putExtra("checkApply",1);
+            context.startActivity(intent);
+        } else {
+            Toast.makeText(context, "请登录账号", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

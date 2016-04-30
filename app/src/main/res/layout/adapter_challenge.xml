@@ -37,4 +37,18 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
         />
+        <TextView
+            android:id="@+id/tv_apply_text"
+            android:layout_width="30dp"
+            android:layout_height="80dp"
+            android:text="查看报名"
+            android:textColor="@color/white"
+            android:background="@color/orange"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/challengeContent"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="checkApply"
+            android:visibility="gone"/>
 </RelativeLayout>
