@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_team"
+    <com.jhy.org.yueqiu.view.ActionBarLayout
+        android:id="@+id/action_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="对手球队"
-        android:textSize="30sp" />
+        chx:title_text="对阵球队"></com.jhy.org.yueqiu.view.ActionBarLayout>
+
+
+    <TextView
+        android:id="@+id/tv_team_logoPicture"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/action_bar"
+        android:layout_marginTop="30dp"
+        android:background="@color/orange"
+        android:gravity="center"
+        android:text="基本资料"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <ImageView
+        android:id="@+id/iv_team_logo"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_below="@id/tv_team_logoPicture"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/icon_launcher" />
 
     <TextView
         android:id="@+id/tv_teamname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_team"
+        android:layout_alignTop="@id/iv_team_logo"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/iv_team_logo"
         android:text="队名:"
         android:textSize="20sp" />
 
@@ -32,8 +55,11 @@
         android:id="@+id/tv_motto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_teamname"
-        android:text="球队宣言:" />
+        android:layout_alignBottom="@id/iv_team_logo"
+        android:layout_marginBottom="10dp"
+        android:layout_toRightOf="@id/iv_team_logo"
+        android:text="球队宣言:"
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/tv_motto_text"
@@ -44,40 +70,32 @@
         android:text=" " />
 
     <TextView
-        android:id="@+id/tv_creator"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_motto"
-        android:text="队长:" />
+        android:id="@+id/tv_team_info"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/iv_team_logo"
+        android:background="@color/dimgray"
+        android:gravity="center"
+        android:text="成员介绍"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
 
-    <TextView
-        android:id="@+id/tv_creator_text"
+    <RelativeLayout
+        android:id="@+id/relative_creator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_creator"
-        android:layout_toRightOf="@id/tv_creator"
-        android:text=" " />
+        android:layout_below="@id/tv_team_info">
 
-    <TextView
-        android:id="@+id/tv_position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_creator"
-        android:layout_marginLeft="100dp"
-        android:layout_toRightOf="@id/tv_creator"
-        android:text="位置:" />
+        <com.jhy.org.yueqiu.view.TeamLayout
+            android:id="@+id/comstomlayout_creator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/tv_position_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/tv_position"
-        android:layout_toRightOf="@id/tv_position"
-        android:text=" " />
 
     <ListView
         android:id="@+id/listview"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_position"></ListView>
+        android:layout_below="@id/relative_creator"></ListView>
 </RelativeLayout>

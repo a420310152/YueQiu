@@ -37,7 +37,7 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
     ChallengeLayout challengeLayout;
     ImageView iv_head;
     Challenge challenge;
-    TextView tv_apply;
+    ImageView tv_apply;
     Context context;
     Person person;
 
@@ -53,7 +53,7 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
             convertView = inflater.inflate(R.layout.adapter_challenge, null);
             challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
             iv_head = (ImageView) convertView.findViewById(R.id.iv_head);
-            tv_apply = (TextView) convertView.findViewById(R.id.tv_apply);
+            tv_apply = (ImageView) convertView.findViewById(R.id.tv_apply);
             tv_apply.setId(1000 + position);
             iv_head.setTag(position);
         }

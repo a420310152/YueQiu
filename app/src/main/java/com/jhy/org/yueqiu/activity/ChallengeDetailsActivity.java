@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
@@ -36,8 +37,12 @@ public class ChallengeDetailsActivity extends Activity{
         build();
     }
 
+private List<Challenge> challengeList = new ArrayList<>();
+private ChallengeAdapter challengeAdapter = null;
     private void build(){
         lv_war = (ListView) findViewById(R.id.lv_war);
+        challengeAdapter = new ChallengeAdapter(challengeList,this);
+        lv_war.setOnItemClickListener(itemClick);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
         query.setLimit(20);
         query.order("-createdAt");//设置按照时间大小降序排列
@@ -45,9 +50,14 @@ public class ChallengeDetailsActivity extends Activity{
         query.findObjects(this, new FindListener<Challenge>() {
             @Override
             public void onSuccess(List<Challenge> list) {
-                ChallengeAdapter adapter = new ChallengeAdapter(list,ChallengeDetailsActivity.this);
-                lv_war.setAdapter(adapter);
-                lv_war.setOnItemClickListener(itemClick);
+                challengeList.clear();
+                challengeList.addAll(list);
+                if (lv_war.getAdapter()!=null){
+                    challengeAdapter.notifyDataSetChanged();
+                }else {
+                    lv_war.setAdapter(challengeAdapter);
+                }
+
             }
 
             @Override
@@ -78,5 +88,25 @@ public class ChallengeDetailsActivity extends Activity{
     };
     public void loginMenu(View v){
         finish();
+    }
+    public void referensh(View v){
+        BmobQuery<Challenge> query = new BmobQuery<Challenge>();
+        query.setLimit(20);
+        query.order("-createdAt");//设置按照时间大小降序排列
+        query.include("initiator");
+        query.findObjects(this, new FindListener<Challenge>() {
+            @Override
+            public void onSuccess(List<Challenge> list) {
+                challengeList.clear();
+                challengeList.addAll(list);
+                lv_war.setAdapter(challengeAdapter);
+                Toast.makeText(ChallengeDetailsActivity.this,"刷新成功",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Toast.makeText(ChallengeDetailsActivity.this,"刷新失败，请检查您的网络",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

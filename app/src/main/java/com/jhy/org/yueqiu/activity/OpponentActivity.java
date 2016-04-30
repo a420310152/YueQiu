@@ -54,48 +54,55 @@ public class OpponentActivity extends Activity {
         build();
         Intent intent = getIntent();
         challenge = (Challenge) intent.getSerializableExtra("challenge");
-        Log.i("cha", "OpponentActivity" + challenge);
-        person = challenge.getInitiator();
-        Bmob.initialize(this, Key.bmob.application_id);
-        BmobQuery<Person> query = new BmobQuery<Person>();
-        query.getObject(this, challenge.getInitiator().getObjectId(), new
-                GetListener<Person>() {
-                    @Override
-                    public void onSuccess(Person person) {
-                        //设置对手信息
-                          //设置对手信息 头像
-                        if (challenge.getInitiator().getAvatarUrl() != null) {
-                            Picasso.with(OpponentActivity.this)
-                                    .load(challenge.getInitiator().getAvatarUrl())
-                                    .transform(new RoundTransform())
-                                    .into(iv_info_head);
+        if (challenge!=null){
+            person = challenge.getInitiator();
+            Bmob.initialize(this, Key.bmob.application_id);
+            BmobQuery<Person> query = new BmobQuery<Person>();
+            query.getObject(this, person.getObjectId(), new
+                    GetListener<Person>() {
+                        @Override
+                        public void onSuccess(Person person) {
+                            setOpponent();
                         }
-                        if (person.getUsername()!=null){
-                            tv_name.setText(person.getUsername());
-                        }
-                        if (person.getSex()!=null){
-                            tv_sex.setText(person.getSex() ? "男" : "女");
-                        }
-                        if (person.getAge()!=null){
-                            tv_age.setText(person.getAge() + " 岁");
-                        }
-                        if (person.getHeight()!=null){
-                            tv_height.setText(person.getHeight() + " cm");
-                        }
-                        if (person.getWeight()!=null){
-                            tv_weight.setText(person.getWeight() + " kg");
-                        }
-                        if (person.getPosition()!=null){
-                            tv_skilled.setText(person.getPosition());
-                        }
-                    }
 
-                    @Override
-                    public void onFailure(int i, String s) {
-                        Log.i("onFailure", "onFailure=====" + s);
-                    }
-                });
+                        @Override
+                        public void onFailure(int i, String s) {
+                            Log.i("onFailure", "onFailure=====" + s);
+                        }
+                    });
+        }else {
+            person = (Person) intent.getSerializableExtra("person");
+            setOpponent();
+        }
 
+
+    }
+    private void setOpponent(){
+        //设置对手信息
+        if (person.getAvatarUrl() != null) {
+            Picasso.with(OpponentActivity.this)
+                    .load(person.getAvatarUrl())
+                    .transform(new RoundTransform())
+                    .into(iv_info_head);
+        }
+        if (person.getUsername()!=null){
+            tv_name.setText(person.getUsername());
+        }
+        if (person.getSex()!=null){
+            tv_sex.setText(person.getSex() ? "男" : "女");
+        }
+        if (person.getAge()!=null){
+            tv_age.setText(person.getAge() + " 岁");
+        }
+        if (person.getHeight()!=null){
+            tv_height.setText(person.getHeight() + " cm");
+        }
+        if (person.getWeight()!=null){
+            tv_weight.setText(person.getWeight() + " kg");
+        }
+        if (person.getPosition()!=null){
+            tv_skilled.setText(person.getPosition());
+        }
     }
 
     private void build() {
