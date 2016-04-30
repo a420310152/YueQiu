@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.view;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,11 +42,16 @@ public class ActionBarLayout extends RelativeLayout implements View.OnClickListe
         ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
         ibtn_back.setOnClickListener(this);
 
-        int logo_src = typedArray.getInt(R.styleable.actionbar_logo_src, R.drawable.icon_mark_a);
+        Drawable logo_src = typedArray.getDrawable(R.styleable.actionbar_logo_src);
         boolean logo_visible = typedArray.getBoolean(R.styleable.actionbar_logo_visible, false);
+
         img_logo = (ImageView) findViewById(R.id.img_logo);
-        img_logo.setImageResource(logo_src);
-        img_logo.setVisibility(logo_visible ? VISIBLE : GONE);
+        if (logo_src != null) {
+            img_logo.setImageDrawable(logo_src);
+            img_logo.setVisibility(VISIBLE);
+        } else {
+            img_logo.setVisibility(logo_visible ? VISIBLE : GONE);
+        }
 
         String title_text = typedArray.getString(R.styleable.actionbar_title_text);
         float title_textSize = typedArray.getDimension(R.styleable.actionbar_title_textSize, 20);
@@ -53,11 +59,16 @@ public class ActionBarLayout extends RelativeLayout implements View.OnClickListe
         tv_titile.setText(title_text == null ? "" : title_text);
         tv_titile.setTextSize(title_textSize);
 
-        int options_src = typedArray.getInt(R.styleable.actionbar_options_src, R.drawable.icon_myfile_info);
+        Drawable options_src = typedArray.getDrawable(R.styleable.actionbar_options_src);
         boolean options_visible = typedArray.getBoolean(R.styleable.actionbar_options_visible, false);
+
         ibtn_options = (ImageButton) findViewById(R.id.ibtn_options);
-        ibtn_options.setImageResource(options_src);
-        ibtn_options.setVisibility(options_visible ? VISIBLE : GONE);
+        if (options_src != null) {
+            ibtn_options.setImageDrawable(options_src);
+            ibtn_options.setVisibility(VISIBLE);
+        } else {
+            ibtn_options.setVisibility(options_visible ? VISIBLE : GONE);
+        }
     }
 
     public void setTitleText (CharSequence text) {

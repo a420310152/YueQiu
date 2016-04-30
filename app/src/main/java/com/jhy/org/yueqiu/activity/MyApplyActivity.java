@@ -29,7 +29,7 @@ public class MyApplyActivity extends Activity{
     private BmobUser my_apply_bmobuser;
     private Context context = this;
     private Challenge challenge;
-    private Person person;
+    private Person person;//当前用户
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +59,7 @@ public class MyApplyActivity extends Activity{
         });
     }
 
-    //判断登录状态
+    //判断登录状态并对报名列表进行监听
     private void judgeLogin(){
         my_apply_bmobuser = BmobUser.getCurrentUser(context);
         if(my_apply_bmobuser!=null){
@@ -73,9 +73,20 @@ public class MyApplyActivity extends Activity{
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intentApplyInfo = new Intent(MyApplyActivity.this,OpponentActivity.class);
-            intentApplyInfo.putExtra("challenge",challenge);
-            startActivity(intentApplyInfo);
+            Challenge challenge = (Challenge) parent.getItemAtPosition(position);
+            String type = challenge.getType();
+            Intent intent;
+
+            if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
+                intent = new Intent(MyApplyActivity.this, OpponentSoloActivity.class);
+                intent.putExtra("challenge", challenge);
+                Log.i("rea", "challenge===========" + challenge.getInitiator());
+                startActivity(intent);
+            } else if (type.equals(Challenge.TYPE_TEAM)) {
+                intent = new Intent(MyApplyActivity.this, OpponentTeamActivity.class);
+                intent.putExtra("challenge", challenge);
+                startActivity(intent);
+            }
         }
     };
 

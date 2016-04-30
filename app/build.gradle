@@ -17,6 +17,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // 移除lint检查的errors
+    lintOptions {
+        abortOnError false
+    }
+
+    // 加载百度地图.so文件
+    sourceSets {
+        main {
+            jniLibs.srcDir(['libs'])
+        }
+    }
 }
 
 dependencies {

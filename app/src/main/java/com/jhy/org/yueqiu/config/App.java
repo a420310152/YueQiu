@@ -70,10 +70,10 @@ public class App extends Application implements BDLocationListener {
         super.onCreate();
         app = this;
 
-        Preferences.initialize(this);
-        SDKInitializer.initialize(this);
-        Bmob.initialize(this, Key.bmob.application_id);
-        RongUtils.initialize(this);
+        Preferences.initialize(app);
+        SDKInitializer.initialize(app);
+        Bmob.initialize(app, Key.bmob.application_id);
+        RongUtils.initialize(app);
         initLocation();
         initConfig();
     }
