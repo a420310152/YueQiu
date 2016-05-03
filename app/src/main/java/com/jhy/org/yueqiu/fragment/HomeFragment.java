@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -129,6 +130,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             markGroup.setOnCheckedChangeListener(this);
         }
         group.setOnCheckedChangeListener(click);
+
     }
 
     //以下是H修改的部分
@@ -151,7 +153,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             }
         });
     }
-
 
     //标题group的选择监听
     RadioGroup.OnCheckedChangeListener click = new RadioGroup.OnCheckedChangeListener() {
