@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="NBA战报"
-            android:textSize="20dp"
+            android:textSize="16sp"
             android:textColor="@drawable/selector_nba_war_text"
             android:drawableBottom="@drawable/selector_border_warning"
             android:layout_marginTop="10dp"
@@ -75,7 +75,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="全名约球"
-            android:textSize="20dp"
+            android:textSize="16sp"
             android:button="@null"
             android:textColor="@drawable/selector_nba_war_text"
             android:gravity="center"
@@ -89,7 +89,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="NBA赛程"
-            android:textSize="20dp"
+            android:textSize="16sp"
             android:button="@null"
             android:textColor="@drawable/selector_nba_war_text"
             android:drawableBottom="@drawable/selector_border_warning"
@@ -181,7 +181,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="&lt;&lt;more"
+            android:text="more&gt;&gt;"
             android:layout_alignBottom="@id/tv_war"
             android:layout_toRightOf="@id/tv_war"
             android:layout_marginBottom="5dp"
@@ -197,7 +197,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/icon_home_background"
                 android:scaleType="centerInside"
-                android:layout_marginBottom="64dp"/>
+                android:layout_marginBottom="64dp"
+                android:layout_marginTop="10dp"/>
     <ListView
         android:id="@+id/lv_war"
         android:layout_marginTop="10dp"
@@ -205,8 +206,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="64dp"
         android:divider="@null"
-        android:layout_alignLeft="@+id/imageView"
-        android:layout_alignStart="@+id/imageView"
         android:layout_below="@+id/tv_war"></ListView>
     <com.jhy.org.yueqiu.view.NavLayout
         android:layout_alignParentBottom="true"

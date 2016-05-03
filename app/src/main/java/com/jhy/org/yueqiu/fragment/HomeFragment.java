@@ -97,12 +97,16 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_gallery, null);
         buildup();
-        builddown();
-
         //以下是H修改的部分
         initWeather();
-
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        builddown();
+        challengeAdapter.notifyDataSetChanged();
     }
 
     private void buildup() {
@@ -132,7 +136,8 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     private static Logx logx = new Logx(HomeFragment.class);
     private Weather weather = null;
     private static final int MSG_RECIEVE_WEATHER = 0x32;
-    private void initWeather () {
+
+    private void initWeather() {
         iv_weather = (ImageView) view.findViewById(R.id.iv_weather);
         tv_temp = (TextView) view.findViewById(R.id.tv_temp);
 
@@ -244,12 +249,17 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         }
     }
 
+    private List<Challenge> challengeList = new ArrayList<>();
+    private ChallengeAdapter challengeAdapter = null;
+
     //下半部分约占列表建立
     private void builddown() {
         tv_war = (TextView) view.findViewById(R.id.tv_war);
         tv_war.setOnClickListener(clickwar);
         Bmob.initialize(getContext(), Key.bmob.application_id);
         listView = (ListView) view.findViewById(R.id.lv_war);
+        challengeAdapter = new ChallengeAdapter(challengeList, getContext());
+        listView.setOnItemClickListener(itemClick);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
         query.setLimit(3);
         query.order("-createdAt");//设置按照时间大小降序排列
@@ -257,9 +267,14 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         query.findObjects(getContext(), new FindListener<Challenge>() {
             @Override
             public void onSuccess(List<Challenge> list) {
-                ChallengeAdapter adapter = new ChallengeAdapter(list, getContext());
-                listView.setAdapter(adapter);
-                listView.setOnItemClickListener(itemClick);
+                challengeList.clear();
+                challengeList.addAll(list);
+                if (listView.getAdapter() != null) {
+                    challengeAdapter.notifyDataSetChanged();
+                } else {
+                    listView.setAdapter(challengeAdapter);
+                }
+
             }
 
             @Override
@@ -290,7 +305,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             Intent intent;
 
             if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
-                intent = new Intent(getContext(), OpponentSoloActivity.class);
+                intent = new Intent(getContext(), OpponentActivity.class);
                 intent.putExtra("challenge", challenge);
                 Log.i("rea", "challenge===========" + challenge.getInitiator());
                 startActivity(intent);

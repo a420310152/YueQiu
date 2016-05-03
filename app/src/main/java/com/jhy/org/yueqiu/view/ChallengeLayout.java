@@ -87,7 +87,7 @@ public class ChallengeLayout extends LinearLayout {
         });
         // 获得发起人选择的地点名字
 
-        String placeString = challenge.getPlaceName();
+        String placeString = challenge.getPlaceName()+"";
         Log.i("placeString", "placeString=====" + placeString);
         if (Utils.isEmpty(placeString)&&placeString.length() > 9) {
             tv_setPlace.setText(challenge.getPlaceName().substring(0, 9) + "...");

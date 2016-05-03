@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
+import com.jhy.org.yueqiu.view.TeamLayout;
 
 import java.util.List;
 
@@ -27,10 +29,10 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class OpponentTeamActivity extends Activity{
     Challenge challenge;
-    TextView tv_motto_text;//球队宣言
-    TextView tv_creator_text;//队长
+    ImageView iv_team_logo;//球队头像
     TextView tv_teamname_text;//队名
-    TextView tv_position_text;//位置
+    TextView tv_motto_text;//球队宣言
+    TeamLayout comstomlayout_creator;//队长
     ListView listview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +43,17 @@ public class OpponentTeamActivity extends Activity{
         build();
     }
     private void build(){
-        tv_motto_text = (TextView) findViewById(R.id.tv_motto_text);
-        tv_creator_text = (TextView) findViewById(R.id.tv_creator_text);
+        iv_team_logo = (ImageView) findViewById(R.id.iv_team_logo);
         tv_teamname_text = (TextView) findViewById(R.id.tv_teamname_text);
-        tv_position_text = (TextView) findViewById(R.id.tv_position_text);
+        tv_motto_text = (TextView) findViewById(R.id.tv_motto_text);
+        comstomlayout_creator = (TeamLayout) findViewById(R.id.comstomlayout_creator);
         listview = (ListView) findViewById(R.id.listview);
 
         //查询Bmob数据 设置页面信息
         Bmob.initialize(this, Key.bmob.application_id);
         Person creator = challenge.getInitiator();//获得队长对象
-        tv_creator_text.setText(creator.getUsername());
-        tv_position_text.setText(creator.getPosition());
+        comstomlayout_creator.setTeam(creator);//设置队长信息
+
         //根据队长 来查询队伍
         final BmobQuery<Team> bmobQuery = new BmobQuery<>();
         bmobQuery.addWhereEqualTo("creator",creator);

@@ -73,6 +73,7 @@ public class ResponseChallengeActivity extends Activity {
         challenge = (Challenge) intent.getSerializableExtra("challenge");
         setContent();
         buildResponse();
+        setCheckApplyContent();
     }
 
     private void build() {
@@ -106,7 +107,7 @@ public class ResponseChallengeActivity extends Activity {
                             i = 1;
                         }
                     }
-                    if (i != 1&&person.getObjectId()!=challenge.getInitiator().getObjectId()) {
+                    if (i != 1 && person.getObjectId() != challenge.getInitiator().getObjectId()) {
                         BmobRelation responders = new BmobRelation();
                         responders.add(person);//将用户对象添加到多对多关联
                         challenge.setResponders(responders);
@@ -189,6 +190,29 @@ public class ResponseChallengeActivity extends Activity {
         tv_time.setText(challenge.getFromDate().getDate() + "");
         tv_place.setText(challenge.getPlaceName());
     }
+    //当点击查看报名按钮时 设置页面为查看信息
+    private void setCheckApplyContent(){
+        Intent intent = getIntent();
+        int checkApply =  intent.getIntExtra("checkApply",0);
+        if (checkApply==1){
+
+            TextView tv_succeed = (TextView) findViewById(R.id.tv_succeed);
+            TextView tv_one = (TextView) findViewById(R.id.tv_one);
+            TextView tv_five = (TextView) findViewById(R.id.tv_five);
+            TextView tv_OK = (TextView) findViewById(R.id.tv_OK);
+            tv_succeed.setText("查看报名");
+            tv_one.setText("您已经报名参加由");
+            tv_five.setText("请您准时赴约哦！");
+            tv_OK.setText("取消报名");
+            tv_OK.setOnClickListener(noClick);
+        }
+    }
+    View.OnClickListener noClick = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Toast.makeText(context,"您已取消报名",Toast.LENGTH_SHORT).show();
+        }
+    };
     //建立响应者显示列表
     private void buildResponse(){
         //得到控件

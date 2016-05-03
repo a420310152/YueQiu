@@ -37,7 +37,7 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
     ChallengeLayout challengeLayout;
     ImageView iv_head;
     Challenge challenge;
-    TextView tv_apply;
+    ImageView tv_apply;
     Context context;
     Person person;
 
@@ -53,7 +53,7 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
             convertView = inflater.inflate(R.layout.adapter_challenge, null);
             challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
             iv_head = (ImageView) convertView.findViewById(R.id.iv_head);
-            tv_apply = (TextView) convertView.findViewById(R.id.tv_apply);
+            tv_apply = (ImageView) convertView.findViewById(R.id.tv_apply);
             tv_apply.setId(1000 + position);
             iv_head.setTag(position);
         }
@@ -71,6 +71,9 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
                     .into(iv_head);
         }
         return convertView;
+    }
+    public void setTv_apply_GONE(){
+        tv_apply.setVisibility(View.GONE);
     }
 
     //点击头像弹出个人资料
@@ -101,4 +104,18 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
             }
         }
     };
+    //点击查看报名按钮
+    public void checkApply(View v){
+        //跳转至报名页面
+        person = BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
+        if (person != null) {
+            challenge = list.get(v.getId() - 1000);
+            Intent intent = new Intent(context, ResponseChallengeActivity.class);
+            intent.putExtra("challenge", challenge);
+            intent.putExtra("checkApply",1);
+            context.startActivity(intent);
+        } else {
+            Toast.makeText(context, "请登录账号", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

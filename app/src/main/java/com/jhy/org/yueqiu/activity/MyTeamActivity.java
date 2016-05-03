@@ -134,6 +134,8 @@ public class MyTeamActivity extends Activity {
             if (requestCode == REQUEST_CODE_FOR_MESSAGE) {
                 teamMember = null;
 
+                // 得到返回的结果
+                Person user = (Person) data.getSerializableExtra("result");
             }
         }
     }
