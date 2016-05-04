@@ -3,17 +3,23 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
+import com.jhy.org.yueqiu.domain.NewFriends;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.test.h.Test7;
 import com.jhy.org.yueqiu.utils.Logx;
-import com.jhy.org.yueqiu.test.h.backups.RongUtils;
+import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.squareup.picasso.Picasso;
 
+import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
+import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -33,12 +39,19 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.UpdateListener;
 import io.rong.imkit.RongIM;
 import io.rong.imkit.fragment.ConversationListFragment;
+import io.rong.imlib.RongIMClient;
 import io.rong.imlib.model.Conversation;
+import io.rong.message.ContactNotificationMessage;
+import io.rong.message.NotificationMessage;
+import io.rong.message.TextMessage;
 
 /*
  **********************************************
@@ -64,6 +77,7 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
 
     private boolean needsResult = false;
     private Person selectedUser = null;
+    private View selectedView = null;
 
     private Person currentUser = null;
     private RongIM rong = RongIM.getInstance();
@@ -87,6 +101,32 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         fillContactList();
         resolveIntent(getIntent());
         //addFriends();
+        //confirmToAddAFriend();
+    }
+
+    private void confirmToAddAFriend () {
+        RongUtils.sendContactNotificationMessage(ContactNotificationMessage.CONTACT_OPERATION_REQUEST, Test7.user.hoge.id, "我是xxx, 请求加你为好友");
+        /*
+        RongIM rong = RongIM.getInstance();
+        if (rong != null) {
+            Conversation.ConversationType type = Conversation.ConversationType.PRIVATE;
+            String targetId = Test7.user.hoge.id;
+            String messageContent = "我是xxx, 请求加你为好友";
+            ContactNotificationMessage message = ContactNotificationMessage.obtain(ContactNotificationMessage.CONTACT_OPERATION_REQUEST, Test7.user.piyo.id, Test7.user.hoge.id, messageContent);
+            rong.getRongIMClient().sendMessage(type, targetId, message, "", "", new RongIMClient.SendMessageCallback() {
+
+                @Override
+                public void onSuccess(Integer integer) {
+                    logx.e("发送消息 成功: " + integer);
+                }
+
+                @Override
+                public void onError(Integer integer, RongIMClient.ErrorCode errorCode) {
+                    logx.e("发送消息 失败: " + integer + errorCode.getMessage());
+                }
+            });
+        }
+        */
     }
 
     private void initView () {
@@ -146,20 +186,24 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
     }
 
     private void fillContactList () {
-        BmobQuery<Person> query = new BmobQuery<>();
-        query.addWhereRelatedTo("friends", new BmobPointer(currentUser));
-        query.findObjects(context, new FindListener<Person>() {
+        BmobQuery<NewFriends> query = new BmobQuery<>();
+        query.addWhereEqualTo("master", currentUser);
+        query.include("underFriends");
+        query.findObjects(context, new FindListener<NewFriends>() {
             @Override
-            public void onSuccess(List<Person> list) {
-                logx.e("填充联系人 成功!");
-                contactList.clear();
-                contactList.addAll(list);
-                lv_contacts.setAdapter(contactAdapter);
+            public void onSuccess(List<NewFriends> list) {
+                if (!Utils.isEmpty(list)) {
+                    contactList.clear();
+                    for (NewFriends i : list) {
+                        contactList.add(i.getUnderFriends());
+                    }
+                    lv_contacts.setAdapter(contactAdapter);
+                }
             }
 
             @Override
             public void onError(int i, String s) {
-                logx.e("填充联系人 失败: i: " + i + ", s: " + s);
+                logx.e("填充联系人 错误>> 错误码: " + i + ", 错误描述: " + s);
             }
         });
     }
@@ -190,6 +234,11 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
 
         if (needsResult) {
             selectedUser = user;
+            if (selectedView != null) {
+                selectedView.setBackgroundColor(Color.TRANSPARENT);
+            }
+            view.setBackgroundColor(0x99AABBCC);
+            selectedView = view;
             ibtn_yes.setVisibility(View.VISIBLE);
 
             if (!Utils.isEmpty(userAvatar)) {

@@ -82,8 +82,9 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
         public void onClick(View v) {
             challenge = list.get((int) v.getTag());
             String type = challenge.getType();
+            Person person = challenge.getInitiator();
             Intent intent = new Intent(context, OpponentActivity.class);
-            intent.putExtra("challenge", challenge);
+            intent.putExtra("person", person);
             Log.i("rea", "challenge===========" + challenge.getInitiator());
             context.startActivity(intent);
         }

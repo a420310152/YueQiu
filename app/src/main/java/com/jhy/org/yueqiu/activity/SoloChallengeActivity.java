@@ -138,6 +138,9 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
                 currentView = tv_toDate;
                 break;
             case R.id.container_title:
+                et_title.setSelectAllOnFocus(true);
+                et_title.setSelected(true);
+                et_title.requestFocus();
                 break;
             case R.id.container_place:
                 searchPlaceIntent.putExtra("needsPlace", true);

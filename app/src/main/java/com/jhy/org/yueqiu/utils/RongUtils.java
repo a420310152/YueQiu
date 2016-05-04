@@ -1,12 +1,17 @@
 package com.jhy.org.yueqiu.utils;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
+import android.view.View;
 
+import com.jhy.org.yueqiu.activity.OpponentActivity;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
+import com.squareup.okhttp.internal.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,10 +24,16 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.GetListener;
 import io.rong.imkit.RongIM;
+import io.rong.imkit.model.UIConversation;
 import io.rong.imlib.RongIMClient;
+import io.rong.imlib.model.Conversation;
+import io.rong.imlib.model.Message;
+import io.rong.imlib.model.MessageContent;
 import io.rong.imlib.model.UserInfo;
+import io.rong.message.ContactNotificationMessage;
+import io.rong.message.TextMessage;
 
-public final class RongUtils {
+public class RongUtils {
     private static boolean isConnected = false;
     private static boolean isRequestingToken = false;
 
@@ -37,6 +48,7 @@ public final class RongUtils {
         String packageName = app.getApplicationInfo().packageName;
         if (packageName.equals(curProcessName) || "io.rong.push".equals(curProcessName)) {
             RongIM.init(app);
+            setConversationListBehaviorListener();
             connect();
         }
     }
@@ -77,10 +89,10 @@ public final class RongUtils {
                             logx.e("无法绑定用户信息 rong == null");
                         }
 
-                        logx.e("connect 成功:");
-                        logx.e("\t\t\tuserId = " + s);
-                        logx.e("\t\t\tusername = " + Preferences.get(App.user.name));
-                        logx.e("\t\t\ttoken = " + Preferences.get(App.user.token));
+//                        logx.e("connect 成功:");
+//                        logx.e("\t\t\tuserId = " + s);
+//                        logx.e("\t\t\tusername = " + Preferences.get(App.user.name));
+//                        logx.e("\t\t\ttoken = " + Preferences.get(App.user.token));
                     }
                     @Override
                     public void onError(RongIMClient.ErrorCode errorCode) {
@@ -133,7 +145,7 @@ public final class RongUtils {
             query.getObject(App.getInstance(), userId, new GetListener<Person>() {
                 @Override
                 public void onSuccess(Person person) {
-                    logx.e("查询用户信息 成功!");
+//                    logx.e("查询用户信息 成功!");
                     String userId = person.getObjectId();
                     String name = person.getUsername();
                     String portaitUri = person.getAvatarUrl();
@@ -153,10 +165,6 @@ public final class RongUtils {
         }
     }
 
-    public static void requestToken () {
-        checkToken();
-    }
-
     // 检查现存的token是否可用
     //      若可用则返回true
     //      若过时则返回false, 并会请求新的token
@@ -167,12 +175,18 @@ public final class RongUtils {
         String token = Preferences.get(App.user.token);
 
         Person person = BmobUser.getCurrentUser(App.getInstance(), Person.class);
+//        String avatarUrl = person.getAvatarUrl();
+//        if (Utils.isEmpty(avatarUrl)) {
+//            avatarUrl = Person.URL_DEFAULT_AVATAR;
+//        }
+
         if (person != null) {
             boolean needsUpdate = !Utils.equals(userId, person.getObjectId())
                     || !Utils.equals(name, person.getUsername())
+                    //|| !Utils.equals(portaitUri, avatarUrl)
                     || Utils.isEmpty(token);
             if (needsUpdate && !isRequestingToken) {
-                logx.e("checkToken 需要更新TOKEN");
+//                logx.e("checkToken 需要更新TOKEN");
                 requestToken(person.getObjectId());
                 isRequestingToken = true;
                 return false;
@@ -182,14 +196,99 @@ public final class RongUtils {
     }
 
     public static void refreshUserInfo (String userId, String name, String portraitUri) {
+        checkToken();
         Preferences.set(App.user.id, userId);
         Preferences.set(App.user.name, name);
         Preferences.set(App.user.portrait_uri, portraitUri);
-        checkToken();
 
         RongIM rong = RongIM.getInstance();
         if (rong != null) {
             rong.refreshUserInfoCache(new UserInfo(userId, name, Uri.parse(portraitUri)));
         }
+    }
+
+    public static void sendContactNotificationMessage (String operation, String targetId, String message) {
+        Person person = BmobUser.getCurrentUser(App.getInstance(), Person.class);
+        if (person != null) {
+            sendContactNotificationMessage(operation, person.getObjectId(), targetId, message);
+        }
+    }
+    public static void sendContactNotificationMessage (String operation, String sourceUserId, String targetUserId, String message) {
+        RongIM rong = RongIM.getInstance();
+        if (rong != null) {
+            ContactNotificationMessage notificationMsg = ContactNotificationMessage.obtain(operation, sourceUserId, targetUserId, message);
+            rong.getRongIMClient().sendMessage(
+                    Conversation.ConversationType.PRIVATE,
+                    targetUserId,
+                    notificationMsg,
+                    "pushContent",
+                    "pushData",
+                    new RongIMClient.SendMessageCallback() {
+
+                        @Override
+                        public void onSuccess(Integer integer) {
+//                            logx.e("发送好友通知消息 成功: " + integer);
+                        }
+
+                        @Override
+                        public void onError(Integer integer, RongIMClient.ErrorCode errorCode) {
+                            logx.e("发送好友通知消息 失败: " + integer + errorCode.getMessage());
+
+                        }
+                    },
+                    new RongIMClient.ResultCallback<Message>() {
+                        @Override
+                        public void onSuccess(Message message) {
+//                            logx.e("发送好友消息通知, 返回结果 成功: " + message.getObjectName());
+                        }
+
+                        @Override
+                        public void onError(RongIMClient.ErrorCode errorCode) {
+                            logx.e("发送好友消息通知, 返回结果 失败: " + errorCode.getMessage());
+                        }
+                    });
+        }
+    }
+
+    private static void setConversationListBehaviorListener () {
+        RongIM.setConversationListBehaviorListener(new RongIM.ConversationListBehaviorListener() {
+
+            @Override
+            public boolean onConversationPortraitClick(Context context, Conversation.ConversationType conversationType, String s) {
+                // 若点击用户, 则进入用户资料页面
+                // 若点击团队, 则进入团队页面
+                Intent oppenentActivity = new Intent(context, OpponentActivity.class);
+                oppenentActivity.putExtra("userId", s);
+                context.startActivity(oppenentActivity);
+                return true;
+            }
+
+            @Override
+            public boolean onConversationPortraitLongClick(Context context, Conversation.ConversationType conversationType, String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onConversationClick(Context context, View view, UIConversation uiConversation) {
+                MessageContent content = uiConversation.getMessageContent();
+                RongIM rong = RongIM.getInstance();
+                if (content instanceof TextMessage) {
+                    rong.startPrivateChat(context, content.getUserInfo().getUserId(), null);
+                } else if (content instanceof ContactNotificationMessage) {
+                    ContactNotificationMessage message = (ContactNotificationMessage) content;
+
+                    Intent oppenentActivity = new Intent(context, OpponentActivity.class);
+                    oppenentActivity.putExtra("userId", message.getSourceUserId());
+                    oppenentActivity.putExtra("action", "response");
+                    context.startActivity(oppenentActivity);
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onConversationLongClick(Context context, View view, UIConversation uiConversation) {
+                return false;
+            }
+        });
     }
 }

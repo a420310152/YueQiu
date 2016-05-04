@@ -153,7 +153,7 @@ public class App extends Application implements BDLocationListener {
         uploadUserLocation(bdLocation.getLatitude(), bdLocation.getLongitude());
 
         String cityCode = Weather.convertCityToCode(bdLocation.getCity());
-        logx.e("保存cityCode: " + cityCode);
+//        logx.e("保存cityCode: " + cityCode);
         Preferences.set(user.city_code, cityCode);
     }
 
@@ -165,7 +165,7 @@ public class App extends Application implements BDLocationListener {
             person.update(app, userId, new UpdateListener() {
                 @Override
                 public void onSuccess() {
-                    logx.e("上传用户位置信息 成功!");
+//                    logx.e("上传用户位置信息 成功!");
                 }
 
                 @Override

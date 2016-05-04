@@ -63,7 +63,7 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
         ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
         ibtn_back.setOnClickListener(this);
 
-        this.myProfileIntent = new Intent(context, MyProfileActivity.class);
+        this.myProfileIntent = new Intent(context, OpponentActivity.class);
 
         App.registerReceiveUserLocation(this);
     }
@@ -71,7 +71,8 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Person person = friendList.get(position);
-        myProfileIntent.putExtra("who", person);
+        myProfileIntent.putExtra("person", person);
+        myProfileIntent.putExtra("action", "request");
         startActivity(myProfileIntent);
     }
 
