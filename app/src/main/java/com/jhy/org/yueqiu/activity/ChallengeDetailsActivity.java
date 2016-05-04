@@ -2,7 +2,9 @@ package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -41,7 +43,7 @@ private List<Challenge> challengeList = new ArrayList<>();
 private ChallengeAdapter challengeAdapter = null;
     private void build(){
         lv_war = (ListView) findViewById(R.id.lv_war);
-        challengeAdapter = new ChallengeAdapter(challengeList,this);
+        challengeAdapter = new ChallengeAdapter(challengeList,this,true);
         lv_war.setOnItemClickListener(itemClick);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
         query.setLimit(20);

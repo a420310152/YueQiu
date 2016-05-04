@@ -52,7 +52,7 @@ public class ApplyAdapter extends MyBaseAdapter<Challenge>{
         }
         iv_head.setOnClickListener(headClick);
         challenge = list.get(position);
-        challengeLayout.setContent(challenge);
+        challengeLayout.setContent(challenge,true);
         /*tv_apply.setOnClickListener(new OnClickListener() {
 
             @Override

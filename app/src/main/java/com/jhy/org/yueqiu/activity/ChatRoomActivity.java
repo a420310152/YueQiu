@@ -33,11 +33,11 @@ public class ChatRoomActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-        getIntentDate(getIntent());
+        getIntentData(getIntent());
         //onSendMessage();
     }
 
-    private void getIntentDate (Intent intent) {
+    private void getIntentData (Intent intent) {
         targetId = intent.getData().getQueryParameter("targetId");
         targetIds = intent.getData().getQueryParameter("targetIds");
 

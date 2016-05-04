@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -129,6 +130,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             markGroup.setOnCheckedChangeListener(this);
         }
         group.setOnCheckedChangeListener(click);
+
     }
 
     //以下是H修改的部分
@@ -151,7 +153,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
             }
         });
     }
-
 
     //标题group的选择监听
     RadioGroup.OnCheckedChangeListener click = new RadioGroup.OnCheckedChangeListener() {
@@ -258,7 +259,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         tv_war.setOnClickListener(clickwar);
         Bmob.initialize(getContext(), Key.bmob.application_id);
         listView = (ListView) view.findViewById(R.id.lv_war);
-        challengeAdapter = new ChallengeAdapter(challengeList, getContext());
+        challengeAdapter = new ChallengeAdapter(challengeList, getContext(),true);
         listView.setOnItemClickListener(itemClick);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
         query.setLimit(3);
