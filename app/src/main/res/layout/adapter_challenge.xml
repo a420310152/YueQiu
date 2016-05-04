@@ -6,49 +6,47 @@
     android:layout_marginTop="10dp">
 
     <com.jhy.org.yueqiu.view.ChallengeLayout layout="@layout/layout_challenge"
-        android:layout_toRightOf="@+id/iv_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/challengeContent"
-        android:layout_toLeftOf="@+id/tv_apply"
         android:layout_centerVertical="true"
         android:layout_marginLeft="10dp"
         />
-    <ImageView
-        android:id="@+id/iv_head"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/icon_launcher"
-        android:scaleType="centerCrop"
-        android:layout_alignTop="@id/challengeContent"
-        android:layout_alignBottom="@id/challengeContent"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="10dp"
-        />
-    <ImageView
-        android:id="@+id/tv_apply"
-        android:layout_width="30dp"
-        android:layout_height="80dp"
-        android:src="@drawable/icon_challenge_aplay"
-        android:scaleType="centerInside"
-        android:layout_alignParentRight="true"
-        android:layout_alignBottom="@id/challengeContent"
-        android:onClick="clickApply"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        />
-        <TextView
-            android:id="@+id/tv_apply_text"
-            android:layout_width="30dp"
-            android:layout_height="80dp"
-            android:text="查看报名"
-            android:textColor="@color/white"
-            android:background="@color/orange"
-            android:gravity="center"
-            android:layout_alignParentRight="true"
-            android:layout_alignBottom="@id/challengeContent"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="5dp"
-            android:onClick="checkApply"
-            android:visibility="gone"/>
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_head"-->
+        <!--android:layout_width="70dp"-->
+        <!--android:layout_height="70dp"-->
+        <!--android:src="@drawable/icon_launcher"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:layout_alignTop="@id/challengeContent"-->
+        <!--android:layout_alignBottom="@id/challengeContent"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--/>-->
+    <!--<ImageView-->
+        <!--android:id="@+id/tv_apply"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_height="80dp"-->
+        <!--android:src="@drawable/icon_challenge_aplay"-->
+        <!--android:scaleType="centerInside"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignBottom="@id/challengeContent"-->
+        <!--android:onClick="clickApply"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_apply_text"-->
+            <!--android:layout_width="30dp"-->
+            <!--android:layout_height="80dp"-->
+            <!--android:text="查看报名"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:background="@color/orange"-->
+            <!--android:gravity="center"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignBottom="@id/challengeContent"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:layout_marginBottom="5dp"-->
+            <!--android:onClick="checkApply"-->
+            <!--android:visibility="gone"/>-->
 </RelativeLayout>

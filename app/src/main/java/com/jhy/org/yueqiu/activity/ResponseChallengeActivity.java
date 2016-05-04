@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.GalleryAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.MyChallege;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Post;
 
@@ -29,12 +30,15 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 
 /*
@@ -95,6 +99,10 @@ public class ResponseChallengeActivity extends Activity {
         @Override
         public void onClick(View v) {
             person = BmobUser.getCurrentUser(context, Person.class);//得到当前用户的对象
+            if (person.getObjectId().equals(challenge.getInitiator().getObjectId())) {
+                    Toast.makeText(context,"您不能报名自己发起的挑战",Toast.LENGTH_SHORT).show();
+            }else {
+
             BmobQuery<Person> bmobQuery = new BmobQuery<Person>();
             bmobQuery.addWhereRelatedTo("responders", new BmobPointer(challenge));
             bmobQuery.findObjects(context, new FindListener<Person>() {
@@ -108,6 +116,7 @@ public class ResponseChallengeActivity extends Activity {
                         }
                     }
                     if (i != 1 && person.getObjectId() != challenge.getInitiator().getObjectId()) {
+                        //将该用户添加到挑战列表
                         BmobRelation responders = new BmobRelation();
                         responders.add(person);//将用户对象添加到多对多关联
                         challenge.setResponders(responders);
@@ -122,6 +131,22 @@ public class ResponseChallengeActivity extends Activity {
                             public void onFailure(int i, String s) {
                             }
                         });
+                        //将该挑战添加到我的报名列表
+                        MyChallege myChallege = new MyChallege();
+                        myChallege.setPersonID(person.getObjectId());
+                        myChallege.setChallenge(challenge);
+                        myChallege.save(context, new SaveListener() {
+                            @Override
+                            public void onSuccess() {
+                                Log.i("MyChallege","MyChallege成功");
+                            }
+
+                            @Override
+                            public void onFailure(int i, String s) {
+
+                            }
+                        });
+
                     }
 
 
@@ -133,6 +158,7 @@ public class ResponseChallengeActivity extends Activity {
                 }
             });
 
+        }
         }
     };
     //设置取消报名监听
@@ -210,7 +236,55 @@ public class ResponseChallengeActivity extends Activity {
     View.OnClickListener noClick = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Toast.makeText(context,"您已取消报名",Toast.LENGTH_SHORT).show();
+            BmobQuery<MyChallege> bmobQuery = new BmobQuery<>();
+            bmobQuery.include("challenge");
+            bmobQuery.addWhereEqualTo("personID", BmobUser.getCurrentUser(context).getObjectId());
+            bmobQuery.addWhereEqualTo("challenge", challenge);
+            bmobQuery.findObjects(context, new FindListener<MyChallege>() {
+                @Override
+                public void onSuccess(List<MyChallege> list) {
+                    Log.i("MyChallege", "MyChallege进入成功" + list.get(0).getObjectId());
+                    MyChallege myChallege = list.get(0);
+                    //删除MyChallege表中数据
+                    myChallege.delete(context, new DeleteListener() {
+                        @Override
+                        public void onSuccess() {
+                            Log.i("MyChallege", "delete成功");
+                            Toast.makeText(context, "取消成功", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            Log.i("MyChallege", "delete失败" + s);
+                        }
+                    });
+
+                }
+
+                @Override
+                public void onError(int i, String s) {
+                    Log.i("MyChallege", "MyChallege进入失败" + s + i);
+                }
+            });
+            Person person1 = BmobUser.getCurrentUser(context,Person.class);
+            //删除Challege表中数据
+            BmobRelation relation = new BmobRelation();
+            relation.remove(person1);
+            Log.i("MyChallege", "person" + person1.getObjectId());
+            Log.i("MyChallege", "challenge" + challenge.getObjectId());
+            challenge.setResponders(relation);
+            challenge.update(context, new UpdateListener() {
+                @Override
+                public void onSuccess() {
+                    Log.i("MyChallege", "challege中响应者删除成功");
+                }
+
+                @Override
+                public void onFailure(int i, String s) {
+                    Log.i("MyChallege", "challege中响应者删除失败" + s + i);
+                }
+            });
         }
     };
     //建立响应者显示列表
