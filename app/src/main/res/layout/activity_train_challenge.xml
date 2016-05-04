@@ -116,7 +116,6 @@
     <LinearLayout
         android:id="@+id/container_title"
         android:focusable="true"
-        android:clickable="true"
         android:background="@drawable/icon_edit"
         android:gravity="center_vertical"
         android:padding="8dp"

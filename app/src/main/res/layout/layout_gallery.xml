@@ -51,162 +51,170 @@
 
     <RadioGroup
         android:id="@+id/rg_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/container_header"
         android:orientation="horizontal"
-        >
+        android:layout_below="@id/container_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <RadioButton
             android:id="@+id/rb_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="NBA战报"
             android:textSize="16sp"
             android:textColor="@drawable/selector_nba_war_text"
             android:drawableBottom="@drawable/selector_border_warning"
-            android:layout_marginTop="10dp"
             android:drawablePadding="4dp"
             android:button="@null"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
         <RadioButton
             android:id="@+id/rb_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:text="全名约球"
             android:textSize="16sp"
-            android:button="@null"
-            android:textColor="@drawable/selector_nba_war_text"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:checked="true"
-            android:drawableBottom="@drawable/selector_border_warning"
-            />
-        <RadioButton
-            android:id="@+id/rb_three"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="NBA赛程"
-            android:textSize="16sp"
-            android:button="@null"
             android:textColor="@drawable/selector_nba_war_text"
             android:drawableBottom="@drawable/selector_border_warning"
             android:drawablePadding="4dp"
+            android:button="@null"
+            android:checked="true"
             android:gravity="center"
-            android:layout_marginTop="10dp"/>
+            android:paddingTop="8dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb_three"
+            android:text="NBA赛程"
+            android:textSize="16sp"
+            android:textColor="@drawable/selector_nba_war_text"
+            android:drawableBottom="@drawable/selector_border_warning"
+            android:drawablePadding="4dp"
+            android:button="@null"
+            android:gravity="center"
+            android:paddingTop="8dp"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </RadioGroup>
-    <ScrollView
-    android:id="@+id/sv_nbawar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/container_gallery"
         android:layout_below="@id/rg_title"
-        android:visibility="invisible"
-        android:layout_above="@+id/tv_war"
-        android:overScrollMode="never"
-        android:fillViewport="true">
-        <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp">
+
+        <ScrollView
+            android:id="@+id/sv_nbawar"
+            android:visibility="invisible"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_home_nbawar"
-            android:scaleType="fitStart"
-            android:layout_marginTop="1dp"
-            />
-    </ScrollView>
-    <ScrollView
-    android:id="@+id/sv_nbapk"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@id/rg_title"
-        android:visibility="invisible"
-        android:layout_above="@+id/tv_war"
-        android:overScrollMode="never">
-        <ImageView
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:fillViewport="true">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_home_nbawar"
+                android:scaleType="fitStart"
+                android:layout_marginTop="1dp" />
+        </ScrollView>
+
+        <ScrollView
+            android:id="@+id/sv_nbapk"
+            android:visibility="invisible"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_home_nbapk"
+                android:scaleType="fitStart"
+                />
+        </ScrollView>
+
+        <Gallery
+            android:id="@+id/gallery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:spacing="30dp"
+            android:unselectedAlpha="1"
+            android:layout_marginTop="-5dp" />
+    </RelativeLayout>
+
+
+    <RadioGroup
+        android:id="@+id/markGroup"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_alignBottom="@id/container_gallery"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="6dp">
+        <RadioButton
+            android:id="@+id/rb_markone"
+            android:background="@drawable/selector_gallery"
+            android:button="@null"
+            android:checked="true"
+            android:layout_marginRight="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_home_nbapk"
-            android:scaleType="fitStart"
-            />
-    </ScrollView>
-    <Gallery
-        android:id="@+id/gallery"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_below="@id/rg_title"
-        android:spacing="30dp"
-        android:unselectedAlpha="1"
-        android:layout_marginTop="-5dp"
-        ></Gallery>
-        <RadioGroup
-            android:id="@+id/markGroup"
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:id="@+id/rb_marktwo"
+            android:background="@drawable/selector_gallery"
+            android:button="@null"
+            android:layout_marginRight="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignBottom="@id/gallery"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="5dp">
-            <RadioButton
-                android:id="@+id/rb_markone"
-                android:layout_width="wrap_content"
-                android:layout_height="6dp"
-                android:background="@drawable/selector_gallery"
-                android:button="@null"
-                android:checked="true"
-                android:layout_marginRight="5dp"/>
-            <RadioButton
-                android:id="@+id/rb_marktwo"
-                android:layout_width="wrap_content"
-                android:layout_height="6dp"
-                android:background="@drawable/selector_gallery"
-                android:button="@null"
-                android:layout_marginRight="5dp"/>
-            <RadioButton
-                android:id="@+id/rb_markthree"
-                android:layout_width="wrap_content"
-                android:layout_height="6dp"
-                android:background="@drawable/selector_gallery"
-                android:button="@null"/>
-        </RadioGroup>
+            android:layout_height="match_parent"/>
+        <RadioButton
+            android:id="@+id/rb_markthree"
+            android:background="@drawable/selector_gallery"
+            android:button="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"/>
+    </RadioGroup>
+
     <TextView
         android:id="@+id/tv_war"
-        android:layout_width="80dp"
-        android:layout_height="wrap_content"
         android:text="约站列表"
         android:textSize="20dp"
         android:textColor="@color/orange"
         android:drawableBottom="@drawable/icon_border_warning"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/gallery"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="more&gt;&gt;"
-            android:layout_alignBottom="@id/tv_war"
-            android:layout_toRightOf="@id/tv_war"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="5dp"/>
-        <ImageView
+        android:layout_below="@id/container_gallery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:text="more&gt;&gt;"
+        android:layout_alignBottom="@id/tv_war"
+        android:layout_toRightOf="@id/tv_war"
+        android:layout_marginLeft="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <ImageView
+        android:src="@drawable/icon_hr"
         android:layout_below="@id/tv_war"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_hr" />
-            <ImageView
-            android:layout_below="@id/tv_war"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/icon_home_background"
-                android:scaleType="centerInside"
-                android:layout_marginBottom="64dp"
-                android:layout_marginTop="10dp"/>
-    <ListView
-        android:id="@+id/lv_war"
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="64dp"
-        android:divider="@null"
-        android:layout_below="@+id/tv_war"></ListView>
+        android:layout_height="wrap_content"/>
+
+    <RelativeLayout
+        android:layout_below="@+id/tv_war"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:src="@drawable/icon_home_background"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+        <ListView
+            android:id="@+id/lv_war"
+            android:divider="@null"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+
     <com.jhy.org.yueqiu.view.NavLayout
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
