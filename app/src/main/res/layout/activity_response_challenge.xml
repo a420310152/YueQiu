@@ -96,6 +96,7 @@
             android:layout_alignBottom="@id/tv_two"
             android:layout_toRightOf="@id/tv_two"
             android:text="发起类型"
+            android:singleLine="false"
             android:textColor="@color/lightseagreen"
             android:textSize="20dp" />
 
@@ -123,9 +124,9 @@
             android:id="@+id/tv_four"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@id/tv_time"
-            android:layout_toRightOf="@id/tv_time"
-            android:text="，地点在"
+            android:layout_alignLeft="@id/tv_three"
+            android:layout_below="@id/tv_time"
+            android:text="地点在"
             android:textColor="@color/darkgray"
             android:textSize="20dp" />
 
@@ -133,7 +134,8 @@
             android:id="@+id/tv_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tv_four"
+            android:layout_toRightOf="@id/tv_four"
+            android:layout_alignBottom="@id/tv_four"
             android:layout_centerHorizontal="true"
             android:singleLine="false"
             android:text="某某地点"

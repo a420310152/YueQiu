@@ -258,7 +258,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         tv_war.setOnClickListener(clickwar);
         Bmob.initialize(getContext(), Key.bmob.application_id);
         listView = (ListView) view.findViewById(R.id.lv_war);
-        challengeAdapter = new ChallengeAdapter(challengeList, getContext());
+        challengeAdapter = new ChallengeAdapter(challengeList, getContext(),true);
         listView.setOnItemClickListener(itemClick);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
         query.setLimit(3);
