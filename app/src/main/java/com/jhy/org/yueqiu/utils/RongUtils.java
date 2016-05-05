@@ -1,13 +1,17 @@
 package com.jhy.org.yueqiu.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
+import com.jhy.org.yueqiu.activity.ContactActivity;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.rong.ContactNotificationMessageProvider;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
@@ -36,6 +40,8 @@ import io.rong.message.TextMessage;
 public class RongUtils {
     private static boolean isConnected = false;
     private static boolean isRequestingToken = false;
+    private static String token = null;
+    private static HashMap<String, UserInfo> userInfoMap;
 
     private static Logx logx = new Logx(RongUtils.class);
 
@@ -48,20 +54,22 @@ public class RongUtils {
         String packageName = app.getApplicationInfo().packageName;
         if (packageName.equals(curProcessName) || "io.rong.push".equals(curProcessName)) {
             RongIM.init(app);
+            //RongIM.registerMessageTemplate(new ContactNotificationMessageProvider());
             setConversationListBehaviorListener();
+            setUserInfoProvider();
             connect();
+
+            userInfoMap = new HashMap<>();
         }
     }
 
     // 连接RongIM, 这是一个必须的动作
     public static void connect () {
         App app = App.getInstance();
-        String token = Preferences.get(App.user.token);
-
-        if (app != null && !isConnected && checkToken()) {
+        if (!isConnected && checkToken()) {
+            logx.e("正在connect...");
             String curPorcessName = App.getCurProcessName(app);
             String packageName = app.getApplicationInfo().packageName;
-
             if (packageName.equals(curPorcessName)) {
 
                 RongIM.connect(token, new RongIMClient.ConnectCallback() {
@@ -72,27 +80,8 @@ public class RongUtils {
                         requestToken((String) BmobUser.getObjectByKey(App.getInstance(), "objectId"));
                     }
                     @Override
-                    public void onSuccess(String s) {
-                        isConnected = true;
-
-                        RongIM rong = RongIM.getInstance();
-                        if (rong != null) {
-                            String userId = Preferences.get(App.user.id);
-                            String name = Preferences.get(App.user.name);
-                            String portaitUri = Preferences.get(App.user.portrait_uri);
-
-                            UserInfo info = new UserInfo(userId, name, Uri.parse(portaitUri));
-
-                            rong.setCurrentUserInfo(info);
-                            rong.setMessageAttachedUserInfo(true);
-                        } else {
-                            logx.e("无法绑定用户信息 rong == null");
-                        }
-
-//                        logx.e("connect 成功:");
-//                        logx.e("\t\t\tuserId = " + s);
-//                        logx.e("\t\t\tusername = " + Preferences.get(App.user.name));
-//                        logx.e("\t\t\ttoken = " + Preferences.get(App.user.token));
+                    public void onSuccess(String userId) {
+                        onConnectSuccess(userId);
                     }
                     @Override
                     public void onError(RongIMClient.ErrorCode errorCode) {
@@ -104,8 +93,39 @@ public class RongUtils {
         }
     }
 
+    private static void onConnectSuccess (String userId) {
+        isConnected = true;
+        RongIM rong = RongIM.getInstance();
+
+        String name = Preferences.get(App.user.name);
+        String portaitUri = Preferences.get(App.user.portrait_uri);
+        UserInfo userInfo = new UserInfo(userId, name, Uri.parse(portaitUri));
+
+        rong.setCurrentUserInfo(userInfo);
+        rong.setMessageAttachedUserInfo(true);
+        refreshUserInfo(userInfo);
+
+        setSendMessageListener();
+    }
+
+    public static void disconnect () {
+        RongIM rong = RongIM.getInstance();
+        if (rong != null) {
+//            rong.getRongIMClient().logout();
+            rong.disconnect();
+        }
+        isConnected = false;
+    }
+
     // 请求token
     public static void requestToken (String userId, String name, String portraitUri) {
+        if (Utils.isEmpty(portraitUri)) {
+            portraitUri = Person.URL_DEFAULT_AVATAR;
+        }
+        Preferences.set(App.user.id, userId);
+        Preferences.set(App.user.name, name);
+        Preferences.set(App.user.portrait_uri, portraitUri);
+
         Map<String, String> params = new HashMap<>();
         params.put("userId", userId);
         params.put("name", name);
@@ -125,10 +145,11 @@ public class RongUtils {
                 String data = response.body().string();
                 try {
                     JSONObject obj = new JSONObject(data);
-                    String token = obj.getString("token");
+                    token = obj.getString("token");
                     if (token != null) {
                         Preferences.set(App.user.token, token);
                         connect();
+                        logx.e("请求TOKEN 成功");
                     } else {
                         logx.e("请求TOKEN 成功, 但并没有获得TOKEN: " + data);
                     }
@@ -150,11 +171,8 @@ public class RongUtils {
                     String name = person.getUsername();
                     String portaitUri = person.getAvatarUrl();
 
-                    Preferences.set(App.user.id, userId);
-                    Preferences.set(App.user.name, name);
-                    Preferences.set(App.user.portrait_uri, portaitUri);
-
                     requestToken(userId, name, portaitUri);
+                    refreshUserInfo(userId, name, portaitUri);
                 }
 
                 @Override
@@ -172,19 +190,14 @@ public class RongUtils {
         String userId = Preferences.get(App.user.id);
         String name = Preferences.get(App.user.name);
         String portaitUri = Preferences.get(App.user.portrait_uri);
-        String token = Preferences.get(App.user.token);
+        token = Preferences.get(App.user.token);
 
-        Person person = BmobUser.getCurrentUser(App.getInstance(), Person.class);
-//        String avatarUrl = person.getAvatarUrl();
-//        if (Utils.isEmpty(avatarUrl)) {
-//            avatarUrl = Person.URL_DEFAULT_AVATAR;
-//        }
-
+        Person person = Person.getCurrentUser();
         if (person != null) {
-            boolean needsUpdate = !Utils.equals(userId, person.getObjectId())
-                    || !Utils.equals(name, person.getUsername())
-                    //|| !Utils.equals(portaitUri, avatarUrl)
-                    || Utils.isEmpty(token);
+            boolean needsUpdate = Utils.isEmpty(token)
+                    || !Utils.equals(portaitUri, person.getAvatarUrl())
+                    || !Utils.equals(userId, person.getObjectId())
+                    || !Utils.equals(name, person.getUsername());
             if (needsUpdate && !isRequestingToken) {
 //                logx.e("checkToken 需要更新TOKEN");
                 requestToken(person.getObjectId());
@@ -195,22 +208,44 @@ public class RongUtils {
         return true;
     }
 
+    public static void refreshUserInfo (UserInfo userInfo) {
+        if (userInfo != null) {
+            RongIM rong = RongIM.getInstance();
+            if (rong != null) {
+                rong.refreshUserInfoCache(userInfo);
+            }
+            userInfoMap.put(userInfo.getUserId(), userInfo);
+        }
+    }
     public static void refreshUserInfo (String userId, String name, String portraitUri) {
-        checkToken();
-        Preferences.set(App.user.id, userId);
-        Preferences.set(App.user.name, name);
-        Preferences.set(App.user.portrait_uri, portraitUri);
+        UserInfo userInfo = new UserInfo(userId, name, Uri.parse(portraitUri));
 
         RongIM rong = RongIM.getInstance();
         if (rong != null) {
-            rong.refreshUserInfoCache(new UserInfo(userId, name, Uri.parse(portraitUri)));
+            rong.refreshUserInfoCache(userInfo);
+        }
+        userInfoMap.put(userId, userInfo);
+    }
+
+    public static void refreshUserInfo (Person person) {
+        if (person != null) {
+            refreshUserInfo(person.getObjectId(), person.getUsername(), person.getAvatarUrl());
         }
     }
 
+    private static void setUserInfoProvider () {
+        RongIM.setUserInfoProvider(new RongIM.UserInfoProvider() {
+            @Override
+            public UserInfo getUserInfo(String userId) {
+                return userInfoMap.get(userId);
+            }
+        }, true);
+    }
+
     public static void sendContactNotificationMessage (String operation, String targetId, String message) {
-        Person person = BmobUser.getCurrentUser(App.getInstance(), Person.class);
-        if (person != null) {
-            sendContactNotificationMessage(operation, person.getObjectId(), targetId, message);
+        Person currentUser = Person.getCurrentUser();
+        if (currentUser != null) {
+            sendContactNotificationMessage(operation, currentUser.getObjectId(), targetId, message);
         }
     }
     public static void sendContactNotificationMessage (String operation, String sourceUserId, String targetUserId, String message) {
@@ -227,7 +262,7 @@ public class RongUtils {
 
                         @Override
                         public void onSuccess(Integer integer) {
-//                            logx.e("发送好友通知消息 成功: " + integer);
+                            logx.e("发送好友通知消息 成功: " + integer);
                         }
 
                         @Override
@@ -239,7 +274,7 @@ public class RongUtils {
                     new RongIMClient.ResultCallback<Message>() {
                         @Override
                         public void onSuccess(Message message) {
-//                            logx.e("发送好友消息通知, 返回结果 成功: " + message.getObjectName());
+                            logx.e("发送好友消息通知, 返回结果 成功: " + message.getObjectName());
                         }
 
                         @Override
@@ -247,6 +282,32 @@ public class RongUtils {
                             logx.e("发送好友消息通知, 返回结果 失败: " + errorCode.getMessage());
                         }
                     });
+        }
+    }
+
+    private static void setSendMessageListener () {
+        RongIM rong = RongIM.getInstance();
+        if (rong != null) {
+            rong.setSendMessageListener(new RongIM.OnSendMessageListener() {
+                @Override
+                public Message onSend(Message message) {
+                    return message;
+                }
+
+                @Override
+                public boolean onSent(Message message, RongIM.SentMessageErrorCode sentMessageErrorCode) {
+                    if (message.getSentStatus() == Message.SentStatus.SENT) {
+                        MessageContent messageContent = message.getContent();
+                        if (messageContent instanceof ContactNotificationMessage) {
+                            RongIM rong = RongIM.getInstance();
+                            if (rong != null) {
+                                rong.getRongIMClient().deleteMessages(new int[] {message.getMessageId()});
+                            }
+                        }
+                    }
+                    return false;
+                }
+            });
         }
     }
 
@@ -272,17 +333,35 @@ public class RongUtils {
             public boolean onConversationClick(Context context, View view, UIConversation uiConversation) {
                 MessageContent content = uiConversation.getMessageContent();
                 RongIM rong = RongIM.getInstance();
-                if (content instanceof TextMessage) {
-                    rong.startPrivateChat(context, content.getUserInfo().getUserId(), null);
-                } else if (content instanceof ContactNotificationMessage) {
+                if (content instanceof ContactNotificationMessage) {
                     ContactNotificationMessage message = (ContactNotificationMessage) content;
 
-                    Intent oppenentActivity = new Intent(context, OpponentActivity.class);
-                    oppenentActivity.putExtra("userId", message.getSourceUserId());
-                    oppenentActivity.putExtra("action", "response");
-                    context.startActivity(oppenentActivity);
+                    String sourceUserId = message.getSourceUserId();
+                    String targetUserId = message.getTargetUserId();
+                    Person currentUser = Person.getCurrentUser();
+                    if (currentUser != null && sourceUserId.equals(currentUser.getObjectId())) {
+                        rong.startPrivateChat(context, targetUserId, null);
+                    } else {
+                        if (context instanceof ContactActivity) {
+                            ContactActivity activity = (ContactActivity) context;
+
+                            if (!activity.hasFriend(targetUserId)) {
+                                Intent oppenentIntent = new Intent(context, OpponentActivity.class);
+                                oppenentIntent.putExtra("userId", message.getSourceUserId());
+                                oppenentIntent.putExtra("action", "response");
+
+                                activity.startActivityForResult(oppenentIntent, 12);
+                            } else {
+                                rong.startPrivateChat(context, targetUserId, null);
+                            }
+                        } else {
+//                            context.startActivity(oppenentIntent);
+                            rong.startPrivateChat(context, targetUserId, null);
+                        }
+                    }
+                    return true;
                 }
-                return true;
+                return false;
             }
 
             @Override
