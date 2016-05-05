@@ -3,7 +3,6 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -17,14 +16,12 @@ import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.AllTeamLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
 
 /**
  * Created by Administrator on 2016/4/23.
@@ -37,6 +34,7 @@ public class MyAllTeamActivity extends Activity {
     private BmobUser my_allTeam_bmobuser;
     private Button btn_add_team;//创建球队按钮
     private Person person;//当前用户
+    private List<Person> memberList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,18 +64,13 @@ public class MyAllTeamActivity extends Activity {
         person = BmobUser.getCurrentUser(MyAllTeamActivity.this, Person.class);
     }
 
-    //返回按钮监听
-    public void allteaminfoClick(View v) {
-        finish();
-    }
-
     //判断我是否创建过球队并查询
     private void queryTeam() {
         BmobQuery<Team> query = new BmobQuery<>();
         query.addWhereEqualTo("creator", new BmobPointer(person));
         query.findObjects(this, new FindListener<Team>() {
             @Override
-            public void onSuccess(List<Team> list) {
+            public void onSuccess(final List<Team> list) {
                 if (!Utils.isEmpty(list)) {
                     team = list.get(0);
                     btn_add_team.setVisibility(View.INVISIBLE);
@@ -114,13 +107,15 @@ public class MyAllTeamActivity extends Activity {
     //查询我加入的球队
     private void addTeam() {
         BmobQuery<Team> query = new BmobQuery<Team>();
-        query.addWhereEqualTo("addTeam", new BmobPointer(person));
+        query.addWhereEqualTo("addTeam", new BmobPointer(team));
         query.findObjects(this, new FindListener<Team>() {
 
             @Override
             public void onSuccess(List<Team> list) {
                 for (final Team addteam : list) {
                     allTeamLayout.setAllTeamInfo(addteam);
+                    allTeamAdapter = new AllTeamAdapter(MyAllTeamActivity.this,list);
+                    lv_allteam_info.setAdapter(allTeamAdapter);
                     lv_allteam_info.setOnItemClickListener(new OnItemClickListener() {
 
                         @Override

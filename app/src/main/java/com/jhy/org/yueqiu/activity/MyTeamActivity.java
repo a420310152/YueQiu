@@ -18,6 +18,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -38,12 +40,16 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
+import static com.jhy.org.yueqiu.R.id.actionbar_profile_title;
+
 /*
  **********************************************
  * 			所有者 C: (曹昌盛)
  **********************************************
  */
-public class MyTeamActivity extends Activity implements OnClickListener{
+
+public class MyTeamActivity extends Activity{
+
     private ImageView iv_team_logo;//球队logo
     private EditText et_team_name;//球队名称
     private EditText et_team_slogan;//球队宣言
@@ -56,10 +62,13 @@ public class MyTeamActivity extends Activity implements OnClickListener{
     private BmobUser myTeam_bmobUser;
     private ImageLoader imageLoader;
     private BmobRelation  relation;
+    private BmobRelation relationTeam;
     private Person teamMember;//添加的球员
+    private Intent memberIntent;
     private Intent addMemberIntent;
     private ActionBarLayout actionBarLayout;
     private int REQUEST_CODE_FOR_MESSAGE = 123;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,8 +86,45 @@ public class MyTeamActivity extends Activity implements OnClickListener{
         lv_team_memember = (ListView) findViewById(R.id.lv_team_memember);
         imageLoader = new ImageLoader(MyTeamActivity.this,iv_team_logo);
         actionBarLayout = (ActionBarLayout) findViewById(R.id.actionbar_team_title);
-        actionBarLayout.setOptionsOnClickListener(MyTeamActivity.this);
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        actionBarLayout.setOptionsOnClickListener(click);
+        //上传头像
+        String logo = team.getLogoUrl();
+        Picasso.with(context)
+                .load(logo)
+                .transform(new RoundTransform())
+                .into(iv_team_logo);
+    }
+
+    //保存按钮的监听
+        View.OnClickListener click = new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                String myteam_name = et_team_name.getText().toString();
+                String myteam_slogan = et_team_slogan.getText().toString();
+                if(myteam_name!=null && myteam_slogan!=null) {
+                    team.setCreator(BmobUser.getCurrentUser(MyTeamActivity.this,Person.class));
+                    team.setName(myteam_name);
+                    team.setMotto(myteam_slogan);
+                    team.setMembers(relation);
+                    team.save(context, new SaveListener() {
+                        @Override
+                        public void onSuccess() {
+                            Toast.makeText(MyTeamActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            Toast.makeText(MyTeamActivity.this, "保存失败" + s, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+        };
     //判断登录状态
     private void saveTeamInfo(){
         myTeam_bmobUser = BmobUser.getCurrentUser(this);
@@ -96,38 +142,12 @@ public class MyTeamActivity extends Activity implements OnClickListener{
             if(team!=null){
                 et_team_name.setText(team.getName());
                 et_team_slogan.setText(team.getMotto());
-                String logo = team.getLogoUrl();
-                Picasso.with(context)
-                        .load(logo)
-                        .transform(new RoundTransform())
-                        .into(iv_team_logo);
+                queryMember();
             }else{
 
             }
         }
-    //保存信息按钮的监听
-    @Override
-    public void onClick(View v) {
-        String myteam_name = et_team_name.getText().toString();
-        String myteam_slogan = et_team_slogan.getText().toString();
-        if(myteam_name!=null && myteam_slogan!=null) {
-            team.setCreator(BmobUser.getCurrentUser(this,Person.class));
-            team.setName(myteam_name);
-            team.setMotto(myteam_slogan);
-            team.setMembers(relation);
-            team.save(context, new SaveListener() {
-                @Override
-                public void onSuccess() {
-                    Toast.makeText(MyTeamActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
-                }
 
-                @Override
-                public void onFailure(int i, String s) {
-                    Toast.makeText(MyTeamActivity.this, "保存失败" + s, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
     //进入我的加入球队界面显示输入框中的信息
         private void showAddTeamInfo(){
             Intent intent =getIntent();
@@ -155,51 +175,34 @@ public class MyTeamActivity extends Activity implements OnClickListener{
         }
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_MESSAGE) {
-                teamMember = null;
-
                 // 得到返回的结果
-                Person user = (Person) data.getSerializableExtra("result");
-            }
-        }
-    }
-    //添加成员按钮的监听
-    public void teaminfoClick(View v){
-                addMemberIntent = new Intent(context,ContactActivity.class);
-                addMemberIntent.putExtra("message",true);
-                startActivityForResult(addMemberIntent,REQUEST_CODE_FOR_MESSAGE);
-
+                teamMember = (Person) data.getSerializableExtra("result");
                 relation = new BmobRelation();
                 relation.add(teamMember);
+                Log.e("添加按钮监听", "team是否有数据" + team);
                 team.setMembers(relation);
+                Log.e("relation","添加的成员数1"+teamMember);
                 team.update(this, new UpdateListener() {
                     @Override
                     public void onSuccess() {
+                        Toast.makeText(MyTeamActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         queryMember();
                     }
                     @Override
                     public void onFailure(int i, String s) {
                         Log.i("onFailure","添加队员失败"+s);
                     }
-            });
+                });
+            }
         }
-
-    //上传队友加入球队的信息至Person表
-    private  void addTeamBmob(){
-        BmobRelation relationTeam = new BmobRelation();
-        relationTeam.add(team);
-        teamMember.setAddTeam(relationTeam);
-        teamMember.save(context, new SaveListener() {
-            @Override
-            public void onSuccess() {
-                Log.e("onSuccess","上传加入球队信息成功");
-            }
-
-            @Override
-            public void onFailure(int i, String s) {
-                Log.e("onFailure","上传加入球队信息失败"+s);
-            }
-        });
     }
+    //添加成员按钮的监听
+    public void teaminfoClick(View v){
+                addMemberIntent = new Intent(MyTeamActivity.this,ContactActivity.class);
+                addMemberIntent.putExtra("message", true);
+                startActivityForResult(addMemberIntent, REQUEST_CODE_FOR_MESSAGE);
+
+        }
     //查询成员信息
     private void queryMember(){
         BmobQuery<Person> query = new BmobQuery<>();
@@ -207,9 +210,19 @@ public class MyTeamActivity extends Activity implements OnClickListener{
         query.findObjects(this, new FindListener<Person>() {
 
             @Override
-            public void onSuccess(List<Person> list) {
-                teamAdapter = new TeamAdapter(MyTeamActivity.this,list);
+            public void onSuccess(final List<Person> list) {
+                Log.e("onSuccess","我的队员信息"+list);
+                teamAdapter = new TeamAdapter(MyTeamActivity.this, list);
                 lv_team_memember.setAdapter(teamAdapter);
+                lv_team_memember.setOnItemClickListener(new OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        memberIntent = new Intent(MyTeamActivity.this,OpponentActivity.class);
+                        Person person = list.get(position);
+                        memberIntent.putExtra("person",person);
+                        startActivity(memberIntent);
+                    }
+                });
             }
 
             @Override
@@ -217,8 +230,8 @@ public class MyTeamActivity extends Activity implements OnClickListener{
 
             }
         });
-
     }
+
     //上传头像
     static private Logx logx = new Logx(MyTeamActivity.class);
     private BmobFile bmobFile;

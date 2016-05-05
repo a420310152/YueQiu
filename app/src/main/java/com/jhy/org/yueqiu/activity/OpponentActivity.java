@@ -82,7 +82,6 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
     }
 
     private void build() {
-        tv_info_title = (TextView) findViewById(R.id.tv_info_title);
         iv_info_head = (ImageView) findViewById(R.id.iv_info_head);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_sex = (TextView) findViewById(R.id.tv_sex);

@@ -212,7 +212,7 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         if (needsResult) {
             Intent resultIntent = new Intent();
             resultIntent.putExtra("result", selectedUser);
-            setResult(selectedUser == null ? RESULT_CANCELED : RESULT_OK);
+            setResult(selectedUser == null ? RESULT_CANCELED : RESULT_OK, resultIntent);
         }
         finish();
     }
