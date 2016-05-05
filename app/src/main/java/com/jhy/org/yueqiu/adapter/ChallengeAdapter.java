@@ -52,18 +52,23 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         super.getView(position, convertView, parent);
+        ViewHolder viewHolder = null;
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.adapter_challenge, null);
-            challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
+            viewHolder = new ViewHolder();
+            viewHolder.challengeLayout = (ChallengeLayout) convertView.findViewById(R.id.challengeContent);
 //            iv_head = (ImageView) convertView.findViewById(R.id.iv_head);
 //            tv_apply = (ImageView) convertView.findViewById(R.id.tv_apply);
 //            tv_apply.setId(1000 + position);
 //            iv_head.setTag(position);
+                convertView.setTag(viewHolder);
+
         }
 //        iv_head.setOnClickListener(headClick);
 //        tv_apply.setOnClickListener(click);
+        viewHolder = (ViewHolder) convertView.getTag();
         challenge = list.get(position);
-        challengeLayout.setContent(challenge,b);//调用ChallengeLayout类里的方法设置内容
+        viewHolder.challengeLayout.setContent(challenge,b);//调用ChallengeLayout类里的方法设置内容
 
 //        //开始设置每一个挑战的发起人头像  此时需要每次都向服务器获取
 //        Log.i("getAvatarUrl", "challenge.getInitiator().getAvatarUrl()===" + challenge.getInitiator().getAvatarUrl());
@@ -75,7 +80,9 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
 //        }
         return convertView;
     }
-
+    private class ViewHolder{
+    private ChallengeLayout challengeLayout;
+    }
 
 //    //点击头像弹出个人资料
 //    View.OnClickListener headClick = new View.OnClickListener() {
