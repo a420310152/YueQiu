@@ -14,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -83,13 +84,11 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
         findViewById(R.id.container_place).setOnClickListener(this);
 
         et_title = (EditText) findViewById(R.id.et_title);
-        findViewById(R.id.container_title).setOnClickListener(this);
+        et_title.setOnClickListener(this);
 
         btn_publish = (Button) findViewById(R.id.btn_publish);
         btn_publish.setOnClickListener(this);
 
-        ibtn_finish = (ImageButton) findViewById(R.id.ibtn_finish);
-        ibtn_finish.setOnClickListener(this);
 
         my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
         my_picker.setYearPickerVisible(false);
@@ -137,10 +136,11 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
                 visible = true;
                 currentView = tv_toDate;
                 break;
-            case R.id.container_title:
-                et_title.setSelectAllOnFocus(true);
-                et_title.setSelected(true);
-                et_title.requestFocus();
+            case R.id.et_title:
+//                et_title.setFocusable(true);
+//                et_title.setFocusableInTouchMode(true);
+//                et_title.requestFocus();
+//                et_title.findFocus();
                 break;
             case R.id.container_place:
                 searchPlaceIntent.putExtra("needsPlace", true);
@@ -148,9 +148,6 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
                 break;
             case R.id.btn_publish:
                 publish();
-                break;
-            case R.id.ibtn_finish:
-                finish();
                 break;
             default:
                 visible = false;
