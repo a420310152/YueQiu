@@ -1,11 +1,16 @@
 package com.jhy.org.yueqiu.domain;
 
+import com.jhy.org.yueqiu.config.App;
+import com.jhy.org.yueqiu.utils.Utils;
+
 import java.util.List;
 
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
+import cn.bmob.v3.listener.GetListener;
 
 /*
  **********************************************
@@ -35,6 +40,15 @@ public class Person extends BmobUser {
     private List<String> collection;// 收藏的地点
     private BmobRelation footprints;// 足迹
     private BmobRelation addTeam;//加入的球队；
+
+    public static Person getCurrentUser () {
+        return BmobUser.getCurrentUser(App.getInstance(), Person.class);
+    }
+
+    public static void query (String objectId, GetListener<Person> listener) {
+        BmobQuery<Person> query = new BmobQuery<>();
+        query.getObject(App.getInstance(), objectId, listener);
+    }
 
     public BmobRelation getAddTeam() {
         return addTeam;
@@ -110,10 +124,16 @@ public class Person extends BmobUser {
     }
 
     public String getAvatarUrl() {
+        if (Utils.isEmpty(avatarUrl)) {
+            return URL_DEFAULT_AVATAR;
+        }
         return avatarUrl;
     }
 
     public void setAvatarUrl(String avatarUrl) {
+        if (Utils.isEmpty(avatarUrl)) {
+            avatarUrl = URL_DEFAULT_AVATAR;
+        }
         this.avatarUrl = avatarUrl;
     }
 

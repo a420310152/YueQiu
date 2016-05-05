@@ -11,20 +11,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         chx:title_text="约战列表"></com.jhy.org.yueqiu.view.ActionBarLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="刷新"
-            android:onClick="referensh"
-            android:layout_alignParentRight="true"
-            android:layout_margin="10dp"
-            />
 
-
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_ly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/action_bar"
+        >
     <ListView
         android:id="@+id/lv_war"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/action_bar"
-        android:divider="@null" />
+        android:layout_height="match_parent"
+        android:dividerHeight="1dp"
+         />
+    </android.support.v4.widget.SwipeRefreshLayout>
 </RelativeLayout>

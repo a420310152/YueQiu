@@ -259,6 +259,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         tv_war.setOnClickListener(clickwar);
         Bmob.initialize(getContext(), Key.bmob.application_id);
         listView = (ListView) view.findViewById(R.id.lv_war);
+        listView.setDividerHeight(0);
         challengeAdapter = new ChallengeAdapter(challengeList, getContext(),true);
         listView.setOnItemClickListener(itemClick);
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
@@ -307,7 +308,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
             if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
                 intent = new Intent(getContext(), OpponentActivity.class);
-                intent.putExtra("challenge", challenge);
+                intent.putExtra("person", challenge.getInitiator());
                 Log.i("rea", "challenge===========" + challenge.getInitiator());
                 startActivity(intent);
             } else if (type.equals(Challenge.TYPE_TEAM)) {

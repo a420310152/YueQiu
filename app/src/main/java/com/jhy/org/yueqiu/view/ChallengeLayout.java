@@ -88,7 +88,7 @@ public class ChallengeLayout extends LinearLayout {
         public void onClick(View v) {
             String type = challenge.getType();
             Intent intent = new Intent(context, OpponentActivity.class);
-            intent.putExtra("challenge", challenge);
+            intent.putExtra("person", challenge.getInitiator());
             Log.i("rea", "challenge===========" + challenge.getInitiator());
             context.startActivity(intent);
         }
@@ -105,18 +105,8 @@ public class ChallengeLayout extends LinearLayout {
                     .into(iv_head);
         }
         //查询Person表的数据 获得发起人的名字
-        BmobQuery<Person> bmobQuery = new BmobQuery<Person>();
-        bmobQuery.getObject(context, challenge.getInitiator().getObjectId(), new GetListener<Person>() {
-            @Override
-            public void onSuccess(Person person) {
-                tv_setName.setText(person.getUsername());
-            }
+        tv_setName.setText(challenge.getInitiator().getUsername());
 
-            @Override
-            public void onFailure(int i, String s) {
-
-            }
-        });
         // 获得发起人选择的地点名字
 
         String placeString = challenge.getPlaceName() + "";

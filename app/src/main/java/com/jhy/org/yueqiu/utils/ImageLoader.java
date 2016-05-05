@@ -94,29 +94,29 @@ public class ImageLoader implements View.OnClickListener {
     }
 
     public File setResult (int requestCode, Intent data) {
+        if (data != null) {
+            switch (requestCode) {
 
-        switch (requestCode) {
+                case CODE_IMAGE_REQUEST:
+                    resizeImage(data.getData());
+                    break;
 
-            case CODE_IMAGE_REQUEST:
-                resizeImage(data.getData());
-                break;
+                case CODE_CAMERA_REQUEST:
+                    if (isSdcardExisting()) {
+                        resizeImage(uri);
+                    } else {
+                        Toast.makeText(activity, "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
 
-            case CODE_CAMERA_REQUEST:
-                if (isSdcardExisting()) {
-                    resizeImage(uri);
-                } else {
-                    Toast.makeText(activity, "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT).show();
-                }
-                break;
-
-            case CODE_RESIZE_REQUEST:
-                if (data != null) {
-                    showResizeImage(data);
-                    return file;
-                }
-                break;
+                case CODE_RESIZE_REQUEST:
+                    if (data != null) {
+                        showResizeImage(data);
+                        return file;
+                    }
+                    break;
+            }
         }
-
         return null;
     }
 
