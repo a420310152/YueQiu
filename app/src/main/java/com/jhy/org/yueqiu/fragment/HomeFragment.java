@@ -8,6 +8,7 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Gallery;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -38,6 +40,7 @@ import com.jhy.org.yueqiu.adapter.HomeGalleryAdapter;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.Constant;
 import com.jhy.org.yueqiu.domain.OnReceiveWeatherInfoListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Place;
@@ -87,6 +90,14 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     ScrollView sv_nbapk;
     TextView tv_war;
 
+    //获取显示屏幕大小
+    private void getDisplay(){
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getActivity().getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        Constant.displayWidth = displayMetrics.widthPixels;
+        Constant.displayHeight = displayMetrics.heightPixels;
+    }
+
     //以下是H修改的部分
     ImageView iv_weather;
     TextView tv_temp;
@@ -97,6 +108,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.layout_gallery, null);
+        getDisplay();
         buildup();
         //以下是H修改的部分
         initWeather();
@@ -116,7 +128,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         gallery = (Gallery) view.findViewById(R.id.gallery);
         sv_nbawar = (ScrollView) view.findViewById(R.id.sv_nbawar);
         sv_nbapk = (ScrollView) view.findViewById(R.id.sv_nbapk);
-
+        //设置控件的自适应大小
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.FILL_PARENT,
+                (int) (Constant.displayHeight * 0.4f + 0.5f));
+        gallery.setLayoutParams(params);
+        sv_nbawar.setLayoutParams(params);
+        sv_nbapk.setLayoutParams(params);
         list = new ArrayList<Integer>();
         list.add(R.drawable.icon_home_gallery1);
         list.add(R.drawable.icon_home_gallery2);
