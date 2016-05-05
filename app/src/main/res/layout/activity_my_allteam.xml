@@ -1,39 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <LinearLayout
+    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
+        chx:title_text="我的球队"
+        chx:title_textSize="15sp"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@color/blackui"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/team"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:id="@+id/tv_allteam_title"/>
-
-    </LinearLayout>
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/icon_system_right"
-        android:padding="25dp"
-        android:background="@null"
-        android:onClick="allteaminfoClick"
-        android:id="@+id/btn_allteam_back"/>
+        android:id="@+id/actionbar_allteam_title"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
         android:background="@color/orange"
-        android:layout_below="@id/btn_allteam_back"
+        android:layout_below="@id/actionbar_allteam_title"
         android:text="我创建的球队"
-        android:textSize="30dp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:gravity="center"
         android:id="@+id/tv_my_buildteam"/>
@@ -53,13 +36,13 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="30dp"
         android:layout_below="@id/btn_add_team"
         android:text="我加入的球队"
-        android:textSize="30dp"
+        android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@color/dimgray"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:gravity="center"
         android:id="@+id/tv_jointeam_info"/>
     <ListView

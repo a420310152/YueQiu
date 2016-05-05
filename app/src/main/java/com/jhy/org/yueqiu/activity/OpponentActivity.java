@@ -37,6 +37,7 @@ import cn.bmob.v3.listener.GetListener;
 import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import io.rong.imkit.RongIM;
+import io.rong.message.ContactNotificationMessage;
 
 /**
  * Created by Administrator on 2016/4/18.
@@ -82,7 +83,6 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
     }
 
     private void build() {
-        tv_info_title = (TextView) findViewById(R.id.tv_info_title);
         iv_info_head = (ImageView) findViewById(R.id.iv_info_head);
         tv_name = (TextView) findViewById(R.id.tv_name);
         tv_sex = (TextView) findViewById(R.id.tv_sex);
@@ -146,6 +146,7 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
         }
         this.targetPerson = person;
         checkContact(person);
+        RongUtils.refreshUserInfo(person);
 
         //设置对手信息
         if (person.getAvatarUrl() != null) {
@@ -193,6 +194,10 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
             finish();
         } else if (Utils.equals(actionOfIntent, "response")) {
             responseToAddFriend(person);
+        } else {
+            requestToAddFriend(person);
+            showToast("已发送好友请求!");
+            finish();
         }
     }
 
@@ -230,6 +235,13 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
         });
     }
 
+    private void returnResult () {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra("targetId", targetPerson.getObjectId());
+        setResult(RESULT_OK, resultIntent);
+        finish();
+    }
+
     //响应添加一个好友
     private void responseToAddFriend (Person person) {
         Person currentUser = BmobUser.getCurrentUser(context, Person.class);
@@ -255,7 +267,7 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
             public void onSuccess() {
                 showToast("已成功添加好友, 开始和ta聊天吧!");
                 btn_addFriend.setVisibility(View.GONE);
-                finish();
+                returnResult();
             }
 
             @Override
@@ -269,7 +281,7 @@ public class OpponentActivity extends Activity implements View.OnClickListener {
     //请求添加好友
     private void requestToAddFriend (Person person) {
         logx.e("requestToAddFriend");
-        RongUtils.sendContactNotificationMessage("Request", person.getObjectId(), "您好! XXX请求添加您为好友!");
+        RongUtils.sendContactNotificationMessage("Request", person.getObjectId(), "您好， " + person.getUsername() + "请求添加您为好友!");
     }
 
     //点击加为好友 向Bmob中Contact表中添加newfriends

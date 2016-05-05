@@ -100,13 +100,13 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
     // 发布一条挑战记录
     private void publish () {
         String _title = et_title.getText().toString();
-        if (Utils.isEmpty(_title)
-                || Utils.isEmpty(tv_place.getText())
-                || Utils.isEmpty(tv_fromDate.getText())
-                || Utils.isEmpty(tv_toDate.getText())) {
-            showToast("提交错误, 请重新填写");
-            return;
-        }
+//        if (Utils.isEmpty(_title)
+//                || Utils.isEmpty(tv_place.getText())
+//                || Utils.isEmpty(tv_fromDate.getText())
+//                || Utils.isEmpty(tv_toDate.getText())) {
+//            showToast("提交错误, 请重新填写");
+//            return;
+//        }
         challenge.setTitle(_title);
         challenge.save(context, new SaveListener() {
             @Override

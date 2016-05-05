@@ -1,6 +1,7 @@
 package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,9 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.config.App;
+import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.fragment.SidebarFragment;
 import com.jhy.org.yueqiu.test.c.TestActivity;
+import com.jhy.org.yueqiu.utils.Logx;
+import com.jhy.org.yueqiu.utils.Preferences;
 import com.jhy.org.yueqiu.utils.RongUtils;
+import com.jhy.org.yueqiu.utils.Utils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,6 +38,7 @@ import cn.bmob.v3.listener.UpdateListener;
  **********************************************
  */
 public class LoginActivity extends Activity{
+    private Context context = this;
     ImageView iv_login_head;
     EditText et_login_name;
     EditText et_login_password;
@@ -41,6 +48,8 @@ public class LoginActivity extends Activity{
     ImageView iv_login_qq;
     ImageView iv_login_weixin;
     ImageView iv_login_weibo;
+
+    private static Logx logx = new Logx(LoginActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +109,21 @@ public class LoginActivity extends Activity{
                     toast("登录成功");
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
-                    RongUtils.connect();
+
+                    Person currentUser = Person.getCurrentUser();
+                    if (currentUser != null) {
+                        String userId = currentUser.getObjectId();
+                        String name = currentUser.getUsername();
+                        String avatarUrl = currentUser.getAvatarUrl();
+
+                        if (Utils.isEmpty(avatarUrl)) {
+                            logx.e("登录 成功: 用户的 avatarUrl 为空");
+                            avatarUrl = Person.URL_DEFAULT_AVATAR;
+                        }
+
+                        RongUtils.requestToken(userId, name, avatarUrl);
+                    }
+//                    RongUtils.connect();
                 }
 
                 @Override

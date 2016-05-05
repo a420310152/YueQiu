@@ -7,6 +7,7 @@ import com.jhy.org.yueqiu.utils.ImageLoader;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.RoundTransform;
+import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.OnValuePickedListener;
 import com.jhy.org.yueqiu.view.PickerLayout;
 import com.squareup.picasso.Picasso;
@@ -15,10 +16,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.View.OnClickListener;
@@ -30,14 +36,17 @@ import cn.bmob.v3.datatype.BmobFile;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
+import static com.jhy.org.yueqiu.R.id.actionbar_profile_title;
+import static com.jhy.org.yueqiu.R.id.btn_info_send;
+
 /*
  **********************************************
  * 			所有者 C: (曹昌盛)
  **********************************************
  */
-public class MyProfileActivity extends Activity implements OnValuePickedListener{
+public class MyProfileActivity extends Activity implements OnValuePickedListener,OnClickListener{
     private ImageView iv_info_head;
-    private Button btn_info_edit;
+    private ActionBarLayout actionBarLayout;
     private EditText et_info_name;
     private TextView tv_selector_sex;
     private TextView tv_selector_age;
@@ -51,6 +60,12 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
     private Context context = this;
     private BmobUser my_profile_bmobUser;
     private ImageLoader imageLoader;
+    private int value;
+    private RelativeLayout relat_info_sex;
+    private RelativeLayout relat_info_age;
+    private RelativeLayout relat_info_height;
+    private RelativeLayout relat_info_weight;
+    private RelativeLayout relat_info_skilled;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,29 +74,51 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
     }
     private void init(){
         iv_info_head = (ImageView) findViewById(R.id.iv_info_head);
-        btn_info_edit = (Button) findViewById(R.id.btn_info_edit);
         et_info_name = (EditText) findViewById(R.id.et_info_name);
         tv_selector_sex = (TextView) findViewById(R.id.tv_selector_sex);
         tv_selector_age = (TextView) findViewById(R.id.tv_selector_age);
         tv_selector_height = (TextView) findViewById(R.id.tv_selector_height);
         tv_selector_weight = (TextView) findViewById(R.id.tv_selector_weight);
         tv_selector_skilled = (TextView) findViewById(R.id.tv_selector_skilled);
+        actionBarLayout = (ActionBarLayout) findViewById(actionbar_profile_title);
+        actionBarLayout.setOptionsOnClickListener(click);
         btn_info_send = (Button) findViewById(R.id.btn_info_send);
+        relat_info_sex = (RelativeLayout) findViewById(R.id.relat_info_sex);
+        relat_info_age = (RelativeLayout) findViewById(R.id.relat_info_age);
+        relat_info_height = (RelativeLayout) findViewById(R.id.relat_info_height);
+        relat_info_weight = (RelativeLayout) findViewById(R.id.relat_info_weight);
+        relat_info_skilled = (RelativeLayout) findViewById(R.id.relat_info_skilled);
+
         pickerLayout = (PickerLayout) findViewById(R.id.info_picker);
         pickerLayout.setOnValuePickedListener(MyProfileActivity.this);
-        btn_info_edit.setOnClickListener(click);
         pickerLayout.setTitle("TITLE");
         my_profile = BmobUser.getCurrentUser(context, Person.class);
         imageLoader = new ImageLoader(MyProfileActivity.this,iv_info_head);
         saveMyProfile();
 
-        //uploadFile(new File("/sdcard/yueqiu/user/avatar.jpg"));
+        //以下是H修改的部分
+        //显示用户头像
+        String avatar = my_profile.getAvatarUrl();
+        Picasso.with(context)
+                .load(avatar)
+                .transform(new RoundTransform())
+                .into(iv_info_head);
     }
     //对编辑按钮进行监听，点击时显示上传按钮
-    OnClickListener click = new OnClickListener(){
+   OnClickListener click = new OnClickListener(){
         @Override
         public void onClick(View v) {
             btn_info_send.setVisibility(View.VISIBLE);
+            et_info_name.setFocusable(true);
+            et_info_name.setFocusableInTouchMode(true);
+            et_info_name.requestFocus();
+
+            relat_info_sex.setOnClickListener(MyProfileActivity.this);
+            relat_info_age.setOnClickListener(MyProfileActivity.this);
+            relat_info_height.setOnClickListener(MyProfileActivity.this);
+            relat_info_weight.setOnClickListener(MyProfileActivity.this);
+            relat_info_skilled.setOnClickListener(MyProfileActivity.this);
+            btn_info_send.setOnClickListener(MyProfileActivity.this);
         }
     };
 
@@ -120,38 +157,26 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
             String userposition = (String) BmobUser.getObjectByKey(context, "position");
             tv_selector_skilled.setText(userposition);
 
-            //以下是H修改的部分
-            //显示用户头像
-            String avatar = my_profile.getAvatarUrl();
-            Picasso.with(context)
-                    .load(avatar)
-                    .transform(new RoundTransform())
-                    .into(iv_info_head);
         } else {
             startActivity(new Intent(context, LoginActivity.class));
             finish();
         }
     }
 
-    public void myProfileBackClick(View v){
-        finish();
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (imageLoader != null) {
-
             //下面是H修改的部分
 //            imageLoader.setResult(requestCode, data);
             uploadFile(imageLoader.setResult(requestCode, data));
         }
     }
-
-    public void setInfoClick(View v){
+    @Override
+    public void onClick(View v) {
         currentView = v;
         switch (v.getId()){
-            case R.id.linear_info_sex:
+            case R.id.relat_info_sex:
                 pickerLayout.setVisibility(View.VISIBLE);
                 String[] values = new String[]{"男", "女"};
                 pickerLayout.setValues(values);
@@ -174,19 +199,15 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
 
             case R.id.relat_info_skilled:
                 pickerLayout.setVisibility(View.VISIBLE);
-                String[] position = new String[]{"PG", "C","SG","PF","SF"};
-                pickerLayout.setValues(position);
+                String[] skilled = new String[]{"PG", "C","SG","PF","SF"};
+                pickerLayout.setValues(skilled);
                 break;
 
             case R.id.btn_info_send:
                 pickerLayout.setVisibility(View.INVISIBLE);
                 String my_profile_name = et_info_name.getText().toString();
-                String path = Environment.getExternalStorageDirectory()+"avatar.jpg";
-                BmobFile file=new BmobFile(new File(path));
-
                 if(my_profile_name!=null && my_profile!=null) {
                     my_profile.setUsername(my_profile_name);
-                    my_profile.setAvatar(file);
                     my_profile.update(MyProfileActivity.this, new UpdateListener() {
                         @Override
                         public void onSuccess() {
@@ -204,14 +225,14 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
     }
 
     @Override
-    public void onValuePicked(PickerLayout picker, int value) {
+    public void onValuePicked(PickerLayout pickerLayout, int value) {
         if (my_profile == null) {
             return;
         }
         switch (currentView.getId()){
-            case R.id.linear_info_sex:
-                my_profile.setSex(picker.getValue() == "男");
-                tv_selector_sex.setText(picker.getValue());
+            case R.id.relat_info_sex:
+                my_profile.setSex(pickerLayout.getValue().equals("男"));
+                tv_selector_sex.setText(pickerLayout.getValue());
                 break;
             case R.id.relat_info_age:
                 my_profile.setAge(value);
@@ -226,8 +247,8 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
                 tv_selector_weight.setText(value+ " kg");
                 break;
             case R.id.relat_info_skilled:
-                my_profile.setPosition(picker.getValue());
-                tv_selector_skilled.setText(picker.getValue());
+                my_profile.setPosition(pickerLayout.getValue());
+                tv_selector_skilled.setText(pickerLayout.getValue());
                 break;
         }
 
@@ -277,4 +298,9 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
             }
         });
     }
+
+
+
+
+
 }

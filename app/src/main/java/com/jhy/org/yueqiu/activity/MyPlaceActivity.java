@@ -69,9 +69,18 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_place);
 
-        currentUser = BmobUser.getCurrentUser(context, Person.class);
-        App.registerReceiveUserLocation(this);
+        currentUser = Person.getCurrentUser();
+        if (currentUser == null) {
+            finish();
+        } else {
+            initView();
 
+            App.registerReceiveUserLocation(this);
+            queryCollection();
+        }
+    }
+
+    private void initView () {
         ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
         ibtn_back.setOnClickListener(this);
 
@@ -82,8 +91,6 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
 
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(this);
-
-        queryCollection();
     }
 
     // 1. 先查询到用户收藏的地点

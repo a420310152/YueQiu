@@ -1,50 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@id/container_header"
+    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
+        chx:title_text="我的资料"
+        chx:title_textSize="15sp"
+        chx:options_visible="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/blackui" >
-
-        <TextView
-            android:id="@+id/tv_info_title"
-            android:text="我的资料"
-            android:textSize="28sp"
-            android:textColor="@color/white"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btn_info_back"
-            android:onClick="myProfileBackClick"
-            android:background="@null"
-            android:drawableLeft="@drawable/icon_system_right"
-            android:paddingLeft="16dp"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
-            android:id="@+id/btn_info_edit"
-            android:background="@null"
-            android:drawableRight="@drawable/icon_myfile_info"
-            android:paddingRight="16dp"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
+        android:id="@+id/actionbar_profile_title"/>
 
     <ScrollView
         android:id="@+id/scroll_main"
-        android:layout_below="@id/container_header"
+        android:layout_below="@id/actionbar_profile_title"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -57,13 +28,14 @@
                 android:background="@drawable/icon_sidebar_head"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:onClick="setInfoClick"
+                android:focusable="false"
+                android:clickable="false"
                 android:id="@+id/iv_info_head"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="上传头像"
-                android:textSize="25sp"
+                android:text="用户头像"
+                android:textSize="15sp"
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/iv_info_head"
                 android:layout_centerHorizontal="true"
@@ -71,7 +43,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/icon_myprofile_bground"
@@ -84,42 +56,43 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_name"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_name"/>
 
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:background="@null"
                     android:layout_marginLeft="40dp"
+                    android:focusable="false"
                     android:id="@+id/et_info_name"/>
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/linear_info_name"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
-                android:onClick="setInfoClick"
-                android:id="@+id/linear_info_sex">
+                android:clickable="true"
+                android:id="@+id/relat_info_sex">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_sex"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_sex"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:drawableRight="@drawable/icon_myprofile_selector"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
+                    android:paddingTop="12dp"
                     android:layout_marginLeft="50dp"
-                    android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_sex"
                     android:layout_alignParentRight="true"
                     android:layout_centerInParent="true"
@@ -129,27 +102,28 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:layout_below="@id/linear_info_sex"
-                android:layout_marginTop="-10dp"
+                android:layout_height="50dp"
+                android:layout_below="@id/relat_info_sex"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
-                android:onClick="setInfoClick"
+                android:clickable="true"
                 android:id="@+id/relat_info_age">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_age"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_age"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:drawableRight="@drawable/icon_myprofile_selector"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:layout_marginLeft="50dp"
+                    android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_age"
                     android:layout_alignParentRight="true"
@@ -160,26 +134,27 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/relat_info_age"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/icon_myprofile_bground"
-                android:onClick="setInfoClick"
+                android:clickable="true"
                 android:id="@+id/relat_info_height">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_height"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_height"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:drawableRight="@drawable/icon_myprofile_selector"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
+                    android:paddingTop="7dp"
                     android:layout_marginLeft="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_height"
@@ -191,26 +166,27 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/relat_info_height"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
-                android:onClick="setInfoClick"
+                android:clickable="true"
                 android:id="@+id/relat_info_weight">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_weight"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_weight"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:drawableRight="@drawable/icon_myprofile_selector"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
+                    android:paddingTop="7dp"
                     android:layout_marginLeft="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_weight"
@@ -222,26 +198,27 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/relat_info_weight"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
-                android:onClick="setInfoClick"
+                android:clickable="true"
                 android:id="@+id/relat_info_skilled">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_skilled"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_skilled"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:drawableRight="@drawable/icon_myprofile_selector"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
+                    android:paddingTop="7dp"
                     android:layout_marginLeft="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_skilled"
@@ -257,10 +234,12 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/relat_info_skilled"
                 android:text="上传"
-                android:textSize="30dp"
+                android:textSize="25dp"
+                android:textColor="@color/white"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:layout_centerHorizontal="true"
-                android:onClick="setInfoClick"
+                android:background="@drawable/icon_profile_send"
                 android:visibility="invisible"
                 android:id="@+id/btn_info_send"/>
 

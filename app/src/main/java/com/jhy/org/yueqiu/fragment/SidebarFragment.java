@@ -28,6 +28,7 @@ import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.squareup.picasso.Picasso;
 
 import cn.bmob.v3.BmobUser;
+import io.rong.imkit.RongIM;
 
 /*
  **********************************************
@@ -35,6 +36,7 @@ import cn.bmob.v3.BmobUser;
  **********************************************
  */
 public class SidebarFragment extends Fragment implements OnClickListener {
+    private Activity activity;
 
     private TextView tv_register_login;
     private Button btn_apply;
@@ -45,19 +47,21 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     private Button btn_cancel;
     private BmobUser login_bmobUser;
     private View view;
-    private Context context;
 
     private RelativeLayout container_header;
     private ImageView img_avatar;
 
 
-    public void setContext(Context context){
-        this.context = context;
+    public void setContext (Context activity){
+        //this.activity = activity;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_sidebar, container, false);
+
+        activity = getActivity();
+
         init();
         judge();
         return  view;
@@ -81,8 +85,8 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_cancel.setOnClickListener(this);
 
         //以下是H修改的部分
-//        if(context != null){
-//            login_bmobUser = BmobUser.getCurrentUser(context);
+//        if(activity != null){
+//            login_bmobUser = BmobUser.getCurrentUser(activity);
 //        }
         container_header = (RelativeLayout) view.findViewById(R.id.container_header);
         container_header.setOnClickListener(this);
@@ -90,14 +94,14 @@ public class SidebarFragment extends Fragment implements OnClickListener {
 
     }
     public void judge() {
-        Person currentUser = BmobUser.getCurrentUser(context, Person.class);
+        Person currentUser = BmobUser.getCurrentUser(activity, Person.class);
 
         if (currentUser != null && btn_cancel != null) {
             String username = currentUser.getUsername();
             tv_register_login.setText(username);
             btn_cancel.setVisibility(View.VISIBLE);
 
-            Picasso.with(context)
+            Picasso.with(activity)
                     .load(currentUser.getAvatarUrl())
                     .transform(new RoundTransform())
                     .into(img_avatar);
@@ -116,7 +120,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         switch (v.getId()){
             case R.id.tv_register_login:
             case R.id.container_header:
-                login_bmobUser = BmobUser.getCurrentUser(context);
+                login_bmobUser = BmobUser.getCurrentUser(activity);
                 if (login_bmobUser != null) {
                     Intent myprofileIntent = new Intent(getActivity(), MyProfileActivity.class);
                     startActivity(myprofileIntent);
@@ -146,10 +150,20 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 startActivity(settingIntent);
                 break;
             case R.id.btn_cancel:
-                BmobUser.logOut(context);   //清除缓存用户对象
+                logout();
                 tv_register_login.setText("登录/注册");
-                startActivity(new Intent(context, LoginActivity.class));
+                startActivity(new Intent(activity, LoginActivity.class));
                 break;
         }
+    }
+
+    private void logout () {
+        BmobUser.logOut(activity);   //清除缓存用户对象
+//
+//        RongIM rong  = RongIM.getInstance();
+//        if (rong != null) {
+//            rong.disconnect();
+////            rong.getRongIMClient().logout();
+//        }
     }
 }

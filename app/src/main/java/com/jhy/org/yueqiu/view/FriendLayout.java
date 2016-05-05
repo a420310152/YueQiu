@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.squareup.picasso.Picasso;
@@ -87,6 +88,8 @@ public class FriendLayout extends RelativeLayout implements View.OnClickListener
             tv_username.setText(username);
             tv_signature.setText(signature);
             tv_position.setText(position);
+
+            RongUtils.refreshUserInfo(person.getObjectId(), username, avatar);
         }
         return this;
     }

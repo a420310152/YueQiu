@@ -22,6 +22,9 @@ import android.os.Message;
 import android.os.Parcel;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.view.ContextMenu;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.CompoundButton;
@@ -42,6 +45,7 @@ import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.datatype.BmobQueryResult;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SQLQueryListener;
 import cn.bmob.v3.listener.UpdateListener;
@@ -88,7 +92,7 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        currentUser = BmobUser.getCurrentUser(context, Person.class);
+        currentUser = Person.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(context, LoginActivity.class));
             finish();
@@ -98,35 +102,89 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         contactAdapter = new FriendAdapter(this, contactList);
 
         initView();
-        fillContactList();
-        resolveIntent(getIntent());
         //addFriends();
         //confirmToAddAFriend();
     }
 
-    private void confirmToAddAFriend () {
-        RongUtils.sendContactNotificationMessage(ContactNotificationMessage.CONTACT_OPERATION_REQUEST, Test7.user.hoge.id, "我是xxx, 请求加你为好友");
-        /*
-        RongIM rong = RongIM.getInstance();
-        if (rong != null) {
-            Conversation.ConversationType type = Conversation.ConversationType.PRIVATE;
-            String targetId = Test7.user.hoge.id;
-            String messageContent = "我是xxx, 请求加你为好友";
-            ContactNotificationMessage message = ContactNotificationMessage.obtain(ContactNotificationMessage.CONTACT_OPERATION_REQUEST, Test7.user.piyo.id, Test7.user.hoge.id, messageContent);
-            rong.getRongIMClient().sendMessage(type, targetId, message, "", "", new RongIMClient.SendMessageCallback() {
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fillContactList();
+        resolveIntent(getIntent());
+    }
 
-                @Override
-                public void onSuccess(Integer integer) {
-                    logx.e("发送消息 成功: " + integer);
-                }
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.add(ContextMenu.NONE, 1, 1, "删除好友");
+    }
 
-                @Override
-                public void onError(Integer integer, RongIMClient.ErrorCode errorCode) {
-                    logx.e("发送消息 失败: " + integer + errorCode.getMessage());
-                }
-            });
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        super.onContextItemSelected(item);
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int position = info.position;
+        long id = item.getItemId();
+        if (id == 1) {
+            Person person = contactList.get(position);
+            deleteFriend(person);
+            contactAdapter.remove(position);
+            logx.e("选中Person: " + person.getUsername());
         }
-        */
+        return true;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && data != null) {
+            String targetId = data.getStringExtra("targetId");
+            RongIM rong = RongIM.getInstance();
+            if (!Utils.isEmpty(targetId) && rong != null) {
+                rong.getRongIMClient().removeConversation(Conversation.ConversationType.PRIVATE, targetId);
+            }
+        }
+    }
+
+    public boolean hasFriend (String userId) {
+        for (Person i : contactList) {
+            if (i.getObjectId().equals(userId)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void deleteFriend (Person person) {
+        NewFriends.query(currentUser, person, new FindListener<NewFriends>() {
+            @Override
+            public void onSuccess(List<NewFriends> list) {
+                logx.e("查询成功，准备删除联系人 list.size() == " + list.size());
+                for (NewFriends i : list) {
+                    i.delete(context, new DeleteListener() {
+                        @Override
+                        public void onSuccess() {
+                            logx.e("删除联系人 成功");
+                        }
+
+                        @Override
+                        public void onFailure(int i, String s) {
+                            logx.e("删除联系人 失败> i: " + i + ", s: " + s);
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                logx.e("查询联系人失败：i:" + i + ", s:" + s);
+            }
+        });
+    }
+
+    private void confirmToAddAFriend () {
+        RongUtils.sendContactNotificationMessage("Request", Test7.user.hoge.id, "我是xxx, 请求加你为好友");
     }
 
     private void initView () {
@@ -145,6 +203,7 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
 
         lv_contacts = (ListView) findViewById(R.id.lv_contacts);
         lv_contacts.setOnItemClickListener(this);
+        registerForContextMenu(lv_contacts);
 
         fragment_conversationlist = (RelativeLayout) findViewById(R.id.fragment_conversationlist);
     }
@@ -171,12 +230,12 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         ConversationListFragment fragment = new ConversationListFragment();
 
         Uri uri = Uri.parse("rong://" + getApplicationInfo().packageName).buildUpon()
-            .appendPath("conversationlist")
-            .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话非聚合显示
-            .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "true")//设置群组会话聚合显示
-            .appendQueryParameter(Conversation.ConversationType.DISCUSSION.getName(), "false")//设置讨论组会话非聚合显示
-            .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "false")//设置系统会话非聚合显示
-            .build();
+                .appendPath("conversationlist")
+                .appendQueryParameter(Conversation.ConversationType.PRIVATE.getName(), "false") //设置私聊会话非聚合显示
+                .appendQueryParameter(Conversation.ConversationType.GROUP.getName(), "false")//设置群组会话聚合显示
+                .appendQueryParameter(Conversation.ConversationType.DISCUSSION.getName(), "false")//设置讨论组会话非聚合显示
+                .appendQueryParameter(Conversation.ConversationType.SYSTEM.getName(), "false")//设置系统会话非聚合显示
+                .build();
 
         fragment.setUri(uri);
 
@@ -186,13 +245,11 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
     }
 
     private void fillContactList () {
-        BmobQuery<NewFriends> query = new BmobQuery<>();
-        query.addWhereEqualTo("master", currentUser);
-        query.include("underFriends");
-        query.findObjects(context, new FindListener<NewFriends>() {
+        NewFriends.query(currentUser, new FindListener<NewFriends>() {
             @Override
             public void onSuccess(List<NewFriends> list) {
                 if (!Utils.isEmpty(list)) {
+
                     contactList.clear();
                     for (NewFriends i : list) {
                         contactList.add(i.getUnderFriends());
@@ -212,7 +269,7 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         if (needsResult) {
             Intent resultIntent = new Intent();
             resultIntent.putExtra("result", selectedUser);
-            setResult(selectedUser == null ? RESULT_CANCELED : RESULT_OK);
+            setResult(selectedUser == null ? RESULT_CANCELED : RESULT_OK, resultIntent);
         }
         finish();
     }
