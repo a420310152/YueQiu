@@ -15,10 +15,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/iv_menember_head"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_toRightOf="@id/iv_menember_head"
         android:text="队员："
-        android:textSize="25dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_memember_name_text"
@@ -27,7 +27,7 @@
         android:layout_alignTop="@id/tv_memember_name"
         android:layout_toRightOf="@id/tv_memember_name"
         android:text="11"
-        android:textSize="25sp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_memember_height"
@@ -36,7 +36,7 @@
         android:layout_below="@id/tv_memember_name"
         android:layout_toRightOf="@id/iv_menember_head"
         android:text="身高:"
-        android:textSize="20dp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_memember_height_text"
@@ -45,7 +45,7 @@
         android:layout_alignTop="@id/tv_memember_height"
         android:layout_toRightOf="@id/tv_memember_height"
         android:text="11"
-        android:textSize="20dp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_memember_weight"
@@ -55,7 +55,7 @@
         android:layout_marginLeft="80dp"
         android:layout_toRightOf="@id/tv_memember_height"
         android:text="体重:"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_memember_weight_text"
@@ -64,7 +64,7 @@
         android:layout_alignTop="@id/tv_memember_weight"
         android:layout_toRightOf="@id/tv_memember_weight"
         android:text="11"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_memember_position"
@@ -73,7 +73,7 @@
         android:layout_below="@id/tv_memember_height"
         android:layout_toRightOf="@id/iv_menember_head"
         android:text="擅长位置:"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 
     <TextView
         android:id="@+id/tv_memember_position_text"
@@ -82,5 +82,5 @@
         android:layout_alignTop="@id/tv_memember_position"
         android:layout_toRightOf="@id/tv_memember_position"
         android:text="11"
-        android:textSize="20sp" />
+        android:textSize="17sp" />
 </RelativeLayout>

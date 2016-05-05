@@ -1,42 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
+        chx:title_text="通知"
+        chx:title_textSize="15sp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:background="@color/blackui"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="通知"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:id="@+id/tv_system_title"/>
-    </LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableLeft="@drawable/icon_system_right"
-        android:padding="18dp"
-        android:background="@null"
-        android:onClick="myToastBackClick"
-        android:id="@+id/btn_system_back"/>
+        android:id="@+id/actionbar_setting_toast_title"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_system_back"
+        android:layout_below="@id/actionbar_setting_toast_title"
         android:background="@color/white"
         android:text="新消息通知"
-        android:drawableRight="@drawable/icon_myprofile_selector"
-        android:textSize="30sp"
-        android:padding="20dp"
+        android:drawableRight="@drawable/icon_setting"
+        android:textSize="20sp"
+        android:padding="10dp"
         android:id="@+id/tv_system_new_message"/>
 
     <TextView
@@ -44,49 +27,49 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_system_new_message"
         android:background="@color/white"
-        android:drawableRight="@drawable/icon_myprofile_selector"
+        android:drawableRight="@drawable/icon_setting_selected"
         android:text="通知显示消息内容"
-        android:textSize="30sp"
-        android:padding="20dp"
+        android:textSize="20sp"
+        android:padding="10dp"
         android:id="@+id/tv_system_show_message"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_system_show_message"
         android:background="@color/white"
-        android:drawableRight="@drawable/icon_myprofile_selector"
+        android:drawableRight="@drawable/icon_setting_selected"
         android:text="附近球友通知显示"
-        android:textSize="30sp"
-        android:padding="20dp"
+        android:textSize="20sp"
+        android:padding="10dp"
         android:id="@+id/tv_system_show_fraend"/>
     <TextView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_below="@id/tv_system_show_fraend"
     android:background="@color/white"
-    android:drawableRight="@drawable/icon_myprofile_selector"
+    android:drawableRight="@drawable/icon_setting"
     android:text="夜间防骚扰模式"
-    android:textSize="30sp"
-    android:padding="20dp"
+    android:textSize="20sp"
+    android:padding="10dp"
     android:id="@+id/tv_system_mode"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_system_mode"
         android:background="@color/white"
-        android:drawableRight="@drawable/icon_myprofile_selector"
+        android:drawableRight="@drawable/icon_setting"
         android:text="球友动态消息显示"
-        android:textSize="30sp"
-        android:padding="20dp"
+        android:textSize="20sp"
+        android:padding="10dp"
         android:id="@+id/tv_system_friend_message"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_system_friend_message"
         android:background="@color/white"
-        android:drawableRight="@drawable/icon_myprofile_selector"
+        android:drawableRight="@drawable/icon_setting"
         android:text="定位显示"
-        android:textSize="30sp"
-        android:padding="20dp"
+        android:textSize="20sp"
+        android:padding="10dp"
         android:id="@+id/tv_system_position"/>
 </RelativeLayout>

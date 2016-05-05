@@ -12,7 +12,7 @@
         android:id="@+id/actionbar_login_title"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="150dp"
         android:layout_below="@id/actionbar_login_title"
         android:background="@drawable/icon_login_background"
         android:id="@+id/line_login_head">
@@ -39,8 +39,8 @@
         <!--android:layout_centerHorizontal="true"-->
         <!--android:id="@+id/tv_login_head"/>-->
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_below="@id/line_login_head"
         android:layout_marginTop="30dp"
         android:layout_centerHorizontal="true"
@@ -52,10 +52,10 @@
         android:paddingRight="35dp"
         android:id="@+id/et_login_name"/>
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
         android:layout_below="@id/et_login_name"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/icon_login_edit"
         android:drawableLeft="@drawable/icon_login_password"
@@ -67,13 +67,13 @@
         android:id="@+id/et_login_password"/>
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:layout_below="@id/et_login_password"
             android:text="登 录"
             android:textSize="20sp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/icon_login"
             android:layout_marginLeft="10dp"
             android:onClick="loginClick"
@@ -107,7 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cb_login_rememberword"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/reminder"
         android:layout_centerHorizontal="true"
         android:id="@+id/tv_login_hint"/>
