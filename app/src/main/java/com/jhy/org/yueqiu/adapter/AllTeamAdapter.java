@@ -14,20 +14,17 @@ import java.util.List;
  */
 public class AllTeamAdapter extends MyBaseAdapter<Team>{
 
-    private AllTeamLayout allTeamLayout;
-    private Team team;
     public AllTeamAdapter(Context context, List<Team> list) {
         super(context, list);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        super.getView(position, convertView, parent);
-        team = list.get(position);
-        AllTeamLayout view = (AllTeamLayout) convertView;
-        if(allTeamLayout!=null) {
-            allTeamLayout.setAllTeamInfo(team);
+        AllTeamLayout allTeamLayout = (AllTeamLayout) convertView;
+        if(allTeamLayout == null) {
+            allTeamLayout = new AllTeamLayout(context);
         }
-        return convertView;
+        allTeamLayout.setAllTeamInfo(list.get(position));
+        return allTeamLayout;
     }
 }

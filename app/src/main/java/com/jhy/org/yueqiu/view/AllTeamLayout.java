@@ -2,23 +2,27 @@ package com.jhy.org.yueqiu.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.AddTeam;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.GetListener;
 
 /**
  * Created by Administrator on 2016/4/23.
@@ -32,6 +36,7 @@ public class AllTeamLayout extends RelativeLayout{
     private Context context ;
     private Team team;
     private Person person;
+    private AddTeam addTeam;
     public AllTeamLayout(Context context) {
         super(context);
         init(context);
@@ -56,34 +61,20 @@ public class AllTeamLayout extends RelativeLayout{
         person = BmobUser.getCurrentUser(context, Person.class);
     }
     //查询我加入球队的信息并设置
-    public void setAllTeamInfo(Team team){
-        BmobQuery<Team> teamQuery = new BmobQuery<Team>();
-        teamQuery.addWhereEqualTo("members", new BmobPointer(person));
-        teamQuery.findObjects(context, new FindListener<Team>() {
-            @Override
-            public void onSuccess(List<Team> list) {
-                for (Team addTeam : list) {
-                    tv_selector_allteam_name.setText(addTeam.getName());
-                    tv_team_buildname.setText(addTeam.getCreator().getUsername());
-                    tv_selector_allteam_time.setText(addTeam.getCreatedAt());
-                    tv_allteam_slogan.setText(addTeam.getMotto());
-                    String logo = addTeam.getLogoUrl();
-                    Picasso.with(context)
-                            .load(logo)
-                            .transform(new RoundTransform())
-                            .into(iv_allteam_head);
-                }
-            }
-
-            @Override
-            public void onError(int i, String s) {
-
-            }
-        });
-
+    public void setAllTeamInfo(Team addallTeam){
+        tv_selector_allteam_name.setText(addallTeam.getName());
+        tv_team_buildname.setText(addallTeam.getCreator().getUsername());
+        tv_selector_allteam_time.setText(addallTeam.getCreatedAt());
+        tv_allteam_slogan.setText(addallTeam.getMotto());
+        String logo = addallTeam.getLogoUrl();
+        Picasso.with(context)
+                .load(logo)
+                .transform(new RoundTransform())
+                .into(iv_allteam_head);
     }
-    //查询并设置我创建球队的信息
-    public void setBuildTeam(Team team) {
+
+            //查询并设置我创建球队的信息
+    /*public void setBuildTeam(Team team) {
         BmobQuery<Team> query = new BmobQuery<Team>();
             query.addWhereEqualTo("creator", new BmobPointer(person));
             query.findObjects(context, new FindListener<Team>() {
@@ -108,5 +99,5 @@ public class AllTeamLayout extends RelativeLayout{
 
             });
 
-        }
+        }*/
     }
