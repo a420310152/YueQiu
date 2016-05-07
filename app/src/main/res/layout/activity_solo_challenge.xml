@@ -47,6 +47,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_opponent_bar"
+        android:layout_alignBottom="@id/container_fromDate"
+        android:layout_alignRight="@id/container_fromDate"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        />
 
     <LinearLayout
         android:id="@+id/container_place"
@@ -77,6 +86,15 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_opponent_bar"
+        android:layout_alignBottom="@id/container_place"
+        android:layout_alignRight="@id/container_place"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        />
 
     <LinearLayout
         android:id="@+id/container_toDate"
@@ -107,6 +125,15 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_opponent_bar"
+        android:layout_alignBottom="@id/container_toDate"
+        android:layout_alignRight="@id/container_toDate"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        />
 
 
     <LinearLayout
@@ -138,6 +165,7 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent" />
     </LinearLayout>
+
 
     <Button
         android:id="@+id/btn_publish"

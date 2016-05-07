@@ -11,7 +11,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -31,6 +34,8 @@ import cn.bmob.v3.listener.FindListener;
 public class ChallengeDetailsActivity extends Activity {
     ListView lv_war;
     SwipeRefreshLayout swipe_ly;
+    ImageView iv_refresh;
+    //RotateAnimation rotate; //刷新旋转动画
     private List<Challenge> challengeList = new ArrayList<>();
     private ChallengeAdapter challengeAdapter;
     
@@ -51,12 +56,30 @@ public class ChallengeDetailsActivity extends Activity {
     private void build(){
         lv_war = (ListView) findViewById(R.id.lv_war);
         swipe_ly = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
+        //iv_refresh= (ImageView) findViewById(R.id.iv_refresh);
+        //rotate();
+        //iv_refresh.setOnClickListener(rotateClick);
         swipe_ly.setOnRefreshListener(referenshClick);
         swipe_ly.setColorSchemeResources(R.color.orange, R.color.red, R.color.lightpink,R.color.violet);
         challengeAdapter = new ChallengeAdapter(challengeList,this,true);
         lv_war.setOnItemClickListener(itemClick);
         findBmob();
     }
+//    //刷新按钮旋转动画、
+//    View.OnClickListener rotateClick = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            iv_refresh.startAnimation(rotate);
+//            referenshClick.onRefresh();
+//
+//        }
+//    };
+//    // 旋转动画
+//    private void rotate() {
+//        rotate = new RotateAnimation(0, 360, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+//        rotate.setDuration(1000);
+//        rotate.setRepeatCount(-1);
+//    }
     //查询数据的方法
     private void findBmob(){
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
@@ -98,6 +121,7 @@ public class ChallengeDetailsActivity extends Activity {
                     lv_war.setAdapter(challengeAdapter);
                     Toast.makeText(ChallengeDetailsActivity.this,"刷新成功",Toast.LENGTH_SHORT).show();
                     swipe_ly.setRefreshing(false);
+                    iv_refresh.clearAnimation();
                 }
 
                 @Override
@@ -107,7 +131,6 @@ public class ChallengeDetailsActivity extends Activity {
             });
         }
     };
-    //上拉加载更多
 
     //点击Item项事件 弹出对手信息
     AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {

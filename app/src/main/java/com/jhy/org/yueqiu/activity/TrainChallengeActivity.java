@@ -88,8 +88,6 @@ public class TrainChallengeActivity extends Activity implements OnPickDatetimeLi
         btn_publish = (Button) findViewById(R.id.btn_publish);
         btn_publish.setOnClickListener(this);
 
-        ibtn_finish = (ImageButton) findViewById(R.id.ibtn_finish);
-        ibtn_finish.setOnClickListener(this);
 
         my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
         my_picker.setYearPickerVisible(false);
@@ -145,9 +143,6 @@ public class TrainChallengeActivity extends Activity implements OnPickDatetimeLi
                 break;
             case R.id.btn_publish:
                 publish();
-                break;
-            case R.id.ibtn_finish:
-                finish();
                 break;
             default:
                 visible = false;

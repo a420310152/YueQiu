@@ -2,12 +2,14 @@ package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
 
+import com.baidu.mapapi.model.LatLng;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.GalleryAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.MyChallege;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Post;
+import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -65,8 +67,8 @@ public class ResponseChallengeActivity extends Activity {
     private RecyclerView mRecyclerView;//响应者RecyclerView
     private GalleryAdapter mAdapter;
 
-    public ResponseChallengeActivity() {
-    }
+    private BaiduMapLayout baiduMapLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +90,20 @@ public class ResponseChallengeActivity extends Activity {
         tv_OK = (TextView) findViewById(R.id.tv_OK);
         tv_cancle = (TextView) findViewById(R.id.tv_cancle);
         cb_helper = (CheckBox) findViewById(R.id.cb_helper);
+        baiduMapLayout = (BaiduMapLayout) findViewById(R.id.baiduMapLayout);
         cb_helper.setOnCheckedChangeListener(click);
         tv_OK.setOnClickListener(clickOk);
         tv_cancle.setOnClickListener(clickCancle);
-
+        tv_place.setOnClickListener(clickPlace);
     }
+    //点击地点弹出地图位置
+    View.OnClickListener clickPlace = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //LatLng pos = challenge.get
+            //baiduMapLayout.setMakerAPos(pos);
+        }
+    };
 
     //设置点击确认报名监听
     View.OnClickListener clickOk = new View.OnClickListener() {

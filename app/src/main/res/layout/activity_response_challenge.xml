@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context="com.jhy.org.yueqiu.activity.ResponseChallengeActivity">
 
     <RelativeLayout
@@ -218,5 +217,10 @@
         android:layout_alignParentBottom="true"
         android:scrollbars="none" />
 
-
+    <com.jhy.org.yueqiu.view.BaiduMapLayout
+    android:id="@+id/baiduMapLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    />
 </RelativeLayout>
