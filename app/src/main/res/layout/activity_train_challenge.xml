@@ -1,42 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <RelativeLayout
-        android:id="@+id/container_header"
-        android:background="@color/primary"
-        android:padding="8dp"
+    <com.jhy.org.yueqiu.view.ActionBarLayout
+        android:id="@+id/my_action_bar"
+        chx:title_text="娱乐练习"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageButton
-            android:id="@+id/ibtn_finish"
-            android:background="@drawable/icon_system_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_type"
-            android:text="娱乐练习"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
-
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_solo_back"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"/>
 
     <LinearLayout
         android:id="@+id/container_fromDate"
         android:focusable="true"
         android:clickable="true"
-        android:background="@drawable/icon_edit"
+        android:background="@drawable/icon_myprofile_bground"
         android:gravity="center_vertical"
         android:padding="8dp"
-        android:layout_marginLeft="-8dp"
-        android:layout_below="@id/container_header"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_below="@id/my_action_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal">
@@ -52,18 +42,31 @@
         <TextView
             android:id="@+id/tv_fromDate"
             android:background="@null"
+            android:text="点击设置设置时间"
+            android:alpha="0.5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_opponent_bar"
+        android:layout_alignBottom="@id/container_fromDate"
+        android:layout_alignRight="@id/container_fromDate"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        />
 
     <LinearLayout
         android:id="@+id/container_place"
         android:focusable="true"
         android:clickable="true"
-        android:background="@drawable/icon_edit"
+        android:background="@drawable/icon_myprofile_bground"
         android:gravity="center_vertical"
         android:padding="8dp"
-        android:layout_marginLeft="-8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@id/container_fromDate"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -80,18 +83,31 @@
         <TextView
             android:id="@+id/tv_place"
             android:background="@null"
+            android:text="点击设置设置地点"
+            android:alpha="0.5"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_opponent_bar"
+        android:layout_alignBottom="@id/container_place"
+        android:layout_alignRight="@id/container_place"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        />
 
     <LinearLayout
         android:id="@+id/container_toDate"
         android:focusable="true"
         android:clickable="true"
-        android:background="@drawable/icon_edit"
+        android:background="@drawable/icon_myprofile_bground"
         android:gravity="center_vertical"
         android:padding="8dp"
-        android:layout_marginLeft="-8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@id/container_place"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -108,18 +124,31 @@
         <TextView
             android:id="@+id/tv_toDate"
             android:background="@null"
+            android:text="点击设置设置时间"
+            android:alpha="0.5"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_opponent_bar"
+        android:layout_alignBottom="@id/container_toDate"
+        android:layout_alignRight="@id/container_toDate"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="10dp"
+        />
 
 
     <LinearLayout
         android:id="@+id/container_title"
         android:focusable="true"
-        android:background="@drawable/icon_edit"
+        android:background="@drawable/icon_myprofile_bground"
         android:gravity="center_vertical"
         android:padding="8dp"
-        android:layout_marginLeft="-8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_below="@id/container_toDate"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -136,6 +165,8 @@
         <EditText
             android:id="@+id/et_title"
             android:background="@null"
+            android:hint="点击输入约战宣言"
+            android:alpha="0.5"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content" />
     </LinearLayout>
@@ -143,7 +174,14 @@
     <Button
         android:id="@+id/btn_publish"
         android:text="发布"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:background="@color/orange"
         android:layout_marginTop="32dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:layout_below="@id/container_title"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
