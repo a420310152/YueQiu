@@ -98,40 +98,37 @@ public class LoginActivity extends Activity{
             toast("请填写密码");
             return;
         }
-        if(loginUserName!=null && loginUserPassword!=null){
-            BmobUser bu_login_user = new BmobUser();
-            bu_login_user.setUsername(loginUserName);
-            bu_login_user.setEmail(loginUserName);
-            bu_login_user.setPassword(loginUserPassword);
-            bu_login_user.login(this, new SaveListener() {
-                @Override
-                public void onSuccess() {
-                    toast("登录成功");
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
+        BmobUser bu_login_user = new BmobUser();
+        bu_login_user.setUsername(loginUserName);
+        bu_login_user.setEmail(loginUserName);
+        bu_login_user.setPassword(loginUserPassword);
+        bu_login_user.login(this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                toast("登录成功");
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
 
-                    Person currentUser = Person.getCurrentUser();
-                    if (currentUser != null) {
-                        String userId = currentUser.getObjectId();
-                        String name = currentUser.getUsername();
-                        String avatarUrl = currentUser.getAvatarUrl();
+                Person currentUser = Person.getCurrentUser();
+                if (currentUser != null) {
+                    String userId = currentUser.getObjectId();
+                    String name = currentUser.getUsername();
+                    String avatarUrl = currentUser.getAvatarUrl();
 
-                        if (Utils.isEmpty(avatarUrl)) {
-                            logx.e("登录 成功: 用户的 avatarUrl 为空");
-                            avatarUrl = Person.URL_DEFAULT_AVATAR;
-                        }
-
-                        RongUtils.requestToken(userId, name, avatarUrl);
+                    if (Utils.isEmpty(avatarUrl)) {
+                        logx.e("登录 成功: 用户的 avatarUrl 为空");
+                        avatarUrl = Person.URL_DEFAULT_AVATAR;
                     }
-//                    RongUtils.connect();
-                }
 
-                @Override
-                public void onFailure(int i, String s) {
-                    toast("登录失败" + s);
+                    RongUtils.requestToken(userId, name, avatarUrl);
                 }
-            });
-        }
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
+                toast("登录失败" + s);
+            }
+        });
     }
 
     //注册按钮的监听

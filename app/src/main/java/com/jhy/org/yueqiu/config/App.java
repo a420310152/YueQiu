@@ -6,7 +6,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.util.Log;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -14,17 +13,14 @@ import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
 import com.jhy.org.yueqiu.R;
-import com.jhy.org.yueqiu.domain.OnReceiveWeatherInfoListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Weather;
-import com.jhy.org.yueqiu.utils.HeWeatherUtils;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.Preferences;
 import com.jhy.org.yueqiu.utils.Utils;
 
 import java.io.File;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +29,6 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.UpdateListener;
 import io.rong.common.FileUtils;
-import io.rong.imkit.RongIM;
 
 /*
  **********************************************
@@ -48,6 +43,8 @@ public class App extends Application implements BDLocationListener {
         public static final String portrait_uri = "user.portrait_uri";
         public static final String token = "user.token";
         public static final String city_code = "user.city_code";
+        public static final String loc_latitude = "user.location.latitude";
+        public static final String loc_longitude = "user.location.longitude";
     }
 
     public static final class version {
@@ -70,7 +67,6 @@ public class App extends Application implements BDLocationListener {
         super.onCreate();
         app = this;
 
-        Preferences.initialize(app);
         SDKInitializer.initialize(app);
         Bmob.initialize(app, Key.bmob.application_id);
         RongUtils.initialize(app);
@@ -88,7 +84,20 @@ public class App extends Application implements BDLocationListener {
         }
     }
 
-    public static BDLocation getUserLocation () { return userLocation; }
+    public static BDLocation getUserLocation () {
+        if (userLocation == null) {
+            Preferences preferences = Preferences.getInstance();
+            userLocation = new BDLocation();
+
+            float latitude = preferences.get(user.loc_latitude, (float) userLocation.getLatitude());
+            float longitude = preferences.get(user.loc_longitude, (float) userLocation.getLongitude());
+
+            userLocation.setLatitude(latitude);
+            userLocation.setLongitude(longitude);
+        }
+        return userLocation;
+    }
+
     public static App getInstance () { return app; }
 
     // 获得当前进程的名字
@@ -129,32 +138,42 @@ public class App extends Application implements BDLocationListener {
     }
 
     private static void initConfig () {
-        if (Preferences.get(FIRST_LAUNCH, true)) {
+        Preferences preferences = Preferences.getInstance();
+        if (preferences.get(FIRST_LAUNCH, true)) {
             Bitmap avatar = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
             Bitmap logo = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
-            File avatarFile = FileUtils.convertBitmap2File(avatar, "/sdcard/yueqiu/user", "avatar.jpg");
-            File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.jpg");
+            File avatarFile = FileUtils.convertBitmap2File(avatar, "/sdcard/yueqiu/user", "avatar.png");
+            File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.png");
 
-            Preferences.set(user.portrait_uri, Uri.fromFile(avatarFile).toString());
-            Preferences.set(user.city_code, Weather.CITY_CODE_DEFAULT);
-            Preferences.set(FIRST_LAUNCH, false);
+            preferences.set(user.portrait_uri, Uri.fromFile(avatarFile).toString())
+                    .set(user.city_code, Weather.CITY_CODE_DEFAULT)
+                    .set(FIRST_LAUNCH, false)
+                    .commit();
             logx.e("file uri: " + Uri.fromFile(avatarFile).toString());
         }
     }
 
     @Override
     public void onReceiveLocation(BDLocation bdLocation) {
-        userLocation = bdLocation;
-        logx.e("百度定位 成功: (" + bdLocation.getLatitude() + ", " + bdLocation.getLongitude() + ")");
+        App.userLocation = bdLocation;
         locationClient.stop();
+        logx.e("百度定位 成功: (" + bdLocation.getLatitude() + ", " + bdLocation.getLongitude() + ")");
+
+        float latitude = (float) bdLocation.getLatitude();
+        float longitude = (float) bdLocation.getLongitude();
+
         for (OnReceiveUserLocationListener listener : locationListeners) {
-            listener.onReceiveUserLocation(userLocation);
+            listener.onReceiveUserLocation(bdLocation);
         }
-        uploadUserLocation(bdLocation.getLatitude(), bdLocation.getLongitude());
+        uploadUserLocation(latitude, longitude);
 
         String cityCode = Weather.convertCityToCode(bdLocation.getCity());
+        Preferences.getInstance()
+                .set(user.city_code, cityCode)
+                .set(user.loc_latitude, latitude)
+                .set(user.loc_longitude, longitude)
+                .commit();
 //        logx.e("保存cityCode: " + cityCode);
-        Preferences.set(user.city_code, cityCode);
     }
 
     private void uploadUserLocation (double latitude, double longitude) {

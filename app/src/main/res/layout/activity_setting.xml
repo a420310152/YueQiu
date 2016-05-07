@@ -56,7 +56,7 @@
         android:layout_below="@id/tv_system_message_set"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/icon_setting_delate"
+        android:drawableLeft="@drawable/icon_setting_remove"
         android:drawableRight="@drawable/icon_myprofile_selector"
         android:text="@string/system_set_clean"
         android:textSize="20sp"

@@ -41,8 +41,6 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
-import static com.jhy.org.yueqiu.R.id.actionbar_profile_title;
-
 /*
  **********************************************
  * 			所有者 C: (曹昌盛)

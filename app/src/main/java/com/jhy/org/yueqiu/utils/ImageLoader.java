@@ -24,10 +24,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 /**
  * Created by Administrator on 2016/4/21 0021.
@@ -38,8 +34,8 @@ public class ImageLoader implements View.OnClickListener {
     public static final int CODE_RESIZE_REQUEST = 0x18;
 
     public static final String STORAGE_DIR = "/sdcard/yueqiu/user";
-    public static final String IMAGE_AVATAR = "avatar.jpg";
-    public static final String IMAGE_LOGO = "logo.jpg";
+    public static final String IMAGE_AVATAR = "avatar.png";
+    public static final String IMAGE_LOGO = "logo.png";
 
     private Activity activity;
     private ImageView iv_selectImage;
@@ -154,7 +150,7 @@ public class ImageLoader implements View.OnClickListener {
     private void saveBitmapAsFile (Bitmap bitmap) {
         try {
             BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(file));
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out);
             out.flush();
             out.close();
         } catch (IOException e) {

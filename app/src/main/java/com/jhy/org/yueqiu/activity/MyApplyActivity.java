@@ -103,7 +103,7 @@ public class MyApplyActivity extends Activity {
 
             if (type.equals(Challenge.TYPE_SOLO) || type.equals(Challenge.TYPE_TRAIN)) {
                 intent = new Intent(MyApplyActivity.this, OpponentActivity.class);
-                intent.putExtra("challenge", challenge);
+                intent.putExtra("person", challenge.getInitiator());
                 Log.i("rea", "challenge===========" + challenge.getInitiator());
                 startActivity(intent);
             } else if (type.equals(Challenge.TYPE_TEAM)) {

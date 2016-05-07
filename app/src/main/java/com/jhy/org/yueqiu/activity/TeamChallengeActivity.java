@@ -88,9 +88,6 @@ public class TeamChallengeActivity extends Activity implements OnPickDatetimeLis
         btn_publish = (Button) findViewById(R.id.btn_publish);
         btn_publish.setOnClickListener(this);
 
-        ibtn_finish = (ImageButton) findViewById(R.id.ibtn_finish);
-        ibtn_finish.setOnClickListener(this);
-
         my_picker = (DatetimePickerLayout) findViewById(R.id.my_picker);
         my_picker.setYearPickerVisible(false);
         my_picker.setSecondPickerVisible(false);
@@ -145,9 +142,6 @@ public class TeamChallengeActivity extends Activity implements OnPickDatetimeLis
                 break;
             case R.id.btn_publish:
                 publish();
-                break;
-            case R.id.ibtn_finish:
-                finish();
                 break;
             default:
                 visible = false;

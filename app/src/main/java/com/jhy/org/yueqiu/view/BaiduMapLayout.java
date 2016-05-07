@@ -31,7 +31,7 @@ import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 /**
  * Created by Administrator on 2016/4/20 0020.
  */
-public class BaiduMapLayout extends RelativeLayout implements View.OnClickListener {
+public class BaiduMapLayout extends RelativeLayout implements View.OnClickListener, OnReceiveUserLocationListener {
     private Context context;
     private MapView mapView;
     private TextView tv_title;
@@ -53,25 +53,30 @@ public class BaiduMapLayout extends RelativeLayout implements View.OnClickListen
 
         this.context = context;
 
+        initView();
+        App.registerReceiveUserLocation(this);
+
+        setVisibility(INVISIBLE);
+    }
+
+    private void initView () {
         mapView = (MapView) findViewById(R.id.mapView);
         tv_title = (TextView) findViewById(R.id.tv_title);
         tv_title.setText("");
         tv_title.setOnClickListener(this);
 
-        baiduMap = mapView.getMap();
-
         icon_a = BitmapDescriptorFactory.fromResource(R.drawable.icon_mark_a);
         icon_b = BitmapDescriptorFactory.fromResource(R.drawable.icon_mark_b);
         icon_location = BitmapDescriptorFactory.fromResource(R.drawable.icon_marker_location);
 
+        baiduMap = mapView.getMap();
+        
         MyLocationConfiguration config = new MyLocationConfiguration(MyLocationConfiguration.LocationMode.FOLLOWING, true, icon_location);
         baiduMap.setMyLocationEnabled(true);
         baiduMap.setMyLocationConfigeration(config);
 
         MapStatus status = new MapStatus.Builder().zoom(15).build();
         baiduMap.setMapStatus(MapStatusUpdateFactory.newMapStatus(status));
-
-        setVisibility(INVISIBLE);
     }
 
     public void setTitle (String title) {
@@ -107,5 +112,10 @@ public class BaiduMapLayout extends RelativeLayout implements View.OnClickListen
         if (v.getId() == R.id.tv_title) {
             setVisibility(INVISIBLE);
         }
+    }
+
+    @Override
+    public void onReceiveUserLocation(BDLocation userLocation) {
+        setLocation(userLocation);
     }
 }

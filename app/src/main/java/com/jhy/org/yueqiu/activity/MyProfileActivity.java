@@ -80,7 +80,7 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
         tv_selector_height = (TextView) findViewById(R.id.tv_selector_height);
         tv_selector_weight = (TextView) findViewById(R.id.tv_selector_weight);
         tv_selector_skilled = (TextView) findViewById(R.id.tv_selector_skilled);
-        actionBarLayout = (ActionBarLayout) findViewById(actionbar_profile_title);
+        actionBarLayout = (ActionBarLayout) findViewById(R.id.actionbar_profile_title);
         actionBarLayout.setOptionsOnClickListener(click);
         btn_info_send = (Button) findViewById(R.id.btn_info_send);
         relat_info_sex = (RelativeLayout) findViewById(R.id.relat_info_sex);

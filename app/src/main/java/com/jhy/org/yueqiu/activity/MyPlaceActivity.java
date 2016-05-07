@@ -59,8 +59,10 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            placeAdapter = new PlaceAdapter(context, placeList, userCollection, userLocation);
-            lv_places.setAdapter(placeAdapter);
+            if (userLocation != null) {
+                placeAdapter = new PlaceAdapter(context, placeList, userCollection, userLocation);
+                lv_places.setAdapter(placeAdapter);
+            }
         }
     };
 
@@ -155,6 +157,5 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
     @Override
     public void onReceiveUserLocation(BDLocation userLocation) {
         this.userLocation = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
-        baiduMap.setLocation(userLocation);
     }
 }

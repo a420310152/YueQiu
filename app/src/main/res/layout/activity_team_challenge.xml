@@ -1,33 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
-
-    <RelativeLayout
-        android:id="@+id/container_header"
-        android:background="@color/primary"
-        android:padding="8dp"
+    <com.jhy.org.yueqiu.view.ActionBarLayout
+        android:id="@+id/my_action_bar"
+        chx:title_text="1V1 SOLO赛"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/ibtn_finish"
-            android:background="@drawable/icon_system_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_type"
-            android:text="组队比赛"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_centerHorizontal="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-    </RelativeLayout>
-
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/icon_solo_back"
+        android:scaleType="centerCrop"
+        android:layout_alignParentBottom="true"/>
     <LinearLayout
         android:id="@+id/container_fromDate"
         android:focusable="true"
@@ -36,7 +24,7 @@
         android:gravity="center_vertical"
         android:padding="8dp"
         android:layout_marginLeft="-8dp"
-        android:layout_below="@id/container_header"
+        android:layout_below="@id/my_action_bar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:orientation="horizontal">
