@@ -70,7 +70,6 @@ public class App extends Application implements BDLocationListener {
         super.onCreate();
         app = this;
 
-        Preferences.initialize(app);
         SDKInitializer.initialize(app);
         Bmob.initialize(app, Key.bmob.application_id);
         RongUtils.initialize(app);
@@ -129,15 +128,17 @@ public class App extends Application implements BDLocationListener {
     }
 
     private static void initConfig () {
-        if (Preferences.get(FIRST_LAUNCH, true)) {
+        Preferences preferences = Preferences.getInstance();
+        if (preferences.get(FIRST_LAUNCH, true)) {
             Bitmap avatar = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
             Bitmap logo = BitmapFactory.decodeResource(app.getResources(), R.drawable.icon_sidebar_head);
             File avatarFile = FileUtils.convertBitmap2File(avatar, "/sdcard/yueqiu/user", "avatar.jpg");
             File logoFile = FileUtils.convertBitmap2File(logo, "/sdcard/yueqiu/user", "logo.jpg");
 
-            Preferences.set(user.portrait_uri, Uri.fromFile(avatarFile).toString());
-            Preferences.set(user.city_code, Weather.CITY_CODE_DEFAULT);
-            Preferences.set(FIRST_LAUNCH, false);
+            preferences.set(user.portrait_uri, Uri.fromFile(avatarFile).toString())
+                    .set(user.city_code, Weather.CITY_CODE_DEFAULT)
+                    .set(FIRST_LAUNCH, false)
+                    .commit();
             logx.e("file uri: " + Uri.fromFile(avatarFile).toString());
         }
     }
@@ -154,7 +155,7 @@ public class App extends Application implements BDLocationListener {
 
         String cityCode = Weather.convertCityToCode(bdLocation.getCity());
 //        logx.e("保存cityCode: " + cityCode);
-        Preferences.set(user.city_code, cityCode);
+        Preferences.getInstance().set(user.city_code, cityCode).commit();
     }
 
     private void uploadUserLocation (double latitude, double longitude) {
