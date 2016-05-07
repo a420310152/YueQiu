@@ -38,7 +38,6 @@ public class OpponentTeamActivity extends Activity{
     TextView tv_motto_text;//球队宣言
     TeamLayout comstomlayout_creator;//队长
     ListView listview;
-    Team team;
     private ActionBarLayout actionBarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +65,7 @@ public class OpponentTeamActivity extends Activity{
         bmobQuery.findObjects(this, new FindListener<Team>() {
             @Override
             public void onSuccess(List<Team> list) {
-                team = list.get(0);//得到Team对象
+                Team team = list.get(0);//得到Team对象
                 tv_motto_text.setText(team.getMotto());//设置球队宣言
                 tv_teamname_text.setText(team.getName());
                 /*

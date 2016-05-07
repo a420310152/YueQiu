@@ -30,13 +30,11 @@ import cn.bmob.v3.listener.GetListener;
 public class AllTeamLayout extends RelativeLayout{
     private ImageView iv_allteam_head;//球队logo
     private TextView tv_selector_allteam_name;//球队名字
-    private TextView tv_team_buildname;//球队人数
+    private TextView tv_team_buildname;//创建者
     private TextView tv_selector_allteam_time;//球队成立时间
     private TextView tv_allteam_slogan;//球队宣言
     private Context context ;
-    private Team team;
     private Person person;
-    private AddTeam addTeam;
     public AllTeamLayout(Context context) {
         super(context);
         init(context);
@@ -60,44 +58,16 @@ public class AllTeamLayout extends RelativeLayout{
         tv_allteam_slogan = (TextView) findViewById(R.id.tv_allteam_slogan);
         person = BmobUser.getCurrentUser(context, Person.class);
     }
-    //查询我加入球队的信息并设置
-    public void setAllTeamInfo(Team addallTeam){
-        tv_selector_allteam_name.setText(addallTeam.getName());
-        tv_team_buildname.setText(addallTeam.getCreator().getUsername());
-        tv_selector_allteam_time.setText(addallTeam.getCreatedAt());
-        tv_allteam_slogan.setText(addallTeam.getMotto());
-        String logo = addallTeam.getLogoUrl();
+    //设置我创建球队的信息
+    public void setAllTeamInfo(Team addTeam){
+        tv_selector_allteam_name.setText(addTeam.getName());
+        tv_team_buildname.setText(person.getUsername());
+        tv_selector_allteam_time.setText(addTeam.getCreatedAt());
+        tv_allteam_slogan.setText(addTeam.getMotto());
+        String logo = addTeam.getLogoUrl();
         Picasso.with(context)
                 .load(logo)
                 .transform(new RoundTransform())
                 .into(iv_allteam_head);
     }
-
-            //查询并设置我创建球队的信息
-    /*public void setBuildTeam(Team team) {
-        BmobQuery<Team> query = new BmobQuery<Team>();
-            query.addWhereEqualTo("creator", new BmobPointer(person));
-            query.findObjects(context, new FindListener<Team>() {
-                @Override
-                public void onSuccess(List<Team> list) {
-                    for (Team team1 : list) {
-                        tv_selector_allteam_name.setText(team1.getName());
-                        tv_team_buildname.setText(person.getUsername());
-                        tv_selector_allteam_time.setText(team1.getCreatedAt());
-                        tv_allteam_slogan.setText(team1.getMotto());
-                        String logo = team1.getLogoUrl();
-                        Picasso.with(context)
-                                .load(logo)
-                                .transform(new RoundTransform())
-                                .into(iv_allteam_head);
-                    }
-                }
-
-                @Override
-                public void onError(int i, String s) {
-                }
-
-            });
-
-        }*/
-    }
+}

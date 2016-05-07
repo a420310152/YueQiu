@@ -131,15 +131,19 @@ public class MyAllTeamActivity extends Activity {
                 for (AddTeam addallteam : list) {
                     Log.e("onSuccess", "加入的所有球队" + list);
                     Team team = addallteam.getAddTeam();
+                    if(team.getCreator().getObjectId().equals(person.getObjectId())){
+                        teamList.remove(team);
+                    }
                     teamList.add(team);
                 }
+
                 allTeamAdapter = new AllTeamAdapter(MyAllTeamActivity.this, teamList);
                 lv_allteam_info.setAdapter(allTeamAdapter);
             }
 
             @Override
             public void onError(int i, String s) {
-                Log.e("onError","查询加入的球队"+s);
+                Log.e("onError", "查询加入的球队"+s);
             }
         });
     }
