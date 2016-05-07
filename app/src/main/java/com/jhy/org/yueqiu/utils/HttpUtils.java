@@ -12,7 +12,6 @@ import java.util.Map.Entry;
 
 public final class HttpUtils {
     private static OkHttpClient httpClient = new OkHttpClient();
-    private static final String BASE_URL = "http://webim.demo.rong.io/";
     public static final MediaType TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
     private static Logx logx = new Logx(HttpUtils.class);
 

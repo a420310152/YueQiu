@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.TeamAdapter;
+import com.jhy.org.yueqiu.domain.AddTeam;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.utils.ImageLoader;
@@ -40,8 +41,6 @@ import cn.bmob.v3.listener.SaveListener;
 import cn.bmob.v3.listener.UpdateListener;
 import cn.bmob.v3.listener.UploadFileListener;
 
-import static com.jhy.org.yueqiu.R.id.actionbar_profile_title;
-
 /*
  **********************************************
  * 			所有者 C: (曹昌盛)
@@ -66,6 +65,7 @@ public class MyTeamActivity extends Activity{
     private Person teamMember;//添加的球员
     private Intent memberIntent;
     private Intent addMemberIntent;
+    private AddTeam addTeam;
     private ActionBarLayout actionBarLayout;
     private int REQUEST_CODE_FOR_MESSAGE = 123;
 
@@ -76,6 +76,7 @@ public class MyTeamActivity extends Activity{
         init();
         saveTeamInfo();
         showInfo();
+        showAddTeamInfo();
     }
     //初始化控件
     private void init(){
@@ -86,19 +87,10 @@ public class MyTeamActivity extends Activity{
         lv_team_memember = (ListView) findViewById(R.id.lv_team_memember);
         imageLoader = new ImageLoader(MyTeamActivity.this,iv_team_logo);
         actionBarLayout = (ActionBarLayout) findViewById(R.id.actionbar_team_title);
+        actionBarLayout.setOptionsOnClickListener(click);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        actionBarLayout.setOptionsOnClickListener(click);
-        //上传头像
-        String logo = team.getLogoUrl();
-        Picasso.with(context)
-                .load(logo)
-                .transform(new RoundTransform())
-                .into(iv_team_logo);
-    }
+
 
     //保存按钮的监听
         View.OnClickListener click = new View.OnClickListener(){
@@ -143,6 +135,12 @@ public class MyTeamActivity extends Activity{
                 et_team_name.setText(team.getName());
                 et_team_slogan.setText(team.getMotto());
                 queryMember();
+                //上传头像
+                String logo = team.getLogoUrl();
+                Picasso.with(context)
+                        .load(logo)
+                        .transform(new RoundTransform())
+                        .into(iv_team_logo);
             }else{
 
             }
@@ -155,14 +153,35 @@ public class MyTeamActivity extends Activity{
             if(addteam!=null){
                 actionBarLayout.setTitleText("我加入球队");
                 et_team_name.setText(addteam.getName());
+                et_team_name.setFocusable(false);
+                et_team_name.setFocusableInTouchMode(false);
+                et_team_name.requestFocus();
                 et_team_slogan.setText(addteam.getMotto());
+                et_team_slogan.setFocusable(false);
+                et_team_slogan.setFocusableInTouchMode(false);
+                et_team_slogan.requestFocus();
                 //btn_team_save.setVisibility(View.INVISIBLE);
-                btn_team_addmemember.setVisibility(View.INVISIBLE);
+                btn_team_addmemember.setVisibility(View.GONE);
                 String logo = addteam.getLogoUrl();
                 Picasso.with(context)
                         .load(logo)
                         .transform(new RoundTransform())
                         .into(iv_team_logo);
+                BmobQuery<Person> bmobQuery1 = new BmobQuery<Person>();
+                bmobQuery1.addWhereRelatedTo("members",new BmobPointer(addteam));
+                bmobQuery1.findObjects(MyTeamActivity.this, new FindListener<Person>() {
+                    @Override
+                    public void onSuccess(List<Person> list) {
+                        Log.i("list", "list=====" + list.size());
+                        TeamAdapter adapter = new TeamAdapter(MyTeamActivity.this, list);
+                        lv_team_memember.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onError(int i, String s) {
+
+                    }
+                });
             }else{
 
             }
@@ -187,6 +206,7 @@ public class MyTeamActivity extends Activity{
                     public void onSuccess() {
                         Toast.makeText(MyTeamActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         queryMember();
+                        addTeamInfo(teamMember,team);
                     }
                     @Override
                     public void onFailure(int i, String s) {
@@ -211,15 +231,15 @@ public class MyTeamActivity extends Activity{
 
             @Override
             public void onSuccess(final List<Person> list) {
-                Log.e("onSuccess","我的队员信息"+list);
+                Log.e("onSuccess", "我的队员信息" + list);
                 teamAdapter = new TeamAdapter(MyTeamActivity.this, list);
                 lv_team_memember.setAdapter(teamAdapter);
                 lv_team_memember.setOnItemClickListener(new OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        memberIntent = new Intent(MyTeamActivity.this,OpponentActivity.class);
+                        memberIntent = new Intent(MyTeamActivity.this, OpponentActivity.class);
                         Person person = list.get(position);
-                        memberIntent.putExtra("person",person);
+                        memberIntent.putExtra("person", person);
                         startActivity(memberIntent);
                     }
                 });
@@ -227,6 +247,23 @@ public class MyTeamActivity extends Activity{
 
             @Override
             public void onError(int code, String msg) {
+
+            }
+        });
+    }
+    //添加信息到AddTeam表
+    private void addTeamInfo(Person teamMember,Team team){
+        addTeam = new AddTeam();
+        addTeam.setMember(teamMember);
+        addTeam.setAddTeam(team);
+        addTeam.save(MyTeamActivity.this, new SaveListener() {
+            @Override
+            public void onSuccess() {
+                Log.e("addTeamInfo","添加信息成功");
+            }
+
+            @Override
+            public void onFailure(int i, String s) {
 
             }
         });
@@ -249,9 +286,9 @@ public class MyTeamActivity extends Activity{
                 logx.e("上传文件 成功: url = " + bmobFile.getFileUrl(context));
 
                 avatarUrl = bmobFile.getFileUrl(context);
-                team = new Team();
-                team.setLogoUrl(avatarUrl);
-                team.update(context, team.getObjectId(), new UpdateListener() {
+                Team _team = new Team();
+                _team.setLogoUrl(avatarUrl);
+                _team.update(context, team.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
                         logx.e("更新用户头像 成功!");

@@ -1,5 +1,7 @@
 package com.jhy.org.yueqiu.domain;
 
+import com.baidu.mapapi.model.LatLng;
+
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobRelation;
@@ -22,16 +24,19 @@ public class Challenge extends BmobObject {
     private String title;           // 标题
     private String content;         // 内容
     private Person initiator;       // 发起人
-    private Place place;            // 场地
+    private String placeUid;        // 场地标识
     private String placeName;       // 场地名字
     private String placeAddress;    // 场地地址
-    private String placeUid;        // 场地标识
+    private Double placeLatitude;    // 场地的纬度
+    private Double placeLongitude;   // 场地的经度
     private BmobDate fromDate;      // 入场时间
     private BmobDate toDate;        // 散场时间
     private String type;           // 对战类型
     private Integer state;          // 挑战状态
     private BmobRelation responders;// 响应者
     private BmobRelation targets;   // 对战者
+
+    private Place place;            // 场地, 已遗弃
 
     public String getTitle() {
         return title;
@@ -67,7 +72,28 @@ public class Challenge extends BmobObject {
     public String getPlaceAddress() { return placeAddress; }
     public void setPlaceAddress(String placeAddress) { this.placeAddress = placeAddress; }
 
-    public String setPlaceUid() { return placeUid; }
+
+    public Double getPlaceLatitude() { return placeLatitude; }
+    public void setPlaceLatitude(Double placeLatitude) { this.placeLatitude = placeLatitude; }
+
+    public Double getPlaceLongitude() { return placeLongitude; }
+    public void setPlaceLongitude(Double placeLongitude) { this.placeLongitude = placeLongitude; }
+
+    public LatLng getPlaceLatLng () {
+        if (placeLatitude == null || placeLongitude == null) {
+            return null;
+        }
+        return new LatLng(placeLatitude, placeLongitude);
+    }
+    public void setPlaceLatLng (LatLng latLng) {
+        if (latLng != null) {
+            placeLatitude = latLng.latitude;
+            placeLongitude = latLng.longitude;
+        }
+    }
+
+
+    public String getPlaceUid() { return placeUid; }
     public void setPlaceUid(String placeUid) { this.placeUid = placeUid; }
 
     public BmobDate getFromDate() {

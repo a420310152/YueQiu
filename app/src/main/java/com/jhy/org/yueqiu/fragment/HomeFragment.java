@@ -161,7 +161,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         iv_weather = (ImageView) view.findViewById(R.id.iv_weather);
         tv_temp = (TextView) view.findViewById(R.id.tv_temp);
 
-        String cityCode = Preferences.get(App.user.city_code);
+        String cityCode = Preferences.getInstance().get(App.user.city_code);
         Weather.request(cityCode, new OnReceiveWeatherInfoListener() {
             @Override
             public void onReceiveWeatherInfo(Weather weather) {

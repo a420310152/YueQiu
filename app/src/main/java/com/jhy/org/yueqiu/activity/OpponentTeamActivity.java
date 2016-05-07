@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -14,7 +15,10 @@ import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
+import com.jhy.org.yueqiu.utils.RoundTransform;
+import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.TeamLayout;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,6 +38,7 @@ public class OpponentTeamActivity extends Activity{
     TextView tv_motto_text;//球队宣言
     TeamLayout comstomlayout_creator;//队长
     ListView listview;
+    private ActionBarLayout actionBarLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
