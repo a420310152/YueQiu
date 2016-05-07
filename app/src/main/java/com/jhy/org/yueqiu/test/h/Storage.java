@@ -1,4 +1,4 @@
-package com.jhy.org.yueqiu.utils;
+package com.jhy.org.yueqiu.test.h;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.text.TextUtils;
+
+import com.jhy.org.yueqiu.utils.Utils;
 
 public class Storage {
 
@@ -236,7 +238,7 @@ public class Storage {
         }
 
         File folder = new File(folderName);
-        return (folder.exists() && folder.isDirectory()) ? true : folder.mkdirs();
+        return (folder.exists() && folder.isDirectory()) || folder.mkdirs();
     }
 
     public static boolean makeFolders(String filePath) {

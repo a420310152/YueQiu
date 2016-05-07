@@ -71,12 +71,26 @@ public class ActionBarLayout extends RelativeLayout implements View.OnClickListe
         }
     }
 
+    // 可删除
     public void setTitleText (CharSequence text) {
         tv_titile.setText(text);
     }
 
+    // 可删除
     public void setOptionsOnClickListener (OnClickListener listener) {
         ibtn_options.setOnClickListener(listener);
+    }
+
+    public ImageView getLogoView () {
+        return img_logo;
+    }
+
+    public TextView getTitleView () {
+        return tv_titile;
+    }
+
+    public ImageButton getOptionsView () {
+        return ibtn_options;
     }
 
     @Override

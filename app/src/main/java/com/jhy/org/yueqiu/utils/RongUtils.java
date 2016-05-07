@@ -1,31 +1,24 @@
 package com.jhy.org.yueqiu.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import com.jhy.org.yueqiu.activity.ContactActivity;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
-import com.jhy.org.yueqiu.rong.ContactNotificationMessageProvider;
 import com.squareup.okhttp.Callback;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-import com.squareup.okhttp.internal.Util;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
@@ -38,7 +31,6 @@ import io.rong.imlib.model.Message;
 import io.rong.imlib.model.MessageContent;
 import io.rong.imlib.model.UserInfo;
 import io.rong.message.ContactNotificationMessage;
-import io.rong.message.TextMessage;
 
 public class RongUtils {
     private static boolean isConnected = false;
@@ -281,36 +273,35 @@ public class RongUtils {
         RongIM rong = RongIM.getInstance();
         if (rong != null) {
             ContactNotificationMessage notificationMsg = ContactNotificationMessage.obtain(operation, sourceUserId, targetUserId, message);
-            rong.getRongIMClient().sendMessage(
-                    Conversation.ConversationType.PRIVATE,
-                    targetUserId,
-                    notificationMsg,
-                    "pushContent",
-                    "pushData",
-                    new RongIMClient.SendMessageCallback() {
+            rong.getRongIMClient().sendMessage(Conversation.ConversationType.PRIVATE,
+                targetUserId,
+                notificationMsg,
+                "pushContent",
+                "pushData",
+                new RongIMClient.SendMessageCallback() {
 
-                        @Override
-                        public void onSuccess(Integer integer) {
-                            logx.e("发送好友通知消息 成功: " + integer);
-                        }
+                    @Override
+                    public void onSuccess(Integer integer) {
+                        logx.e("发送好友通知消息 成功: " + integer);
+                    }
 
-                        @Override
-                        public void onError(Integer integer, RongIMClient.ErrorCode errorCode) {
-                            logx.e("发送好友通知消息 失败: " + integer + errorCode.getMessage());
+                    @Override
+                    public void onError(Integer integer, RongIMClient.ErrorCode errorCode) {
+                        logx.e("发送好友通知消息 失败: " + integer + errorCode.getMessage());
 
-                        }
-                    },
-                    new RongIMClient.ResultCallback<Message>() {
-                        @Override
-                        public void onSuccess(Message message) {
-                            logx.e("发送好友消息通知, 返回结果 成功: " + message.getObjectName());
-                        }
+                    }
+                },
+                new RongIMClient.ResultCallback<Message>() {
+                    @Override
+                    public void onSuccess(Message message) {
+                        logx.e("发送好友消息通知, 返回结果 成功: " + message.getObjectName());
+                    }
 
-                        @Override
-                        public void onError(RongIMClient.ErrorCode errorCode) {
-                            logx.e("发送好友消息通知, 返回结果 失败: " + errorCode.getMessage());
-                        }
-                    });
+                    @Override
+                    public void onError(RongIMClient.ErrorCode errorCode) {
+                        logx.e("发送好友消息通知, 返回结果 失败: " + errorCode.getMessage());
+                    }
+                });
         }
     }
 
