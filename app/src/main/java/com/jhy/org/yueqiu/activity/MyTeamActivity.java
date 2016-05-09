@@ -253,6 +253,12 @@ public class MyTeamActivity extends Activity{
         });
     }
 
+    @Override
+    protected void onPause () {
+        super.onPause();
+        RongUtils.saveUserInfo();
+    }
+
     //上传头像
     static private Logx logx = new Logx(MyTeamActivity.class);
     private BmobFile bmobFile;

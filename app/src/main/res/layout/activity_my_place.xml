@@ -1,42 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:id="@+id/container_hear"
+    <com.jhy.org.yueqiu.view.ActionBarLayout
+        android:id="@+id/my_actionBar"
+        chx:title_text="我的收藏"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:background="@color/blackui"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/ibtn_back"
-            android:background="@drawable/icon_system_right"
-            android:layout_margin="25dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <TextView
-            android:id="@+id/tv_collect_title"
-            android:text="@string/collect"
-            android:textSize="30sp"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </RelativeLayout>
+        android:layout_height="wrap_content" />
 
     <ImageView
         android:id="@+id/iv_collect_head"
         android:background="@drawable/icon_launcher"
         android:layout_centerHorizontal="true"
-        android:layout_below="@id/container_hear"
+        android:layout_below="@id/my_actionBar"
         android:layout_marginTop="20dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_width="128dp"
+        android:layout_height="128dp"/>
 
     <ListView
         android:id="@+id/lv_places"
@@ -49,9 +31,10 @@
     </ListView>
 
     <com.jhy.org.yueqiu.view.BaiduMapLayout
-        android:id="@+id/baiduMap"
+        android:id="@+id/my_baiduMap"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
 
 </RelativeLayout>
