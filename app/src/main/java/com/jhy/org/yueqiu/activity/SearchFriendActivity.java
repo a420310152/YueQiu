@@ -19,6 +19,7 @@ import com.jhy.org.yueqiu.adapter.FriendAdapter;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.Logx;
 
 import java.util.List;
 
@@ -31,16 +32,16 @@ import cn.bmob.v3.listener.FindListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class SearchFriendActivity extends Activity implements AdapterView.OnItemClickListener, OnReceiveUserLocationListener, View.OnClickListener {
+public class SearchFriendActivity extends Activity implements AdapterView.OnItemClickListener, OnReceiveUserLocationListener {
     private static final int MSG_FILL_FRIENDS = 0x32;
     private Context context = this;
     private Intent myProfileIntent;
 
-    private ImageButton ibtn_back;
-
     private ListView lv_friends;
     private List<Person> friendList = null;
     private FriendAdapter friendAdapter = null;
+
+    private static Logx logx = new Logx(SearchFriendActivity.class);
 
     private Handler handler = new Handler() {
         @Override
@@ -59,9 +60,6 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
         this.lv_friends = (ListView) findViewById(R.id.lv_friends);
         lv_friends.setOnItemClickListener(this);
-
-        ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
-        ibtn_back.setOnClickListener(this);
 
         this.myProfileIntent = new Intent(context, OpponentActivity.class);
 
@@ -91,7 +89,7 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
                 @Override
                 public void onError(int i, String s) {
-                    Log.i("ilog", "SearchActivity: 查找失败!");
+                    logx.e("查找附近朋友 失败：" + s);
                     showToast("不好意思, 查找失败!");
                 }
             });
@@ -99,12 +97,5 @@ public class SearchFriendActivity extends Activity implements AdapterView.OnItem
 
     private void showToast (CharSequence text) {
         Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.ibtn_back) {
-            finish();
-        }
     }
 }

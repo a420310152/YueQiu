@@ -13,9 +13,12 @@ public class Preferences {
     private static final String PREFERENCES_MAIN = "yueqiu.main";
     private static Preferences singleton = null;
 
-    protected Preferences (String prefName) {
-        pref = App.getInstance().getSharedPreferences(prefName, Context.MODE_PRIVATE);
+    public Preferences (Context context, String prefName) {
+        pref = context.getSharedPreferences(prefName, Context.MODE_PRIVATE);
         editor = pref.edit();
+    }
+    public Preferences (String prefName) {
+        this(App.getInstance(), prefName);
     }
 
     public static Preferences getInstance () {

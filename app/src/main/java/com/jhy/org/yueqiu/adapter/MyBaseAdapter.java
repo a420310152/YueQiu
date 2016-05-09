@@ -12,10 +12,10 @@ import java.util.List;
  *          所有者 H: (黄振梓)
  **********************************************
  */
-public class MyBaseAdapter<T> extends BaseAdapter{
-    public List<T> list;
-    public Context context;
-    public LayoutInflater inflater;
+public class MyBaseAdapter<T> extends BaseAdapter {
+    protected List<T> list;
+    protected Context context;
+    protected LayoutInflater inflater;
 
     public MyBaseAdapter(Context context, List<T> list) {
         this.list = list;
@@ -25,7 +25,7 @@ public class MyBaseAdapter<T> extends BaseAdapter{
 
     @Override
     public int getCount() {
-        return list==null ? 0 : list.size();
+        return list == null ? 0 : list.size();
     }
 
     @Override

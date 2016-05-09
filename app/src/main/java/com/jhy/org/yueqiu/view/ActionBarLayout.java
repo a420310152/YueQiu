@@ -59,16 +59,15 @@ public class ActionBarLayout extends RelativeLayout implements View.OnClickListe
         tv_titile.setText(title_text == null ? "" : title_text);
         tv_titile.setTextSize(title_textSize);
 
-        Drawable options_src = typedArray.getDrawable(R.styleable.actionbar_options_src);
-        boolean options_visible = typedArray.getBoolean(R.styleable.actionbar_options_visible, false);
-
         ibtn_options = (ImageButton) findViewById(R.id.ibtn_options);
+
+        Drawable options_src = typedArray.getDrawable(R.styleable.actionbar_options_src);
         if (options_src != null) {
             ibtn_options.setImageDrawable(options_src);
-            ibtn_options.setVisibility(VISIBLE);
-        } else {
-            ibtn_options.setVisibility(options_visible ? VISIBLE : GONE);
         }
+
+        boolean options_visible = typedArray.getBoolean(R.styleable.actionbar_options_visible, false);
+        ibtn_options.setVisibility(options_visible ? VISIBLE : GONE);
     }
 
     // 可删除

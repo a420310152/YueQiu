@@ -36,8 +36,7 @@ public class RongUtils {
     private static boolean isConnected = false;
     private static boolean isRequestingToken = false;
     private static String token = null;
-    private static HashMap<String, UserInfo> userInfoMap;
-    private static UserInfoPreferences userInfoPreferences;
+    private static UserInfoCache userInfoCache;
     private static Preferences preferences;
 
     private static Logx logx = new Logx(RongUtils.class);
@@ -47,10 +46,10 @@ public class RongUtils {
          * OnCreate 会被多个进程重入，这段保护代码，确保只有您需要使用 RongIM 的进程和 Push 进程执行了 init。
          * io.rong.push 为融云 push 进程名称，不可修改。
          */
-        userInfoPreferences = UserInfoPreferences.getInstance();
+        userInfoCache = UserInfoCache.getInstance();
         preferences = Preferences.getInstance();
 
-        String curProcessName = App.getCurProcessName(app.getApplicationContext());
+        String curProcessName = App.getCurProcessName(app);
         String packageName = app.getApplicationInfo().packageName;
         if (packageName.equals(curProcessName) || "io.rong.push".equals(curProcessName)) {
             RongIM.init(app);
@@ -58,8 +57,6 @@ public class RongUtils {
             setConversationListBehaviorListener();
             setUserInfoProvider();
             connect();
-
-            userInfoMap = new HashMap<>();
         }
     }
 
@@ -217,8 +214,7 @@ public class RongUtils {
             if (rong != null) {
                 rong.refreshUserInfoCache(userInfo);
             }
-            userInfoMap.put(userInfo.getUserId(), userInfo);
-            userInfoPreferences.setUserInfo(userInfo).commit();
+            userInfoCache.setUserInfo(userInfo);
         }
     }
     public static void refreshUserInfo (String userId, String name, String portraitUri) {
@@ -228,6 +224,10 @@ public class RongUtils {
         if (person != null) {
             refreshUserInfo(person.getObjectId(), person.getUsername(), person.getAvatarUrl());
         }
+    }
+
+    public static void saveUserInfo () {
+        UserInfoCache.getInstance().apply();
     }
 
     private static void refreshUserInfoFromCloud (String userId) {
@@ -249,12 +249,8 @@ public class RongUtils {
             @Override
             public UserInfo getUserInfo(String userId) {
                 UserInfo userInfo = null;
-                UserInfoPreferences pref = UserInfoPreferences.getInstance();
-                if (userInfoMap.containsKey(userId)) {
-                    userInfo = userInfoMap.get(userId);
-                } else if (pref.contains(userId)) {
-                    userInfo = pref.getUserInfo(userId);
-                    userInfoMap.put(userId, userInfo);
+                if (userInfoCache.contains(userId)) {
+                    userInfo = userInfoCache.getUserInfo(userId);
                 } else {
                     refreshUserInfoFromCloud(userId);
                 }
