@@ -72,6 +72,13 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
         setContentView(R.layout.activity_my_profile);
         init();
     }
+
+    @Override
+    protected void onPause () {
+        super.onPause();
+        RongUtils.saveUserInfo();
+    }
+
     private void init(){
         iv_info_head = (ImageView) findViewById(R.id.iv_info_head);
         et_info_name = (EditText) findViewById(R.id.et_info_name);
@@ -293,6 +300,7 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
                 logx.e("\t\t\t" + s);
             }
         });
+
     }
 
 
