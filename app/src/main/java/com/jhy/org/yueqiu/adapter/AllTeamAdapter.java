@@ -24,7 +24,7 @@ public class AllTeamAdapter extends MyBaseAdapter<Team>{
         if(allTeamLayout == null) {
             allTeamLayout = new AllTeamLayout(context);
         }
-        allTeamLayout.setAllTeamInfo(list.get(position));
+        allTeamLayout.setAddTeam(list.get(position));
         return allTeamLayout;
     }
 }

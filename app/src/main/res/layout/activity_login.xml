@@ -12,7 +12,7 @@
         android:id="@+id/actionbar_login_title"/>
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="160dp"
         android:layout_below="@id/actionbar_login_title"
         android:background="@drawable/icon_login_background"
         android:id="@+id/line_login_head">
@@ -28,10 +28,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/icon_login_bottom"
-
         android:layout_below="@id/line_login_head"
         android:textColor="@color/dimgray"/>
-    <!--<TextView-->
+<!--<TextView-->G6
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="@string/head"-->

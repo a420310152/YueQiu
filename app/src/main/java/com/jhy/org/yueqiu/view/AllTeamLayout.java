@@ -58,10 +58,23 @@ public class AllTeamLayout extends RelativeLayout{
         tv_allteam_slogan = (TextView) findViewById(R.id.tv_allteam_slogan);
         person = BmobUser.getCurrentUser(context, Person.class);
     }
-    //设置我创建球队的信息
-    public void setAllTeamInfo(Team addTeam){
-        tv_selector_allteam_name.setText(addTeam.getName());
+    //查询我创建球队的信息并设置
+    public void setAllTeamInfo(Team buildTeam){
+        tv_selector_allteam_name.setText(buildTeam.getName());
         tv_team_buildname.setText(person.getUsername());
+        tv_selector_allteam_time.setText(buildTeam.getCreatedAt());
+        tv_allteam_slogan.setText(buildTeam.getMotto());
+        String logo = buildTeam.getLogoUrl();
+        Picasso.with(context)
+                .load(logo)
+                .transform(new RoundTransform())
+                .into(iv_allteam_head);
+    }
+
+     //设置我加入球队的信息
+    public void setAddTeam(Team addTeam) {
+        tv_selector_allteam_name.setText(addTeam.getName());
+        tv_team_buildname.setText(addTeam.getCreator().getUsername());
         tv_selector_allteam_time.setText(addTeam.getCreatedAt());
         tv_allteam_slogan.setText(addTeam.getMotto());
         String logo = addTeam.getLogoUrl();

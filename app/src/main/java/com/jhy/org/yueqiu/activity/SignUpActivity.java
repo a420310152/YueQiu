@@ -8,11 +8,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.view.ActionBarLayout;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
 
 import static android.widget.Toast.LENGTH_LONG;
+import static com.jhy.org.yueqiu.R.id.actionbar_signup_title;
 
 /*
  **********************************************
@@ -25,6 +27,7 @@ public class SignUpActivity extends Activity {
     EditText et_signup_password;//注册的密码
     EditText getEt_signup_repetPassword;//注册的重复密码
     Button btn_signup_register;//注册按钮
+    ActionBarLayout actionBarLayout;
 
     //获取输入框中的email，用户名，密码，重复密码
     String userEmail,userName,userPassword,userRepetPassword;
@@ -43,6 +46,7 @@ public class SignUpActivity extends Activity {
         et_signup_password = (EditText) findViewById(R.id.et_signup_password);
         getEt_signup_repetPassword = (EditText) findViewById(R.id.et_signup_repetpassward);
         btn_signup_register = (Button) findViewById(R.id.btn_signup_register);
+        actionBarLayout = (ActionBarLayout) findViewById(actionbar_signup_title);
     }
 
     //返回箭头的监听

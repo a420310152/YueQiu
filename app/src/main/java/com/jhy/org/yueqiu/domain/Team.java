@@ -13,8 +13,9 @@ public class Team extends BmobObject {
     private String logoUrl;         // Logo
     private BmobFile logo;          // Logo标志
     private Person creator;         // 创建者
-    private BmobRelation members;   // 队员
     private String motto;           // 口号
+
+    private BmobRelation members;   // 队员，已遗弃
 
     public String getName() {
         return name;

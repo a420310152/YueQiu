@@ -37,8 +37,6 @@ public class MyAllTeamActivity extends Activity {
     private BmobUser my_allTeam_bmobuser;
     private Button btn_add_team;//创建球队按钮
     private Person person;//当前用户
-    private List<Person> memberList;
-    private AddTeam addTeam;
     private List<Team> teamList = new ArrayList<>();
 
     @Override
@@ -46,6 +44,11 @@ public class MyAllTeamActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_allteam);
         judgeLogin();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         queryTeam();
         addTeam();
     }
@@ -72,7 +75,7 @@ public class MyAllTeamActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent addTeamIntent = new Intent(MyAllTeamActivity.this, MyTeamActivity.class);
-                addTeamIntent.putExtra("addteam", teamList.get(position));
+                addTeamIntent.putExtra("team", teamList.get(position));
                 startActivity(addTeamIntent);
             }
         });
@@ -81,6 +84,7 @@ public class MyAllTeamActivity extends Activity {
             public void onClick(View v) {
                 Intent allTeamIntent = new Intent(MyAllTeamActivity.this, MyTeamActivity.class);
                 allTeamIntent.putExtra("team", team);
+                allTeamIntent.putExtra("myOwn", true);
                 startActivity(allTeamIntent);
             }
         });
@@ -121,8 +125,8 @@ public class MyAllTeamActivity extends Activity {
     //查询我加入的球队
     private void addTeam() {
         BmobQuery<AddTeam> query = new BmobQuery<AddTeam>();
-        query.addWhereEqualTo("member",new BmobPointer(person));
-        query.include("addTeam");
+        query.addWhereEqualTo("member", new BmobPointer(person));
+        query.include("addTeam,addTeam.creator");
         query.findObjects(this, new FindListener<AddTeam>() {
 
             @Override
@@ -131,7 +135,7 @@ public class MyAllTeamActivity extends Activity {
                 for (AddTeam addallteam : list) {
                     Log.e("onSuccess", "加入的所有球队" + list);
                     Team team = addallteam.getAddTeam();
-                    if(team.getCreator().getObjectId().equals(person.getObjectId())){
+                    if (Utils.equals(team.getCreator().getObjectId(), person.getObjectId())) {
                         teamList.remove(team);
                     }
                     teamList.add(team);
@@ -143,7 +147,7 @@ public class MyAllTeamActivity extends Activity {
 
             @Override
             public void onError(int i, String s) {
-                Log.e("onError", "查询加入的球队"+s);
+                Log.e("onError", "查询加入的球队" + s);
             }
         });
     }

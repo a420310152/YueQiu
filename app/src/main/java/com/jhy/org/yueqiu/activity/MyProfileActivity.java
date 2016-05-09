@@ -129,7 +129,7 @@ public class MyProfileActivity extends Activity implements OnValuePickedListener
             String username = (String) BmobUser.getObjectByKey(context, "username");
             et_info_name.setText(username);
             Boolean usersex = (Boolean) BmobUser.getObjectByKey(context, "sex");
-            tv_selector_sex.setText(usersex ? "男" : "女");
+            tv_selector_sex.setText(usersex == null || usersex ? "男" : "女");
             Integer userage = (Integer) BmobUser.getObjectByKey(context, "age");
             if(userage==null){
                 tv_selector_age.setText("");

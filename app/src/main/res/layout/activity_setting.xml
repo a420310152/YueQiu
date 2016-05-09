@@ -82,7 +82,7 @@
         android:layout_below="@id/tv_system_set_about_help"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/icon_setting_position"
+        android:drawableLeft="@drawable/icon_setting_info"
         android:drawableRight="@drawable/icon_myprofile_selector"
         android:text="@string/system_music_set"
         android:textSize="20sp"
