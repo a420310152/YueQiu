@@ -70,6 +70,8 @@ public class FriendLayout extends RelativeLayout implements View.OnClickListener
             String position = person.getPosition();
             String avatar = person.getAvatarUrl();
 
+            RongUtils.refreshUserInfo(person.getObjectId(), username, avatar);
+
             if (signature == null || signature.isEmpty()) {
                 signature = "该用户还没有签名";
             }
@@ -88,8 +90,6 @@ public class FriendLayout extends RelativeLayout implements View.OnClickListener
             tv_username.setText(username);
             tv_signature.setText(signature);
             tv_position.setText(position);
-
-            RongUtils.refreshUserInfo(person.getObjectId(), username, avatar);
         }
         return this;
     }

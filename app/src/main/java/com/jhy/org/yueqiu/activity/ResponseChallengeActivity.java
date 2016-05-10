@@ -100,8 +100,12 @@ public class ResponseChallengeActivity extends Activity {
     View.OnClickListener clickPlace = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            //LatLng pos = challenge.get
-            //baiduMapLayout.setMakerAPos(pos);
+            LatLng pos = challenge.getPlaceLatLng();
+        if (pos!=null&&challenge.getPlaceName()!=null){
+            baiduMapLayout.setPosition(pos);
+            baiduMapLayout.setTitle(challenge.getPlaceName());
+            baiduMapLayout.setVisibility(View.VISIBLE);
+        }
         }
     };
 

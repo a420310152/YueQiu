@@ -38,12 +38,12 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
         Bmob.initialize(this, Key.bmob.application_id);
         build();
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+
         sidebarFragment.judge();
     }
 
@@ -52,7 +52,7 @@ public class MainActivity extends FragmentActivity {
         //添加Fragment
         sidebarFragment = new SidebarFragment();
         sidebarFragment.setContext(this);
-//        sidebarFragment.judge();
+
         HomeFragment homeFragment = new HomeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.linear,homeFragment);

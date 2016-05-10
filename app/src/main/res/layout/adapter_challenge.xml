@@ -3,7 +3,8 @@
      android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
     <com.jhy.org.yueqiu.view.ChallengeLayout layout="@layout/layout_challenge"
         android:layout_width="wrap_content"

@@ -14,6 +14,7 @@
         android:layout_alignTop="@+id/challengeContent"
         android:layout_alignBottom="@+id/challengeContent"
         android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
         />
     <RelativeLayout
         android:orientation="vertical" android:layout_width="wrap_content"
