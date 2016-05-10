@@ -61,6 +61,7 @@ public class TeamLayout extends RelativeLayout {
     public void setTeam(Person person) {
         this.person = person;
         Picasso.with(context).load(person.getAvatarUrl()).transform(new RoundTransform()).into(iv_memember_head);
+        this.iv_memember_head.setClickable(false);
         this.tv_memember_name_text.setText(person.getUsername());
         this.tv_memember_height_text.setText(person.getHeight() + "cm");
         this.tv_memember_weight_text.setText(person.getWeight() + "kg");

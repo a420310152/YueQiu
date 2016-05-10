@@ -23,7 +23,7 @@
                 android:id="@+id/iv_info_head"
                 android:background="@drawable/icon_sidebar_head"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"/>
             <TextView
@@ -37,13 +37,13 @@
                 android:drawablePadding="10dp"
                 android:padding="5dp"
                 android:text="12"
-                android:textSize="25sp" />
+                android:textSize="20sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/icon_myprofile_bground"
                 android:layout_below="@id/tv_info_zan"
                 android:id="@+id/linear_info_name">
@@ -54,13 +54,13 @@
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_name"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_name"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:background="@null"
                     android:layout_marginLeft="40dp"
                     android:gravity="center_vertical"
@@ -70,24 +70,25 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/linear_info_name"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
                 android:id="@+id/linear_info_sex">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_sex"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_sex"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:textSize="25sp"
+                    android:layout_height="50dp"
+                    android:textSize="20sp"
+                    android:paddingTop="13dp"
                     android:layout_marginLeft="50dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_sex"
@@ -100,25 +101,26 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/linear_info_sex"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
                 android:id="@+id/relat_info_age">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_age"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_age"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:textSize="25sp"
+                    android:layout_height="40dp"
+                    android:textSize="20sp"
                     android:layout_marginLeft="50dp"
+                    android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_age"
                     android:layout_alignParentRight="true"
@@ -130,7 +132,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/relat_info_age"
                 android:layout_marginTop="25dp"
                 android:background="@drawable/icon_myprofile_bground"
@@ -139,16 +141,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_height"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_height"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:textSize="25sp"
+                    android:layout_height="40dp"
+                    android:textSize="20sp"
                     android:layout_marginLeft="50dp"
+                    android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_height"
                     android:layout_alignParentRight="true"
@@ -160,25 +163,26 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/relat_info_height"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
                 android:id="@+id/relat_info_weight">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_weight"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_weight"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:textSize="25sp"
+                    android:layout_height="40dp"
+                    android:textSize="20sp"
                     android:layout_marginLeft="50dp"
+                    android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_weight"
                     android:layout_alignParentRight="true"
@@ -190,25 +194,26 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="70dp"
+                android:layout_height="50dp"
                 android:layout_below="@id/relat_info_weight"
-                android:layout_marginTop="-10dp"
+                android:layout_marginTop="-5dp"
                 android:background="@drawable/icon_myprofile_bground"
                 android:id="@+id/relat_info_skilled">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="13dp"
                     android:layout_marginLeft="40dp"
                     android:text="@string/info_skilled"
-                    android:textSize="25sp"
+                    android:textSize="20sp"
                     android:id="@+id/tv_info_skilled"/>
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="30dp"
-                    android:textSize="25sp"
+                    android:layout_height="40dp"
+                    android:textSize="20sp"
                     android:layout_marginLeft="50dp"
+                    android:paddingTop="7dp"
                     android:layout_centerHorizontal="true"
                     android:layout_toRightOf="@id/tv_info_skilled"
                     android:layout_alignParentRight="true"
@@ -224,6 +229,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/relat_info_skilled"
                 android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
                 <Button

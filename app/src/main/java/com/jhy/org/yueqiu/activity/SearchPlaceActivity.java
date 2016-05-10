@@ -1,5 +1,6 @@
 package com.jhy.org.yueqiu.activity;
 
+import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.baidu.mapapi.model.LatLng;
@@ -29,6 +31,9 @@ import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.MyPlace;
+import com.jhy.org.yueqiu.utils.Logx;
+import com.jhy.org.yueqiu.utils.Utils;
+import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import java.util.ArrayList;
@@ -43,26 +48,29 @@ import cn.bmob.v3.listener.GetListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResultListener, OnReceiveUserLocationListener, AdapterView.OnItemClickListener, View.OnClickListener {
+public class SearchPlaceActivity extends Activity implements OnReceiveUserLocationListener, AdapterView.OnItemClickListener, View.OnClickListener {
     private Context context = this;
     private Person currentUser;
     private PoiSearch poiSearch;
     private PoiNearbySearchOption searchOption;
 
-    private List<MyPlace> placeList;
+    private List<MyPlace> placeList = new ArrayList<>();
     private List<String> userCollection;
     private LatLng userLocation;
     private PlaceAdapter placeAdapter;
     private ListView lv_places;
     private boolean readyToSetAdpater = false;
 
-    private ImageButton ibtn_back;
-    private Button btn_ok;
+    private TextView tv_title;
+    private ImageButton ibtn_yes;
+
     private int selectedPostion = -1;
     private View selectedView = null;
+    private boolean needsPlace = false;
 
     private BaiduMapLayout baiduMap;
 
+    private static Logx logx = new Logx(SearchPlaceActivity.class);
 
     private Handler handler = new Handler() {
         @Override
@@ -77,33 +85,57 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_place);
+        currentUser = Person.getCurrentUser();
 
-        currentUser = BmobUser.getCurrentUser(context, Person.class);
+        resolveIntent(getIntent());
+        initSearch();
+        initView();
+        App.registerReceiveUserLocation(this);
+        queryCollection();
+    }
 
-        poiSearch = PoiSearch.newInstance();
-        searchOption = new PoiNearbySearchOption()
-                .radius(10000)
-                .keyword("篮球场")
-                .pageNum(0);
-        poiSearch.setOnGetPoiSearchResultListener(this);
-
-        placeList = new ArrayList<MyPlace>();
+    private void initView () {
         lv_places = (ListView) findViewById(R.id.lv_places);
         lv_places.setOnItemClickListener(this);
 
         baiduMap = (BaiduMapLayout) findViewById(R.id.baiduMap);
         baiduMap.setVisibility(View.INVISIBLE);
 
-        ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
-        ibtn_back.setOnClickListener(this);
+        ActionBarLayout my_actionBar = (ActionBarLayout) findViewById(R.id.my_actionBar);
+        tv_title = my_actionBar.getTitleView();
+        ibtn_yes = my_actionBar.getOptionsView();
+        ibtn_yes.setOnClickListener(this);
+    }
 
-        btn_ok = (Button) findViewById(R.id.btn_ok);
-        btn_ok.setOnClickListener(this);
-        btn_ok.setVisibility(getIntent() != null && getIntent().hasExtra("needsPlace") ? View.VISIBLE : View.INVISIBLE);
+    private void initSearch () {
+        poiSearch = PoiSearch.newInstance();
+        searchOption = new PoiNearbySearchOption()
+                .radius(10000)
+                .keyword("篮球场")
+                .pageNum(0);
 
-        App.registerReceiveUserLocation(this);
+        poiSearch.setOnGetPoiSearchResultListener(new OnGetPoiSearchResultListener() {
+            @Override
+            public void onGetPoiResult(PoiResult poiResult) {
+                if (poiResult == null || poiResult.error != SearchResult.ERRORNO.NO_ERROR) {
+                    return;
+                }
+                for (PoiInfo info : poiResult.getAllPoi()) {
+                    placeList.add(new MyPlace(info));
+                }
+                handler.sendEmptyMessage(1);
+            }
 
-        queryCollection();
+            @Override
+            public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
+
+            }
+        });
+    }
+
+    private void resolveIntent (Intent intent) {
+        boolean needsPlace = intent.getBooleanExtra("needsPlace", false);
+        this.needsPlace = needsPlace;
     }
 
     @Override
@@ -114,24 +146,8 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
     }
 
     @Override
-    public void onGetPoiResult(PoiResult poiResult) {
-        if (poiResult == null || poiResult.error != SearchResult.ERRORNO.NO_ERROR) {
-            return;
-        }
-        for (PoiInfo info : poiResult.getAllPoi()) {
-            placeList.add(new MyPlace(info));
-        }
-        handler.sendEmptyMessage(1);
-    }
-
-    @Override
-    public void onGetPoiDetailResult(PoiDetailResult poiDetailResult) {
-
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("ilog", "点击列表里的某一项[" + position + "]");
+        //logx.e("点击列表里的某一项[\" + position + \"]");
         MyPlace info = placeList.get(position);
         baiduMap.setTitle(info.name);
         baiduMap.setPosition(info.location);
@@ -143,25 +159,19 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
         }
         view.setBackgroundColor(0x99AABBCC);
         selectedView = view;
+
+        ibtn_yes.setVisibility(needsPlace ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
     public void onClick(View v) {
-        Log.i("ilog", "点击事件: " + v.getId());
-        switch (v.getId()) {
-            case R.id.btn_ok:
-                if (btn_ok.getVisibility() == View.VISIBLE && selectedPostion != -1) {
-                    Intent intent = new Intent();
-                    intent.putExtra("place", placeList.get(selectedPostion));
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-                break;
-            case R.id.ibtn_back:
+        if (Utils.equals(v, ibtn_yes)) {
+            if (ibtn_yes.getVisibility() == View.VISIBLE && selectedPostion != -1) {
+                Intent intent = new Intent();
+                intent.putExtra("place", placeList.get(selectedPostion));
+                setResult(RESULT_OK, intent);
                 finish();
-                break;
-            default:
-                break;
+            }
         }
     }
 
@@ -173,7 +183,6 @@ public class SearchPlaceActivity extends Activity implements OnGetPoiSearchResul
                 @Override
                 public void onSuccess(Person person) {
                     userCollection = person.getCollection();
-                    Log.i("ilog", "userCollection.size() = " + userCollection.size());
                     setAdapter(false);
                 }
 

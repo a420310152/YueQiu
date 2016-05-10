@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -39,17 +40,21 @@ import cn.bmob.v3.listener.UpdateListener;
  */
 public class LoginActivity extends Activity{
     private Context context = this;
-    ImageView iv_login_head;
-    EditText et_login_name;
-    EditText et_login_password;
-    Button btn_login;
-    TextView tv_register_text;
-    CheckBox cb_login_rememberword;
-    ImageView iv_login_qq;
-    ImageView iv_login_weixin;
-    ImageView iv_login_weibo;
-
+    private ImageView iv_login_head;
+    private EditText et_login_name;
+    private EditText et_login_password;
+    private Button btn_login;
+    private TextView tv_register_text;
+    private CheckBox cb_login_rememberword;
+    private ImageView iv_login_qq;
+    private ImageView iv_login_weixin;
+    private ImageView iv_login_weibo;
+    private Boolean isRemember = false;
     private static Logx logx = new Logx(LoginActivity.class);
+    private static final int REQUESTCODE_REGIST = 101;
+    private Preferences preferences;
+    private String name;
+    private String pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,25 +76,35 @@ public class LoginActivity extends Activity{
         iv_login_weixin = (ImageView) findViewById(R.id.iv_login_weixin);
         cb_login_rememberword.setOnCheckedChangeListener(checkedChange);
 
+        preferences = Preferences.getInstance();
+        String name = preferences.get("name", "");
+        String pwd = preferences.get("pwd", "");
+        isRemember = preferences.get("isRemember", false);
+        if (isRemember) {
+            et_login_name.setText(name);
+            et_login_password.setText(pwd);
+            cb_login_rememberword.setChecked(isRemember);
+        }
     }
     //对checkBox进行监听
     OnCheckedChangeListener checkedChange = new OnCheckedChangeListener(){
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            isRemember = isChecked;
+            preferences.set("isRemember", isRemember)
+                        .commit();
 
         }
     };
-
-    //返回箭头的监听
-    public void loginBackClick(View v){
-        finish();
-    }
 
     //登录按钮的监听
     public void loginClick(View v) {
         String loginUserName = et_login_name.getText().toString();
         String loginUserPassword = et_login_password.getText().toString();
+        preferences.set("name", loginUserName)
+                .set("pwd", loginUserPassword)
+                .commit();
         if(loginUserName.equals("")){
             toast("请填写用户名");
             return;
@@ -106,6 +121,7 @@ public class LoginActivity extends Activity{
             @Override
             public void onSuccess() {
                 toast("登录成功");
+
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 

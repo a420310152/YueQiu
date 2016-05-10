@@ -19,11 +19,13 @@ import com.jhy.org.yueqiu.domain.MyPlace;
 import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -39,20 +41,19 @@ import cn.bmob.v3.listener.GetListener;
  * 			所有者 H: (黄振梓)
  **********************************************
  */
-public class MyPlaceActivity extends Activity implements View.OnClickListener, OnGetPoiSearchResultListener, OnReceiveUserLocationListener {
+public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultListener, AdapterView.OnItemClickListener, OnReceiveUserLocationListener {
     private Context context = this;
     private Person currentUser = null;
 
     private LatLng userLocation;
     private List<String> userCollection;
-    private List<MyPlace> placeList;
+    private List<MyPlace> placeList = new ArrayList<>();
     private PlaceAdapter placeAdapter;
+    private View selectedView = null;
     private ListView lv_places;
     private int resultCount = 0;
 
-    private ImageButton ibtn_back;
-
-    private BaiduMapLayout baiduMap;
+    private BaiduMapLayout my_baiduMap;
     private PoiSearch poiSearch;
 
     private Handler handler = new Handler() {
@@ -83,13 +84,10 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
     }
 
     private void initView () {
-        ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
-        ibtn_back.setOnClickListener(this);
-
-        placeList = new ArrayList<>();
         lv_places = (ListView) findViewById(R.id.lv_places);
+        lv_places.setOnItemClickListener(this);
 
-        baiduMap = (BaiduMapLayout) findViewById(R.id.baiduMap);
+        my_baiduMap = (BaiduMapLayout) findViewById(R.id.my_baiduMap);
 
         poiSearch = PoiSearch.newInstance();
         poiSearch.setOnGetPoiSearchResultListener(this);
@@ -124,17 +122,6 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
     }
 
     @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ibtn_back:
-                finish();
-                break;
-            default:
-                break;
-        }
-    }
-
-    @Override
     public void onGetPoiResult(PoiResult poiResult) {
 
     }
@@ -157,5 +144,19 @@ public class MyPlaceActivity extends Activity implements View.OnClickListener, O
     @Override
     public void onReceiveUserLocation(BDLocation userLocation) {
         this.userLocation = new LatLng(userLocation.getLatitude(), userLocation.getLongitude());
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        MyPlace info = placeList.get(position);
+        my_baiduMap.setTitle(info.name);
+        my_baiduMap.setPosition(info.location);
+        my_baiduMap.setVisibility(View.VISIBLE);
+
+        if (selectedView != null) {
+            selectedView.setBackgroundColor(Color.TRANSPARENT);
+        }
+        view.setBackgroundColor(0x99AABBCC);
+        selectedView = view;
     }
 }

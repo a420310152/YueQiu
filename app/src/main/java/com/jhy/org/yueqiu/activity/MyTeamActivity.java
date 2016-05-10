@@ -10,6 +10,7 @@ import com.jhy.org.yueqiu.utils.ImageLoader;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.RongUtils;
 import com.jhy.org.yueqiu.utils.RoundTransform;
+import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.squareup.picasso.Picasso;
 
@@ -29,6 +30,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import cn.bmob.v3.BmobQuery;
@@ -54,17 +56,16 @@ public class MyTeamActivity extends Activity{
     private EditText et_team_slogan;//球队宣言
     private Button btn_team_addmemember;//添加成员按钮
     private TeamAdapter teamAdapter;
+    private List<Person> memberList = new ArrayList<>();
     private ListView lv_team_memember;
     private Team team;//我创建的球队
-    private Team addteam;//我加入的球队
     private Context context = this;
     private BmobUser myTeam_bmobUser;
     private ImageLoader imageLoader;
     private BmobRelation  relation;
-    private BmobRelation relationTeam;
     private Person teamMember;//添加的球员
-    private Intent memberIntent;
-    private Intent addMemberIntent;
+    private Intent memberIntent;//我的球队成员的跳转
+    private Intent addMemberIntent;//添加成员按钮的跳转
     private AddTeam addTeam;
     private ActionBarLayout actionBarLayout;
     private int REQUEST_CODE_FOR_MESSAGE = 123;
@@ -75,9 +76,9 @@ public class MyTeamActivity extends Activity{
         setContentView(R.layout.activity_my_team);
         init();
         saveTeamInfo();
-        showInfo();
-        showAddTeamInfo();
+        resolveIntent(getIntent());
     }
+
     //初始化控件
     private void init(){
         iv_team_logo = (ImageView) findViewById(R.id.iv_team_logo);
@@ -88,9 +89,17 @@ public class MyTeamActivity extends Activity{
         imageLoader = new ImageLoader(MyTeamActivity.this,iv_team_logo);
         actionBarLayout = (ActionBarLayout) findViewById(R.id.actionbar_team_title);
         actionBarLayout.setOptionsOnClickListener(click);
+
+        lv_team_memember.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                memberIntent = new Intent(MyTeamActivity.this, OpponentActivity.class);
+                Person person = memberList.get(position);
+                memberIntent.putExtra("person", person);
+                startActivity(memberIntent);
+            }
+        });
     }
-
-
 
     //保存按钮的监听
         View.OnClickListener click = new View.OnClickListener(){
@@ -98,20 +107,26 @@ public class MyTeamActivity extends Activity{
             public void onClick(View v) {
                 String myteam_name = et_team_name.getText().toString();
                 String myteam_slogan = et_team_slogan.getText().toString();
-                if(myteam_name!=null && myteam_slogan!=null) {
-                    team.setCreator(BmobUser.getCurrentUser(MyTeamActivity.this,Person.class));
-                    team.setName(myteam_name);
-                    team.setMotto(myteam_slogan);
-                    team.setMembers(relation);
-                    team.save(context, new SaveListener() {
+                if(Utils.isEmpty(myteam_name)){
+                    toast("请创建你喜欢的球队名称");
+                }else if(Utils.isEmpty(myteam_slogan)){
+                    toast("请创建你喜欢的球队口号");
+                }else {
+                    Team myTeam = new Team();
+                    myTeam.setCreator(BmobUser.getCurrentUser(MyTeamActivity.this, Person.class));
+                    myTeam.setName(myteam_name);
+                    myTeam.setMotto(myteam_slogan);
+                    myTeam.setMembers(relation);
+                    MyTeamActivity.this.team = myTeam;
+                    myTeam.update(context, new UpdateListener() {
                         @Override
                         public void onSuccess() {
-                            Toast.makeText(MyTeamActivity.this, "保存成功", Toast.LENGTH_SHORT).show();
+                            toast("创建成功");
                         }
 
                         @Override
                         public void onFailure(int i, String s) {
-                            Toast.makeText(MyTeamActivity.this, "保存失败" + s, Toast.LENGTH_SHORT).show();
+                            toast("创建失败");
                         }
                     });
                 }
@@ -127,65 +142,40 @@ public class MyTeamActivity extends Activity{
             finish();
         }
     }
-    //进入我的球队界面显示输入框中的信息
-        private void showInfo(){
-            Intent intent =getIntent();
-            team = (Team) intent.getSerializableExtra("team");
-            if(team!=null){
-                et_team_name.setText(team.getName());
-                et_team_slogan.setText(team.getMotto());
-                queryMember();
-                //上传头像
-                String logo = team.getLogoUrl();
-                Picasso.with(context)
-                        .load(logo)
-                        .transform(new RoundTransform())
-                        .into(iv_team_logo);
-            }else{
-
-            }
-        }
-
-    //进入我的加入球队界面显示输入框中的信息
-        private void showAddTeamInfo(){
-            Intent intent =getIntent();
-            addteam = (Team) intent.getSerializableExtra("addteam");
-            if(addteam!=null){
+    //从MyAllTeamActivity传来的team，并进行判断
+    private void resolveIntent (Intent intent) {
+        Team team = (Team) intent.getSerializableExtra("team");
+        boolean myOwn = intent.getBooleanExtra("myOwn", false);
+        showTeamInfo(team, myOwn);
+        this.team = team;
+    }
+    //判断传来的team是我创建的还是我加入的
+    private void showTeamInfo (Team team, boolean myOwn) {
+        if (team != null) {
+            if (!myOwn) {
                 actionBarLayout.setTitleText("我加入球队");
-                et_team_name.setText(addteam.getName());
+                iv_team_logo.setClickable(false);
+
                 et_team_name.setFocusable(false);
                 et_team_name.setFocusableInTouchMode(false);
                 et_team_name.requestFocus();
-                et_team_slogan.setText(addteam.getMotto());
                 et_team_slogan.setFocusable(false);
                 et_team_slogan.setFocusableInTouchMode(false);
                 et_team_slogan.requestFocus();
-                //btn_team_save.setVisibility(View.INVISIBLE);
+
+                actionBarLayout.getOptionsView().setVisibility(View.INVISIBLE);
                 btn_team_addmemember.setVisibility(View.GONE);
-                String logo = addteam.getLogoUrl();
-                Picasso.with(context)
-                        .load(logo)
-                        .transform(new RoundTransform())
-                        .into(iv_team_logo);
-                BmobQuery<Person> bmobQuery1 = new BmobQuery<Person>();
-                bmobQuery1.addWhereRelatedTo("members",new BmobPointer(addteam));
-                bmobQuery1.findObjects(MyTeamActivity.this, new FindListener<Person>() {
-                    @Override
-                    public void onSuccess(List<Person> list) {
-                        Log.i("list", "list=====" + list.size());
-                        TeamAdapter adapter = new TeamAdapter(MyTeamActivity.this, list);
-                        lv_team_memember.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void onError(int i, String s) {
-
-                    }
-                });
-            }else{
-
             }
+            et_team_name.setText(team.getName());
+            et_team_slogan.setText(team.getMotto());
+            Picasso.with(context)
+                    .load(team.getLogoUrl())
+                    .transform(new RoundTransform())
+                    .into(iv_team_logo);
+            queryMember(team);
         }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -195,18 +185,17 @@ public class MyTeamActivity extends Activity{
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_FOR_MESSAGE) {
                 // 得到返回的结果
+                Team team = new Team();
                 teamMember = (Person) data.getSerializableExtra("result");
                 relation = new BmobRelation();
                 relation.add(teamMember);
-                Log.e("添加按钮监听", "team是否有数据" + team);
                 team.setMembers(relation);
-                Log.e("relation","添加的成员数1"+teamMember);
-                team.update(this, new UpdateListener() {
+                team.update(this, this.team.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
                         Toast.makeText(MyTeamActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
-                        queryMember();
-                        addTeamInfo(teamMember,team);
+                       queryMember(MyTeamActivity.this.team);
+                        addTeamInfo(teamMember, MyTeamActivity.this.team);
                     }
                     @Override
                     public void onFailure(int i, String s) {
@@ -218,13 +207,15 @@ public class MyTeamActivity extends Activity{
     }
     //添加成员按钮的监听
     public void teaminfoClick(View v){
-                addMemberIntent = new Intent(MyTeamActivity.this,ContactActivity.class);
-                addMemberIntent.putExtra("message", true);
-                startActivityForResult(addMemberIntent, REQUEST_CODE_FOR_MESSAGE);
+        addMemberIntent = new Intent(MyTeamActivity.this,ContactActivity.class);
+        addMemberIntent.putExtra("message", true);
+        addMemberIntent.putExtra("noTeamMembers", true);
+       // addMemberIntent.putExtra("teamMembers", (Object)memberList);
 
-        }
+        startActivityForResult(addMemberIntent, REQUEST_CODE_FOR_MESSAGE);
+    }
     //查询成员信息
-    private void queryMember(){
+    private void queryMember(Team team){
         BmobQuery<Person> query = new BmobQuery<>();
         query.addWhereRelatedTo("members", new BmobPointer(team));
         query.findObjects(this, new FindListener<Person>() {
@@ -232,17 +223,10 @@ public class MyTeamActivity extends Activity{
             @Override
             public void onSuccess(final List<Person> list) {
                 Log.e("onSuccess", "我的队员信息" + list);
-                teamAdapter = new TeamAdapter(MyTeamActivity.this, list);
+                memberList.clear();
+                memberList.addAll(list);
+                teamAdapter = new TeamAdapter(MyTeamActivity.this, memberList);
                 lv_team_memember.setAdapter(teamAdapter);
-                lv_team_memember.setOnItemClickListener(new OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        memberIntent = new Intent(MyTeamActivity.this, OpponentActivity.class);
-                        Person person = list.get(position);
-                        memberIntent.putExtra("person", person);
-                        startActivity(memberIntent);
-                    }
-                });
             }
 
             @Override
@@ -269,6 +253,12 @@ public class MyTeamActivity extends Activity{
         });
     }
 
+    @Override
+    protected void onPause () {
+        super.onPause();
+        RongUtils.saveUserInfo();
+    }
+
     //上传头像
     static private Logx logx = new Logx(MyTeamActivity.class);
     private BmobFile bmobFile;
@@ -288,6 +278,7 @@ public class MyTeamActivity extends Activity{
                 avatarUrl = bmobFile.getFileUrl(context);
                 Team _team = new Team();
                 _team.setLogoUrl(avatarUrl);
+                Log.e("onSuccess","上传头像"+team);
                 _team.update(context, team.getObjectId(), new UpdateListener() {
                     @Override
                     public void onSuccess() {
@@ -312,5 +303,8 @@ public class MyTeamActivity extends Activity{
                 logx.e("\t\t\t" + s);
             }
         });
+    }
+    private void toast(String str){
+        Toast.makeText(MyTeamActivity.this, str, Toast.LENGTH_SHORT).show();
     }
 }

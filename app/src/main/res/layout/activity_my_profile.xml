@@ -28,8 +28,6 @@
                 android:background="@drawable/icon_sidebar_head"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"
-                android:focusable="false"
-                android:clickable="false"
                 android:id="@+id/iv_info_head"/>
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +37,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_below="@id/iv_info_head"
                 android:layout_centerHorizontal="true"
-                android:id="@+id/tv_info_zan"/>
+                android:id="@+id/tv_info_head"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,7 +45,7 @@
                 android:orientation="horizontal"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/icon_myprofile_bground"
-                android:layout_below="@id/tv_info_zan"
+                android:layout_below="@id/tv_info_head"
                 android:id="@+id/linear_info_name">
 
                 <TextView
@@ -91,7 +89,7 @@
                     android:layout_height="50dp"
                     android:drawableRight="@drawable/icon_myprofile_selector"
                     android:textSize="20sp"
-                    android:paddingTop="12dp"
+                    android:paddingTop="13dp"
                     android:layout_marginLeft="50dp"
                     android:layout_toRightOf="@id/tv_info_sex"
                     android:layout_alignParentRight="true"

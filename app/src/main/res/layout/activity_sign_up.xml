@@ -12,56 +12,77 @@
         android:layout_height="wrap_content"
         android:id="@+id/actionbar_signup_title"/>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
         android:layout_below="@id/actionbar_signup_title"
-        android:background="@drawable/icon_sidebar_head"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/iv_signup_head"/>
-    <EditText
+        android:background="@drawable/icon_signup_back"
+        android:id="@+id/relat_signup_head">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/icon_sidebar_head"
+            android:layout_gravity="center"
+            android:layout_centerInParent="true"
+            android:id="@+id/iv_signup_head"/>
+    </RelativeLayout>
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_signup_head"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/icon_edit"
+        android:background="@drawable/icon_login_bottom"
+        android:layout_below="@id/relat_signup_head"
+        android:textColor="@color/dimgray"/>
+    <EditText
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/relat_signup_head"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/icon_login_edit"
         android:gravity="center"
         android:hint="@string/email"
         android:id="@+id/et_signup_email"/>
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/et_signup_email"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/icon_edit"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/icon_login_edit"
         android:gravity="center"
         android:hint="用户名"
         android:id="@+id/et_signup_name"/>
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/et_signup_name"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/icon_edit"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/icon_login_edit"
         android:gravity="center"
+        android:inputType="textPassword"
         android:hint="@string/passward"
         android:id="@+id/et_signup_password"/>
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/et_signup_password"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/icon_edit"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/icon_login_edit"
         android:gravity="center"
         android:hint="@string/repetpassward"
+        android:inputType="textPassword"
         android:id="@+id/et_signup_repetpassward"/>
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:text="注  册"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
         android:layout_below="@id/et_signup_repetpassward"
-        android:background="@drawable/icon_cancel"
-        android:layout_marginTop="20dp"
+        android:background="@drawable/icon_login"
+        android:layout_marginTop="15dp"
         android:layout_centerInParent="true"
         android:onClick="signupClick"
         android:id="@+id/btn_signup_register"/>
