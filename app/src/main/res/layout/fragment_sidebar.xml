@@ -99,8 +99,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/btn_disabled"
-        android:background="@drawable/icon_sidebar_cancle"
+        android:background="@color/orange"
         android:layout_margin="20dp"
+        android:text="退出"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:visibility="invisible"
         android:id="@+id/btn_cancel"/>
 </RelativeLayout>
