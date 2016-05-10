@@ -71,7 +71,7 @@ public class AllTeamLayout extends RelativeLayout{
                 .into(iv_allteam_head);
     }
 
-     //设置我加入球队的信息
+     //设置我加入球队的信息        
     public void setAddTeam(Team addTeam) {
         tv_selector_allteam_name.setText(addTeam.getName());
         tv_team_buildname.setText(addTeam.getCreator().getUsername());
