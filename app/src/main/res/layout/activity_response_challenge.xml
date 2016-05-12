@@ -129,17 +129,25 @@
             android:textColor="@color/darkgray"
             android:textSize="20dp" />
 
+        <ImageView
+        android:id="@+id/iv_place"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:src="@drawable/icon_setting_position"
+            android:layout_toRightOf="@id/tv_four"
+            android:layout_alignBottom="@id/tv_four"/>
         <TextView
             android:id="@+id/tv_place"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_four"
-            android:layout_alignBottom="@id/tv_four"
+            android:layout_toRightOf="@id/iv_place"
+            android:layout_alignBottom="@id/iv_place"
             android:layout_centerHorizontal="true"
             android:singleLine="false"
             android:text="某某地点"
             android:textColor="@color/lightseagreen"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            />
 
         <TextView
             android:id="@+id/tv_five"

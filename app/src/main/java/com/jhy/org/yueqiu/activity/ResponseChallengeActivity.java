@@ -16,6 +16,7 @@ import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -230,6 +231,7 @@ public class ResponseChallengeActivity extends Activity {
         tv_type.setText(challenge.getType());
         tv_time.setText(challenge.getFromDate().getDate() + "");
         tv_place.setText(challenge.getPlaceName());
+        tv_place.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
     }
     //当点击查看报名按钮时 设置页面为查看信息
     private void setCheckApplyContent(){

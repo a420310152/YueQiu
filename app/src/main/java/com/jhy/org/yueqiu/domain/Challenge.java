@@ -4,6 +4,7 @@ import com.baidu.mapapi.model.LatLng;
 
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
 
 /*
@@ -29,6 +30,7 @@ public class Challenge extends BmobObject {
     private String placeAddress;    // 场地地址
     private Double placeLatitude;    // 场地的纬度
     private Double placeLongitude;   // 场地的经度
+    private BmobGeoPoint gpsPlace;  //场地的坐标
     private BmobDate fromDate;      // 入场时间
     private BmobDate toDate;        // 散场时间
     private String type;           // 对战类型
@@ -38,16 +40,27 @@ public class Challenge extends BmobObject {
 
     private Place place;            // 场地, 已遗弃
 
+
     public String getTitle() {
         return title;
     }
+
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public BmobGeoPoint getGpsPlace() {
+        return gpsPlace;
+    }
+
+    public void setGpsPlace(BmobGeoPoint gpsPlace) {
+        this.gpsPlace = gpsPlace;
     }
 
     public String getContent() {
         return content;
     }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -55,6 +68,7 @@ public class Challenge extends BmobObject {
     public Person getInitiator() {
         return initiator;
     }
+
     public void setInitiator(Person initiator) {
         this.initiator = initiator;
     }
@@ -62,30 +76,52 @@ public class Challenge extends BmobObject {
     public Place getPlace() {
         return place;
     }
+
     public void setPlace(Place place) {
         this.place = place;
     }
 
-    public String getPlaceName() { return placeName; }
-    public void setPlaceName(String placeName) { this.placeName = placeName; }
+    public String getPlaceName() {
+        return placeName;
+    }
 
-    public String getPlaceAddress() { return placeAddress; }
-    public void setPlaceAddress(String placeAddress) { this.placeAddress = placeAddress; }
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
+    }
+
+    public String getPlaceAddress() {
+        return placeAddress;
+    }
+
+    public void setPlaceAddress(String placeAddress) {
+        this.placeAddress = placeAddress;
+    }
 
 
-    public Double getPlaceLatitude() { return placeLatitude; }
-    public void setPlaceLatitude(Double placeLatitude) { this.placeLatitude = placeLatitude; }
+    public Double getPlaceLatitude() {
+        return placeLatitude;
+    }
 
-    public Double getPlaceLongitude() { return placeLongitude; }
-    public void setPlaceLongitude(Double placeLongitude) { this.placeLongitude = placeLongitude; }
+    public void setPlaceLatitude(Double placeLatitude) {
+        this.placeLatitude = placeLatitude;
+    }
 
-    public LatLng getPlaceLatLng () {
+    public Double getPlaceLongitude() {
+        return placeLongitude;
+    }
+
+    public void setPlaceLongitude(Double placeLongitude) {
+        this.placeLongitude = placeLongitude;
+    }
+
+    public LatLng getPlaceLatLng() {
         if (placeLatitude == null || placeLongitude == null) {
             return null;
         }
         return new LatLng(placeLatitude, placeLongitude);
     }
-    public void setPlaceLatLng (LatLng latLng) {
+
+    public void setPlaceLatLng(LatLng latLng) {
         if (latLng != null) {
             placeLatitude = latLng.latitude;
             placeLongitude = latLng.longitude;
@@ -93,12 +129,18 @@ public class Challenge extends BmobObject {
     }
 
 
-    public String getPlaceUid() { return placeUid; }
-    public void setPlaceUid(String placeUid) { this.placeUid = placeUid; }
+    public String getPlaceUid() {
+        return placeUid;
+    }
+
+    public void setPlaceUid(String placeUid) {
+        this.placeUid = placeUid;
+    }
 
     public BmobDate getFromDate() {
         return fromDate;
     }
+
     public void setFromDate(BmobDate fromDate) {
         this.fromDate = fromDate;
     }
@@ -106,6 +148,7 @@ public class Challenge extends BmobObject {
     public BmobDate getToDate() {
         return toDate;
     }
+
     public void setToDate(BmobDate toDate) {
         this.toDate = toDate;
     }
@@ -113,6 +156,7 @@ public class Challenge extends BmobObject {
     public String getType() {
         return type;
     }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -120,6 +164,7 @@ public class Challenge extends BmobObject {
     public Integer getState() {
         return state;
     }
+
     public void setState(Integer state) {
         this.state = state;
     }
@@ -127,6 +172,7 @@ public class Challenge extends BmobObject {
     public BmobRelation getResponders() {
         return responders;
     }
+
     public void setResponders(BmobRelation responders) {
         this.responders = responders;
     }
@@ -134,6 +180,7 @@ public class Challenge extends BmobObject {
     public BmobRelation getTargets() {
         return targets;
     }
+
     public void setTargets(BmobRelation targets) {
         this.targets = targets;
     }
