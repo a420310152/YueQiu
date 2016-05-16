@@ -46,7 +46,7 @@
         android:drawableLeft="@drawable/icon_login_custom"
         android:paddingLeft="20dp"
         android:background="@drawable/icon_login_edit"
-        android:gravity="center"
+        android:drawablePadding="30dp"
         android:hint="@string/name"
         android:paddingRight="35dp"
         android:id="@+id/et_login_name"/>
@@ -58,8 +58,8 @@
         android:layout_centerHorizontal="true"
         android:background="@drawable/icon_login_edit"
         android:drawableLeft="@drawable/icon_login_password"
-        android:paddingLeft="20dp"
-        android:gravity="center"
+        android:paddingLeft="25dp"
+        android:drawablePadding="30dp"
         android:hint= "密  码"
         android:paddingRight="35dp"
         android:inputType="textPassword"
@@ -112,33 +112,33 @@
         android:id="@+id/tv_login_hint"/>
 
     <ImageView
+        android:onClick="loginOnClick"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_below="@+id/tv_login_hint"
         android:layout_marginTop="20dp"
-        android:background="@drawable/icon_login_weibo"
+        android:src="@drawable/icon_login_weibo"
         android:layout_centerHorizontal="true"
+        android:id="@+id/iv_login_weibo"/>
+    <ImageView
         android:onClick="loginOnClick"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@id/iv_login_weibo"
+        android:layout_marginRight="20dp"
+        android:layout_below="@+id/tv_login_hint"
+        android:background="@drawable/icon_login_qq"
         android:id="@+id/iv_login_qq"/>
     <ImageView
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@id/iv_login_qq"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/tv_login_hint"
-        android:background="@drawable/icon_login_qq"
-        android:onClick="loginOnClick"
-        android:id="@+id/iv_login_weixin"/>
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/iv_login_qq"
+        android:layout_toRightOf="@id/iv_login_weibo"
         android:layout_marginLeft="20dp"
         android:layout_below="@+id/tv_login_hint"
         android:background="@drawable/icon_login_weixin"
         android:onClick="loginOnClick"
-        android:id="@+id/iv_login_weibo"/>
+        android:id="@+id/iv_login_weixin"/>
 
 </RelativeLayout>

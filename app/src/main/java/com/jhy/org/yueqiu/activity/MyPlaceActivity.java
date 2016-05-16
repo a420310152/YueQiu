@@ -19,6 +19,7 @@ import com.jhy.org.yueqiu.domain.MyPlace;
 import com.jhy.org.yueqiu.view.BaiduMapLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -55,7 +56,6 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
 
     private BaiduMapLayout my_baiduMap;
     private PoiSearch poiSearch;
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -74,6 +74,7 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
 
         currentUser = Person.getCurrentUser();
         if (currentUser == null) {
+            startActivity(new Intent(MyPlaceActivity.this, LoginActivity.class));
             finish();
         } else {
             initView();
@@ -82,7 +83,6 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
             queryCollection();
         }
     }
-
     private void initView () {
         lv_places = (ListView) findViewById(R.id.lv_places);
         lv_places.setOnItemClickListener(this);

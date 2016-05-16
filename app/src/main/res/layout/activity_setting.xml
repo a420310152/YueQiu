@@ -106,15 +106,15 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@id/system_set_clean_position"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/icon_setting_info"
-        android:drawableRight="@drawable/icon_myprofile_selector"
-        android:text="注销账户"
-        android:textSize="20sp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/red"
+        android:text="注销当前账号"
+        android:textSize="30sp"
+        android:textColor="@color/white"
         android:layout_marginTop="20dp"
-        android:gravity="center_vertical"
-        android:drawablePadding="20dp"
+        android:paddingTop="5dp"
+        android:gravity="center_horizontal"
         android:id="@+id/tv_system_set_cancle"/>
 
 </RelativeLayout>
