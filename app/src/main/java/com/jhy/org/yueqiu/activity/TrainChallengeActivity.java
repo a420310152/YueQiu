@@ -162,6 +162,7 @@ public class TrainChallengeActivity extends Activity implements OnPickDatetimeLi
                     challenge.setPlaceName(place.name);
                     challenge.setPlaceAddress(place.address);
                     challenge.setPlaceUid(place.uid);
+                    challenge.setPlaceLatLng(place.location);
                 }
             }
         }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.multidex.MultiDex;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
@@ -22,6 +23,7 @@ import com.jhy.org.yueqiu.utils.Utils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cn.bmob.v3.Bmob;
@@ -65,6 +67,7 @@ public class App extends Application implements BDLocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
+        MultiDex.install(this);
         app = this;
 
         SDKInitializer.initialize(app);
@@ -72,6 +75,16 @@ public class App extends Application implements BDLocationListener {
         RongUtils.initialize(app);
         initLocation();
         initConfig();
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+
+        // Enabling multidex support.
+        // 1. 65535 limited
+        // 2. run -- error ：Java.exe finished with non-zero exit value 2
+        MultiDex.install(this);
     }
 
     public static void registerReceiveUserLocation (OnReceiveUserLocationListener listener) {

@@ -20,9 +20,20 @@ public class Key {
 		public static final String app_key = "sfci50a7c2dhi";
 		public static final String app_secret = "yG3yFTy2UG";
 	}
-}
 
-// 通过以下命令行来获得证书
-// cd .android
-// keytool -list -v -keystore debug.keystore
+	public static final class weibo {
+		public static final String app_key = "3941305093";
+		public static final String app_secret = "b28c606f7d089f3320364850619bf2d8";
+	}
+
+    public static final class qq {
+        public static final String app_id = "1105317597";
+        public static final String app_key = "h4p5tll6E8ztnIJq";
+    }
+
+	public static final class weixin {
+		public static final String app_id = "wx2da8ebf4379b1609";
+		public static final String app_secret = "ea8670efacb8c050a43cb3823182845a";
+	}
+}
 
