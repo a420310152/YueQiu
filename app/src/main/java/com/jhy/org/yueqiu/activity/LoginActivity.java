@@ -17,13 +17,25 @@ import android.widget.Toast;
 import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.config.App;
+import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.fragment.SidebarFragment;
 import com.jhy.org.yueqiu.test.c.TestActivity;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.Preferences;
+import com.jhy.org.yueqiu.utils.QQUserAuth;
 import com.jhy.org.yueqiu.utils.RongUtils;
+import com.jhy.org.yueqiu.utils.ThirdUserAuth;
 import com.jhy.org.yueqiu.utils.Utils;
+import com.jhy.org.yueqiu.utils.WeiboUserAuth;
+import com.jhy.org.yueqiu.utils.WeixinUserAuth;
+import com.sina.weibo.sdk.WeiboAppManager;
+import com.sina.weibo.sdk.auth.AuthInfo;
+import com.sina.weibo.sdk.auth.Oauth2AccessToken;
+import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.exception.WeiboException;
+import com.tencent.connect.common.Constants;
+import com.tencent.tauth.Tencent;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,16 +52,22 @@ import cn.bmob.v3.listener.UpdateListener;
  */
 public class LoginActivity extends Activity{
     private Context context = this;
-    private ImageView iv_login_head;
-    private EditText et_login_name;
-    private EditText et_login_password;
-    private Button btn_login;
-    private TextView tv_register_text;
-    private CheckBox cb_login_rememberword;
-    private ImageView iv_login_qq;
-    private ImageView iv_login_weixin;
-    private ImageView iv_login_weibo;
+    ImageView iv_login_head;
+    EditText et_login_name;
+    EditText et_login_password;
+    Button btn_login;
+    TextView tv_register_text;
+    CheckBox cb_login_rememberword;
+    ImageView iv_login_qq;
+    ImageView iv_login_weixin;
+    ImageView iv_login_weibo;
+    
     private Boolean isRemember = false;
+    
+    private QQUserAuth qqUserAuth;
+    private WeixinUserAuth weixinUserAuth;
+    private WeiboUserAuth weiboUserAuth;
+    
     private static Logx logx = new Logx(LoginActivity.class);
     private static final int REQUESTCODE_REGIST = 101;
     private Preferences preferences;
@@ -63,6 +81,17 @@ public class LoginActivity extends Activity{
         init();
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == Constants.REQUEST_LOGIN && qqUserAuth != null) {
+            qqUserAuth.onActivityResultData(requestCode, resultCode, data);
+        }
+        if (weiboUserAuth != null) {
+            weiboUserAuth.onActivityResultData(requestCode, resultCode, data);
+        }
+    }
+
     //初始化控件
     private void init(){
         iv_login_head = (ImageView) findViewById(R.id.iv_login_head);
@@ -71,11 +100,12 @@ public class LoginActivity extends Activity{
         btn_login = (Button) findViewById(R.id.btn_login);
         tv_register_text = (TextView) findViewById(R.id.tv_register_text);
         cb_login_rememberword = (CheckBox) findViewById(R.id.cb_login_rememberword);
-        iv_login_qq = (ImageView) findViewById(R.id.iv_login_qq);
-        iv_login_weibo = (ImageView) findViewById(R.id.iv_login_weibo);
-        iv_login_weixin = (ImageView) findViewById(R.id.iv_login_weixin);
+        iv_login_qq = (ImageView) findViewById(R.id.iv_login_qq);        iv_login_weixin = (ImageView) findViewById(R.id.iv_login_weixin);
         cb_login_rememberword.setOnCheckedChangeListener(checkedChange);
 
+        iv_login_weibo = (ImageView) findViewById(R.id.iv_login_weibo);
+//        iv_login_weibo.setBackgroundResource(R.drawable.icon_login_weibo);
+        
         preferences = Preferences.getInstance();
         String name = preferences.get("name", "");
         String pwd = preferences.get("pwd", "");
@@ -97,6 +127,11 @@ public class LoginActivity extends Activity{
 
         }
     };
+
+    //返回箭头的监听
+    public void loginBackClick(View v){
+        finish();
+    }
 
     //登录按钮的监听
     public void loginClick(View v) {
@@ -168,43 +203,39 @@ public class LoginActivity extends Activity{
         }
     }
 
+    private QQUserAuth getQQUserAuth () {
+        if (qqUserAuth == null) {
+            qqUserAuth = new QQUserAuth(this);
+        }
+        return qqUserAuth;
+    }
+
+    private WeixinUserAuth getWeixinUserAuth () {
+        if (weixinUserAuth == null) {
+            weixinUserAuth = new WeixinUserAuth(this);
+        }
+        return weixinUserAuth;
+    }
+
+    private WeiboUserAuth getWeiboUserAuth () {
+        if (weiboUserAuth == null) {
+            weiboUserAuth = new WeiboUserAuth(this);
+        }
+        return weiboUserAuth;
+    }
+
     //三方登陆的微信登录
     private void loginByWeixin(String s){
-        JSONObject qqobj;
-        try {
-            qqobj = new JSONObject(s);
-            String token = qqobj.getString("access_token");
-            String expires = String.valueOf(qqobj.getLong("expires_in"));
-            String openid = qqobj.getString("openid");
-            final BmobThirdUserAuth authInfo = new BmobThirdUserAuth(BmobThirdUserAuth.SNS_TYPE_WEIXIN,token,expires,openid);
-            BmobUser.loginWithAuthData(LoginActivity.this, authInfo, new OtherLoginListener() {
-
-                @Override
-                public void onSuccess(JSONObject userAuth) {
-                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                    intent.putExtra("json", userAuth.toString());
-                    intent.putExtra("from", authInfo.getSnsType());
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onFailure(int i, String s) {
-                    toast("第三方登录失败");
-                }
-            });
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
+        getWeixinUserAuth().login();
     }
 
     //三方登陆的qq登录
-    private void loginByqq(String s){
-
+    private void loginByqq (String s){
+        getQQUserAuth().login();
     }
     //三方登录微博登录
-    private void loginByWeibo(String s){
-
+    private void loginByWeibo (String s){
+        getWeiboUserAuth().login();
     }
 
     //提示信息

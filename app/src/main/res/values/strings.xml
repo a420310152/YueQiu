@@ -33,4 +33,10 @@
     <string name="system_set_about_help">音效设置</string>
     <string name="system_music_set">清除地理位置</string>
     <string name="system_set_clean_position">关于约球</string>
+
+    <string name="errcode_success">成功</string>
+    <string name="errcode_cancel">已取消</string>
+    <string name="errcode_deny">已被拒绝</string>
+    <string name="errcode_unknown">未知错误</string>
+
 </resources>
