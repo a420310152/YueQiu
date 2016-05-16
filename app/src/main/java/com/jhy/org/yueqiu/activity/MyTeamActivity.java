@@ -118,15 +118,15 @@ public class MyTeamActivity extends Activity{
                     myTeam.setMotto(myteam_slogan);
                     myTeam.setMembers(relation);
                     MyTeamActivity.this.team = myTeam;
-                    myTeam.save(context, new SaveListener() {
+                    myTeam.update(context, new UpdateListener() {
                         @Override
                         public void onSuccess() {
-                            toast("保存成功");
+                            toast("创建成功");
                         }
 
                         @Override
                         public void onFailure(int i, String s) {
-                            toast("保存失败");
+                            toast("创建失败");
                         }
                     });
                 }

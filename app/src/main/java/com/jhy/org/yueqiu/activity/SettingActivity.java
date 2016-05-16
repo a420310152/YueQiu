@@ -10,14 +10,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
+import cn.bmob.v3.BmobUser;
+
 /*
  **********************************************
  * 			所有者 C: (曹昌盛)
  **********************************************
  */
-public class SettingActivity extends Activity implements View.OnClickListener {
-    TextView tv_system_set_toast;
-    TextView tv_system_message_set;
+public class SettingActivity extends Activity implements OnClickListener {
+    private TextView tv_system_set_cancle;
+    private TextView tv_system_set_toast;
+    private TextView tv_system_message_set;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,17 +28,22 @@ public class SettingActivity extends Activity implements View.OnClickListener {
         init();
     }
     private void init(){
+        tv_system_set_cancle = (TextView) findViewById(R.id.tv_system_set_cancle);
         tv_system_set_toast = (TextView) findViewById(R.id.tv_system_set_toast);
         tv_system_message_set = (TextView) findViewById(R.id.tv_system_message_set);
         tv_system_set_toast.setOnClickListener(this);
         tv_system_message_set.setOnClickListener(this);
+        tv_system_set_cancle.setOnClickListener(this);
     }
-    public void setSystemBackClick(View v){
-            finish();
-        }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
+            case R.id.tv_system_set_cancle:
+                logout();
+                //tv_register_login.setText("登录/注册");
+                startActivity(new Intent(SettingActivity.this, LoginActivity.class));
+                break;
             case R.id.tv_system_set_toast:
                 Log.i("result","!!!!!!!!!!!!!!53125353643462!!!!!!!!!!!");
                 Intent intentToast = new Intent(SettingActivity.this,SetttingToastActivity.class);
@@ -46,5 +54,8 @@ public class SettingActivity extends Activity implements View.OnClickListener {
                 startActivity(intentMessage);
                 break;
         }
+    }
+    private void logout () {
+        BmobUser.logOut(this);   //清除缓存用户对象
     }
 }

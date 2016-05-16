@@ -60,6 +60,7 @@
         android:layout_marginTop="15dp"
         android:background="@drawable/icon_login_edit"
         android:gravity="center"
+        android:inputType="textPassword"
         android:hint="@string/passward"
         android:id="@+id/et_signup_password"/>
     <EditText
@@ -71,6 +72,7 @@
         android:background="@drawable/icon_login_edit"
         android:gravity="center"
         android:hint="@string/repetpassward"
+        android:inputType="textPassword"
         android:id="@+id/et_signup_repetpassward"/>
     <Button
         android:layout_width="350dp"

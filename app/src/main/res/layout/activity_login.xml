@@ -30,7 +30,7 @@
         android:background="@drawable/icon_login_bottom"
         android:layout_below="@id/line_login_head"
         android:textColor="@color/dimgray"/>
-<!--<TextView-->G6
+<!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="@string/head"-->

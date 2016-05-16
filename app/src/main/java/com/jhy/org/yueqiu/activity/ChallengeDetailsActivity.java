@@ -34,7 +34,6 @@ import cn.bmob.v3.listener.FindListener;
 public class ChallengeDetailsActivity extends Activity {
     ListView lv_war;
     SwipeRefreshLayout swipe_ly;
-    ImageView iv_refresh;
     //RotateAnimation rotate; //刷新旋转动画
     private List<Challenge> challengeList = new ArrayList<>();
     private ChallengeAdapter challengeAdapter;
@@ -121,12 +120,13 @@ public class ChallengeDetailsActivity extends Activity {
                     lv_war.setAdapter(challengeAdapter);
                     Toast.makeText(ChallengeDetailsActivity.this,"刷新成功",Toast.LENGTH_SHORT).show();
                     swipe_ly.setRefreshing(false);
-                    iv_refresh.clearAnimation();
+                    Log.i("SwipeRefreshLayout", "=====刷新成功");
                 }
 
                 @Override
                 public void onError(int i, String s) {
                     Toast.makeText(ChallengeDetailsActivity.this,"刷新失败，请检查您的网络",Toast.LENGTH_SHORT).show();
+                    Log.i("SwipeRefreshLayout","=====刷新失败，"+s+i);
                 }
             });
         }

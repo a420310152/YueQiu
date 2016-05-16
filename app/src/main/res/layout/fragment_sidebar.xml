@@ -72,17 +72,17 @@
         android:layout_below="@id/btn_collect"
         android:textColor="@color/orange"
         android:id="@+id/btn_team"/>
-    <!--<Button-->
-        <!--android:layout_width="200dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@null"-->
-        <!--android:text="@string/track"-->
-        <!--android:drawableLeft="@drawable/icon_sidebar_track"-->
-        <!--android:paddingLeft="30dp"-->
-        <!--android:paddingRight="30dp"-->
-        <!--android:layout_below="@id/btn_team"-->
-        <!--android:textColor="@color/orange"-->
-        <!--android:id="@+id/btn_track"/>-->
+    <Button
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:text="@string/track"
+        android:drawableLeft="@drawable/icon_sidebar_track"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:layout_below="@id/btn_team"
+        android:textColor="@color/orange"
+        android:id="@+id/btn_track"/>
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
@@ -91,17 +91,19 @@
         android:drawableLeft="@drawable/icon_sidebar_setting"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
-        android:layout_below="@id/btn_team"
+        android:layout_below="@id/btn_track"
         android:textColor="@color/orange"
         android:id="@+id/btn_disabled"/>
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/btn_disabled"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/icon_sidebar_cancle"
+        android:background="@color/orange"
         android:layout_margin="20dp"
+        android:text="退出"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:visibility="invisible"
         android:id="@+id/btn_cancel"/>
 </RelativeLayout>

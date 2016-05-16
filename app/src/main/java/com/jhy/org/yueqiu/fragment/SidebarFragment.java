@@ -150,9 +150,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 startActivity(settingIntent);
                 break;
             case R.id.btn_cancel:
-                logout();
-                tv_register_login.setText("登录/注册");
-                startActivity(new Intent(activity, LoginActivity.class));
+                System.exit(0);
                 break;
         }
     }

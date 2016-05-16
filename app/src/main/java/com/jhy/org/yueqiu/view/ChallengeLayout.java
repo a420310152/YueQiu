@@ -111,10 +111,12 @@ public class ChallengeLayout extends LinearLayout {
 
         String placeString = challenge.getPlaceName() + "";
         Log.i("placeString", "placeString=====" + placeString);
-        if (Utils.isEmpty(placeString) && placeString.length() > 9) {
-            tv_setPlace.setText(challenge.getPlaceName().substring(0, 9) + "...");
-        } else if (Utils.isEmpty(placeString)) {
-            tv_setPlace.setText(challenge.getPlaceName());
+        if (!Utils.isEmpty(placeString) && placeString.length() > 9) {
+            tv_setPlace.setText(placeString.substring(0, 9) + "...");
+            Log.i("placeString", "Tag11111=====" + placeString);
+        } else if (!Utils.isEmpty(placeString)) {
+            tv_setPlace.setText(placeString);
+            Log.i("placeString", "Tag22222=====" + placeString);
         }
         //由于在列表challenge中是以String类型存在  所以不用特别查询  直接设置
         tv_type.setText(challenge.getType());

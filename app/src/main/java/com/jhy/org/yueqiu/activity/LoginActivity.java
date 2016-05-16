@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.fragment.SidebarFragment;
+import com.jhy.org.yueqiu.test.c.TestActivity;
 import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.Preferences;
 import com.jhy.org.yueqiu.utils.QQUserAuth;
@@ -58,12 +61,18 @@ public class LoginActivity extends Activity{
     ImageView iv_login_qq;
     ImageView iv_login_weixin;
     ImageView iv_login_weibo;
-
+    
+    private Boolean isRemember = false;
+    
     private QQUserAuth qqUserAuth;
     private WeixinUserAuth weixinUserAuth;
     private WeiboUserAuth weiboUserAuth;
-
+    
     private static Logx logx = new Logx(LoginActivity.class);
+    private static final int REQUESTCODE_REGIST = 101;
+    private Preferences preferences;
+    private String name;
+    private String pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,18 +100,30 @@ public class LoginActivity extends Activity{
         btn_login = (Button) findViewById(R.id.btn_login);
         tv_register_text = (TextView) findViewById(R.id.tv_register_text);
         cb_login_rememberword = (CheckBox) findViewById(R.id.cb_login_rememberword);
-        iv_login_qq = (ImageView) findViewById(R.id.iv_login_qq);
-        iv_login_weixin = (ImageView) findViewById(R.id.iv_login_weixin);
+        iv_login_qq = (ImageView) findViewById(R.id.iv_login_qq);        iv_login_weixin = (ImageView) findViewById(R.id.iv_login_weixin);
         cb_login_rememberword.setOnCheckedChangeListener(checkedChange);
 
         iv_login_weibo = (ImageView) findViewById(R.id.iv_login_weibo);
 //        iv_login_weibo.setBackgroundResource(R.drawable.icon_login_weibo);
+        
+        preferences = Preferences.getInstance();
+        String name = preferences.get("name", "");
+        String pwd = preferences.get("pwd", "");
+        isRemember = preferences.get("isRemember", false);
+        if (isRemember) {
+            et_login_name.setText(name);
+            et_login_password.setText(pwd);
+            cb_login_rememberword.setChecked(isRemember);
+        }
     }
     //对checkBox进行监听
     OnCheckedChangeListener checkedChange = new OnCheckedChangeListener(){
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            isRemember = isChecked;
+            preferences.set("isRemember", isRemember)
+                        .commit();
 
         }
     };
@@ -116,6 +137,9 @@ public class LoginActivity extends Activity{
     public void loginClick(View v) {
         String loginUserName = et_login_name.getText().toString();
         String loginUserPassword = et_login_password.getText().toString();
+        preferences.set("name", loginUserName)
+                .set("pwd", loginUserPassword)
+                .commit();
         if(loginUserName.equals("")){
             toast("请填写用户名");
             return;
@@ -132,6 +156,7 @@ public class LoginActivity extends Activity{
             @Override
             public void onSuccess() {
                 toast("登录成功");
+
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 
@@ -217,4 +242,5 @@ public class LoginActivity extends Activity{
     private void toast(String msg){
         Toast.makeText(LoginActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
+
 }

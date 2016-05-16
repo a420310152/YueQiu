@@ -1,15 +1,18 @@
 package com.jhy.org.yueqiu.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.activity.OpponentActivity;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.squareup.picasso.Picasso;
@@ -22,6 +25,7 @@ import java.util.List;
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
     private LayoutInflater mInflater;
     private List<Person> mDatas;
+    Person person;
     Context context;
 
 
@@ -54,9 +58,19 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         ViewHolder viewHolder = new ViewHolder(view);
         viewHolder.mTxt = (TextView) view.findViewById(R.id.tv_name);
         viewHolder.mImg = (ImageView) view.findViewById(R.id.iv_head);
+        //viewHolder.mImg.setOnClickListener(click);
+        //viewHolder.mImg.setId(1000 + i);
         return viewHolder;
     }
-
+    View.OnClickListener click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+             person = mDatas.get(v.getId()-1000);
+             Intent intent = new Intent(context, OpponentActivity.class);
+            intent.putExtra("person", person);
+             context.startActivity(intent);
+        }
+    };
     /**
      * 设置值
      */
@@ -72,4 +86,5 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         }
         viewHolder.mTxt.setText(mDatas.get(i).getUsername());
     }
+
 }
