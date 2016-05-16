@@ -50,11 +50,6 @@ public class SignUpActivity extends Activity {
         actionBarLayout = (ActionBarLayout) findViewById(actionbar_signup_title);
     }
 
-    //返回箭头的监听
-    public void signupBackClick(View v){
-        finish();
-    }
-
     //注册按钮的监听
     public  void signupClick(View v){
         //获取输入框中的email，用户名，密码，重复密码

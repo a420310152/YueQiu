@@ -12,8 +12,17 @@ public class Post extends BmobObject {
     private String title;           // 标题
     private String content;         // 内容
     private Person author;          // 作者
+    private String avatarUrl;       // 头像的地址
     private BmobFile image;         // 图片
     private BmobRelation likes;     // 赞的人
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
     public String getTitle() {
         return title;

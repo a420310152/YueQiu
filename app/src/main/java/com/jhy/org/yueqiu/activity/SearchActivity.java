@@ -18,20 +18,18 @@ import android.widget.TextView;
 public class SearchActivity extends Activity implements View.OnClickListener {
     private Context context = this;
 
-    private ImageButton ibtn_back;
     private TextView tv_searchFriend;
     private TextView tv_searchPlace;
+    private TextView tv_searchSogou;
 
     private Intent searchFriendIntent;
     private Intent searchPlaceIntent;
+    private Intent searchSogouIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-
-        ibtn_back = (ImageButton) findViewById(R.id.ibtn_back);
-        ibtn_back.setOnClickListener(this);
 
         tv_searchFriend = (TextView) findViewById(R.id.tv_searchFriend);
         tv_searchFriend.setOnClickListener(this);
@@ -39,21 +37,25 @@ public class SearchActivity extends Activity implements View.OnClickListener {
         tv_searchPlace = (TextView) findViewById(R.id.tv_searchPlace);
         tv_searchPlace.setOnClickListener(this);
 
+        tv_searchSogou = (TextView) findViewById(R.id.tv_searchSogou);
+        tv_searchSogou.setOnClickListener(this);
+
         searchFriendIntent = new Intent(context, SearchFriendActivity.class);
         searchPlaceIntent = new Intent(context, SearchPlaceActivity.class);
+        searchSogouIntent = new Intent(context,CommunityActivity.class);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ibtn_back:
-                finish();
-                break;
             case R.id.tv_searchFriend:
                 startActivity(searchFriendIntent);
                 break;
             case R.id.tv_searchPlace:
                 startActivity(searchPlaceIntent);
+                break;
+            case R.id.tv_searchSogou:
+               startActivity(searchSogouIntent);
                 break;
             default:
                 break;

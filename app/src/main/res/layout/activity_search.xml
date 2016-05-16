@@ -14,29 +14,40 @@
     <RelativeLayout
         android:id="@+id/container_first"
         android:paddingTop="16dp"
-        android:layout_centerHorizontal="true"
         android:layout_below="@id/my_action_bar"
         android:layout_marginTop="16dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_searchFriend"
-            android:text="附近球友"
-            android:drawableTop="@drawable/icon_hoop"
-            android:drawablePadding="4dp"
-            android:gravity="center_horizontal"
-            android:layout_marginRight="32dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+
         <TextView
             android:id="@+id/tv_searchPlace"
             android:text="附近球场"
             android:drawableTop="@drawable/icon_map_marker"
-            android:drawablePadding="8dp"
+            android:drawablePadding="15dp"
+            android:layout_toLeftOf="@+id/tv_searchFriend"
+            android:layout_alignBottom="@+id/tv_searchFriend"
+            android:layout_marginRight="55dp"
             android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_searchFriend"
+            android:text="附近球友"
+            android:drawableTop="@drawable/icon_hoop"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_searchSogou"
+            android:text="球友论坛"
+            android:drawableTop="@drawable/icon_community_sogou"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:layout_marginLeft="40dp"
             android:layout_toRightOf="@id/tv_searchFriend"
             android:layout_alignBottom="@id/tv_searchFriend"
-            android:layout_marginLeft="32dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </RelativeLayout>

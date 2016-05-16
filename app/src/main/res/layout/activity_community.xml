@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/relat">
+
+    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
+        chx:title_text="球友社区"
+        chx:options_visible="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/actionbar_community_title"/>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@color/black"
+        android:dividerHeight="1dp"
+        android:layout_below="@id/actionbar_community_title"
+        android:descendantFocusability="blocksDescendants"
+        android:id="@+id/lv_community_post">
+    </ListView>
+    <com.jhy.org.yueqiu.view.CommunityPostLayout layout="@layout/layout_community_post"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/actionbar_community_title"
+        android:visibility="invisible"
+        android:id="@+id/community_post"/>
+</RelativeLayout>
