@@ -69,6 +69,7 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobFile;
+import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.GetListener;
@@ -112,16 +113,10 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         buildup();
         //以下是H修改的部分
         initWeather();
-        return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
         builddown();
         challengeAdapter.notifyDataSetChanged();
+        return view;
     }
-
     private void buildup() {
         group = (RadioGroup) view.findViewById(R.id.rg_title);
         markGroup = (RadioGroup) view.findViewById(R.id.markGroup);
@@ -280,7 +275,13 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
         listView.setDividerHeight(0);
         challengeAdapter = new ChallengeAdapter(challengeList, getContext(),true);
         listView.setOnItemClickListener(itemClick);
+        addChallenge();
+    }
+    //查询Challege列表 填充ListView
+    public void addChallenge(){
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
+        BmobGeoPoint point = new BmobGeoPoint(App.getUserLocation().getLongitude(),App.getUserLocation().getLatitude());
+        query.addWhereWithinKilometers("gpsPlace",point,50);
         query.setLimit(3);
         query.order("-createdAt");//设置按照时间大小降序排列
         query.include("initiator");
@@ -302,8 +303,6 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
 
             }
         });
-
-
     }
 
     //点击约战列表 弹出详细约战长列表

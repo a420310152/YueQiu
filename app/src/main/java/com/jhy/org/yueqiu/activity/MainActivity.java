@@ -2,6 +2,8 @@ package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -32,6 +34,7 @@ import cn.bmob.v3.listener.SaveListener;
 public class MainActivity extends FragmentActivity {
     SidebarFragment sidebarFragment;
     DrawerLayout drawerLayout;
+    HomeFragment homeFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,8 +46,8 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         sidebarFragment.judge();
+        homeFragment.addChallenge();
     }
 
     private void build() {
@@ -52,8 +55,7 @@ public class MainActivity extends FragmentActivity {
         //添加Fragment
         sidebarFragment = new SidebarFragment();
         sidebarFragment.setContext(this);
-
-        HomeFragment homeFragment = new HomeFragment();
+        homeFragment = new HomeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.linear,homeFragment);
         ft.commit();

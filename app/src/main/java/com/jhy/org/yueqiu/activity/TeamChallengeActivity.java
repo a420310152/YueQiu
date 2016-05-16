@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.SaveListener;
 
 /*
@@ -161,6 +162,8 @@ public class TeamChallengeActivity extends Activity implements OnPickDatetimeLis
                     challenge.setPlaceName(place.name);
                     challenge.setPlaceAddress(place.address);
                     challenge.setPlaceUid(place.uid);
+                    challenge.setPlaceLatLng(place.location);
+                    challenge.setGpsPlace(new BmobGeoPoint(place.location.longitude, place.location.latitude));
                 }
             }
         }
