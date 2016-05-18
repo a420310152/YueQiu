@@ -17,6 +17,7 @@ import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,24 +25,15 @@ import java.util.List;
  */
 public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHolder> {
     private LayoutInflater mInflater;
-    private List<Person> mDatas;
+    private List<Person> mDatas = new ArrayList<>();
     Person person;
     Context context;
 
-
-    public GalleryAdapter(Context context, List<Person> datats) {
+    public GalleryAdapter(Context context, List<Person> datas) {
         mInflater = LayoutInflater.from(context);
-        mDatas = datats;
+        mDatas.clear();
+        mDatas.addAll(datas);
         this.context = context;
-    }
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public ViewHolder(View arg0) {
-            super(arg0);
-        }
-
-        TextView mTxt;
-        ImageView mImg;
     }
 
     @Override
@@ -75,10 +67,9 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
      * 设置值
      */
     @Override
-    public void onBindViewHolder(final ViewHolder viewHolder, final int i) {
-        Log.i("getAvatarUrl","mDatas.get(i).getAvatarUrl()======="+mDatas.get(i).getAvatarUrl());
+    public void onBindViewHolder(ViewHolder viewHolder, int i) {
+       Log.i("getAvatarUrl","mDatas.get(i).getAvatarUrl()======="+mDatas.get(i).getAvatarUrl());
         if (mDatas.get(i).getAvatarUrl() != null) {
-
             Picasso.with(context)
                     .load(mDatas.get(i).getAvatarUrl())
                     .transform(new RoundTransform())
@@ -87,4 +78,12 @@ public class GalleryAdapter extends RecyclerView.Adapter<GalleryAdapter.ViewHold
         viewHolder.mTxt.setText(mDatas.get(i).getUsername());
     }
 
+    public static class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View arg0) {
+            super(arg0);
+        }
+
+        TextView mTxt;
+        ImageView mImg;
+    }
 }

@@ -26,6 +26,7 @@ import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.MyChallege;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.Utils;
 
 import java.util.ArrayList;
@@ -34,8 +35,10 @@ import java.util.List;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobPointer;
+import cn.bmob.v3.datatype.BmobRelation;
 import cn.bmob.v3.listener.DeleteListener;
 import cn.bmob.v3.listener.FindListener;
+import cn.bmob.v3.listener.UpdateListener;
 
 public class MyApplyActivity extends Activity {
     private ListView lv_apply_info;
@@ -46,6 +49,7 @@ public class MyApplyActivity extends Activity {
     private Context context = this;
     private Challenge challenge;
     private Person person;//当前用户
+    Logx logx = new Logx(MyApplyActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,21 +64,23 @@ public class MyApplyActivity extends Activity {
         myChallenge();
         applyChallenge();
     }
-private void build(){
-    lv_apply_info = (ListView) findViewById(R.id.lv_apply_info);
-    lv_mychallenge = (ListView) findViewById(R.id.lv_mychallenge);
-    tv_challenge = (TextView) findViewById(R.id.tv_challenge);
-    tv_apply_test = (TextView) findViewById(R.id.tv_apply_test);
-    person = BmobUser.getCurrentUser(MyApplyActivity.this, Person.class);
-    judgeLogin();
-    registerForContextMenu(lv_mychallenge);
-}
+
+    private void build() {
+        lv_apply_info = (ListView) findViewById(R.id.lv_apply_info);
+        lv_mychallenge = (ListView) findViewById(R.id.lv_mychallenge);
+        tv_challenge = (TextView) findViewById(R.id.tv_challenge);
+        tv_apply_test = (TextView) findViewById(R.id.tv_apply_test);
+        person = BmobUser.getCurrentUser(MyApplyActivity.this, Person.class);
+        judgeLogin();
+        registerForContextMenu(lv_mychallenge);
+    }
 
     private List<Challenge> challengeList = new ArrayList<>();
     private ChallengeAdapter challengeAdapter = null;
+
     //查询我发起的挑战
     private void myChallenge() {
-        challengeAdapter = new ChallengeAdapter(challengeList, this,false);
+        challengeAdapter = new ChallengeAdapter(challengeList, this, false);
         Person person = BmobUser.getCurrentUser(this, Person.class);
         if (person != null) {
             BmobQuery<Challenge> bmobQuery = new BmobQuery<>();
@@ -91,7 +97,7 @@ private void build(){
                     } else {
                         lv_mychallenge.setAdapter(challengeAdapter);
                     }
-                    challengeAdapter.notifyDataSetChanged();
+//                    challengeAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -101,17 +107,16 @@ private void build(){
             });
         }
     }
+
     private List<Challenge> challengeList1 = new ArrayList<>();
     private ChallengeAdapter challengeAdapter1 = null;
+
     //查询我报名的挑战
     private void applyChallenge() {
-        challengeAdapter1 = new ChallengeAdapter(challengeList1,this,false);
+        challengeAdapter1 = new ChallengeAdapter(challengeList1, this, false);
         person = BmobUser.getCurrentUser(this, Person.class);
         if (person != null) {
-            BmobQuery<MyChallege> bmobQuery = new BmobQuery<>();
-            bmobQuery.addWhereEqualTo("personID", person.getObjectId());
-            bmobQuery.include("challenge.initiator");
-            bmobQuery.findObjects(context, new FindListener<MyChallege>() {
+            MyChallege.query(person, new FindListener<MyChallege>() {
                 @Override
                 public void onSuccess(List<MyChallege> list) {
                     challengeList1.clear();
@@ -119,15 +124,16 @@ private void build(){
                         tv_apply_test.setVisibility(View.VISIBLE);
                         lv_apply_info.setAdapter(challengeAdapter1);
                     } else {
-                        List<Challenge> data = new ArrayList<Challenge>();
-                        for (int i = 0; i < list.size(); i++) {
-                            Challenge challenge = list.get(i).getChallenge();
-                            data.add(challenge);
+                        challengeList1.clear();
+                        for (MyChallege i : list) {
+                            challengeList1.add(i.getChallenge());
+
+                            if (i.getChallenge().getInitiator() == null) {
+                                Log.e("ilkdfldfd", "发起人为空");
+                            }
                         }
-                        challengeList1.addAll(data);
                         lv_apply_info.setAdapter(challengeAdapter1);
                     }
-                    challengeAdapter1.notifyDataSetChanged();
                 }
 
                 @Override
@@ -137,23 +143,27 @@ private void build(){
             });
         }
     }
+
     //长按弹出菜单删除
     private static final int ITEM_DELETE = 113;
-    AdapterView.AdapterContextMenuInfo info ;
+    AdapterView.AdapterContextMenuInfo info;
+
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        menu.addSubMenu(menu.NONE,ITEM_DELETE,menu.NONE,"删除");
+        menu.addSubMenu(menu.NONE, ITEM_DELETE, menu.NONE, "删除");
     }
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         super.onContextItemSelected(item);
         info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case ITEM_DELETE:
-
                 Challenge challenge = challengeList.get(info.position);
+                //MyChallenge表中删除challenge
+                MyChallege.delete(challenge);
+                //challenge自身删除
                 challenge.delete(context, new DeleteListener() {
                     @Override
                     public void onSuccess() {
@@ -168,9 +178,10 @@ private void build(){
                     }
                 });
 
-            break;
+
+                break;
             default:
-            break;
+                break;
         }
         return true;
     }

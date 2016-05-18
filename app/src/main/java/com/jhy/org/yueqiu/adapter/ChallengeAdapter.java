@@ -43,7 +43,7 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
     Person person;
     Boolean b;
 
-    public ChallengeAdapter(List<Challenge> list, Context context,Boolean b) {
+    public ChallengeAdapter(List<Challenge> list, Context context, Boolean b) {
         super(context, list);
         this.context = context;
         this.b = b;
@@ -61,14 +61,14 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
 //            tv_apply = (ImageView) convertView.findViewById(R.id.tv_apply);
 //            tv_apply.setId(1000 + position);
 //            iv_head.setTag(position);
-                convertView.setTag(viewHolder);
+            convertView.setTag(viewHolder);
 
         }
 //        iv_head.setOnClickListener(headClick);
 //        tv_apply.setOnClickListener(click);
         viewHolder = (ViewHolder) convertView.getTag();
         challenge = list.get(position);
-        viewHolder.challengeLayout.setContent(challenge,b);//调用ChallengeLayout类里的方法设置内容
+        viewHolder.challengeLayout.setContent(challenge, b);//调用ChallengeLayout类里的方法设置内容
 
 //        //开始设置每一个挑战的发起人头像  此时需要每次都向服务器获取
 //        Log.i("getAvatarUrl", "challenge.getInitiator().getAvatarUrl()===" + challenge.getInitiator().getAvatarUrl());
@@ -80,8 +80,9 @@ public class ChallengeAdapter extends MyBaseAdapter<Challenge> {
 //        }
         return convertView;
     }
-    private class ViewHolder{
-    private ChallengeLayout challengeLayout;
+
+    private class ViewHolder {
+        public ChallengeLayout challengeLayout;
     }
 
 //    //点击头像弹出个人资料

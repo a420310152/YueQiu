@@ -39,13 +39,13 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Bmob.initialize(this, Key.bmob.application_id);
         build();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Bmob.initialize(this, Key.bmob.application_id);
         sidebarFragment.judge();
         homeFragment.addChallenge();
     }

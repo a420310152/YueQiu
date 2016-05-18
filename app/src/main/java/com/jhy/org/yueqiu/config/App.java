@@ -67,7 +67,7 @@ public class App extends Application implements BDLocationListener {
     @Override
     public void onCreate() {
         super.onCreate();
-        MultiDex.install(this);
+        //MultiDex.install(this);
         app = this;
 
         SDKInitializer.initialize(app);

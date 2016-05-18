@@ -27,6 +27,12 @@ public final class Logx {
     public void d (String text) { Log.d(TAG, getMessage(text)); }
     public void v (String text) { Log.v(TAG, getMessage(text)); }
 
+    public void a (boolean flag, String text) {
+        if (!flag) {
+            e(text);
+        }
+    }
+
     public void toast (String text) {
         Toast.makeText(App.getInstance(), text, Toast.LENGTH_SHORT).show();
         e(text);

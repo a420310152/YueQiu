@@ -82,6 +82,7 @@ public class ChallengeLayout extends LinearLayout {
         iv_head.setOnClickListener(headClick);
         tv_apply_text.setOnClickListener(textClick);
     }
+
     //点击头像弹出个人资料
     View.OnClickListener headClick = new View.OnClickListener() {
         @Override
@@ -94,18 +95,19 @@ public class ChallengeLayout extends LinearLayout {
         }
     };
 
-    public void setContent(Challenge challenge,Boolean b) {//传此两个参数，第二个boolean值为true为默认 false为设置成查看报名
+    public void setContent(Challenge challenge, Boolean b) {//传此两个参数，第二个boolean值为true为默认 false为设置成查看报名
         this.challenge = challenge;
         //开始设置每一个挑战的发起人头像  此时需要每次都向服务器获取
-        Log.i("getAvatarUrl", "challenge.getInitiator().getAvatarUrl()===" + challenge.getInitiator().getAvatarUrl());
-        if (challenge.getInitiator().getAvatarUrl() != null) {
+        if (challenge == null || b == null) {
+            return;
+        }
+//        Log.i("getAvatarUrl", "challenge.getInitiator().getAvatarUrl()===" + challenge.getInitiator().getAvatarUrl());
+        if (challenge.getInitiator() != null) {
             Picasso.with(context)
                     .load(challenge.getInitiator().getAvatarUrl())
                     .transform(new RoundTransform())
                     .into(iv_head);
         }
-        //查询Person表的数据 获得发起人的名字
-        tv_setName.setText(challenge.getInitiator().getUsername());
 
         // 获得发起人选择的地点名字
 
@@ -128,13 +130,14 @@ public class ChallengeLayout extends LinearLayout {
         tv_setTime.setText(data);
         tv_title.setText(challenge.getTitle());
         //设置是否显示查看报名按钮
-        if (b==true){
+        if (b == true) {
             tv_apply.setOnClickListener(click);
-        }else {
+        } else {
             tv_apply.setVisibility(INVISIBLE);
             tv_apply_text.setVisibility(VISIBLE);
         }
     }
+
     //点击约战报名按钮
     View.OnClickListener click = new View.OnClickListener() {
         @Override
@@ -159,7 +162,7 @@ public class ChallengeLayout extends LinearLayout {
             if (person != null) {
                 Intent intent = new Intent(context, ResponseChallengeActivity.class);
                 intent.putExtra("challenge", challenge);
-                intent.putExtra("checkApply",1);
+                intent.putExtra("checkApply", 1);
                 context.startActivity(intent);
             } else {
                 Toast.makeText(context, "请登录账号", Toast.LENGTH_SHORT).show();

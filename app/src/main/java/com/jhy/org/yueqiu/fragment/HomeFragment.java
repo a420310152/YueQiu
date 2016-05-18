@@ -281,7 +281,7 @@ public class HomeFragment extends Fragment implements OnItemSelectedListener, Ra
     public void addChallenge(){
         BmobQuery<Challenge> query = new BmobQuery<Challenge>();
         BmobGeoPoint point = new BmobGeoPoint(App.getUserLocation().getLongitude(),App.getUserLocation().getLatitude());
-        query.addWhereWithinKilometers("gpsPlace",point,50);
+        //query.addWhereWithinKilometers("gpsPlace",point,50);
         query.setLimit(3);
         query.order("-createdAt");//设置按照时间大小降序排列
         query.include("initiator");
