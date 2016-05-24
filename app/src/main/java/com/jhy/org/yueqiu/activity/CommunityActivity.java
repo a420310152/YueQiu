@@ -30,6 +30,7 @@ import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.CommunityPostLayout;
 import com.jhy.org.yueqiu.view.CommunityPostLayout.InotifyInfo;
+import com.jhy.org.yueqiu.view.CommunityReleaseLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +78,7 @@ public class CommunityActivity extends Activity{
         actionBarLayout = (ActionBarLayout) findViewById(R.id.actionbar_community_title);
         communityPostLayout = (CommunityPostLayout) findViewById(R.id.community_post);
         lv_community_post = (ListView) findViewById(R.id.lv_community_post);
-       actionBarLayout.getOptionsView().setOnClickListener(new OnClickListener() {
+        actionBarLayout.getOptionsView().setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View v) {
                if (switcher == false) {
@@ -105,7 +106,6 @@ public class CommunityActivity extends Activity{
                 communityPostLayout.sendPost();
             }
         });
-
     }
     //查询数据
     private  void setCommunityInfo(){

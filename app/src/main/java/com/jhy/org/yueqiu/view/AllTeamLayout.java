@@ -39,6 +39,7 @@ public class AllTeamLayout extends RelativeLayout{
         super(context);
         init(context);
     }
+
     public AllTeamLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);

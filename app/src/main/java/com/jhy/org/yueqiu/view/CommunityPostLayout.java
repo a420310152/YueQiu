@@ -86,8 +86,8 @@ public class CommunityPostLayout extends RelativeLayout{
         return et_community_info;
     }
     //回调刷新
-    public static interface InotifyInfo{
-        void setCommunityInfo();
+    public interface InotifyInfo{
+        void sendPost();
     }
 
 

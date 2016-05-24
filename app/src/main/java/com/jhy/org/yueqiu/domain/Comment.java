@@ -11,10 +11,19 @@ public class Comment extends BmobObject {
     private Person commenter;       // 评论的人
     private Post post;              // 评论的帖子
     private String text;            // 文本内容
+    private String avatarUrl;       // 头像的地址
     private BmobFile image;         // 图片内容
 
     public Person getCommenter() {
         return commenter;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 
     public void setCommenter(Person commenter) {

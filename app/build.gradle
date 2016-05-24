@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
         applicationId "com.jhy.org.yueqiu"
@@ -33,7 +33,7 @@ android {
         // <- Java.exe finished with non-zero exit value 1 设置的值不要大于你机器可用的内存，如：Windwos10 4GB 此处设置为 1g
         //javaMaxHeapSize "1G"
         incremental true
-        javaMaxHeapSize "2048M"
+        javaMaxHeapSize "1G"
         jumboMode = true
     }
 

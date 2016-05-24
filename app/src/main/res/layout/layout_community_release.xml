@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:text="昵称："
         android:textSize="20sp"
+        android:textColor="@color/orange"
         android:layout_marginTop="15dp"
         android:layout_toRightOf="@id/iv_community_head"
         android:id="@+id/tv_community_name"/>
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="sfs"
         android:textSize="20sp"
+        android:textColor="@color/orange"
         android:layout_marginTop="15dp"
         android:layout_toRightOf="@id/tv_community_name"
         android:id="@+id/tv_community_userName"/>
@@ -46,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="afasfwr"
-        android:textSize="20sp"
+        android:textSize="15sp"
       android:layout_marginLeft="20dp"
         android:layout_below="@id/iv_community_head"
         android:id="@+id/tv_community_info"/>
@@ -59,36 +61,36 @@
         android:id="@+id/linear">
     <Button
        android:layout_width="wrap_content"
-       android:layout_height="60dp"
+       android:layout_height="30dp"
         android:layout_weight="1"
        android:layout_toRightOf="@id/iv_community_head"
        android:drawableLeft="@drawable/icon_community_zf"
        android:text="转发"
-        android:paddingLeft="20dp"
-        android:background="@null"
+        android:paddingLeft="30dp"
+        android:background="@color/white"
        android:focusable="false"
        android:id="@+id/btn_scan"/>
-   <Button
+        <Button
        android:layout_width="wrap_content"
-       android:layout_height="60dp"
+       android:layout_height="30dp"
        android:layout_toRightOf="@id/btn_scan"
        android:layout_weight="1"
        android:text="评论"
-       android:background="@null"
        android:paddingLeft="20dp"
        android:layout_alignBottom="@id/btn_scan"
        android:drawableLeft="@drawable/icon_community_comment"
+       android:background="@color/white"
        android:focusable="false"
        android:id="@+id/btn_comment"/>
 <Button
    android:layout_width="wrap_content"
-   android:layout_height="60dp"
+   android:layout_height="30dp"
    android:layout_toRightOf="@id/btn_comment"
    android:layout_alignBottom="@id/btn_comment"
     android:layout_weight="1"
     android:paddingLeft="40dp"
-    android:background="@null"
-   android:drawableLeft="@drawable/selector_myprofile_zan"
+   android:drawableLeft="@drawable/icon_community_commend"
+    android:background="@color/white"
    android:focusable="false"
    android:id="@+id/btn_commend"/>
     </LinearLayout>

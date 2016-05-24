@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:chx="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
+        chx:title_text="评论"
+        chx:options_visible="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/actionbar_community_comment"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/actionbar_community_comment"
+        android:background="@null"
+        android:hint="写评论..."
+        android:layout_margin="5dp"
+        android:id="@+id/et_community_comment"/>
+</RelativeLayout>

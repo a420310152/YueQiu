@@ -61,6 +61,8 @@
         </activity>
         <activity android:name=".activity.CommunityItemActivity">
         </activity>
+        <activity android:name=".activity.CommunityComment">
+        </activity>
         <activity android:name=".activity.SearchPlaceActivity">
         </activity>
         <activity android:name=".activity.ForumActivity">
