@@ -45,7 +45,7 @@
             android:drawableTop="@drawable/icon_community_sogou"
             android:drawablePadding="10dp"
             android:gravity="center_horizontal"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:layout_toRightOf="@id/tv_searchFriend"
             android:layout_alignBottom="@id/tv_searchFriend"
             android:layout_width="wrap_content"

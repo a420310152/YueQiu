@@ -45,7 +45,7 @@ import cn.bmob.v3.listener.GetListener;
 public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultListener, AdapterView.OnItemClickListener, OnReceiveUserLocationListener {
     private Context context = this;
     private Person currentUser = null;
-
+    private BmobUser myPlace_bmobUser;
     private LatLng userLocation;
     private List<String> userCollection;
     private List<MyPlace> placeList = new ArrayList<>();
@@ -71,14 +71,12 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_place);
-
         currentUser = Person.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(MyPlaceActivity.this, LoginActivity.class));
             finish();
         } else {
             initView();
-
             App.registerReceiveUserLocation(this);
             queryCollection();
         }

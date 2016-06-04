@@ -29,8 +29,6 @@ import com.jhy.org.yueqiu.domain.Post;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.CommunityPostLayout;
-import com.jhy.org.yueqiu.view.CommunityPostLayout.InotifyInfo;
-import com.jhy.org.yueqiu.view.CommunityReleaseLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,9 +104,10 @@ public class CommunityActivity extends Activity{
                 communityPostLayout.sendPost();
             }
         });
+
     }
     //查询数据
-    private  void setCommunityInfo(){
+    public void setCommunityInfo(){
         BmobQuery<Post> query = new BmobQuery<>();
         query.include("title,content,author");
         query.findObjects(context, new FindListener<Post>() {

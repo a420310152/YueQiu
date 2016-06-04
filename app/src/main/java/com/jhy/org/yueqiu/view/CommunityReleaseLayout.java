@@ -31,7 +31,7 @@ public class CommunityReleaseLayout extends RelativeLayout{
     private TextView tv_community_userName;//标题
     private TextView tv_community_info;//内容
     private TextView tv_community_buildtime;//时间
-    private Button btn_scan;//转发按钮
+    private Button btn_scan;//浏览量按钮
     private Button btn_comment;//评论按钮
     private Button btn_commend;//赞按钮
     private Context context;

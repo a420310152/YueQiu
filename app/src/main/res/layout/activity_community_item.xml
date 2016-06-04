@@ -14,12 +14,12 @@
         android:layout_below="@id/actionbar_community_title"
         android:id="@+id/communityreleaseLayout"/>
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="评论:"
         android:textSize="20dp"
         android:layout_margin="10dp"
-        android:layout_below="@id/communityreleaseLayout"
+        android:layout_below="@id/actionbar_community_title"
         android:id="@+id/tv_comment"/>
     <ListView
         android:layout_width="match_parent"
@@ -39,8 +39,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:drawableLeft="@drawable/icon_community_zf"
-            android:text="转发"
+            android:drawableLeft="@drawable/icon_community_look"
+            android:text="1"
             android:background="@null"
             android:paddingLeft="25dp"
             android:layout_weight="1"
@@ -57,8 +57,8 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:drawableLeft="@drawable/icon_community_commend"
             android:paddingLeft="50dp"
+            android:drawableLeft="@drawable/icon_community_commend"
             android:background="@null"
             android:layout_weight="1"
             android:id="@+id/btn_community_commend"/>

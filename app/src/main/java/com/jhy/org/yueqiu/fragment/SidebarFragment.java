@@ -42,7 +42,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
     private Button btn_apply;
     private Button btn_collect;
     private Button btn_team;
-    //private Button btn_track;
+    private Button btn_track;
     private Button btn_disabled;
     private Button btn_cancel;
     private BmobUser login_bmobUser;
@@ -72,7 +72,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_apply = (Button) view.findViewById(R.id.btn_apply);
         btn_collect = (Button) view.findViewById(R.id.btn_collect);
         btn_team = (Button) view.findViewById(R.id.btn_team);
-        //btn_track = (Button) view.findViewById(R.id.btn_track);
+        btn_track = (Button) view.findViewById(R.id.btn_track);
         btn_disabled = (Button) view.findViewById(R.id.btn_disabled);
         btn_cancel = (Button) view.findViewById(R.id.btn_cancel);
 
@@ -80,7 +80,7 @@ public class SidebarFragment extends Fragment implements OnClickListener {
         btn_apply.setOnClickListener(this);
         btn_collect.setOnClickListener(this);
         btn_team.setOnClickListener(this);
-        //btn_track.setOnClickListener(this);
+        btn_track.setOnClickListener(this);
         btn_disabled.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
 
@@ -141,10 +141,10 @@ public class SidebarFragment extends Fragment implements OnClickListener {
                 Intent teamIntent =  new Intent(getActivity(), MyAllTeamActivity.class);
                 startActivity(teamIntent);
                 break;
-           /* case R.id.btn_track:
+            case R.id.btn_track:
                 Intent trackIntent =  new Intent(getActivity(), MyFootprintActivity.class);
                 startActivity(trackIntent);
-                break;*/
+                break;
             case R.id.btn_disabled:
                 Intent settingIntent =  new Intent(getActivity(), SettingActivity.class);
                 startActivity(settingIntent);

@@ -2,6 +2,7 @@ package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.Person;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,12 +23,20 @@ public class SettingActivity extends Activity implements OnClickListener {
     private TextView tv_system_set_toast;
     private TextView tv_system_message_set;
     private BmobUser setting_bmobUser;
+    private Person currentUser = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-        init();
         judgeLogin();
+
+        currentUser = Person.getCurrentUser();
+        if (currentUser == null) {
+            startActivity(new Intent(SettingActivity.this,LoginActivity.class));
+            finish();
+        } else {
+            init();
+        }
     }
     //判断登录状态
     private void judgeLogin() {

@@ -7,7 +7,6 @@
 
     <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
         chx:title_text="我的资料"
-        chx:title_textSize="15sp"
         chx:options_visible="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

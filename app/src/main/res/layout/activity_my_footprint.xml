@@ -4,16 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
-        chx:title_text="登录"
-        chx:title_textSize="15sp"
+    <com.jhy.org.yueqiu.view.ActionBarLayout
+        android:id="@+id/actionBar_footprint_title"
+        chx:title_text="我的足迹"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/actionbar_track_title"/>
+        android:layout_height="wrap_content" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/actionbar_track_title"
+        android:layout_below="@id/actionBar_footprint_title"
         android:divider="@color/dimgray"
         android:dividerHeight="2dp"
         android:layout_marginTop="10dp"

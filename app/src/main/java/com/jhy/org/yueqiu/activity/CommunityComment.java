@@ -69,5 +69,4 @@ public class CommunityComment extends Activity{
             });
         }
     }
-
 }
