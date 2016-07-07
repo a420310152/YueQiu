@@ -16,6 +16,7 @@ import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.MyPlace;
+import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.BaiduMapLayout;
 import com.jhy.org.yueqiu.view.LoadingImageView;
 
@@ -65,8 +66,8 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
             if (userLocation != null) {
                 placeAdapter = new PlaceAdapter(context, placeList, userCollection, userLocation);
                 lv_places.setAdapter(placeAdapter);
-                my_loading.hide();
             }
+            my_loading.hide();
         }
     };
 
@@ -123,11 +124,13 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
     }
 
     private void searchNext () {
-        if (userCollection != null && resultCount < userCollection.size()) {
+        if (!Utils.isEmpty(userCollection) && resultCount < userCollection.size()) {
             PoiDetailSearchOption option = new PoiDetailSearchOption();
             option.poiUid(userCollection.get(resultCount));
             poiSearch.searchPoiDetail(option);
             resultCount += 1;
+        } else {
+            handler.sendEmptyMessage(1);
         }
     }
 

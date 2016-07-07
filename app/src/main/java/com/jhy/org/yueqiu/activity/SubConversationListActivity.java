@@ -25,7 +25,7 @@ public class SubConversationListActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.activity_sub_conversation_list);
-        logx.e("hello!");
+        logx.e("icon_hello!");
         enterFragment();
     }
 

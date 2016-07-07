@@ -50,12 +50,16 @@ public class App extends Application implements BDLocationListener {
     }
 
     public static final class version {
-        public static final int first_launch = 1;
+        public static final int first_launch = 7;
+        public static final int major = 3;
+        public static final int minor = 7;
+        public static final String ver = "v" + major + "." + minor;
     }
 
     public static final String PACKAGE_NAME = "com.jhy.org.yueqiu";
     public static final String FIRST_LAUNCH = "app.first_launch_" + version.first_launch;
     private static App app = null;
+    private static boolean initialized = false;
     private static BDLocation userLocation = null;
     private static LocationClient locationClient = null;
 
@@ -69,12 +73,17 @@ public class App extends Application implements BDLocationListener {
         super.onCreate();
         //MultiDex.install(this);
         app = this;
+    }
 
-        SDKInitializer.initialize(app);
-        Bmob.initialize(app, Key.bmob.application_id);
-        RongUtils.initialize(app);
-        initLocation();
-        initConfig();
+    public synchronized static void initialize () {
+        if (!initialized) {
+            SDKInitializer.initialize(app);
+            Bmob.initialize(app, Key.bmob.application_id);
+            RongUtils.initialize(app);
+            app.initLocation();
+            initConfig();
+            initialized = true;
+        }
     }
 
     @Override
