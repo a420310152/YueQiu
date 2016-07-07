@@ -29,6 +29,8 @@ import com.jhy.org.yueqiu.domain.Post;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.CommunityPostLayout;
+import com.jhy.org.yueqiu.view.CommunityReleaseLayout;
+import com.jhy.org.yueqiu.view.LoadingImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,7 @@ public class CommunityActivity extends Activity{
     private Intent postIntent;
     private Post post;
     private List<Post> postList = new ArrayList<>();//所有帖子的集合
+    private LoadingImageView my_loading;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +71,7 @@ public class CommunityActivity extends Activity{
     @Override
     protected void onStart() {
         super.onStart();
+        my_loading.show();
         setCommunityInfo();
     }
 
@@ -76,6 +80,7 @@ public class CommunityActivity extends Activity{
         actionBarLayout = (ActionBarLayout) findViewById(R.id.actionbar_community_title);
         communityPostLayout = (CommunityPostLayout) findViewById(R.id.community_post);
         lv_community_post = (ListView) findViewById(R.id.lv_community_post);
+        my_loading = (LoadingImageView) findViewById(R.id.my_loading);
         actionBarLayout.getOptionsView().setOnClickListener(new OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -104,7 +109,6 @@ public class CommunityActivity extends Activity{
                 communityPostLayout.sendPost();
             }
         });
-
     }
     //查询数据
     public void setCommunityInfo(){
@@ -118,6 +122,7 @@ public class CommunityActivity extends Activity{
                 Log.e("setCommunityInfo", "发布的数据" + postList);
                 communityAdapter = new CommunityAdapter(context, postList);
                 lv_community_post.setAdapter(communityAdapter);
+                my_loading.hide();
             }
 
             @Override

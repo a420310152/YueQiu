@@ -44,7 +44,7 @@ public class ChallengeDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_challenge);
-
+        initView();
     }
 
     @SuppressLint("InlinedApi")
@@ -104,7 +104,7 @@ public class ChallengeDetailsActivity extends Activity {
                     lv_war.setAdapter(challengeAdapter);
                 }
 
-                my_loading.hidden();
+                my_loading.hide();
             }
 
             @Override

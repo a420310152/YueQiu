@@ -2,6 +2,7 @@ package com.jhy.org.yueqiu.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class CommunityReleaseLayout extends RelativeLayout{
     private Button btn_commend;//赞按钮
     private Context context;
     private Post post;
+    private Boolean flag = false;
     Comment comment;
     private Person person;
     public CommunityReleaseLayout(Context context) {
@@ -71,6 +73,30 @@ public class CommunityReleaseLayout extends RelativeLayout{
         tv_community_userName.setText(post.getAuthor().getUsername());
         tv_community_buildtime.setText(post.getCreatedAt());
         tv_community_info.setText(post.getContent());
+        btn_comment.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent commentIntent = new Intent(context, CommunityComment.class);
+                commentIntent.putExtra("post", CommunityReleaseLayout.this.post);
+                context.startActivity(commentIntent);
+            }
+        });
+        btn_commend.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(flag == false) {
+                    Drawable drawable = getResources().getDrawable(R.drawable.icon_community_commend_red);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                    btn_commend.setCompoundDrawables(drawable, null, null, null);
+                    flag = true;
+                }else if(flag == true){
+                    Drawable drawable = getResources().getDrawable(R.drawable.icon_community_commend);
+                    drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                    btn_commend.setCompoundDrawables(drawable, null, null, null);
+                    flag = false;
+                }
+            }
+        });
     }
     //设置评论者信息
     public void setCommentInfo(Comment comment){

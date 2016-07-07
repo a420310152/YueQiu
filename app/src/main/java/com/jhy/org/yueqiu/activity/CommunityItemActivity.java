@@ -53,8 +53,8 @@ public class CommunityItemActivity extends Activity{
         init();
         Intent intent = getIntent();
         post = (Post) intent.getSerializableExtra("post");
-        int i = 0;
-        btn_community_zf.setText(i+1);
+        //int i = 0;
+        //btn_community_zf.setText(i+1);
         setPostInfo(post);
         setComment(post);
     }

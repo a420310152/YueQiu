@@ -24,13 +24,15 @@
             android:layout_height="match_parent"
             android:dividerHeight="1dp" />
 
-        <com.jhy.org.yueqiu.view.LoadingImageView
-            android:id="@+id/my_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
     </android.support.v4.widget.SwipeRefreshLayout>
 
+    <com.jhy.org.yueqiu.view.LoadingImageView
+        android:id="@+id/my_loading"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/action_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <!--<ImageView-->
     <!--android:id="@+id/iv_refresh"-->
         <!--android:layout_width="wrap_content"-->

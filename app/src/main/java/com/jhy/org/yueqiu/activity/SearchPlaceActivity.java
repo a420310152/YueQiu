@@ -35,6 +35,7 @@ import com.jhy.org.yueqiu.utils.Logx;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.ActionBarLayout;
 import com.jhy.org.yueqiu.view.BaiduMapLayout;
+import com.jhy.org.yueqiu.view.LoadingImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,7 @@ public class SearchPlaceActivity extends Activity implements OnReceiveUserLocati
     private ListView lv_places;
     private boolean readyToSetAdpater = false;
 
+    private LoadingImageView my_loading;
     private TextView tv_title;
     private ImageButton ibtn_yes;
 
@@ -94,6 +96,12 @@ public class SearchPlaceActivity extends Activity implements OnReceiveUserLocati
         queryCollection();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        my_loading.show();
+    }
+
     private void initView () {
         lv_places = (ListView) findViewById(R.id.lv_places);
         lv_places.setOnItemClickListener(this);
@@ -105,6 +113,8 @@ public class SearchPlaceActivity extends Activity implements OnReceiveUserLocati
         tv_title = my_actionBar.getTitleView();
         ibtn_yes = my_actionBar.getOptionsView();
         ibtn_yes.setOnClickListener(this);
+
+        my_loading = (LoadingImageView) findViewById(R.id.my_loading);
     }
 
     private void initSearch () {
@@ -198,6 +208,7 @@ public class SearchPlaceActivity extends Activity implements OnReceiveUserLocati
         if (readyToSetAdpater || flag) {
             placeAdapter = new PlaceAdapter(context, placeList, userCollection, userLocation);
             lv_places.setAdapter(placeAdapter);
+            my_loading.hide();
         }
         readyToSetAdpater = true;
     }
