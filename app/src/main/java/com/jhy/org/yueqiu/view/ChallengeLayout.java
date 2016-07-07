@@ -108,7 +108,11 @@ public class ChallengeLayout extends LinearLayout {
                     .transform(new RoundTransform())
                     .into(iv_head);
         }
+        //获得发起人的名字
+        if(challenge.getInitiator()!=null){
+            tv_setName.setText(challenge.getInitiator().getUsername());
 
+        }
         // 获得发起人选择的地点名字
 
         String placeString = challenge.getPlaceName() + "";
