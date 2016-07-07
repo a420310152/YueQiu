@@ -7,7 +7,6 @@
 
     <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
         chx:title_text="我的球队"
-        chx:title_textSize="15sp"
         chx:options_visible="true"
         chx:options_src="@drawable/icon_team_save"
         android:layout_width="wrap_content"

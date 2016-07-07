@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,19 +29,22 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.datatype.BmobPointer;
 import cn.bmob.v3.listener.FindListener;
 
+import static com.jhy.org.yueqiu.R.drawable.icon_community_commend_red;
+
 /**
  * Created by Administrator on 2016/5/12.
  */
 public class CommunityItemActivity extends Activity{
     private Post post;
     private Context context = this;
-    private Button btn_community_zf;//转发按钮
+    private Button btn_community_zf;//浏览量按钮
     private Button btn_community_comment;//评论按钮
     private Button btn_community_commend;//赞按钮
     private TextView tv_comment;
     private ListView lv_item_comment;
     private CommunityCommentAdapter commentAdapter;
     private CommunityReleaseLayout communityReleaseLayout;
+    private Boolean flag = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class CommunityItemActivity extends Activity{
         init();
         Intent intent = getIntent();
         post = (Post) intent.getSerializableExtra("post");
+        //int i = 0;
+        //btn_community_zf.setText(i+1);
         setPostInfo(post);
         setComment(post);
     }
@@ -59,12 +65,30 @@ public class CommunityItemActivity extends Activity{
         btn_community_commend = (Button) findViewById(R.id.btn_community_commend);
         tv_comment = (TextView) findViewById(R.id.tv_comment);
         lv_item_comment = (ListView) findViewById(R.id.lv_item_comment);
+        //评论按钮监听
         btn_community_comment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent commentIntent = new Intent(CommunityItemActivity.this, CommunityComment.class);
                 commentIntent.putExtra("post",post);
                 startActivity(commentIntent);
+            }
+        });
+        //赞按钮监听
+        btn_community_commend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            if(flag == false) {
+                Drawable drawable = getResources().getDrawable(R.drawable.icon_community_commend_red);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                btn_community_commend.setCompoundDrawables(drawable, null, null, null);
+                flag = true;
+            }else if(flag == true){
+                Drawable drawable = getResources().getDrawable(R.drawable.icon_community_commend);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                btn_community_commend.setCompoundDrawables(drawable, null, null, null);
+                flag = false;
+            }
             }
         });
     }

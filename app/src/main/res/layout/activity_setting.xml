@@ -6,7 +6,6 @@
 
     <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
         chx:title_text="系统设置"
-        chx:title_textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actionbar_setting_title"/>
@@ -82,7 +81,7 @@
         android:layout_below="@id/tv_system_set_about_help"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:drawableLeft="@drawable/icon_setting_position"
+        android:drawableLeft="@drawable/icon_setting_info"
         android:drawableRight="@drawable/icon_myprofile_selector"
         android:text="@string/system_music_set"
         android:textSize="20sp"
@@ -105,16 +104,16 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:background="@color/red"
         android:layout_below="@id/system_set_clean_position"
         android:layout_marginLeft="30dp"
         android:layout_marginRight="30dp"
-        android:background="@color/red"
         android:text="注销当前账号"
         android:textSize="30sp"
         android:textColor="@color/white"
         android:layout_marginTop="20dp"
         android:paddingTop="5dp"
-        android:gravity="center_horizontal"
-        android:id="@+id/tv_system_set_cancle"/>
+        android:gravity="center"
+        android:id="@+id/tv_system_set_cancle" />
 
 </RelativeLayout>

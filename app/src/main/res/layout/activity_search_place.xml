@@ -19,6 +19,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <com.jhy.org.yueqiu.view.LoadingImageView
+        android:id="@+id/my_loading"
+        android:layout_below="@+id/my_actionBar"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
     <com.jhy.org.yueqiu.view.BaiduMapLayout
         android:id="@+id/baiduMap"
         android:layout_alignParentBottom="true"

@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
     <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
         chx:title_text="我的球队"
-        chx:title_textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actionbar_allteam_title"/>
@@ -45,6 +44,13 @@
         android:layout_marginTop="10dp"
         android:gravity="center"
         android:id="@+id/tv_jointeam_info"/>
+    <com.jhy.org.yueqiu.view.LoadingImageView
+        android:id="@+id/my_loading"
+        android:layout_below="@+id/tv_jointeam_info"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -14,6 +14,7 @@ import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Post;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.ActionBarLayout;
+import com.jhy.org.yueqiu.view.LoadingImageView;
 
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.SaveListener;
@@ -22,9 +23,9 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by Administrator on 2016/5/17.
  */
 public class CommunityComment extends Activity{
+    private Context context = this;
     private ActionBarLayout actionBarLayout;
     private EditText et_community_comment;
-    private Context context = this;
     private Person person;
     private Post post;
     @Override
@@ -60,6 +61,7 @@ public class CommunityComment extends Activity{
                 @Override
                 public void onSuccess() {
                     Toast.makeText(context,"评论成功",Toast.LENGTH_SHORT).show();
+                    finish();
                 }
 
                 @Override
@@ -69,5 +71,4 @@ public class CommunityComment extends Activity{
             });
         }
     }
-
 }

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.ChallengeAdapter;
 import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.view.LoadingImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ import cn.bmob.v3.listener.FindListener;
  */
 public class ChallengeDetailsActivity extends Activity {
     ListView lv_war;
+    LoadingImageView my_loading;
     SwipeRefreshLayout swipe_ly;
     //RotateAnimation rotate; //刷新旋转动画
     private List<Challenge> challengeList = new ArrayList<>();
@@ -42,7 +44,7 @@ public class ChallengeDetailsActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_challenge);
-
+        initView();
     }
 
     @SuppressLint("InlinedApi")
@@ -51,10 +53,14 @@ public class ChallengeDetailsActivity extends Activity {
         build();
     }
 
-
-    private void build(){
+    private void initView () {
         lv_war = (ListView) findViewById(R.id.lv_war);
         swipe_ly = (SwipeRefreshLayout) findViewById(R.id.swipe_ly);
+        my_loading = (LoadingImageView) findViewById(R.id.my_loading);
+    }
+
+
+    private void build(){
         //iv_refresh= (ImageView) findViewById(R.id.iv_refresh);
         //rotate();
         //iv_refresh.setOnClickListener(rotateClick);
@@ -63,6 +69,8 @@ public class ChallengeDetailsActivity extends Activity {
         challengeAdapter = new ChallengeAdapter(challengeList,this,true);
         lv_war.setOnItemClickListener(itemClick);
         findBmob();
+
+        my_loading.show();
     }
 //    //刷新按钮旋转动画、
 //    View.OnClickListener rotateClick = new View.OnClickListener() {
@@ -96,6 +104,7 @@ public class ChallengeDetailsActivity extends Activity {
                     lv_war.setAdapter(challengeAdapter);
                 }
 
+                my_loading.hide();
             }
 
             @Override

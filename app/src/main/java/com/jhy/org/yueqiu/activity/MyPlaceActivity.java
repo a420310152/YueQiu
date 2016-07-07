@@ -17,6 +17,7 @@ import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.MyPlace;
 import com.jhy.org.yueqiu.view.BaiduMapLayout;
+import com.jhy.org.yueqiu.view.LoadingImageView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -45,13 +46,14 @@ import cn.bmob.v3.listener.GetListener;
 public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultListener, AdapterView.OnItemClickListener, OnReceiveUserLocationListener {
     private Context context = this;
     private Person currentUser = null;
-
+    private BmobUser myPlace_bmobUser;
     private LatLng userLocation;
     private List<String> userCollection;
     private List<MyPlace> placeList = new ArrayList<>();
     private PlaceAdapter placeAdapter;
     private View selectedView = null;
     private ListView lv_places;
+    private LoadingImageView my_loading;
     private int resultCount = 0;
 
     private BaiduMapLayout my_baiduMap;
@@ -63,6 +65,7 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
             if (userLocation != null) {
                 placeAdapter = new PlaceAdapter(context, placeList, userCollection, userLocation);
                 lv_places.setAdapter(placeAdapter);
+                my_loading.hide();
             }
         }
     };
@@ -71,21 +74,28 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_place);
-
         currentUser = Person.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(MyPlaceActivity.this, LoginActivity.class));
             finish();
         } else {
             initView();
-
             App.registerReceiveUserLocation(this);
             queryCollection();
         }
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        my_loading.show();
+    }
+
     private void initView () {
         lv_places = (ListView) findViewById(R.id.lv_places);
         lv_places.setOnItemClickListener(this);
+
+        my_loading = (LoadingImageView) findViewById(R.id.my_loading);
 
         my_baiduMap = (BaiduMapLayout) findViewById(R.id.my_baiduMap);
 

@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.activity.CommunityActivity;
+import com.jhy.org.yueqiu.activity.CommunityItemActivity;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Post;
 import com.jhy.org.yueqiu.utils.Utils;
@@ -25,6 +27,7 @@ import cn.bmob.v3.listener.SaveListener;
  * Created by Administrator on 2016/5/12.
  */
 public class CommunityPostLayout extends RelativeLayout{
+    private CommunityActivity activity;
     private EditText et_community_title;
     private EditText et_community_info;
     private Button btn_community_send;
@@ -33,7 +36,6 @@ public class CommunityPostLayout extends RelativeLayout{
     private Person person;
     private Context context;
 
-
     public CommunityPostLayout(Context context) {
         super(context);
     }
@@ -41,11 +43,12 @@ public class CommunityPostLayout extends RelativeLayout{
     public CommunityPostLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+        this.activity = (CommunityActivity) context;
         LayoutInflater.from(context).inflate(R.layout.layout_community_post, this);
         et_community_title = (EditText) findViewById(R.id.et_community_title);
         et_community_info = (EditText) findViewById(R.id.et_community_info);
         btn_community_send = (Button) findViewById(R.id.btn_community_send);
-        person = BmobUser.getCurrentUser(context,Person.class);
+        person = BmobUser.getCurrentUser(context, Person.class);
     }
     //上传帖子
     public void sendPost() {
@@ -65,7 +68,9 @@ public class CommunityPostLayout extends RelativeLayout{
                 @Override
                 public void onSuccess() {
                     Log.e("sendPost", "上传贴子成功");
+                    Toast.makeText(context, "发表成功", Toast.LENGTH_SHORT).show();
                     if(!Utils.isEmpty(title) && !Utils.isEmpty(info)){
+                        activity.setCommunityInfo();
                         setVisibility(View.INVISIBLE);
                     }
                 }
@@ -85,11 +90,4 @@ public class CommunityPostLayout extends RelativeLayout{
     public EditText getInfoView () {
         return et_community_info;
     }
-    //回调刷新
-    public interface InotifyInfo{
-        void sendPost();
-    }
-
-
-
 }

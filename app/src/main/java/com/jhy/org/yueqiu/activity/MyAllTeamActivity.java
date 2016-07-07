@@ -17,6 +17,7 @@ import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.AllTeamLayout;
+import com.jhy.org.yueqiu.view.LoadingImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +39,7 @@ public class MyAllTeamActivity extends Activity {
     private Button btn_add_team;//创建球队按钮
     private Person person;//当前用户
     private List<Team> teamList = new ArrayList<>();
+    private LoadingImageView my_loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,7 @@ public class MyAllTeamActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        my_loading.show();
         queryTeam();
         addTeam();
     }
@@ -69,6 +72,7 @@ public class MyAllTeamActivity extends Activity {
         allTeamLayout = (AllTeamLayout) findViewById(R.id.allteam_mode);
         btn_add_team = (Button) findViewById(R.id.btn_add_team);
         person = BmobUser.getCurrentUser(MyAllTeamActivity.this, Person.class);
+        my_loading = (LoadingImageView) findViewById(R.id.my_loading);
 
         lv_allteam_info = (ListView) findViewById(R.id.lv_allteam_info);
         lv_allteam_info.setOnItemClickListener(new OnItemClickListener() {
@@ -143,6 +147,7 @@ public class MyAllTeamActivity extends Activity {
 
                 allTeamAdapter = new AllTeamAdapter(MyAllTeamActivity.this, teamList);
                 lv_allteam_info.setAdapter(allTeamAdapter);
+                my_loading.hide();
             }
 
             @Override

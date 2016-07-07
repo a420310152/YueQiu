@@ -6,7 +6,6 @@
 
     <com.jhy.org.yueqiu.view.ActionBarLayout layout="@layout/layout_action_bar"
         chx:title_text="消息记录"
-        chx:title_textSize="15sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actionbar_setting_message_title"/>

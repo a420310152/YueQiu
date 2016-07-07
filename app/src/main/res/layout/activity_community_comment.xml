@@ -11,10 +11,11 @@
         android:id="@+id/actionbar_community_comment"/>
     <EditText
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@+id/actionbar_community_comment"
         android:background="@null"
         android:hint="写评论..."
         android:layout_margin="5dp"
+        android:gravity="fill_horizontal"
         android:id="@+id/et_community_comment"/>
 </RelativeLayout>

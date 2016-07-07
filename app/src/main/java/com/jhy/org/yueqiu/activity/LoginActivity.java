@@ -127,12 +127,6 @@ public class LoginActivity extends Activity{
 
         }
     };
-
-    //返回箭头的监听
-    public void loginBackClick(View v){
-        finish();
-    }
-
     //登录按钮的监听
     public void loginClick(View v) {
         String loginUserName = et_login_name.getText().toString();
