@@ -1,6 +1,10 @@
 .gradle
 .DS_Store
 
-/IMKitWitVoIP/
+/.gradle/
+/.idea/
+/gradle/
+/IMKitWithVoIP/
+
 
 
