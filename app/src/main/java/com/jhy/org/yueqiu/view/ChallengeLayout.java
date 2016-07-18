@@ -173,5 +173,4 @@ public class ChallengeLayout extends LinearLayout {
             }
         }
     };
-
 }

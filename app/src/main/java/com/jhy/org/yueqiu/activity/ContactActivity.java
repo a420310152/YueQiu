@@ -3,6 +3,7 @@ package com.jhy.org.yueqiu.activity;
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.FriendAdapter;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.domain.NewFriends;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.test.h.Test7;
@@ -92,7 +93,7 @@ public class ContactActivity extends FragmentActivity implements AdapterView.OnI
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact);
 
-        currentUser = Person.getCurrentUser();
+        currentUser = BmobUtils.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(context, LoginActivity.class));
             finish();

@@ -5,6 +5,7 @@ import android.app.Activity;
 import com.baidu.mapapi.model.LatLng;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.GalleryAdapter;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.MyChallege;
 import com.jhy.org.yueqiu.domain.Person;
@@ -83,7 +84,7 @@ public class ResponseChallengeActivity extends Activity {
         build();
         Intent intent = getIntent();
         challenge = (Challenge) intent.getSerializableExtra("challenge");
-        person = Person.getCurrentUser();
+        person = BmobUtils.getCurrentUser();
         setContent();
         buildResponse();
         setCheckApplyContent();

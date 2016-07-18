@@ -12,6 +12,7 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.PlaceAdapter;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
@@ -75,7 +76,7 @@ public class MyPlaceActivity extends Activity implements OnGetPoiSearchResultLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_place);
-        currentUser = Person.getCurrentUser();
+        currentUser = BmobUtils.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(MyPlaceActivity.this, LoginActivity.class));
             finish();

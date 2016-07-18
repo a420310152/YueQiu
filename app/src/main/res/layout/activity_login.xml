@@ -9,73 +9,54 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/actionbar_login_title"/>
+
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="160dp"
+        android:id="@+id/line_login_head"
+        style="@style/Header"
         android:layout_below="@id/actionbar_login_title"
-        android:background="@drawable/icon_login_background"
-        android:id="@+id/line_login_head">
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/icon_sidebar_head"
-        android:layout_gravity="center"
-        android:layout_centerInParent="true"
-        android:id="@+id/iv_login_head"/>
+        android:background="@drawable/icon_login_background">
+
+        <ImageView
+            style="@style/Center"
+            android:background="@drawable/icon_sidebar_head" />
+
     </RelativeLayout>
+
     <ImageView
+        android:layout_below="@id/line_login_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/icon_login_bottom"
-        android:layout_below="@id/line_login_head"
         android:textColor="@color/dimgray"/>
-<!--<TextView-->
+
+    <RelativeLayout
+        android:layout_below="@id/line_login_head"
+        android:layout_centerHorizontal="true"
+        android:layout_width="300dp"
+        android:layout_height="match_parent">
+
+        <!--<TextView-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
         <!--android:text="@string/head"-->
         <!--android:layout_below="@id/iv_login_head"-->
         <!--android:layout_centerHorizontal="true"-->
         <!--android:id="@+id/tv_login_head"/>-->
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/line_login_head"
-        android:layout_marginTop="30dp"
-        android:layout_centerHorizontal="true"
-        android:drawableLeft="@drawable/icon_login_custom"
-        android:paddingLeft="20dp"
-        android:background="@drawable/icon_login_edit"
-        android:drawablePadding="30dp"
-        android:hint="@string/name"
-        android:paddingRight="35dp"
-        android:id="@+id/et_login_name"/>
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:layout_below="@id/et_login_name"
-        android:layout_marginTop="10dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/icon_login_edit"
-        android:drawableLeft="@drawable/icon_login_password"
-        android:paddingLeft="25dp"
-        android:drawablePadding="30dp"
-        android:hint= "密  码"
-        android:paddingRight="35dp"
-        android:inputType="textPassword"
-        android:id="@+id/et_login_password"/>
+        <EditText
+            android:id="@+id/et_login_name"
+            style="@style/Form.Control.UserName"/>
+
+        <EditText
+            android:id="@+id/et_login_password"
+            android:layout_below="@id/et_login_name"
+            style="@style/Form.Control.Password"/>
 
         <Button
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:id="@+id/btn_login"
             android:layout_below="@id/et_login_password"
-            android:text="登 录"
-            android:textSize="20sp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/icon_login"
-            android:layout_marginLeft="10dp"
             android:onClick="loginClick"
-            android:id="@+id/btn_login"/>
+            style="@style/Form.Control.Login"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -91,53 +72,55 @@
             android:clickable="true"
             android:id="@+id/tv_register_text"/>
 
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/btn_login"
-        android:layout_marginLeft="10dp"
-        android:layout_alignLeft="@id/btn_login"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:text="@string/rememberword"
-        android:id="@+id/cb_login_rememberword"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/cb_login_rememberword"
-        android:layout_marginTop="10dp"
-        android:text="@string/reminder"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/tv_login_hint"/>
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_login"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:padding="10dp"
+            android:drawablePadding="10dp"
+            android:text="@string/rememberword"
+            android:id="@+id/cb_login_rememberword"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cb_login_rememberword"
+            android:layout_marginTop="10dp"
+            android:text="@string/reminder"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tv_login_hint"/>
 
-    <ImageView
-        android:onClick="loginOnClick"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_below="@+id/tv_login_hint"
-        android:layout_marginTop="20dp"
-        android:src="@drawable/icon_login_weibo"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/iv_login_weibo"/>
-    <ImageView
-        android:onClick="loginOnClick"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@id/iv_login_weibo"
-        android:layout_marginRight="20dp"
-        android:layout_below="@+id/tv_login_hint"
-        android:background="@drawable/icon_login_qq"
-        android:id="@+id/iv_login_qq"/>
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="20dp"
-        android:layout_toRightOf="@id/iv_login_weibo"
-        android:layout_marginLeft="20dp"
-        android:layout_below="@+id/tv_login_hint"
-        android:background="@drawable/icon_login_weixin"
-        android:onClick="loginOnClick"
-        android:id="@+id/iv_login_weixin"/>
+        <ImageView
+            android:onClick="loginOnClick"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_below="@+id/tv_login_hint"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/icon_login_weibo"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/iv_login_weibo"/>
+        <ImageView
+            android:onClick="loginOnClick"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_toLeftOf="@id/iv_login_weibo"
+            android:layout_marginRight="20dp"
+            android:layout_below="@+id/tv_login_hint"
+            android:background="@drawable/icon_login_qq"
+            android:id="@+id/iv_login_qq"/>
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@id/iv_login_weibo"
+            android:layout_marginLeft="20dp"
+            android:layout_below="@+id/tv_login_hint"
+            android:background="@drawable/icon_login_weixin"
+            android:onClick="loginOnClick"
+            android:id="@+id/iv_login_weixin"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -27,6 +27,7 @@ import com.baidu.mapapi.search.poi.PoiResult;
 import com.baidu.mapapi.search.poi.PoiSearch;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.PlaceAdapter;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.OnReceiveUserLocationListener;
 import com.jhy.org.yueqiu.domain.Person;
@@ -87,7 +88,7 @@ public class SearchPlaceActivity extends Activity implements OnReceiveUserLocati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_place);
-        currentUser = Person.getCurrentUser();
+        currentUser = BmobUtils.getCurrentUser();
 
         resolveIntent(getIntent());
         initSearch();

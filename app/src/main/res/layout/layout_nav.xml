@@ -3,63 +3,31 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="192dp">
+
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="192dp">
+        style="@style/App.Nav" >
 
         <RelativeLayout
             android:id="@+id/rlay_nav"
-            android:background="@color/primary"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="64dp">
+            style="@style/App.Navbar">
 
             <TextView
                 android:id="@+id/tv_contact"
-                android:text="通讯"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:drawableTop="@drawable/icon_home_contact"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:drawablePadding="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/App.Navbar.Item.Contact"/>
+
             <TextView
                 android:id="@+id/tv_search"
-                android:text="发现"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:drawableTop="@drawable/icon_home_search"
-                android:layout_alignParentRight="true"
-                android:paddingLeft="32dp"
-                android:paddingRight="32dp"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:drawablePadding="4dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                style="@style/App.Navbar.Item.Search"/>
 
         </RelativeLayout>
 
         <com.jhy.org.yueqiu.view.PopupSpan
             android:id="@+id/popupSpan"
-            android:visibility="gone"
-            android:layout_centerHorizontal="true"
-            android:layout_above="@id/rlay_nav"
-            android:layout_width="256dp"
-            android:layout_height="128dp" />
+            style="@style/App.Navbar.PopupSpan"/>
 
         <ImageView
             android:id="@+id/iv_basketball"
-            android:background="@drawable/icon_home_nav"
-            android:layout_marginBottom="4dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_width="120dp"
-            android:layout_height="120dp"/>
+            style="@style/App.Navbar.Basketball"/>
 
     </RelativeLayout>
 </merge>

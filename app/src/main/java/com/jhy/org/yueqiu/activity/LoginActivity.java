@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.bmob.v3.BmobUser.BmobThirdUserAuth;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.config.Key;
 import com.jhy.org.yueqiu.domain.Person;
@@ -94,7 +95,6 @@ public class LoginActivity extends Activity{
 
     //初始化控件
     private void init(){
-        iv_login_head = (ImageView) findViewById(R.id.iv_login_head);
         et_login_name = (EditText) findViewById(R.id.et_login_name);
         et_login_password = (EditText) findViewById(R.id.et_login_password);
         btn_login = (Button) findViewById(R.id.btn_login);
@@ -154,7 +154,7 @@ public class LoginActivity extends Activity{
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
 
-                Person currentUser = Person.getCurrentUser();
+                Person currentUser = BmobUtils.getCurrentUser();
                 if (currentUser != null) {
                     String userId = currentUser.getObjectId();
                     String name = currentUser.getUsername();

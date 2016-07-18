@@ -175,36 +175,6 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
         }
     }
 
-    public String getValue () {
-        String value = "";
-        boolean isFirst = true;
-        if (rlay_year.getVisibility() == VISIBLE) {
-            value += np_year.getValue();
-            isFirst = false;
-        }
-        if (rlay_month.getVisibility() == VISIBLE) {
-            value += (isFirst ? "" : "-") + np_month.getValue();
-            isFirst = false;
-        }
-        if (rlay_day.getVisibility() == VISIBLE) {
-            value += (isFirst ? "" : "-") + np_day.getValue();
-            isFirst = false;
-        }
-        if (rlay_hour.getVisibility() == VISIBLE) {
-            value += (isFirst ? "" : " ") + np_hour.getValue();
-            isFirst = false;
-        }
-        if (rlay_minute.getVisibility() == VISIBLE) {
-            value += (isFirst ? "" : ":") + np_minute.getValue();
-            isFirst = false;
-        }
-        if (rlay_second.getVisibility() == VISIBLE) {
-            value += (isFirst ? "" : ":") + np_second.getValue();
-            isFirst = false;
-        }
-        return value;
-    }
-
     public Date getDatetime () {
         calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, np_year.getValue());
@@ -219,7 +189,7 @@ public class DatetimePickerLayout extends RelativeLayout implements View.OnClick
     @Override
     public void onClick(View v) {
         if (pickListener != null) {
-            pickListener.onPickDatetime(this, getValue());
+            pickListener.onPickDatetime(this);
             setVisibility(INVISIBLE);
         }
     }

@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.jhy.org.yueqiu.activity.ContactActivity;
 import com.jhy.org.yueqiu.activity.OpponentActivity;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.config.App;
 import com.jhy.org.yueqiu.domain.Person;
 import com.squareup.okhttp.Callback;
@@ -191,7 +192,7 @@ public class RongUtils {
         String portaitUri = preferences.get(App.user.portrait_uri);
         token = preferences.get(App.user.token);
 
-        Person person = Person.getCurrentUser();
+        Person person = BmobUtils.getCurrentUser();
         if (person != null) {
             boolean needsUpdate = Utils.isEmpty(token)
                     || !Utils.equals(portaitUri, person.getAvatarUrl())
@@ -231,7 +232,7 @@ public class RongUtils {
     }
 
     private static void refreshUserInfoFromCloud (String userId) {
-        Person.query(userId, new GetListener<Person>() {
+        BmobUtils.query(userId, new GetListener<Person>() {
             @Override
             public void onSuccess(Person person) {
                 refreshUserInfo(person);
@@ -260,7 +261,7 @@ public class RongUtils {
     }
 
     public static void sendContactNotificationMessage (String operation, String targetId, String message) {
-        Person currentUser = Person.getCurrentUser();
+        Person currentUser = BmobUtils.getCurrentUser();
         if (currentUser != null) {
             sendContactNotificationMessage(operation, currentUser.getObjectId(), targetId, message);
         }
@@ -354,7 +355,7 @@ public class RongUtils {
 
                     String sourceUserId = message.getSourceUserId();
                     String targetUserId = message.getTargetUserId();
-                    Person currentUser = Person.getCurrentUser();
+                    Person currentUser = BmobUtils.getCurrentUser();
                     if (currentUser != null && sourceUserId.equals(currentUser.getObjectId())) {
                         rong.startPrivateChat(context, targetUserId, null);
                     } else {

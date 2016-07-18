@@ -100,16 +100,14 @@
     <RelativeLayout
         android:id="@+id/container_gallery"
         android:layout_below="@id/rg_title"
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
+        style="@style/App.Banner">
 
         <ScrollView
             android:id="@+id/sv_nbawar"
             android:visibility="invisible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
             android:overScrollMode="never"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            style="@style/App.ScrollView">
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -121,9 +119,8 @@
         <ScrollView
             android:id="@+id/sv_nbapk"
             android:visibility="invisible"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:overScrollMode="never">
+            android:overScrollMode="never"
+            style="@style/App.ScrollView">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

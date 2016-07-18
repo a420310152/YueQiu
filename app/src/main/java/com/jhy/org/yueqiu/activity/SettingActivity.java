@@ -2,6 +2,7 @@ package com.jhy.org.yueqiu.activity;
 
 import android.app.Activity;
 import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.domain.Person;
 
 import android.content.Intent;
@@ -30,7 +31,7 @@ public class SettingActivity extends Activity implements OnClickListener {
         setContentView(R.layout.activity_setting);
         judgeLogin();
 
-        currentUser = Person.getCurrentUser();
+        currentUser = BmobUtils.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(SettingActivity.this,LoginActivity.class));
             finish();

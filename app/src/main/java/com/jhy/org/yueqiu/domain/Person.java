@@ -41,19 +41,9 @@ public class Person extends BmobUser {
     private BmobRelation footprints;// 足迹
     private BmobRelation addTeam;//加入的球队；
 
-    public static Person getCurrentUser () {
-        return BmobUser.getCurrentUser(App.getInstance(), Person.class);
-    }
-
-    public static void query (String objectId, GetListener<Person> listener) {
-        BmobQuery<Person> query = new BmobQuery<>();
-        query.getObject(App.getInstance(), objectId, listener);
-    }
-
     public BmobRelation getAddTeam() {
         return addTeam;
     }
-
     public void setAddTeam(BmobRelation addTeam) {
         this.addTeam = addTeam;
     }
@@ -62,7 +52,6 @@ public class Person extends BmobUser {
     public String getPosition() {
         return position;
     }
-
     public void setPosition(String position) {
         this.position = position;
     }
@@ -70,7 +59,6 @@ public class Person extends BmobUser {
     public Boolean getSex() {
         return sex;
     }
-
     public void setSex(Boolean sex) {
         this.sex = sex;
     }
@@ -86,7 +74,6 @@ public class Person extends BmobUser {
     public Integer getAge() {
         return age;
     }
-
     public void setAge(Integer age) {
         this.age = age;
     }
@@ -94,7 +81,6 @@ public class Person extends BmobUser {
     public Integer getHeight() {
         return height;
     }
-
     public void setHeight(Integer height) {
         this.height = height;
     }
@@ -102,7 +88,6 @@ public class Person extends BmobUser {
     public Integer getWeight() {
         return weight;
     }
-
     public void setWeight(Integer weight) {
         this.weight = weight;
     }
@@ -110,7 +95,6 @@ public class Person extends BmobUser {
     public Integer getProficiency() {
         return proficiency;
     }
-
     public void setProficiency(Integer proficiency) {
         this.proficiency = proficiency;
     }
@@ -118,7 +102,6 @@ public class Person extends BmobUser {
     public String getSignature() {
         return signature;
     }
-
     public void setSignature(String signature) {
         this.signature = signature;
     }
@@ -140,7 +123,6 @@ public class Person extends BmobUser {
     public BmobFile getAvatar() {
         return avatar;
     }
-
     public void setAvatar(BmobFile avatar) {
         this.avatar = avatar;
     }
@@ -148,7 +130,6 @@ public class Person extends BmobUser {
     public BmobRelation getFriends() {
         return friends;
     }
-
     public void setFriends(BmobRelation friends) {
         this.friends = friends;
     }
@@ -157,7 +138,6 @@ public class Person extends BmobUser {
     public String getAddress() {
         return address;
     }
-
     public void setAddress(String address) {
         this.address = address;
     }
@@ -165,7 +145,6 @@ public class Person extends BmobUser {
     public BmobGeoPoint getLocation() {
         return location;
     }
-
     public void setLocation(BmobGeoPoint location) {
         this.location = location;
     }
@@ -173,7 +152,6 @@ public class Person extends BmobUser {
     public BmobRelation getFootprints() {
         return footprints;
     }
-
     public void setFootprints(BmobRelation footprints) {
         this.footprints = footprints;
     }
@@ -181,7 +159,6 @@ public class Person extends BmobUser {
     public List<String> getCollection() {
         return collection;
     }
-
     public void setCollection(List<String> collection) {
         this.collection = collection;
     }

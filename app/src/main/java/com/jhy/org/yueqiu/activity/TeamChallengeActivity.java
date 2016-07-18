@@ -6,6 +6,7 @@ import com.baidu.mapapi.search.core.PoiInfo;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.MyDateUtils;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.DatetimePickerLayout;
 import com.jhy.org.yueqiu.view.OnPickDatetimeListener;
@@ -170,9 +171,9 @@ public class TeamChallengeActivity extends Activity implements OnPickDatetimeLis
     }
 
     @Override
-    public void onPickDatetime(DatetimePickerLayout picker, String value) {
+    public void onPickDatetime(DatetimePickerLayout picker) {
         if (currentView != null) {
-            currentView.setText(value);
+            currentView.setText(MyDateUtils.toString(picker.getDatetime(), "MM月dd日 hh:mm"));
 
             if (currentView == tv_fromDate) {
                 challenge.setFromDate(new BmobDate(picker.getDatetime()));

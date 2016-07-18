@@ -6,6 +6,7 @@ import com.baidu.mapapi.search.core.PoiInfo;
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.domain.Challenge;
 import com.jhy.org.yueqiu.domain.Person;
+import com.jhy.org.yueqiu.utils.MyDateUtils;
 import com.jhy.org.yueqiu.utils.Utils;
 import com.jhy.org.yueqiu.view.DatetimePickerLayout;
 import com.jhy.org.yueqiu.view.OnPickDatetimeListener;
@@ -101,13 +102,13 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
     // 发布一条挑战记录
     private void publish () {
         String _title = et_title.getText().toString();
-//        if (Utils.isEmpty(_title)
-//                || Utils.isEmpty(tv_place.getText())
-//                || Utils.isEmpty(tv_fromDate.getText())
-//                || Utils.isEmpty(tv_toDate.getText())) {
-//            showToast("提交错误, 请重新填写");
-//            return;
-//        }
+        if (Utils.isEmpty(_title)
+                || Utils.isEmpty(tv_place.getText())
+                || Utils.isEmpty(tv_fromDate.getText())
+                || Utils.isEmpty(tv_toDate.getText())) {
+            showToast("提交错误, 请重新填写");
+            return;
+        }
         challenge.setTitle(_title);
         challenge.save(context, new SaveListener() {
             @Override
@@ -176,9 +177,9 @@ public class SoloChallengeActivity extends Activity implements OnPickDatetimeLis
     }
 
     @Override
-    public void onPickDatetime(DatetimePickerLayout picker, String value) {
+    public void onPickDatetime(DatetimePickerLayout picker) {
         if (currentView != null) {
-            currentView.setText(value);
+            currentView.setText(MyDateUtils.toString(picker.getDatetime(), "MM月dd日 hh:mm"));
 
             if (currentView == tv_fromDate) {
                 challenge.setFromDate(new BmobDate(picker.getDatetime()));

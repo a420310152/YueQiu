@@ -24,6 +24,7 @@ import android.widget.RelativeLayout;
 
 import com.jhy.org.yueqiu.R;
 import com.jhy.org.yueqiu.adapter.CommunityAdapter;
+import com.jhy.org.yueqiu.bmob.BmobUtils;
 import com.jhy.org.yueqiu.domain.Person;
 import com.jhy.org.yueqiu.domain.Post;
 import com.jhy.org.yueqiu.utils.Utils;
@@ -59,7 +60,7 @@ public class CommunityActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_community);
         //判断登录状态
-        currentUser = Person.getCurrentUser();
+        currentUser = BmobUtils.getCurrentUser();
         if (currentUser == null) {
             startActivity(new Intent(CommunityActivity.this, LoginActivity.class));
             finish();

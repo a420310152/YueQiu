@@ -1,23 +1,24 @@
 package com.jhy.org.yueqiu.activity;
 
-        import android.app.Activity;
-        import com.jhy.org.yueqiu.R;
-        import com.jhy.org.yueqiu.domain.Challenge;
-        import com.jhy.org.yueqiu.domain.Place;
-        import com.jhy.org.yueqiu.view.DatetimePickerLayout;
-        import com.jhy.org.yueqiu.view.OnPickDatetimeListener;
+import android.app.Activity;
+import com.jhy.org.yueqiu.R;
+import com.jhy.org.yueqiu.domain.Challenge;
+import com.jhy.org.yueqiu.domain.Place;
+import com.jhy.org.yueqiu.utils.MyDateUtils;
+import com.jhy.org.yueqiu.view.DatetimePickerLayout;
+import com.jhy.org.yueqiu.view.OnPickDatetimeListener;
 
-        import android.content.Context;
-        import android.content.Intent;
-        import android.os.Bundle;
-        import android.text.InputType;
-        import android.util.Log;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-        import cn.bmob.v3.datatype.BmobDate;
-        import cn.bmob.v3.listener.SaveListener;
+import cn.bmob.v3.datatype.BmobDate;
+import cn.bmob.v3.listener.SaveListener;
 
 /*
  **********************************************
@@ -131,9 +132,9 @@ public class EditChallengeActivity extends Activity implements OnPickDatetimeLis
     }
 
     @Override
-    public void onPickDatetime(DatetimePickerLayout picker, String value) {
+    public void onPickDatetime(DatetimePickerLayout picker) {
         if (currentView != null) {
-            currentView.setText(value);
+            currentView.setText(MyDateUtils.toString(picker.getDatetime(), "MM月dd日 hh:mm"));
 
             if (currentView == et_fromDate) {
                 challenge.setFromDate(new BmobDate(picker.getDatetime()));

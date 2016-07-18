@@ -15,14 +15,7 @@ import com.jhy.org.yueqiu.domain.Team;
 import com.jhy.org.yueqiu.utils.RoundTransform;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.datatype.BmobPointer;
-import cn.bmob.v3.listener.FindListener;
-import cn.bmob.v3.listener.GetListener;
 
 /**
  * Created by Administrator on 2016/4/23.
